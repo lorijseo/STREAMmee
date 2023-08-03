@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopMovies</title>
+    <link id="styleSheet" href="styleDark.css" rel="stylesheet" type="text/css">
+
+    <form>
+        <button id="styleDark" type="submit" title="Dark Mode with smaller movie display">&#9790;</button>
+        <button id="styleLight" type="submit" title="Light Mode with bigger movie display">&#9728;</button>
+    </form>
+
+
+</head>
+<body>
+    <h1>Top Movies</h1>
+
+    <div class="popup" id="popupA">
+        <p>New Feature! Swap between the current "Dark Mode" &#9790; or "Light Mode" &#9728; anytime!
+            "Dark Mode" uses a dark background with lighter text. "Light Mode" uses
+            a light background with dark text and magnifies the font of the application. 
+        </p>
+        <p> Click &#9728; below to swap to "Light Mode" now or click &#9790; to continue in "Dark Mode" 
+            You can change your mind anytime by accessing the button at the top right!
+        </p>
+        <button id="swapStyle">&#9728;</button> <button id="closeA">&#9790;</button>
+
+        
+    </div>
+    <div class="popup" id="popupB">
+        <p> Welcome! Find the top 12 trending movies under any category using the buttons in the navigation bar!</p>
+        <button id="closeB">&raquo;</button>
+        
+    </div>
+
+
+
+    <table class="center">
+        <tr>
+            <td>
+                <table colspan="1" id="popularTable">
+                    <tr>
+                        <td  class="tablelabel">Popular</td>
+                    </tr>
+                    <tr>
+                        <td> <button id="trendingWeekBtn">Trending This Week</button> </td>
+                    </tr>
+                    <tr>
+                        <td> <button id="trendingDayBtn">Trending Today</button> </td>
+                    </tr>
+                </table>
+
+            </td>
+            <td>
+                <table id="genreTable">
+                    <tr>
+                        <td colspan="8" class="tablelabel">Genre</td>
+                    </tr>
+                    <tr>
+                        <td> <button id="actionBtn">Action</button> </td>
+                        <td> <button id="adventureBtn">Adventure</button> </td>
+                        <td> <button id="animationBtn">Animation</button> </td>
+                        <td> <button id="comedyBtn">Comedy</button> </td>
+                        <td> <button id="documentaryBtn">Documentary</button> </td>
+                        <td> <button id="dramaBtn">Drama</button> </td>
+                        <td> <button id="familyBtn">Family</button> </td>
+                        <td> <button id="fantasyBtn">Fantasy</button></td>
+                    </tr>
+                    <tr>
+                        <td> <button id="historyBtn">History</button> </td>
+                        <td> <button id="horrorBtn">Horror</button> </td>
+                        <td> <button id="musicBtn">Music</button> </td>
+                        <td> <button id="mysteryBtn">Mystery</button> </td>
+                        <td> <button id="romanceBtn">Romance</button> </td>
+                        <td> <button id="thrillerBtn">Thriller</button> </td>
+                        <td> <button id="warBtn">War</button> </td>
+                        <td> &nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+
+    <div class="displayList">  </div>
+    <div class="logo"><img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" alt="tmdb logo"></div>
+    <script src="./movie.js"></script>
+</body>
+</html>

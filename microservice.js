@@ -1,0 +1,197 @@
+// var el = document.getElementById("go")
+// if (el){
+//     el.addEventListener("click", getPokemon)
+// };
+
+// function getPokemon(event){
+//     console.log("yay!")
+//     const name = document.getElementById("pokemon").value
+//     fetch(`http://pokeapi.co/api/v2/pokemon/${name}`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//             document.querySelector(".display").innerHTML = `
+//             Name: ${data.name} Height: ${data.height} ID: ${data.id} Weight: ${data.weight} Element: ${data.types[0].type.name}`;
+//         })
+//         .catch((err) => {
+//             console.log("pokemon not found", err);
+//         });
+//     event.preventDefault();
+// }
+
+
+// // importing express with variable express
+// const express = require("express")
+// // store another variable to store
+// const app = express()
+// // specify port number
+// const port = 3000
+
+// // install cors to prevent any bugs with cross-platform 
+// const cors = require('cors');
+
+// // use cors package after requiring 
+// app.use(cors());
+
+// const key = "613a35f50aa647f0d9c8c32ff6377714"
+
+// app.get('/trending', async(req, res, next) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`);
+//     const data = await response.json();
+//     res.send(data);
+// });
+
+
+// // listen in which port
+// app.listen(port, () => {
+//     console.log(`Application is listening on port ${port}!`)
+// })
+
+
+
+// importing express with variable express
+const express = require("express")
+
+
+const app = express();
+
+
+// specify port number
+const port = 4000
+
+// install cors to prevent any bugs with cross-platform 
+const cors = require('cors');
+
+// use cors package after requiring 
+app.use(cors());
+
+
+app.get('/moviedata/horror', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie/?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=27`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/romance', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=10749`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/action', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=28`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/adventure', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=12`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/animation', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=16`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/comedy', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=35`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/crime', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=80`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/documentary', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=99`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/drama', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=18`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/family', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=10751`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/fantasy', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=14`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/history', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=36`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/music', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=10402`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/mystery', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=9648`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/thriller', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=53`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/war', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=10752`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/western', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=37`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/sciencefiction', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=878`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/tvmovie', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316&language=en-US&sort_by=popularity.desc&with_genres=10770`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/trendday', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316`);
+    const data = await response.json();
+    res.send(data);
+});
+
+app.get('/moviedata/trendweek', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=b5ecd30b8ab4a4a0b405e7f8e5ce1316`);
+    const data = await response.json();
+    res.send(data);
+});
+
+// listen in which port
+app.listen(port, () => {
+    console.log(`Application is listening on port ${port}!`)
+})
