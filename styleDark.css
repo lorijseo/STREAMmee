@@ -10,7 +10,7 @@ button{
   color: #d5d5d5;
 }
 
-form{
+#choose_css{
   text-align: right;
 }
 
@@ -141,3 +141,17 @@ td.tablelabel{
   display:none;
 }
 
+#search_bar{
+  text-align:center;
+  margin:auto;
+}
+
+#search_input{
+  width:50%;
+  font-size: 18px;
+}
+
+#searchBtn{
+  border:#d5d5d5 1px solid;
+  padding: 5px 15px;
+}

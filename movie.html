@@ -7,7 +7,7 @@
     <title>TopMovies</title>
     <link id="styleSheet" href="styleDark.css" rel="stylesheet" type="text/css">
 
-    <form>
+    <form id="choose_css">
         <button id="styleDark" type="submit" title="Dark Mode with smaller movie display">&#9790;</button>
         <button id="styleLight" type="submit" title="Light Mode with bigger movie display">&#9728;</button>
     </form>
@@ -17,7 +17,7 @@
 <body>
     <h1>Top Movies</h1>
 
-    <div class="popup" id="popupA">
+    <!-- <div class="popup" id="popupA">
         <p>New Feature! Swap between the current "Dark Mode" &#9790; or "Light Mode" &#9728; anytime!
             "Dark Mode" uses a dark background with lighter text. "Light Mode" uses
             a light background with dark text and magnifies the font of the application. 
@@ -33,7 +33,7 @@
         <p> Welcome! Find the top 12 trending movies under any category using the buttons in the navigation bar!</p>
         <button id="closeB">&raquo;</button>
         
-    </div>
+    </div> -->
 
 
 
@@ -84,6 +84,16 @@
 
 
     </table>
+
+    <form autocomplete="off" action="#" id="search_bar">
+        <div class="autocomplete">
+            <label for="searchMovie">Search for movie</label>
+            <input type="text" name="searchMovie" id="search_input"placeholder="search movies title...">
+            <button type="submit" id="searchBtn">Go</button>
+        </div>
+    </form>
+
+    <div class="displayMovie"></div>
 
 
 

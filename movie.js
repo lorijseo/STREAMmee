@@ -1,50 +1,50 @@
 
-// close popup A and swap to Light Mode
-const swapStyleBtn = document.getElementById("swapStyle")
+// // close popup A and swap to Light Mode
+// const swapStyleBtn = document.getElementById("swapStyle")
 
-swapStyleBtn.addEventListener("click", function(e){
-    e.preventDefault();
-    document.getElementById("popupA").style.display="none";
-    document.getElementById("styleSheet").href="styleLight.css";
+// swapStyleBtn.addEventListener("click", function(e){
+//     e.preventDefault();
+//     document.getElementById("popupA").style.display="none";
+//     document.getElementById("styleSheet").href="styleLight.css";
     
-})
+// })
 
 
-// close popup A
-const closeABtn = document.getElementById("closeA")
+// // close popup A
+// const closeABtn = document.getElementById("closeA")
 
-closeABtn.addEventListener("click", function(e){
-    e.preventDefault();
-    document.getElementById("popupA").style.display="none";
-})
+// closeABtn.addEventListener("click", function(e){
+//     e.preventDefault();
+//     document.getElementById("popupA").style.display="none";
+// })
 
-// close popup B
-const closeBBtn = document.getElementById("closeB")
+// // close popup B
+// const closeBBtn = document.getElementById("closeB")
 
-closeBBtn.addEventListener("click", function(e){
-    e.preventDefault();
-    document.getElementById("popupB").style.display="none";
-    document.getElementById("popupA").style.opacity= .9;
-})
+// closeBBtn.addEventListener("click", function(e){
+//     e.preventDefault();
+//     document.getElementById("popupB").style.display="none";
+//     document.getElementById("popupA").style.opacity= .9;
+// })
 
 
-// change CSS to style B
-const styleBBtn = document.getElementById("styleLight")
+// // change CSS to style B
+// const styleBBtn = document.getElementById("styleLight")
 
-styleBBtn.addEventListener("click", function(e){
-    e.preventDefault();
-    document.getElementById("styleSheet").href="styleLight.css";
+// styleBBtn.addEventListener("click", function(e){
+//     e.preventDefault();
+//     document.getElementById("styleSheet").href="styleLight.css";
 
-})
+// })
 
-// change CSS to style A
-const styleABtn = document.getElementById("styleDark")
+// // change CSS to style A
+// const styleABtn = document.getElementById("styleDark")
 
-styleABtn.addEventListener("click", function(e){
-    e.preventDefault();
-    document.getElementById("styleSheet").href="styleDark.css";
+// styleABtn.addEventListener("click", function(e){
+//     e.preventDefault();
+//     document.getElementById("styleSheet").href="styleDark.css";
 
-})
+// })
 
 
 // displays 12 movies that are trending this week
@@ -543,4 +543,55 @@ async function displayWar(){
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
     document.querySelector(".logo").style.display="block";
+}
+
+
+
+const searchBtn = document.querySelector("#searchBtn");
+searchBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    const searchMovie = document.querySelector("#search_input").value;
+
+    //find movie from trend week
+    const movieFound = await findMovie(searchMovie);
+    if (movieFound){
+        document.querySelector(".displayMovie").innerHTML = movieFound;
+    }
+    else{
+        alert("NANI what movie?!?")
+    }
+    //check the movie's keywords to see if it's based from book or novel (818) 
+
+    
+    
+})
+
+
+
+async function findMovie(movieTitle){
+    const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
+    const data = await response.json();
+
+    let numOfPages = 0;
+    for (let page in data){
+        numOfPages++
+    }
+
+    for(let i =0; i<numOfPages; i++){
+        for(let j=0; j<20; j++){
+            if (data[i].results[j].title == movieTitle){
+                const foundMovie = data[i].results[j];
+                return `
+                <div class="grid-item">
+                <div title="Synopsis: ${foundMovie.overview}"> <img src="https://image.tmdb.org/t/p/w300/${foundMovie.poster_path}" alt="movie poster" /> </div>
+                </div>
+                <div class="grid-item" id="one-movie">
+                <div class="grid-item"><h3 class="title" title="Synopsis: ${foundMovie.overview}">"${foundMovie.title}"</h3></div>
+                <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${foundMovie.overview}">${foundMovie.overview}</p></div>
+                </div>
+                `
+            }
+        }
+        
+    }
 }
