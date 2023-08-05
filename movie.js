@@ -553,45 +553,48 @@ searchBtn.addEventListener("click", async function(e){
     const searchMovie = document.querySelector("#search_input").value;
 
     //find movie from trend week
-    const movieFound = await findMovie(searchMovie);
-    if (movieFound){
-        document.querySelector(".displayMovie").innerHTML = movieFound;
+    const movieData = await findMovie(searchMovie);
+
+    //if movie is found
+    if (movieData){
+        console.log(movieData);
+        console.log(movieData.id);
+        displayMovie(movieData);
     }
-    else{
-        alert("NANI what movie?!?")
-    }
+
     //check the movie's keywords to see if it's based from book or novel (818) 
 
     
     
 })
 
-
+function displayMovie(foundMovie){
+    document.querySelector(".displayMovie").innerHTML = `
+    <div class="grid-item">
+    <div title="Synopsis: ${foundMovie.overview}"> <img src="https://image.tmdb.org/t/p/w300/${foundMovie.poster_path}" alt="movie poster" /> </div>
+    </div>
+    <div class="grid-item" id="one-movie">
+    <div class="grid-item"><h3 class="title" title="Synopsis: ${foundMovie.overview}">"${foundMovie.title}"</h3></div>
+    <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${foundMovie.overview}">${foundMovie.overview}</p></div>
+    </div>
+    `
+}
 
 async function findMovie(movieTitle){
     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
     const data = await response.json();
 
-    let numOfPages = 0;
-    for (let page in data){
-        numOfPages++
-    }
-
-    for(let i =0; i<numOfPages; i++){
+    for(let page in data){
         for(let j=0; j<20; j++){
-            if (data[i].results[j].title == movieTitle){
-                const foundMovie = data[i].results[j];
-                return `
-                <div class="grid-item">
-                <div title="Synopsis: ${foundMovie.overview}"> <img src="https://image.tmdb.org/t/p/w300/${foundMovie.poster_path}" alt="movie poster" /> </div>
-                </div>
-                <div class="grid-item" id="one-movie">
-                <div class="grid-item"><h3 class="title" title="Synopsis: ${foundMovie.overview}">"${foundMovie.title}"</h3></div>
-                <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${foundMovie.overview}">${foundMovie.overview}</p></div>
-                </div>
-                `
+            if (data[page].results[j].title == movieTitle){
+                const foundMovie = data[page].results[j];
+                const movieId = foundMovie.id;
+                // console.log(movieId);
+                return foundMovie;
             }
-        }
-        
+        } 
     }
+    alert("NANI what movie?!?")
+    return false;
 }
+
