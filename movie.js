@@ -59,23 +59,30 @@ async function displayTrendweek(){
     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
     const data = await response.json();
     
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
+    for(let i=0; i<5; i++){
+        let dataDisplay = data[i].results.slice(0,20).map((object) => {
+            const {title, poster_path, overview, release_date, vote_average} = object;
+    
+            return `
+            <div class="grid-item">
+            <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
+            </div>
+            <div class="grid-item" id="one-movie">
+            <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
+            <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
+            <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
+            </div>
+            `
+        }).join("");
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
-    }).join("");
+        document.querySelector(`#display${i+1}`).innerHTML = dataDisplay;
+        document.querySelector(".logo").style.display="block";
 
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
+    }
+
+
+
 }
 
 
@@ -90,7 +97,7 @@ trendingDayBtn.addEventListener("click", function(e){
 async function displayTrendday(){
     const response = await fetch(`http://localhost:4000/moviedata/trendday`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
+    let dataDisplay = data.results.slice(0,19).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
         return `
