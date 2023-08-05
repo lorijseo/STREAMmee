@@ -204,28 +204,45 @@ app.get('/moviedata/trendweek', async (req, res, next) => {
     const data5 = await response5.json();
     // const obj2 = JSON.parse(data2);
 
-
     const mergedArr =[data1, data2,data3, data4, data5]
-    // const sendData = JSON.stringify(mergedObject)
-    // console.log(data1);
-    // console.log(data2);
-    // console.log(mergedObject);
     console.log(mergedArr);
-    // res.send(mergedObject);
     res.send(mergedArr)
 });
 
-// const options = {
-//     method: 'GET',
-//     headers: {
-//       accept: 'application/json',
-//       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTNhMzVmNTBhYTY0N2YwZDljOGMzMmZmNjM3NzcxNCIsInN1YiI6IjYzZTZjMjhlZjI4ODM4MDA4MmRkNWVkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2BeG7R-8jQVLM3wsBq8PrVZ6evMFyMJ17jyLosLxcrI'
-//     }
-//   };
-  
-// fetch('https://api.themoviedb.org/3/movie/movie_id/watch/providers', options)
+const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTNhMzVmNTBhYTY0N2YwZDljOGMzMmZmNjM3NzcxNCIsInN1YiI6IjYzZTZjMjhlZjI4ODM4MDA4MmRkNWVkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2BeG7R-8jQVLM3wsBq8PrVZ6evMFyMJ17jyLosLxcrI'
+    }
+    };
+
+
+    //app.get not working - it's not sending the ids to localhost************
+app.get('/movie/keys', async(req,res,next)=>{
+    fetch('https://api.themoviedb.org/3/movie/872585/keywords', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+    res.send(response);
+})
+
+
+
+
+
+
+// fetch('https://api.themoviedb.org/3/authentication', options)
 // .then(response => response.json())
-// .then(res.send(response))
+// .then(response => console.log(response))
+// .catch(err => console.error(err));
+
+
+
+
+// fetch('https://api.themoviedb.org/3/movie/872585/keywords', options)
+// .then(response => response.json())
+// .then(response => console.log(response))
 // .catch(err => console.error(err));
 
 // listen in which port

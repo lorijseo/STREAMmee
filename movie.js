@@ -546,6 +546,28 @@ async function displayWar(){
 }
 
 
+async function displayId(){
+    const response = await fetch(`http://localhost:4000/movie/keys`);
+    const data = await response.json();
+    console.log(data)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
@@ -560,6 +582,7 @@ searchBtn.addEventListener("click", async function(e){
         console.log(movieData);
         console.log(movieData.id);
         displayMovie(movieData);
+        displayId();
     }
 
     //check the movie's keywords to see if it's based from book or novel (818) 
