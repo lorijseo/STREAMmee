@@ -549,17 +549,18 @@ async function displayWar(){
 async function getKeywords(movie_id){
     const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
     const data = await response.json();
-    console.log(data)
+    return data.keywords
+
 }
 
 
 
-//given movie's keywords, find any keywords relating to books or novels
-function adaptedFromBook(data){
-    const keywords = data.keywords;
-    for(let i=0; i<keywords.length(); i++){
-
-
+// given movie's keywords, find any keywords relating to books or novels
+function adaptedFromBook(keywordArr){
+    for(let i in keywordArr){
+        if(keywordArr[i].id == 818){
+            return true
+        }
     }
 }
 
@@ -588,8 +589,10 @@ searchBtn.addEventListener("click", async function(e){
         // console.log(movieData);
         // console.log(movieData.id);
         displayMovie(movieData);
-        const movieKeywords = getKeywords(movieData.id);
-        // adaptedFromBook(keywordsData);
+        const keywordsData = await getKeywords(movieData.id);
+        if (adaptedFromBook(keywordsData)){
+            alert("we have a book!")
+        }
         
     }
 
