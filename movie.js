@@ -546,16 +546,22 @@ async function displayWar(){
 }
 
 
-async function displayId(){
-    const response = await fetch(`http://localhost:4000/movie/keys`);
+async function getKeywords(movie_id){
+    const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
     const data = await response.json();
     console.log(data)
 }
 
 
 
+//given movie's keywords, find any keywords relating to books or novels
+function adaptedFromBook(data){
+    const keywords = data.keywords;
+    for(let i=0; i<keywords.length(); i++){
 
 
+    }
+}
 
 
 
@@ -579,10 +585,12 @@ searchBtn.addEventListener("click", async function(e){
 
     //if movie is found
     if (movieData){
-        console.log(movieData);
-        console.log(movieData.id);
+        // console.log(movieData);
+        // console.log(movieData.id);
         displayMovie(movieData);
-        displayId();
+        const movieKeywords = getKeywords(movieData.id);
+        // adaptedFromBook(keywordsData);
+        
     }
 
     //check the movie's keywords to see if it's based from book or novel (818) 

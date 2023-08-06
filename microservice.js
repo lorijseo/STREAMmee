@@ -205,7 +205,7 @@ app.get('/moviedata/trendweek', async (req, res, next) => {
     // const obj2 = JSON.parse(data2);
 
     const mergedArr =[data1, data2,data3, data4, data5]
-    console.log(mergedArr);
+    // console.log(mergedArr);
     res.send(mergedArr)
 });
 
@@ -218,32 +218,20 @@ const options = {
     };
 
 
-    //app.get not working - it's not sending the ids to localhost************
-app.get('/movie/keys', async(req,res,next)=>{
-    fetch('https://api.themoviedb.org/3/movie/872585/keywords', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
-    res.send(response);
+
+
+
+app.get(`/get_keys/:movie_id`, async(req,res,next)=>{
+    const movie_id = req.params.movie_id;
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/keywords`, options);
+    const data = await response.json();
+    console.log(data);
+    res.send(data);
 })
 
 
-
-
-
-
-// fetch('https://api.themoviedb.org/3/authentication', options)
-// .then(response => response.json())
-// .then(response => console.log(response))
-// .catch(err => console.error(err));
-
-
-
-
-// fetch('https://api.themoviedb.org/3/movie/872585/keywords', options)
-// .then(response => response.json())
-// .then(response => console.log(response))
-// .catch(err => console.error(err));
+//gets all movies that are based on book or novel
+https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&language=en-US&sort_by=popularity.desc&page=1&with_keywords=818
 
 // listen in which port
 app.listen(port, () => {
