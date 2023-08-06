@@ -527,11 +527,23 @@ async function displayWar(){
     const response = await fetch(`http://localhost:4000/moviedata/war`);
     const data = await response.json();
     let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
+        const {title, poster_path, backdrop_path, overview, release_date, vote_average} = object;
+        let imgSrc = `"https://image.tmdb.org/t/p/w300/${poster_path}"`;
+
+        if((poster_path == null) && (backdrop_path== null)){
+            imgSrc="ammonia_icon.png"
+        }
+        else if (poster_path == null){
+            imgSrc = `"https://image.tmdb.org/t/p/w300/${backdrop_path}"`
+        }
+        else{
+            imgSrc = `"https://image.tmdb.org/t/p/w300/${poster_path}"`
+        }
+
 
         return `
         <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
+        <div title="Synopsis: ${overview}"> <img src=${imgSrc} alt="movie poster" /> </div>
         </div>
         <div class="grid-item" id="one-movie">
         <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
@@ -553,6 +565,17 @@ async function getKeywords(movie_id){
 
 }
 
+async function getMovieList(movie_title){
+    const response = await fetch(`http://localhost:4000/get_movies/${movie_title}`);
+    const data = await response.json();
+    return data
+}
+
+async function getMovie(movie_id){
+    const response = await fetch(`http://localhost:4000/get_movie/${movie_id}`);
+    const data = await response.json();
+    return data
+}
 
 
 // given movie's keywords, find any keywords relating to books or novels
@@ -566,11 +589,63 @@ function adaptedFromBook(keywordArr){
 
 
 
+async function displaySimiliarMovies(data){
+
+    let dataDisplay = data.results.slice(0,20).map((object,index) => {
+        const {title,id, poster_path, backdrop_path, overview, release_date, vote_average} = object;
+        let imgSrc = `"https://image.tmdb.org/t/p/w300/${poster_path}"`;
+
+        let className = "movie_btn_" + index;
+        if((poster_path == null) && (backdrop_path== null)){
+            imgSrc="ammonia_icon.png"
+        }
+        else if (poster_path == null){
+            imgSrc = `"https://image.tmdb.org/t/p/w300/${backdrop_path}"`
+        }
+        else{
+            imgSrc = `"https://image.tmdb.org/t/p/w300/${poster_path}"`
+        }
+
+        return `
+        <div class="grid-item"> ${index}
+        <div title="Synopsis: ${overview}" id="${id}" class=${className}> <img src=${imgSrc} alt="movie poster" /> </div>
+        </div>
+        `
+    }).join("");
+
+    document.querySelector(".displayList").innerHTML = dataDisplay;
+    document.querySelector(".logo").style.display="block";
+}
 
 
 
 
+function createMovieBtns(){
+    //consider the number of outcomes
+    for (let i=0; i<10; i++){
+        let className = ".movie_btn_" + i;
+        const movieBtn = document.querySelector(className)
+        movieBtn.addEventListener("click", async function(e){
+            e.preventDefault();
+            const chosenMovie = document.querySelector(className);
+            console.log(chosenMovie)
+            document.querySelector(".displayList").innerHTML="";
+            // document.querySelector(".displayList").appendChild(chosenMovie);
+            const id = chosenMovie.id;
+            const data = await getMovie(id);
+            displayMovie(data);
+            const keywordsData = await getKeywords(id);
+            if (adaptedFromBook(keywordsData)){
+                alert("we have a book!")
+            }
+            else{
+                alert("noiirrr book")
+            }
+        })
 
+    }
+    
+}
 
 
 
@@ -580,6 +655,11 @@ const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const searchMovie = document.querySelector("#search_input").value;
+    const movieList = await getMovieList(searchMovie);
+    displaySimiliarMovies(movieList);
+    createMovieBtns();
+    return
+
 
     //find movie from trend week
     const movieData = await findMovie(searchMovie);

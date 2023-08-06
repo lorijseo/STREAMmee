@@ -220,18 +220,35 @@ const options = {
 
 
 
-
+//returns keywords given movie id
 app.get(`/get_keys/:movie_id`, async(req,res,next)=>{
     const movie_id = req.params.movie_id;
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/keywords`, options);
     const data = await response.json();
-    console.log(data);
+    res.send(data);
+})
+
+//returns list of similar movies given string
+app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
+    const movie_title = req.params.movie_title;
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie_title}&include_adult=false&language=en-US&page=1`, options)
+    const data = await response.json();
     res.send(data);
 })
 
 
+//returns movie given move id
+app.get(`/get_movie/:movie_id`, async(req,res,next)=>{
+    const movie_id = req.params.movie_id;
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`, options);
+    const data = await response.json();
+    res.send(data);
+})
+  
+
 //gets all movies that are based on book or novel
 https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&language=en-US&sort_by=popularity.desc&page=1&with_keywords=818
+
 
 // listen in which port
 app.listen(port, () => {
