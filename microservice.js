@@ -255,6 +255,12 @@ app.get(`/get_video/:movie_id`, async(req,res,next)=>{
 
 
 
+app.get(`/get_book/`, async(req,res,next)=>{
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=potter+inauthor:rowling&key=AIzaSyCq3oTg--GJzlTZP5Q19ZgmYxn9JB04HEE`, options);
+    const data = await response.json();
+    res.send(data);
+})
+
 //gets all movies that are based on book or novel
 https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&language=en-US&sort_by=popularity.desc&page=1&with_keywords=818
 
