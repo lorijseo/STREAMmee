@@ -577,6 +577,12 @@ async function getMovie(movie_id){
     return data
 }
 
+async function getVideo(movie_id){
+    const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
+    const data = await response.json();
+    return data
+}
+
 
 // given movie's keywords, find any keywords relating to books or novels
 function adaptedFromBook(keywordArr){
@@ -641,12 +647,28 @@ function createMovieBtns(){
             else{
                 alert("noiirrr book")
             }
+            const video = await getVideo(id);
+            const videoList = video.results;
+            const wordList = ["Official", "official", "Trailer", "trailer"]
+            let potentialTrailerList = [];
+            for(let video in videoList){
+                let current_vid = videoList[video]
+                if((current_vid.type == "Trailer")&&(current_vid.official == true)){
+                    let video_key = current_vid.key;
+                    console.log(current_vid);
+                    document.querySelector(".displayVideo").innerHTML = `
+                    <iframe height="360" width="640"  
+                    src="https://www.youtube.com/embed/${video_key}">
+                    </iframe>`
+                    return
+                    
+                }
+            }
         })
 
     }
     
 }
-
 
 
 

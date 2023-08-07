@@ -215,7 +215,7 @@ const options = {
         accept: 'application/json',
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTNhMzVmNTBhYTY0N2YwZDljOGMzMmZmNjM3NzcxNCIsInN1YiI6IjYzZTZjMjhlZjI4ODM4MDA4MmRkNWVkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2BeG7R-8jQVLM3wsBq8PrVZ6evMFyMJ17jyLosLxcrI'
     }
-    };
+};
 
 
 
@@ -237,14 +237,23 @@ app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
 })
 
 
-//returns movie given move id
+//returns movie given movie id
 app.get(`/get_movie/:movie_id`, async(req,res,next)=>{
     const movie_id = req.params.movie_id;
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`, options);
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?language=en-US&append_to_response=videos`, options);
     const data = await response.json();
     res.send(data);
 })
   
+//returns video results given movie id
+app.get(`/get_video/:movie_id`, async(req,res,next)=>{
+    const movie_id = req.params.movie_id;
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?language=en-US`, options);
+    const data = await response.json();
+    res.send(data);
+})
+
+
 
 //gets all movies that are based on book or novel
 https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&language=en-US&sort_by=popularity.desc&page=1&with_keywords=818
