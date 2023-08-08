@@ -734,3 +734,21 @@ async function findMovie(movieTitle){
     return false;
 }
 
+// function welcome(name){
+//     console.log("hey" + name);
+// }
+
+
+// const pootpoot = require('./microservice');
+// console.log(pootpoot)
+// pootpoot.welcome("toast");
+
+// window.welcome("toast")
+// console.log(window);
+// console.log(document)
+
+// const path = require("path");
+
+// const pathObj = path.parse(__filename);
+
+// console.log(pathObj);
