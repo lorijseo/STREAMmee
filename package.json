@@ -12,7 +12,7 @@
   "main": "genre.js",
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon microservice.js"
+    "start": "nodemon movie.js"
   },
   "repository": {
     "type": "git",
