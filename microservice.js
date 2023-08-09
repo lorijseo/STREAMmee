@@ -56,7 +56,7 @@ const app = express();
 
 
 // specify port number
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // install cors to prevent any bugs with cross-platform 
 const cors = require('cors');
@@ -279,6 +279,10 @@ https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff637
 // let freeMemory = os.freemem();
 
 // console.log(`total memory: ${totalMemory}`);
+
+app.get('/', (req,res) => {
+    res.send("RIP katy")
+})
 
 // listen in which port
 app.listen(port, () => {

@@ -4,15 +4,15 @@
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "joi": "^17.9.2",
     "node-fetch": "^3.3.0",
     "nodemon": "^3.0.1"
   },
   "name": "topmovies",
   "version": "1.0.0",
   "main": "genre.js",
-  "devDependencies": {},
   "scripts": {
-    "start": "nodemon movie.js"
+    "start": "nodemon microservice.js"
   },
   "repository": {
     "type": "git",
