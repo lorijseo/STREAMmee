@@ -11,15 +11,35 @@ button{
   padding: 5px 15px;
 }
 
-a{
+.header{
+  margin: 2% 0;
+}
+
+.logo{
+  font-size: 30px;
+}
+.navbar-container{
+  display:flex;
+  justify-content: space-between;
+}
+
+.navbar{
+  display:flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+.navbar li{
+  margin: 0 30px;
+  font-weight: 700;
+  
+}
+
+
+.navbar li a{
   color: #d5d5d5;
 }
-
-h1{
-  text-align: center;
-  font-size: 50px;
-}
-
 
 
 .title{
@@ -63,6 +83,9 @@ h1{
 .movie{
   margin: 2%;
 }
+.movie:hover{
+  cursor: pointer;
+}
 
 .movie .title{
   text-align: center;
@@ -91,10 +114,10 @@ h1{
   font-size: 18px;
 }
 
-#searchBtn{
+/* #searchBtn{
   border:#d5d5d5 1px solid;
   padding: 5px 15px;
-}
+} */
 
 
 .columns{
