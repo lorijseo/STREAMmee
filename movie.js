@@ -15,26 +15,12 @@ async function displayTrendweek(){
         let dataDisplay = data[i].results.slice(0,20).map((object) => {
             const {title, poster_path, overview, release_date, vote_average} = object;
     
-            return `
-            <div class="grid-item">
-            <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-            </div>
-            <div class="grid-item" id="one-movie">
-            <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-            <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-            <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-            </div>
-            `
+            return displayMoviePoster(object)
         }).join("");
 
         document.querySelector(`#display${i+1}`).innerHTML = dataDisplay;
-        document.querySelector(".logo").style.display="block";
-
 
     }
-
-
-
 }
 
 
@@ -52,19 +38,10 @@ async function displayTrendday(){
     let dataDisplay = data.results.slice(0,19).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 romance movies
@@ -79,20 +56,11 @@ async function displayRomance(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 horror movies
@@ -107,20 +75,11 @@ async function displayHorror(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 action movies
@@ -135,20 +94,11 @@ async function displayAction(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 adventure movies
@@ -163,20 +113,11 @@ async function displayAdventure(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 animation movies
@@ -191,20 +132,11 @@ async function displayAnimation(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 // displays 12 comedy movies
@@ -220,20 +152,11 @@ async function displayComedy(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 documentary movies
@@ -249,20 +172,11 @@ async function displayDocumentary(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 drama movies
@@ -277,30 +191,18 @@ async function displayDrama(){
     const data = await response.json();
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 family movies
 const familyBtn = document.getElementById("familyBtn");
 familyBtn.addEventListener("click", function(e){
     e.preventDefault();
-    console.log("family")
     displayFamily();
-    console.log("yay")
 })
 
 async function displayFamily(){
@@ -309,20 +211,11 @@ async function displayFamily(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 fantasy movies
@@ -338,20 +231,11 @@ async function displayFantasy(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 history movies
@@ -367,20 +251,11 @@ async function displayHistory(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 music movies
@@ -396,20 +271,11 @@ async function displayMusic(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 mystery movies
@@ -425,20 +291,11 @@ async function displayMystery(){
     let dataDisplay = data.results.slice(0,12).map((object) => {
         const {title, poster_path, overview, release_date, vote_average} = object;
 
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 //displays 12 thriller movies
@@ -467,7 +324,6 @@ thrillerBtn.addEventListener("click", function(e){
 //     }).join("");
 
 //     document.querySelector(".displayList").innerHTML = dataDisplay;
-//     document.querySelector(".logo").style.display="block";
 // }
 
 
@@ -475,11 +331,11 @@ async function displayThriller(){
     const response = await fetch(`http://localhost:4000/moviedata/thriller`);
     const data = await response.json();
     let dataDisplay = data.results.slice(0,12).map((object) => {
-        return test2(object)
+        return displayMoviePoster(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 
@@ -497,21 +353,22 @@ function test(data){
     `
 }
 
-function test2(data){
+function displayMoviePoster(data){
     const {title, poster_path, overview, release_date, vote_average} = data;
+    const imageWidth = 300;
 
     return `    <div class="movie">    <div class="poster">
-            <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> 
+            <img src="https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}" alt="movie poster" /> 
         </div>
 
 
-        <div class="title">
+        <div class="title" style="width: ${imageWidth}px ">
             ${title}
         </div>
 
         <div class="descr">
             <div class="date">${release_date}</div>
-            <div class="score">${vote_average}</div>
+            <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
         </div>
         </div>
         `
@@ -567,7 +424,7 @@ async function displayWar(){
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 
@@ -633,7 +490,7 @@ async function displaySimiliarMovies(data){
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-    document.querySelector(".logo").style.display="block";
+
 }
 
 
