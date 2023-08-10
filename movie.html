@@ -4,86 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/db024aa634.js" crossorigin="anonymous"></script>
+    <!-- boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>TopMovies</title>
     <link id="styleSheet" href="styleDark.css" rel="stylesheet" type="text/css">
 
-    <form id="choose_css">
+    <!-- <form id="choose_css">
         <button id="styleDark" type="submit" title="Dark Mode with smaller movie display">&#9790;</button>
         <button id="styleLight" type="submit" title="Light Mode with bigger movie display">&#9728;</button>
-    </form>
+    </form> -->
 
 
 </head>
 <body>
     <h1>Top Movies</h1>
 
-    <!-- <div class="popup" id="popupA">
-        <p>New Feature! Swap between the current "Dark Mode" &#9790; or "Light Mode" &#9728; anytime!
-            "Dark Mode" uses a dark background with lighter text. "Light Mode" uses
-            a light background with dark text and magnifies the font of the application. 
-        </p>
-        <p> Click &#9728; below to swap to "Light Mode" now or click &#9790; to continue in "Dark Mode" 
-            You can change your mind anytime by accessing the button at the top right!
-        </p>
-        <button id="swapStyle">&#9728;</button> <button id="closeA">&#9790;</button>
 
-        
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Genre
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="trendingWeekBtn" href="#">Trending week</a>
+          <a class="dropdown-item" id="trendingDayBtn" href="#">Trending Today</a>
+          <a class="dropdown-item" id="actionBtn" href="#">Action</a>
+          <a class="dropdown-item" id="adventureBtn" href="#">Adventure</a>
+          <a class="dropdown-item" id="animationBtn" href="#">Animation</a>
+          <a class="dropdown-item" id="comedyBtn" href="#">Comedy</a>
+          <a class="dropdown-item" id="documentaryBtn" href="#">Documentary</a>
+          <a class="dropdown-item" id="dramaBtn" href="#">Drama</a>
+          <a class="dropdown-item" id="familyBtn" href="#">Family</a>
+          <a class="dropdown-item" id="fantasyBtn" href="#">Fantasy</a>
+          <a class="dropdown-item" id="historyBtn" href="#">History</a>
+          <a class="dropdown-item" id="horrorBtn" href="#">Horror</a>
+          <a class="dropdown-item" id="musicBtn" href="#">Music</a>
+          <a class="dropdown-item" id="mysteryBtn" href="#">Mystery</a>
+          <a class="dropdown-item" id="romanceBtn" href="#">Romance</a>
+          <a class="dropdown-item" id="thrillerBtn" href="#">Thriller</a>
+          <a class="dropdown-item" id="warBtn" href="#">War</a>
+        </div>
     </div>
-    <div class="popup" id="popupB">
-        <p> Welcome! Find the top 12 trending movies under any category using the buttons in the navigation bar!</p>
-        <button id="closeB">&raquo;</button>
-        
+
+
+
+    <!-- <div class="poster">
+        <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> 
+    </div>
+
+
+    <div class="title">
+        ${title}
+    </div>
+
+    <div class="descr">
+        <div class="date">${release_date}</div>
+        <div class="score">${vote_average}</div>
     </div> -->
 
 
 
-    <table class="center">
-        <tr>
-            <td>
-                <table colspan="1" id="popularTable">
-                    <tr>
-                        <td  class="tablelabel">Popular</td>
-                    </tr>
-                    <tr>
-                        <td> <button id="trendingWeekBtn">Trending This Week</button> </td>
-                    </tr>
-                    <tr>
-                        <td> <button id="trendingDayBtn">Trending Today</button> </td>
-                    </tr>
-                </table>
-
-            </td>
-            <td>
-                <table id="genreTable">
-                    <tr>
-                        <td colspan="8" class="tablelabel">Genre</td>
-                    </tr>
-                    <tr>
-                        <td> <button id="actionBtn">Action</button> </td>
-                        <td> <button id="adventureBtn">Adventure</button> </td>
-                        <td> <button id="animationBtn">Animation</button> </td>
-                        <td> <button id="comedyBtn">Comedy</button> </td>
-                        <td> <button id="documentaryBtn">Documentary</button> </td>
-                        <td> <button id="dramaBtn">Drama</button> </td>
-                        <td> <button id="familyBtn">Family</button> </td>
-                        <td> <button id="fantasyBtn">Fantasy</button></td>
-                    </tr>
-                    <tr>
-                        <td> <button id="historyBtn">History</button> </td>
-                        <td> <button id="horrorBtn">Horror</button> </td>
-                        <td> <button id="musicBtn">Music</button> </td>
-                        <td> <button id="mysteryBtn">Mystery</button> </td>
-                        <td> <button id="romanceBtn">Romance</button> </td>
-                        <td> <button id="thrillerBtn">Thriller</button> </td>
-                        <td> <button id="warBtn">War</button> </td>
-                        <td> &nbsp;</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
 
 
-    </table>
+
+
 
     <form autocomplete="off" action="#" id="search_bar">
         <div class="autocomplete">
@@ -103,6 +88,14 @@
     <div class="displayList" id="display4">  </div>
     <div class="displayList" id="display5">  </div>
     <div class="logo"><img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" alt="tmdb logo"></div>
+
+
+
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="./movie.js"></script>
     <script src="./microservice.js"></script>
 </body>

@@ -1,52 +1,4 @@
 
-// // close popup A and swap to Light Mode
-// const swapStyleBtn = document.getElementById("swapStyle")
-
-// swapStyleBtn.addEventListener("click", function(e){
-//     e.preventDefault();
-//     document.getElementById("popupA").style.display="none";
-//     document.getElementById("styleSheet").href="styleLight.css";
-    
-// })
-
-
-// // close popup A
-// const closeABtn = document.getElementById("closeA")
-
-// closeABtn.addEventListener("click", function(e){
-//     e.preventDefault();
-//     document.getElementById("popupA").style.display="none";
-// })
-
-// // close popup B
-// const closeBBtn = document.getElementById("closeB")
-
-// closeBBtn.addEventListener("click", function(e){
-//     e.preventDefault();
-//     document.getElementById("popupB").style.display="none";
-//     document.getElementById("popupA").style.opacity= .9;
-// })
-
-
-// // change CSS to style B
-// const styleBBtn = document.getElementById("styleLight")
-
-// styleBBtn.addEventListener("click", function(e){
-//     e.preventDefault();
-//     document.getElementById("styleSheet").href="styleLight.css";
-
-// })
-
-// // change CSS to style A
-// const styleABtn = document.getElementById("styleDark")
-
-// styleABtn.addEventListener("click", function(e){
-//     e.preventDefault();
-//     document.getElementById("styleSheet").href="styleDark.css";
-
-// })
-
-
 // displays 12 movies that are trending this week
 const trendingWeekBtn = document.getElementById("trendingWeekBtn");
 
@@ -346,7 +298,9 @@ async function displayDrama(){
 const familyBtn = document.getElementById("familyBtn");
 familyBtn.addEventListener("click", function(e){
     e.preventDefault();
+    console.log("family")
     displayFamily();
+    console.log("yay")
 })
 
 async function displayFamily(){
@@ -494,27 +448,86 @@ thrillerBtn.addEventListener("click", function(e){
     displayThriller();
 })
 
+// async function displayThriller(){
+//     const response = await fetch(`http://localhost:4000/moviedata/thriller`);
+//     const data = await response.json();
+//     let dataDisplay = data.results.slice(0,12).map((object) => {
+//         const {title, poster_path, overview, release_date, vote_average} = object;
+
+//         return `
+//         <div class="grid-item">
+//         <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
+//         </div>
+//         <div class="grid-item" id="one-movie">
+//         <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
+//         <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
+//         <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
+//         </div>
+//         `
+//     }).join("");
+
+//     document.querySelector(".displayList").innerHTML = dataDisplay;
+//     document.querySelector(".logo").style.display="block";
+// }
+
+
 async function displayThriller(){
     const response = await fetch(`http://localhost:4000/moviedata/thriller`);
     const data = await response.json();
     let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return `
-        <div class="grid-item">
-        <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
-        </div>
-        <div class="grid-item" id="one-movie">
-        <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
-        <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
-        <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
-        </div>
-        `
+        return test2(object)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
     document.querySelector(".logo").style.display="block";
 }
+
+
+function test(data){
+    const {title, poster_path, overview, release_date, vote_average} = data;
+    return `
+    <div class="grid-item">
+    <div title="Synopsis: ${overview}"> <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> </div>
+    </div>
+    <div class="grid-item" id="one-movie">
+    <div class="grid-item"><h3 class="title" title="Synopsis: ${overview}">"${title}"</h3></div>
+    <div class="grid-item"><p class="overview" id= "overview" title="Synopsis: ${overview}">${overview}</p></div>
+    <div class="grid-item"><p class="date" id= "date">Release Date:  ${release_date.slice(5,10)}${release_date[4]}${release_date.slice(0,4)} &nbsp; Vote Average: ${vote_average.toFixed(1)} </p></div>
+    </div>
+    `
+}
+
+function test2(data){
+    const {title, poster_path, overview, release_date, vote_average} = data;
+
+    return `    <div class="movie">    <div class="poster">
+            <img src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="movie poster" /> 
+        </div>
+
+
+        <div class="title">
+            ${title}
+        </div>
+
+        <div class="descr">
+            <div class="date">${release_date}</div>
+            <div class="score">${vote_average}</div>
+        </div>
+        </div>
+        `
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 //displays 12 war movies
 const warBtn = document.getElementById("warBtn");
