@@ -205,13 +205,13 @@ async function getMystery(){
 
 
 
-const thrillerBtn = document.getElementById("thrillerBtn");
-thrillerBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const data = await getThriller();
-    displayMovieContainer(data);
-    addMovieRoutes();
-})
+// const thrillerBtn = document.getElementById("thrillerBtn");
+// thrillerBtn.addEventListener("click", async function(e){
+//     e.preventDefault();
+//     const data = await getThriller();
+//     displayMovieContainer(data);
+//     addMovieRoutes();
+// })
 
 
 async function getThriller(){
@@ -232,7 +232,21 @@ function displayMovieContainer(data){
 
 
 
+const thrillerBtn = document.getElementById("thrillerBtn");
+thrillerBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    const genre = this.getAttribute("value")
+    const data = await getMovieApi(genre)
+    displayMovieContainer(data);
+    addMovieRoutes();
+})
 
+
+async function getMovieApi(genreName){
+    const response = await fetch(`http://localhost:4000/moviedata/${genreName}`);
+    const data = await response.json();
+    return data
+}
 
 
 
