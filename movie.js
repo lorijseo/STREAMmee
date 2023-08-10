@@ -7,20 +7,10 @@ trendingWeekBtn.addEventListener("click", function(e){
     displayTrendweek();
 })
 
-async function displayTrendweek(){
+async function getTrendweek(){
     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
     const data = await response.json();
-    
-    for(let i=0; i<5; i++){
-        let dataDisplay = data[i].results.slice(0,20).map((object) => {
-            const {title, poster_path, overview, release_date, vote_average} = object;
-    
-            return createMovieContainer(object)
-        }).join("");
-
-        document.querySelector(`#display${i+1}`).innerHTML = dataDisplay;
-
-    }
+    return data
 }
 
 
@@ -32,15 +22,10 @@ trendingDayBtn.addEventListener("click", function(e){
     displayTrendday();
 })
 
-async function displayTrendday(){
+async function getTrendday(){
     const response = await fetch(`http://localhost:4000/moviedata/trendday`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,19).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -50,16 +35,10 @@ romanceBtn.addEventListener("click", function(e){
     e.preventDefault();
     displayRomance();
 })
-async function displayRomance(){
+async function getRomance(){
     const response = await fetch(`http://localhost:4000/moviedata/romance`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -69,17 +48,10 @@ horrorBtn.addEventListener("click", function(e){
     e.preventDefault();
     displayHorror();
 })
-async function displayHorror(){
+async function getHorror(){
     const response = await fetch(`http://localhost:4000/moviedata/horror`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
+    return data
 }
 
 // displays 12 action movies
@@ -88,16 +60,10 @@ actionBtn.addEventListener("click", function(e){
     e.preventDefault();
     displayAction();
 })
-async function displayAction(){
+async function getAction(){
     const response = await fetch(`http://localhost:4000/moviedata/action`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -107,16 +73,10 @@ adventureBtn.addEventListener("click", function(e){
     e.preventDefault();
     displayAdventure();
 })
-async function displayAdventure(){
+async function getAdventure(){
     const response = await fetch(`http://localhost:4000/moviedata/adventure`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -126,17 +86,10 @@ animationBtn.addEventListener("click", function(e){
     e.preventDefault();
     displayAnimation();
 })
-async function displayAnimation(){
+async function getAnimation(){
     const response = await fetch(`http://localhost:4000/moviedata/animation`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
+    return data
 }
 
 // displays 12 comedy movies
@@ -146,16 +99,10 @@ comedyBtn.addEventListener("click", function(e){
     displayComedy();
 })
 
-async function displayComedy(){
+async function getComedy(){
     const response = await fetch(`http://localhost:4000/moviedata/comedy`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -166,16 +113,10 @@ documentaryBtn.addEventListener("click", function(e){
     displayDocumentary();
 })
 
-async function displayDocumentary(){
+async function getDocumentary(){
     const response = await fetch(`http://localhost:4000/moviedata/documentary`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -186,15 +127,10 @@ dramaBtn.addEventListener("click", function(e){
     displayDrama();
 })
 
-async function displayDrama(){
+async function getDrama(){
     const response = await fetch(`http://localhost:4000/moviedata/drama`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-        return createMovieContainer(object)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -205,16 +141,10 @@ familyBtn.addEventListener("click", function(e){
     displayFamily();
 })
 
-async function displayFamily(){
+async function getFamily(){
     const response = await fetch(`http://localhost:4000/moviedata/family`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object, index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -225,17 +155,10 @@ fantasyBtn.addEventListener("click", function(e){
     displayFantasy();
 })
 
-async function displayFantasy(){
+async function getFantasy(){
     const response = await fetch(`http://localhost:4000/moviedata/fantasy`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object, index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
+    return data
 }
 
 //displays 12 history movies
@@ -245,16 +168,10 @@ historyBtn.addEventListener("click", function(e){
     displayHistory();
 })
 
-async function displayHistory(){
+async function getHistory(){
     const response = await fetch(`http://localhost:4000/moviedata/history`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        const {title, poster_path, overview, release_date, vote_average} = object;
-
-        return createMovieContainer(object, index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    return data
 
 }
 
@@ -265,17 +182,10 @@ musicBtn.addEventListener("click", function(e){
     displayMusic();
 })
 
-async function displayMusic(){
+async function getMusic(){
     const response = await fetch(`http://localhost:4000/moviedata/music`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-
-
-        return createMovieContainer(object, index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
+    return data
 }
 
 //displays 12 mystery movies
@@ -286,39 +196,38 @@ mysteryBtn.addEventListener("click", async function(e){
     addMovieRoutes();
 })
 
-async function displayMystery(){
+async function getMystery(){
     const response = await fetch(`http://localhost:4000/moviedata/mystery`);
     const data = await response.json();
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        return createMovieContainer(object, index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
+    return data
 }
 
-//displays 12 thriller movies
+
+
+
 const thrillerBtn = document.getElementById("thrillerBtn");
 thrillerBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    await displayThriller();
+    const data = await getThriller();
+    displayMovieContainer(data);
     addMovieRoutes();
 })
 
 
-async function displayThriller(){
+async function getThriller(){
     const response = await fetch(`http://localhost:4000/moviedata/thriller`);
     const data = await response.json();
+    return data
+
+}
+
+function displayMovieContainer(data){
     let dataDisplay = data.results.slice(0,12).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
 
     document.querySelector(".displayList").innerHTML = dataDisplay;
-
 }
-
-
-
 
 
 
