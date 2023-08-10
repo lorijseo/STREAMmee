@@ -187,27 +187,31 @@ app.get('/moviedata/trendday', async (req, res, next) => {
 });
 
 app.get('/moviedata/trendweek', async (req, res, next) => {
-    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=1`);
-    const data1 = await response.json();
-    // const obj1 = JSON.parse(data);
-    // res.send(data);
-    const response2 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=2`);
-    const data2 = await response2.json();
-
-    const response3 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=3`);
-    const data3 = await response3.json();
-
-    const response4 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=4`);
-    const data4 = await response4.json();
-
-    const response5 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=5`);
-    const data5 = await response5.json();
-    // const obj2 = JSON.parse(data2);
-
-    const mergedArr =[data1, data2,data3, data4, data5]
-    // console.log(mergedArr);
-    res.send(mergedArr)
+    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`);
+    const data = await response.json();
+    res.send(data);
 });
+
+
+// app.get('/moviedata/trendweek', async (req, res, next) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=1`);
+//     const data1 = await response.json();
+//     // const obj1 = JSON.parse(data);
+//     // res.send(data);
+//     const response2 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=2`);
+//     const data2 = await response2.json();
+
+//     const response3 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=3`);
+//     const data3 = await response3.json();
+
+//     const response4 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=4`);
+//     const data4 = await response4.json();
+
+//     const response5 = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}&page=5`);
+//     const data5 = await response5.json();
+//     const mergedArr =[data1, data2,data3, data4, data5]
+//     res.send(mergedArr)
+// });
 
 const options = {
     method: 'GET',
