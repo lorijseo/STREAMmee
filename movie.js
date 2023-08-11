@@ -1,7 +1,6 @@
 
 // displays 12 movies that are trending this week
 const trendingWeekBtn = document.getElementById("trendweek");
-
 trendingWeekBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genre = this.getAttribute("id")
@@ -19,7 +18,6 @@ async function getTrendweek(){
 
 // displays 12 movies that are trending today
 const trendingDayBtn = document.getElementById("trendday");
-
 trendingDayBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genre = this.getAttribute("id")
@@ -305,12 +303,12 @@ function createMovieContainer(data,index){
     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
-        imgSrc=`"ammonia_icon.png" style = "width: 300px"`
+        imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
     }
 
 
     return `    <div class="movie" id=${className}>    <div class="poster">
-            <div> <img src=${imgSrc} alt="movie poster"/> </div>
+             <img src=${imgSrc} alt="movie poster"/> 
         </div>
 
 
@@ -326,6 +324,7 @@ function createMovieContainer(data,index){
         `
     
 }
+
 
 
 // function createMovieContainer(data,index){
@@ -553,47 +552,28 @@ searchBtn.addEventListener("click", async function(e){
     if (movieList.results.length > 0){
         displaySimiliarMovies(movieList);
         addMovieRoutes()
-        // createMovieBtns();
+
     }
     else{
         alert("doesn't exist")
+        $("<div>Test message</div>").dialog();
     }
+    document.querySelector("#search_input").value = '';
     return
 })
 
 
 
-// function displayMovie(foundMovie){
-
-//     const videoWidth = 798;
-//     const videoHeight = 798 / (16/9);
-
-//     document.querySelector("#modalhere").innerHTML = `
-//     <div class="videoDisplay">
-//     <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
-//     src="https://www.youtube.com/embed/${foundMovie.videos.results[0].key}?autoplay=1&mute=1&rel=0"" frameborder="0" allowfullscreen> 
-//     </iframe></div>
-//     <div><h3 class="previewTitle">${foundMovie.title}</h3></div>
-//     <div><p class="previewDescr" id= "overview">${foundMovie.overview}</p></div>
-
-//     `
-  
-// }
 
 
 function displayMovie(foundMovie){
     console.log(foundMovie)
     const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos} = foundMovie;
-    const videoWidth = 798;
-    const videoHeight = 798 / (16/9);
+    const videoWidth = 740;
+    const videoHeight = videoWidth / (16/9);
 
     const videoSrc = validateTrailer(videos.results)
 
-    // logoList =[]
-    // for (company in production_companies){
-    //     let logoSrc = production_companies[company].logo_path;
-    //     logoList.push(logoSrc)
-    // }
     const logoArray = displayPreviewLogo(production_companies)
 
     const genreArray = displayPreviewGenre(genres);
