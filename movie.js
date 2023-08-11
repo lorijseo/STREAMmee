@@ -1,19 +1,27 @@
-$('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
+//jquery runs after document is loaded
+$(function(){
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:false,
+        // autoplay:true,
+        // autoplayTimeout: 3000,
+        dots:true,
+        stagePadding:50,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:4
+            }
         }
-    }
-})
+    });
+  });
+
 
 
 // displays 12 movies that are trending this week
@@ -302,61 +310,70 @@ async function getMovieApi(genreName){
 
 
 
+//trending data
+
+//iterate through top 12
+function displayMovieContainer(data){
+    let dataDisplay = data.results.slice(0,12).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+
+    document.querySelector(".displayList").innerHTML = dataDisplay;
+}
+//fetch movie object
+//display poster
+//on click, view modal
 
 
 
+async function mainCarousel(genre){
+    const data = await getMovieApi(genre);
+    let dataDisplay = data.results.slice(0,12).map((object, index) => {
+        const newItem = document.createElement('div');
+        newItem.className = "item";
+        newItem.id = `item_${index}`
+        const imgSrc = createCarouselImg(object,index);
+        
+        document.querySelector(".owl-carousel").appendChild(newItem);
+        document.querySelector(`#item_${index}`).appendChild(imgSrc);
+        return 
+    });
+}
 
 
+function createCarouselImg(data, index){
+    const {id,title, poster_path, backdrop_path} = data;
+    const imageWidth = 300;
+
+    let imgSrc = `https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}` 
+
+    if((poster_path == null)){
+        imgSrc=`images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px`
+    }
+
+    const newItem = document.createElement('img');
+    newItem.src = imgSrc
+    console.log(newItem)
+    return newItem
+}
 
 
-
-
-
-
-// function createMovieContainer(data,index){
-//     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
-//     const imageWidth = 300;
-//     const className = "movie_btn_" + index;
-//     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
-
-//     if((poster_path == null)){
-//         imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
-//     }
-
-
-//     return `    <div class="movie" id=${className}>    <div class="poster">
-//              <img src=${imgSrc} alt="movie poster"/> 
-//         </div>
-
-
-//         <div id="${id}" class="title" style="width: ${imageWidth}px ">
-//             ${title}
-//         </div>
-
-//         <div class="descr">
-//             <div class="date">${release_date}</div>
-//             <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
-//         </div>
-//         </div>
-//         `
-    
-// }
 
 
 
 function createMovieContainer(data,index){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
-    const imageWidth = 780;
+    const imageWidth = 300;
     const className = "movie_btn_" + index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
-    if((backdrop_path == null)){
-        imgSrc=`"ammonia_icon.png" style = "width: 300px"`
+    if((poster_path == null)){
+        imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
     }
 
 
     return `    <div class="movie" id=${className}>    <div class="poster">
-            <div> <img src=${imgSrc} alt="movie poster"/> </div>
+             <img src=${imgSrc} alt="movie poster"/> 
         </div>
 
 
@@ -372,6 +389,37 @@ function createMovieContainer(data,index){
         `
     
 }
+
+
+
+// function createMovieContainer(data,index){
+//     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
+//     const imageWidth = 780;
+//     const className = "movie_btn_" + index;
+//     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+
+//     if((backdrop_path == null)){
+//         imgSrc=`"ammonia_icon.png" style = "width: 300px"`
+//     }
+
+
+//     return `    <div class="movie" id=${className}>    <div class="poster">
+//             <div> <img src=${imgSrc} alt="movie poster"/> </div>
+//         </div>
+
+
+//         <div id="${id}" class="title" style="width: ${imageWidth}px ">
+//             ${title}
+//         </div>
+
+//         <div class="descr">
+//             <div class="date">${release_date}</div>
+//             <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
+//         </div>
+//         </div>
+//         `
+    
+// }
 
 
 
@@ -675,6 +723,30 @@ function addMovieRoutes(){
     }
 }
 
+
+function addOwlRoutes(){
+    let selectedMovie = document.querySelectorAll(".item");
+    for (let i=0; i<selectedMovie.length; i++){
+        if (selectedMovie[i].id){
+            const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
+            movieBtn.addEventListener("click", async function(e){
+                e.preventDefault();
+                alert("yay")
+                const movieClass = this.querySelector(".owlImg");
+                const movieId = movieClass.id;
+                data = await getMovie(movieId);
+                displayMoviePreview(data);
+    
+            })
+        }
+
+    }
+}
+
+// window.addEventListener('load', async function(){
+//     addOwlRoutes();
+    
+// })
 
 
 function displayMoviePreview(data){
