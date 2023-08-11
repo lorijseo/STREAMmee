@@ -1,3 +1,20 @@
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+
 
 // displays 12 movies that are trending this week
 const trendingWeekBtn = document.getElementById("trendweek");
@@ -296,50 +313,19 @@ async function getMovieApi(genreName){
 
 
 
-function createMovieContainer(data,index){
-    const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
-    const imageWidth = 300;
-    const className = "movie_btn_" + index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
-
-    if((poster_path == null)){
-        imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
-    }
-
-
-    return `    <div class="movie" id=${className}>    <div class="poster">
-             <img src=${imgSrc} alt="movie poster"/> 
-        </div>
-
-
-        <div id="${id}" class="title" style="width: ${imageWidth}px ">
-            ${title}
-        </div>
-
-        <div class="descr">
-            <div class="date">${release_date}</div>
-            <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
-        </div>
-        </div>
-        `
-    
-}
-
-
-
 // function createMovieContainer(data,index){
 //     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
-//     const imageWidth = 780;
+//     const imageWidth = 300;
 //     const className = "movie_btn_" + index;
-//     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+//     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
-//     if((backdrop_path == null)){
-//         imgSrc=`"ammonia_icon.png" style = "width: 300px"`
+//     if((poster_path == null)){
+//         imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
 //     }
 
 
 //     return `    <div class="movie" id=${className}>    <div class="poster">
-//             <div> <img src=${imgSrc} alt="movie poster"/> </div>
+//              <img src=${imgSrc} alt="movie poster"/> 
 //         </div>
 
 
@@ -355,6 +341,37 @@ function createMovieContainer(data,index){
 //         `
     
 // }
+
+
+
+function createMovieContainer(data,index){
+    const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
+    const imageWidth = 780;
+    const className = "movie_btn_" + index;
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+
+    if((backdrop_path == null)){
+        imgSrc=`"ammonia_icon.png" style = "width: 300px"`
+    }
+
+
+    return `    <div class="movie" id=${className}>    <div class="poster">
+            <div> <img src=${imgSrc} alt="movie poster"/> </div>
+        </div>
+
+
+        <div id="${id}" class="title" style="width: ${imageWidth}px ">
+            ${title}
+        </div>
+
+        <div class="descr">
+            <div class="date">${release_date}</div>
+            <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
+        </div>
+        </div>
+        `
+    
+}
 
 
 
