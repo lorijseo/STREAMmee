@@ -226,7 +226,7 @@ button {
 }
 
 .previewLogoIcon {
-  margin: 0 10px;
+  margin: 10px;
 }
 
 .previewLogoIcon img {
@@ -243,7 +243,7 @@ button {
 /* ***********************************MODAL JQUERY*********************************** */
 
 #dialog-message{
-  background-color: yellow !important;
+  background-color: #302e2e; 
 
 }
 
@@ -251,9 +251,9 @@ button {
 
 .ui-dialog { z-index: 1000 !important ;}
 
-.ui-button{
-  background-color: red;
-}
+/* .ui-button{
+  visibility: hidden;
+} */
 
 .ui-dialog .ui-dialog-buttonpane { 
   text-align: center;
@@ -264,4 +264,21 @@ button {
 
 .ui-dialog-titlebar-close {
   visibility: hidden;
+}
+
+#cancel-button{
+  text-align: center;
+  background-color: transparent;
+  border: none;
+}
+
+#cancel-button:hover i{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#cancel-button i{
+  color: red;
+  font-size: 40px;
+  opacity: 0.4;
 }

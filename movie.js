@@ -33,8 +33,10 @@ $j(function(){
         autoOpen:false,
         buttons: [
             {
+                id: "cancel-button",
                 // text: "byebye",
-                icon: "ui-icon-heart",
+                // showText: false,
+                // icons: {primary: "ui-icon-heart"},
                 click: function() {
                     $j( this ).dialog( "close" );}
             }
@@ -52,6 +54,13 @@ $j(function(){
           duration: 500
         }
     });
+
+
+    // var buttons = $j( "#dialog-message" ).dialog( "option", "buttons" );
+    // buttons[0].html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
+    // console.log(buttons[0])
+
+    $j( "#cancel-button" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
 
     // $( "#dialog-message").dialog( "open" );
 
