@@ -31,9 +31,15 @@ $j(function(){
         $j("#dialog-message" ).dialog({
         modal: true,
         autoOpen:false,
-        buttons:{
-            "byebye": function(){$j(this).dialog('close')}
-        },
+        buttons: [
+            {
+                // text: "byebye",
+                icon: "ui-icon-heart",
+                click: function() {
+                    $j( this ).dialog( "close" );}
+            }
+
+        ],
         width: 740,
         //prevents lag
         // draggable:false,
