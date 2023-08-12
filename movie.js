@@ -1,16 +1,16 @@
 var $j = jQuery.noConflict();
 
-
-//jquery runs after document is loaded
-$j(function($){
-    $('.owl-carousel').owlCarousel({
+$j(".owl-carousel").each(function(){
+    $j(this).owlCarousel({
         loop:true,
         margin:10,
-        nav:false,
+        // nav:true,
+        mouseDrag:true,
         // autoplay:true,
         // autoplayTimeout: 3000,
         dots:true,
         stagePadding:50,
+        pagination : false,
         responsive:{
             0:{
                 items:1
@@ -20,10 +20,45 @@ $j(function($){
             },
             1000:{
                 items:4
+            },
+            1200:{
+                items:6
             }
         }
     });
-});
+  });
+
+//jquery runs after document is loaded
+
+
+// $j(function($){
+//     $('#trendTodayOwl').owlCarousel({
+//         loop:true,
+//         margin:10,
+//         // nav:true,
+//         mouseDrag:true,
+//         // autoplay:true,
+//         // autoplayTimeout: 3000,
+//         dots:true,
+//         stagePadding:50,
+//         responsive:{
+//             0:{
+//                 items:1
+//             },
+//             600:{
+//                 items:3
+//             },
+//             1000:{
+//                 items:8
+//             }
+//         }
+//     });
+// });
+
+document.querySelector('#topBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo(0,0);
+})
 
 
 $j(function(){
@@ -56,76 +91,26 @@ $j(function(){
     });
 
 
-    // var buttons = $j( "#dialog-message" ).dialog( "option", "buttons" );
-    // buttons[0].html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
-    // console.log(buttons[0])
-
     $j( "#cancel-button" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
 
-    // $( "#dialog-message").dialog( "open" );
-
-    // $("#dialog-message" ).dialog({
-    //     show: {
-    //       effect: "blind",
-    //       duration: 1000
-    //     },
-    //     hide: {
-    //       effect: "explode",
-    //       duration: 1000
-    //     }
-    // });
-
-    // $( "#dialog-message" ).dialog( "destroy" );
-
-    // $( "#dialog-message").dialog( "open" );
-
-})
-
-$j(function(){
-    $j('#yay').click(function($){
-        $j("#dialog-message" ).dialog("moveToTop");
-        $j('#dialog-message').dialog( "open" );
-    })
 })
 
 
 
 
 
+// async function getTrendweek(){
+//     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
+//     const data = await response.json();
+//     return data
+// }
 
-// displays 12 movies that are trending this week
-const trendingWeekBtn = document.getElementById("trendweek");
-trendingWeekBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
+// async function getTrendday(){
+//     const response = await fetch(`http://localhost:4000/moviedata/trendday`);
+//     const data = await response.json();
+//     return data
 
-async function getTrendweek(){
-    const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
-    const data = await response.json();
-    return data
-}
-
-
-// displays 12 movies that are trending today
-const trendingDayBtn = document.getElementById("trendday");
-trendingDayBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-async function getTrendday(){
-    const response = await fetch(`http://localhost:4000/moviedata/trendday`);
-    const data = await response.json();
-    return data
-
-}
+// }
 
 // displays 12 romance movies
 const romanceBtn = document.getElementById("romance");
@@ -386,7 +371,8 @@ function displayMovieContainer(data){
     let dataDisplay = data.results.slice(0,12).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
-
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#toast").style.display = "none";
     document.querySelector(".displayList").innerHTML = dataDisplay;
 }
 //fetch movie object
@@ -395,16 +381,38 @@ function displayMovieContainer(data){
 
 
 
-async function mainCarousel(genre){
+// async function mainCarousel(genre,positionId){
+//     const data = await getMovieApi(genre);
+//     let dataDisplay = data.results.slice(0,12).map((object, index) => {
+
+//         const newItem = createCarouselImg(object,index);
+
+//         $j(function(){
+//             $j('.owl-carousel').owlCarousel('add', newItem);
+//             $j('.owl-carousel').owlCarousel('update')
+//         })
+
+//         $j(function(){
+//             $j('.owl-carousel').owlCarousel('add', newItem);
+//             $j('.owl-carousel').owlCarousel('update')
+//         })
+
+//         return 
+//     });
+// }
+
+async function mainCarousel(genre,positionId){
     const data = await getMovieApi(genre);
     let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        const newItem = document.createElement('div');
-        newItem.className = "item";
-        newItem.id = `item_${index}`
-        const imgSrc = createCarouselImg(object,index);
-        
-        document.querySelector(".owl-carousel").appendChild(newItem);
-        document.querySelector(`#item_${index}`).appendChild(imgSrc);
+
+        const newItem = createCarouselImg(object,index);
+
+        $j(function(){
+            $j(positionId).owlCarousel('add', newItem);
+            $j(positionId).owlCarousel('update')
+        })
+
+
         return 
     });
 }
@@ -420,10 +428,15 @@ function createCarouselImg(data, index){
         imgSrc=`images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px`
     }
 
-    const newItem = document.createElement('img');
-    newItem.src = imgSrc
-    console.log(newItem)
-    return newItem
+    newOwlItem = `    <div class="item" id="item${index}">
+    <img class="owlImg" id='${data.id}'src="${imgSrc}">
+</div>`
+    // const newItem = document.createElement('img');
+    // newItem.src = imgSrc
+    // console.log(newItem)
+
+
+    return newOwlItem
 }
 
 
@@ -588,6 +601,8 @@ function displaySimiliarMovies(data){
         return createMovieContainer(object,index)
     }).join("");
 
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#toast").style.display = "none";
     document.querySelector(".displayList").innerHTML = dataDisplay;
 
 }
@@ -728,10 +743,7 @@ function displayMovie(foundMovie){
   
 }
 
-{/* <p class="previewDescr"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""></p>    
-<p class="previewDescr"><img src="https://image.tmdb.org/t/p/w92/${logoList[1]}" alt=""></p>
-<p class="previewDescr"><img src="https://image.tmdb.org/t/p/w92/${logoList[2]}" alt=""></p>
-<p class="previewDescr"><img src="https://image.tmdb.org/t/p/w92/${logoList[3]}" alt=""></p> */}
+
 
 function displayPreviewLogo(logoList){
     let dataDisplay = logoList.slice(0,logoList.length).map((object, index) => {
@@ -795,36 +807,80 @@ function addMovieRoutes(){
 }
 
 
-function addOwlRoutes(){
-    let selectedMovie = document.querySelectorAll(".item");
-    for (let i=0; i<selectedMovie.length; i++){
-        if (selectedMovie[i].id){
-            const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
-            movieBtn.addEventListener("click", async function(e){
-                e.preventDefault();
-                alert("yay")
-                const movieClass = this.querySelector(".owlImg");
-                const movieId = movieClass.id;
-                data = await getMovie(movieId);
-                displayMoviePreview(data);
-    
-            })
-        }
+// function addOwlRoutes(){
 
-    }
-}
+//     const owlContainer = $j('.owl-stage').find('.owl-item')
+//     console.log(owlContainer)
+//     for (let i=0; i<24; i++){
+//         // const owlItemArr = owlContainer.querySelectorAll('.owl-item');
 
-// window.addEventListener('load', async function(){
-//     addOwlRoutes();
+//         for (owl in owlContainer){
+//             const imgContainer = owl.querySelector('.item');
+//             const imgContainerId = imgContainer.id;
+
+//             const movieBtn = document.querySelector(`#${imgContainerId}`);
+//             movieBtn.addEventListener("click", async function(e){
+//                 e.preventDefault();
+//                 alert("hey")
+//                 const movieClass = this.querySelector(".owlImg");
+//                 const movieId = movieClass.id;
+//                 console.log(movieId);
+//                 data = await getMovie(movieId);
+//                 displayMoviePreview(data);})
+           
+//         }
+        
+//     }
+// }
+
+
+
+// function addOwlRoutes(){
+//     let selectedMovie = document.querySelectorAll(".item");
+//     for (let i=0; i<selectedMovie.length; i++){
+//         if (selectedMovie[i].id){
+//             const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
+//             movieBtn.addEventListener("click", async function(e){
+//                 e.preventDefault();
+//                 const movieClass = this.querySelector(".owlImg");
+//                 const movieId = movieClass.id;
+//                 console.log(movieId);
+//                 data = await getMovie(movieId);
+//                 displayMoviePreview(data);
     
+//             })
+//         }
+
+//     }
+// }
+
+
+// $j(function(){
+//     $j('#item2').click(function(){
+//         const imgTag = $j(this).find('img');
+//         const movieId = $j(imgTag).attr('id');
+//         owlPreview(movieId);
+//     })
 // })
+
+// $j( "#item2" ).trigger( "click" );
+
+// async function owlPreview(movieId){
+//     data = await getMovie(movieId);
+//     displayMoviePreview(data);
+// }
+
+
+window.addEventListener('load', async function(){
+    await mainCarousel("thriller","#toast");
+    await mainCarousel("trendday","#trendTodayOwl");
+    // addOwlRoutes();
+    
+})
 
 
 function displayMoviePreview(data){
     displayMovie(data);
-    // displayVideo(data.id);
-
-    // $('#myModal').modal('show');
 
     $j(function(){
         // $j("#dialog-message" ).dialog("moveToTop");
