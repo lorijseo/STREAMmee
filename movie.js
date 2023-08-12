@@ -47,11 +47,11 @@ $j(function(){
         // draggable:false,
         show: {
           effect: "fade",
-          duration: 500
+          duration: 1000
         },
         hide: {
           effect: "fade",
-          duration: 500
+          duration: 1000
         }
     });
 

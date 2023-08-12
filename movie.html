@@ -20,9 +20,10 @@
     <title>TopMovies</title>
     <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
     <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <section class="header">
+    <!-- <section class="header">
         <div class="navbar-container">
             <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
             <ul class="navbar">
@@ -68,11 +69,41 @@
             </ul>
         </div>
 
+    </section> -->
+
+
+
+    <section class="header">
+        <div class="navbar-container">
+            <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a class="sub-btn" href="#">Genre <i class="fas fa-angle-down"></i></a>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a href="#" id="thriller">Thriller</a></li>
+                        <li class="sub-item"><a href="#" id="trendweek">TrendWeek</a></li>
+                        <li class="sub-item"><a href="#" id="action">Action</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#">About</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Books</a>
+                </li>
+                <li class="menu-item" >
+                    <a href="#">Scripts</a>
+                </li>
+                <li class="menu-item">
+                    <form action="submit">
+                        <input id="search_input" type="text">
+                        <button id="searchBtn">go</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
     </section>
-
-
-
-
 
     
 

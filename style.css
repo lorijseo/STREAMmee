@@ -32,6 +32,41 @@ button {
 }
 
 /* ***********************************NAV*********************************** */
+
+
+
+.menu{
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.menu-item{
+  margin: 20px
+}
+.menu .menu-item a {
+  color: black;
+  /* color: #d5d5d5; */
+}
+
+.menu .sub-menu{
+  position:absolute;
+  list-style: none;
+  /* pointer-events: none; */
+  background: yellow;
+  border-radius: 0 0 8px 8px;
+  transform: translateY(20px);
+}
+
+.menu-item .sub-menu .sub-item{
+  position: relative;
+  /* padding: 15px 30px; */
+}
+
+.menu-item .sub-menu{
+  column-count: 3;
+}
+
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -162,7 +197,7 @@ button {
 }
 
 /* ***********************************MODAL*********************************** */
-#myModal {
+/* #myModal {
   top: 7%;
   padding-right: 0 !important;
 }
@@ -170,7 +205,7 @@ button {
 .modal-content {
   width: 740px;
   min-height: 400px;
-}
+} */
 
 #dialog-message {
   display: flex;
@@ -178,10 +213,50 @@ button {
   flex-wrap: wrap;
 }
 
-#modalCloseBtn {
+#dialog-message{
+  background-color: #302e2e; 
+
+}
+
+.ui-front { z-index: 1000 !important; }
+
+.ui-dialog { z-index: 1000 !important ;}
+
+/* .ui-button{
+  visibility: hidden;
+} */
+
+.ui-dialog .ui-dialog-buttonpane { 
+  text-align: center;
+}
+/* .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+  float: none;
+} */
+
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
+
+#cancel-button{
+  text-align: center;
+  background-color: transparent;
+  border: none;
+}
+
+#cancel-button:hover i{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#cancel-button i{
+  color: red;
+  font-size: 40px;
+  opacity: 0.4;
+}
+
+/* #modalCloseBtn {
   margin: 0;
   color: unset;
-  /* text-align: center; */
   right: 20%;
 }
 
@@ -197,9 +272,12 @@ button {
 .modal-body {
   padding: 0;
   background-color: #121212;
-}
+} */
 
 /* ***********************************MODAL MOVIE PREVIEW*********************************** */
+
+
+
 .videoDisplay {
   /* width:70%; */
   text-align: center;
@@ -242,43 +320,3 @@ button {
 
 /* ***********************************MODAL JQUERY*********************************** */
 
-#dialog-message{
-  background-color: #302e2e; 
-
-}
-
-.ui-front { z-index: 1000 !important; }
-
-.ui-dialog { z-index: 1000 !important ;}
-
-/* .ui-button{
-  visibility: hidden;
-} */
-
-.ui-dialog .ui-dialog-buttonpane { 
-  text-align: center;
-}
-/* .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
-  float: none;
-} */
-
-.ui-dialog-titlebar-close {
-  visibility: hidden;
-}
-
-#cancel-button{
-  text-align: center;
-  background-color: transparent;
-  border: none;
-}
-
-#cancel-button:hover i{
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-#cancel-button i{
-  color: red;
-  font-size: 40px;
-  opacity: 0.4;
-}
