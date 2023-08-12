@@ -255,6 +255,13 @@ button {
   background-color: red;
 }
 
+.ui-dialog .ui-dialog-buttonpane { 
+  text-align: center;
+}
+/* .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+  float: none;
+} */
+
 .ui-dialog-titlebar-close {
   visibility: hidden;
 }
