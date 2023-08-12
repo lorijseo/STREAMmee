@@ -172,7 +172,7 @@ button {
   min-height: 400px;
 }
 
-#modalhere {
+#dialog-message {
   display: flex;
   justify-content: column;
   flex-wrap: wrap;
