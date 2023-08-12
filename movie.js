@@ -1,5 +1,8 @@
+var $j = jQuery.noConflict();
+
+
 //jquery runs after document is loaded
-$(function(){
+$j(function($){
     $('.owl-carousel').owlCarousel({
         loop:true,
         margin:10,
@@ -20,7 +23,58 @@ $(function(){
             }
         }
     });
-  });
+});
+
+
+$j(function(){
+
+        $j("#dialog-message" ).dialog({
+        modal: true,
+        autoOpen:false,
+        buttons:{
+            "byebye": function(){$j(this).dialog('close')}
+        },
+        width: 740,
+        //prevents lag
+        // draggable:false,
+        show: {
+          effect: "fade",
+          duration: 500
+        },
+        hide: {
+          effect: "fade",
+          duration: 500
+        }
+    });
+
+    // $( "#dialog-message").dialog( "open" );
+
+    // $("#dialog-message" ).dialog({
+    //     show: {
+    //       effect: "blind",
+    //       duration: 1000
+    //     },
+    //     hide: {
+    //       effect: "explode",
+    //       duration: 1000
+    //     }
+    // });
+
+    // $( "#dialog-message" ).dialog( "destroy" );
+
+    // $( "#dialog-message").dialog( "open" );
+
+})
+
+$j(function(){
+    $j('#yay').click(function($){
+        $j("#dialog-message" ).dialog("moveToTop");
+        $j('#dialog-message').dialog( "open" );
+    })
+})
+
+
+
 
 
 
@@ -643,7 +697,8 @@ function displayMovie(foundMovie){
 
     const genreArray = displayPreviewGenre(genres);
 
-    document.querySelector("#modalhere").innerHTML = `
+    //"#modalhere" TESTA
+    document.querySelector("#dialog-message").innerHTML = `
     <div class="videoDisplay">
     <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
     src=${videoSrc} frameborder="0" allowfullscreen> 
@@ -670,6 +725,7 @@ function displayPreviewLogo(logoList){
         }
         return
     }).join("");
+    console.log(dataDisplay);
     return dataDisplay
 }
 
@@ -752,9 +808,33 @@ function addOwlRoutes(){
 function displayMoviePreview(data){
     displayMovie(data);
     // displayVideo(data.id);
-    // jQuery.noConflict();
-    $('#myModal').modal('show');
+
+    // $('#myModal').modal('show');
+
+    $j(function(){
+        // $j("#dialog-message" ).dialog("moveToTop");
+        $j('#dialog-message').dialog( "open" );
+        return
+    })
+    
 }
+
+
+$j(function(){
+    $j('.buttons').click(function(){
+        $j(modal).dialog( "close" );
+    })
+})
+
+
+// $j('.ui-button').click(function(){
+//     $j('#dialog-message').dialog( "close" );
+// })
+
+document.querySelector("#dropdownMenuButton").addEventListener('click', function(){
+    document.querySelector(".dropdown-menu").style.display = "block";
+})
+
 
 // $(function displayMoviePreview(e,data){
 //     e.preventDefault();
@@ -764,19 +844,20 @@ function displayMoviePreview(data){
 //     $('#myModal').modal('show');
 // })
 
-$('.wap').click(function(){
-    $('.modalContainer').show();
-})
+// $('.wap').click(function(){
+//     $('.modalContainer').show();
+// })
 
-$('.wapa').click(function(){
-    $('.modalContainer').hide();
-})
+// $('.wapa').click(function(){
+//     $('.modalContainer').hide();
+// })
 
 // document.querySelector("#modalthere").innerHTML=`WAPAAAAA`
 
 
 //turns off youtube when modal closed
-$(document).ready(function() {
+
+jQuery(document).ready(function($) {
     let url = $("#movieTrailer").attr('src');
     $('#myModal').on('hide.bs.modal', function() {
         $("#movieTrailer").attr('src', '');

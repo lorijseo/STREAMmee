@@ -57,9 +57,9 @@ button {
   color: black;
 }
 
-.navbar:hover .dropdown-menu {
+/* .navbar:hover .dropdown-menu {
   display: block;
-}
+} */
 
 /* .dropdown:hover #dropdownMenuButton{
   text-decoration: underline;
@@ -125,7 +125,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 50% 0 0 0;
+  margin: 10% 0 0 0;
 }
 
 .movie {
@@ -240,3 +240,21 @@ button {
 
 
 
+/* ***********************************MODAL JQUERY*********************************** */
+
+#dialog-message{
+  background-color: yellow !important;
+
+}
+
+.ui-front { z-index: 1000 !important; }
+
+.ui-dialog { z-index: 1000 !important ;}
+
+.ui-button{
+  background-color: red;
+}
+
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
