@@ -68,20 +68,20 @@
     
 
     <section id="setting">
-        <form action="submit">
+        <form action="#">
             <h1>Settings</h1>
             <div>
-                <label for="userName">Username</label>
-                <input type="text" name="userName">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
 
             </div>
 
             <div>
                 <label for="location">Location</label>
-                <input type="text" name="location">
+                <input type="text" name="location" id="location">
                 <div>
                     <label for="useLocation">Use your location to narrow down on searches</label>
-                    <input type="checkbox" name="useLocation">
+                    <input type="checkbox" name="useLocation" id="use-location">
                 </div>
 
             </div>
@@ -91,13 +91,13 @@
                 <input type="text" name="subscription">
                 <div>
                     <label for="useSubscription">Use your subscription to narrow down on searches</label>
-                    <input type="checkbox" name="useSubscription">
+                    <input type="checkbox" name="useSubscription" id="use-subscription">
     
                 </div>
             </div>
 
             <div>
-                <button type="submit">Submit</button>
+                <button action="submit" id="setting-btn">Submit</button>
 
             </div>
 
@@ -110,20 +110,23 @@
         <h1>Profile</h1>
         <div>
             <span class="profile-label">Username</span>
-            <span>poot</span>
+            <span id="profile-username">poot</span>
         </div>
         <div>
             <span class="profile-label">Location</span>
-            <span>doob</span>
+            <span id="profile-location">doob</span>
+            <span id="location-is-active" style="display:none">location active</span>
         </div>
         <div>
             <span class="profile-label">Subscription</span>
+            <span id="subscription-is-active" style="display:none">subscription active</span>
             <ul>
                 <li>wah</li>
                 <li>woo</li>
                 <li>woa</li>
             </ul>
         </div>
+        <button id="edit-profile-btn">Edit Profile</button>
 
     </section>
 
@@ -140,9 +143,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+    <script>
+        const settingBtn = document.querySelector("#setting-btn");
+        settingBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            // get values
+            const userName = document.querySelector("#username").value;
+            const userLocation = document.querySelector("#location").value;
 
-    <script src="./movie.js"></script>
-    <script src="./microservice.js"></script>
+            const isLocationActive = document.querySelector("#use-location").checked;
+            const isSubscriptionActive = document.querySelector("#use-subscription").checked;
+            updateProfile(userName, userLocation, isLocationActive, isSubscriptionActive );
+            
+        })
+
+        function updateProfile(name, location, locationActive, subscriptionActive){
+            document.querySelector("#profile-username").innerHTML= name;
+            document.querySelector("#profile-location").innerHTML= location;
+            if (locationActive){
+                document.querySelector("#location-is-active").style.display = "block";
+            }
+            if (subscriptionActive){
+                document.querySelector("#subscription-is-active").style.display = "block";
+            }
+            
+
+        }
+
+
+    </script>
+
+    <!-- <script src="./movie.js"></script>
+    <script src="./microservice.js"></script> -->
 
     <!-- <script>jQuery.noConflict();</script> -->
 
