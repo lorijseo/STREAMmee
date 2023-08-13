@@ -967,5 +967,44 @@ searchBtn.addEventListener("click", async function(e){
 
 // let response = ''
 
+document.querySelector("#profile-location").innerHTML= location;
+if (locationActive){
+    document.querySelector("#location-is-active").style.display = "block";
+}
+if (subscriptionActive){
+    document.querySelector("#subscription-is-active").style.display = "block";
+}
 
 
+const settingBtn = document.querySelector("#setting-btn");
+        settingBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            // get values
+            const userName = document.querySelector("#username").value;
+            const userLocation = document.querySelector("#location").value;
+
+            const isLocationActive = document.querySelector("#use-location").checked;
+            const isSubscriptionActive = document.querySelector("#use-subscription").checked;
+            updateProfile(userName, userLocation, isLocationActive, isSubscriptionActive );
+            clearForm();
+            
+        })
+
+        function clearForm(){
+            document.querySelector("#username").value='';
+            document.querySelector("#location").value='';
+            document.querySelector("#use-location").checked = false;
+            document.querySelector("#use-subscription").checked = false;
+        }
+
+        function updateProfile(name, location, locationActive, subscriptionActive){
+            let profile ={}
+            document.querySelector("#profile-username").innerHTML= name;
+            profile["username"] = name;
+            profile["location"] = location;
+            profile["locationActive"] = locationActive;
+            profile["subscriptionActive"] = subscriptionActive;
+            
+            localStorage.setItem("user", JSON.stringify(profile))
+
+        }
