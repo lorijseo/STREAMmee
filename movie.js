@@ -548,11 +548,17 @@ async function getMovie(movie_id){
     return data
 }
 
-async function getVideo(movie_id){
-    const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
+async function getProviders(movie_id){
+    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
     const data = await response.json();
     return data
 }
+
+// async function getVideo(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
+//     const data = await response.json();
+//     return data
+// }
 
 
 // given movie's keywords, find any keywords relating to books or novels
@@ -776,7 +782,8 @@ async function findMovie(movieTitle){
             if (data[page].results[j].title == movieTitle){
                 const foundMovie = data[page].results[j];
                 const movieId = foundMovie.id;
-                // console.log(movieId);
+                console.log(movieId);
+
                 return foundMovie;
             }
         } 
@@ -798,7 +805,9 @@ function addMovieRoutes(){
                 e.preventDefault();
                 const movieClass = this.querySelector(".title");
                 const movieId = movieClass.id;
-                data = await getMovie(movieId);
+                const provider = await getProviders(movieId);
+                console.log(provider);
+                const data = await getMovie(movieId);
                 displayMoviePreview(data);
     
             })
@@ -944,23 +953,27 @@ jQuery(document).ready(function($) {
 //     $('.dropdown-menu').css("display", "none")
 // })
 
+// let mydata = ''
+// // get geolocation of user
+// const data = null;
 
-// get geolocation of user
-const data = null;
+// const xhr = new XMLHttpRequest();
+// //set to false because CORS blocks off all cookies
+// xhr.withCredentials = false;
 
-const xhr = new XMLHttpRequest();
-//set to false because CORS blocks off all cookies
-xhr.withCredentials = false;
+// xhr.addEventListener("readystatechange", function () {
+//   if (this.readyState === this.DONE) {
+//     console.log(this.responseText);
+//     console.log(this.response);
+//     mydata = this.response;
+    
+//   }
+// });
 
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === this.DONE) {
-    console.log(this.responseText);
-  }
-});
+// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}`);
+// xhr.send(data);
 
-const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}`);
 
-xhr.send(data);
+// console.log(xhr.country_code)
 
-console.log(xhr)

@@ -241,6 +241,15 @@ app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
 })
 
 
+
+app.get(`/get_providers/:movie_id`, async(req,res,next)=>{
+    const movie_id = req.params.movie_id;
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/watch/providers`, options);
+    const data = await response.json();
+    res.send(data);
+});
+
+
 //returns movie given movie id
 app.get(`/get_movie/:movie_id`, async(req,res,next)=>{
     const movie_id = req.params.movie_id;
@@ -248,14 +257,18 @@ app.get(`/get_movie/:movie_id`, async(req,res,next)=>{
     const data = await response.json();
     res.send(data);
 })
+
+
+  
+
   
 //returns video results given movie id
-app.get(`/get_video/:movie_id`, async(req,res,next)=>{
-    const movie_id = req.params.movie_id;
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?language=en-US`, options);
-    const data = await response.json();
-    res.send(data);
-})
+// app.get(`/get_video/:movie_id`, async(req,res,next)=>{
+//     const movie_id = req.params.movie_id;
+//     const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?language=en-US`, options);
+//     const data = await response.json();
+//     res.send(data);
+// })
 
 
 
