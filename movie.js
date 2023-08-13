@@ -336,13 +336,6 @@ async function getThriller(){
 
 }
 
-function displayMovieContainer(data){
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
-
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-}
 
 
 
@@ -356,6 +349,18 @@ thrillerBtn.addEventListener("click", async function(e){
     addMovieRoutes();
 })
 
+//displays 12 war movies
+const warBtn = document.getElementById("war");
+warBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    const genre = this.getAttribute("id")
+    const data = await getMovieApi(genre)
+    displayMovieContainer(data);
+    addMovieRoutes();
+});
+
+
+// **********************************************FETCH FUNCTIONS**********************************************
 
 async function getMovieApi(genreName){
     const response = await fetch(`http://localhost:4000/moviedata/${genreName}`);
@@ -363,45 +368,65 @@ async function getMovieApi(genreName){
     return data
 }
 
-
-
-//trending data
-
-//iterate through top 12
-function displayMovieContainer(data){
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
-    document.querySelector("#main").style.display = "none";
-    document.querySelector("#trendWeekOwl").style.display = "none";
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+async function getWar(){
+    const response = await fetch(`http://localhost:4000/moviedata/war`);
+    const data = await response.json();
+    return data
 }
-//fetch movie object
-//display poster
-//on click, view modal
 
 
+async function getKeywords(movie_id){
+    const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
+    const data = await response.json();
+    return data.keywords
 
-// async function mainCarousel(genre,positionId){
-//     const data = await getMovieApi(genre);
-//     let dataDisplay = data.results.slice(0,12).map((object, index) => {
+}
 
-//         const newItem = createCarouselImg(object,index);
+async function getMovieList(movie_title){
+    const response = await fetch(`http://localhost:4000/get_movies/${movie_title}`);
+    const data = await response.json();
+    return data
+}
 
-//         $j(function(){
-//             $j('.owl-carousel').owlCarousel('add', newItem);
-//             $j('.owl-carousel').owlCarousel('update')
-//         })
+async function getMovie(movie_id){
+    const response = await fetch(`http://localhost:4000/get_movie/${movie_id}`);
+    const data = await response.json();
+    return data
+}
 
-//         $j(function(){
-//             $j('.owl-carousel').owlCarousel('add', newItem);
-//             $j('.owl-carousel').owlCarousel('update')
-//         })
+async function getProviders(movie_id){
+    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
+    const data = await response.json();
+    return data
+}
 
-//         return 
-//     });
+async function getUserProviders(data, country){
+    if (data.results[country] != null){
+        const userProvidersList = data.results[country]
+        const movieSubscriptionList = data.results.country.flatrate;
+        console.log(userProvidersList);
+        console.log(movieSubscriptionList);
+        return 
+    }
+    else{
+        console.log("movie not available anywhere")
+    }
+
+}
+// async function getVideo(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
+//     const data = await response.json();
+//     return data
 // }
 
+
+
+
+
+
+
+
+// **********************************************CAROUSEL**********************************************
 async function mainCarousel(genre,positionId){
     const data = await getMovieApi(genre);
     let dataDisplay = data.results.slice(0,12).map((object, index) => {
@@ -441,9 +466,34 @@ function createCarouselImg(data, index){
 }
 
 
+// **********************************************SEARCH DISPLAY**********************************************
+
+//iterate through top 12
+
+function displayMovieContainer(data){
+    let dataDisplay = data.results.slice(0,12).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#sub1").style.display = "none";
+    document.querySelector(".displayList").innerHTML = dataDisplay;
+}
 
 
+// function displayMovieContainer(data){
+//     let dataDisplay = data.results.slice(0,12).map((object, index) => {
+//         return createMovieContainer(object,index)
+//     }).join("");
+//     document.querySelector("#main").style.display = "none";
+//     document.querySelector("#trendWeekOwl").style.display = "none";
+//     document.querySelector(".displayList").innerHTML = dataDisplay;
+// }
+//fetch movie object
+//display poster
+//on click, view modal
 
+// **********************************************MOVIE POSTER DISPLAY**********************************************
 function createMovieContainer(data,index){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
@@ -509,58 +559,6 @@ function createMovieContainer(data,index){
 
 
 
-
-
-//displays 12 war movies
-const warBtn = document.getElementById("war");
-warBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-
-async function getWar(){
-    const response = await fetch(`http://localhost:4000/moviedata/war`);
-    const data = await response.json();
-    return data
-}
-
-
-async function getKeywords(movie_id){
-    const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
-    const data = await response.json();
-    return data.keywords
-
-}
-
-async function getMovieList(movie_title){
-    const response = await fetch(`http://localhost:4000/get_movies/${movie_title}`);
-    const data = await response.json();
-    return data
-}
-
-async function getMovie(movie_id){
-    const response = await fetch(`http://localhost:4000/get_movie/${movie_id}`);
-    const data = await response.json();
-    return data
-}
-
-async function getProviders(movie_id){
-    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
-    const data = await response.json();
-    return data
-}
-
-// async function getVideo(movie_id){
-//     const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
-//     const data = await response.json();
-//     return data
-// }
-
-
 // given movie's keywords, find any keywords relating to books or novels
 function adaptedFromBook(keywordArr){
     for(let i in keywordArr){
@@ -601,138 +599,124 @@ function adaptedFromBook(keywordArr){
 // }
 
 
-function displaySimiliarMovies(data){
-
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
-        // return displayMoviePoster(object)
-        return createMovieContainer(object,index)
-    }).join("");
-
-    document.querySelector("#main").style.display = "none";
-    document.querySelector("#trendWeekOwl").style.display = "none";
-    document.querySelector(".displayList").innerHTML = dataDisplay;
-
-}
-
-
-
-function createMovieBtns(){
-    //consider the number of outcomes
-    for (let i=0; i<10; i++){
-        let className = "#movie_btn_" + i;
-        console.log(className)
-
-        const movieBtn = document.querySelector(className)
-        console.log(movieBtn)
-        movieBtn.addEventListener("click", async function(e){
-            e.preventDefault();
-            const chosenMovie = document.querySelector(className);
-            console.log(chosenMovie)
-            document.querySelector(".displayList").innerHTML="";
-            // document.querySelector(".displayList").appendChild(chosenMovie);
-            const id = chosenMovie.id;
-            const data = await getMovie(id);
-            displayMovie(data);
-            const keywordsData = await getKeywords(id);
-            if (adaptedFromBook(keywordsData)){
-                alert("we have a book!")
-            }
-            else{
-                alert("noiirrr book")
-            }
-            displayVideo(id)
-        })
-
-    }
+// function createMovieBtns(){
+    //     //consider the number of outcomes
+    //     for (let i=0; i<10; i++){
+    //         let className = "#movie_btn_" + i;
+    //         console.log(className)
     
-}
+    //         const movieBtn = document.querySelector(className)
+    //         console.log(movieBtn)
+    //         movieBtn.addEventListener("click", async function(e){
+    //             e.preventDefault();
+    //             const chosenMovie = document.querySelector(className);
+    //             console.log(chosenMovie)
+    //             document.querySelector(".displayList").innerHTML="";
+    //             // document.querySelector(".displayList").appendChild(chosenMovie);
+    //             const id = chosenMovie.id;
+    //             const data = await getMovie(id);
+    //             displayMovie(data);
+    //             const keywordsData = await getKeywords(id);
+    //             if (adaptedFromBook(keywordsData)){
+    //                 alert("we have a book!")
+    //             }
+    //             else{
+    //                 alert("noiirrr book")
+    //             }
+    //             displayVideo(id)
+    //         })
+    
+    //     }
+        
+    // }
+    
+    // async function displayVideo(id){
+    //     const video = await getVideo(id);
+    //     const videoList = video.results;
+    //     const wordList = ["Official", "official", "Trailer", "trailer"]
+    //     // let potentialTrailerList = [];
+    //     for(let video in videoList){
+    //         let current_vid = videoList[video]
+    //         if((current_vid.type == "Trailer")&&(current_vid.official == true)){
+    //             let video_key = current_vid.key;
+    //             console.log(current_vid);
+    //             console.log(document.querySelector("#modalthere"));
+    //             document.querySelector("#modalthere").innerHTML = `
+    //             <iframe height="360" width="640"  
+    //             src="https://www.youtube.com/embed/${video_key}">
+    //             </iframe>`
+    
+    //             return
+                
+    //         }
+    //     }
+    // }
 
-async function displayVideo(id){
-    const video = await getVideo(id);
-    const videoList = video.results;
-    const wordList = ["Official", "official", "Trailer", "trailer"]
-    // let potentialTrailerList = [];
-    for(let video in videoList){
-        let current_vid = videoList[video]
-        if((current_vid.type == "Trailer")&&(current_vid.official == true)){
-            let video_key = current_vid.key;
-            console.log(current_vid);
-            console.log(document.querySelector("#modalthere"));
-            document.querySelector("#modalthere").innerHTML = `
-            <iframe height="360" width="640"  
-            src="https://www.youtube.com/embed/${video_key}">
-            </iframe>`
+    // async function findMovie(movieTitle){
+        //     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
+        //     const data = await response.json();
+        
+        //     for(let page in data){
+        //         for(let j=0; j<20; j++){
+        //             if (data[page].results[j].title == movieTitle){
+        //                 const foundMovie = data[page].results[j];
+        //                 const movieId = foundMovie.id;
+        //                 console.log(movieId);
+        
+        //                 return foundMovie;
+        //             }
+        //         } 
+        //     }
+        //     alert("NANI what movie?!?")
+        //     return false;
+        // }
+        
+// **********************************************MAKE BUTTONS FOR POSTERS**********************************************
 
-            return
-            
+
+function addMovieRoutes(){
+    let selectedMovie = document.querySelectorAll(".movie");
+    for (let i=0; i<selectedMovie.length; i++){
+        if (selectedMovie[i].id){
+            const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
+            movieBtn.addEventListener("click", async function(e){
+                e.preventDefault();
+                const movieClass = this.querySelector(".title");
+                const movieId = movieClass.id;
+                const provider = await getProviders(movieId);
+                console.log(provider);
+                const data = await getMovie(movieId);
+                const providers = await getUserProviders(movieId, "KR")
+                displayMoviePreview(data, providers);
+    
+            })
         }
+
     }
 }
 
 
+// ********************************************** FORMAT MODAL DISPLAY**********************************************
 
-function validateTrailer(videoList){
-    let videoSrc = '""';
-    if (videoList.length > 0){
-        for(let i=videoList.length-1; i>=0; i--){
-            let currentVid = videoList[i];
-            if((currentVid.name.search("trailer") >= 0)||(currentVid.name.search("Trailer") >= 0)){
-                let videoKey = currentVid.key;
-                return videoSrc = `"https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1&rel=0"`
-            }
-        }
-    }
-    return videoSrc
+// const userLocation = "KR"
 
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-const searchBtn = document.querySelector("#searchBtn");
-searchBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const searchMovie = document.querySelector("#search_input").value;
-    const movieList = await getMovieList(searchMovie);
-
-    //validate if movie title exists
-    if (movieList.results.length > 0){
-        displaySimiliarMovies(movieList);
-        addMovieRoutes()
-
-    }
-    else{
-        alert("doesn't exist")
-        $("<div>Test message</div>").dialog();
-    }
-    document.querySelector("#search_input").value = '';
-    return
-})
-
-
-
-
-
-function displayMovie(foundMovie){
+async function displayMovie(foundMovie, providers){
     console.log(foundMovie)
     const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos} = foundMovie;
     const videoWidth = 740;
     const videoHeight = videoWidth / (16/9);
 
-    const videoSrc = validateTrailer(videos.results)
+    const videoSrc = displayPreviewTrailer(videos.results)
 
     const logoArray = displayPreviewLogo(production_companies)
 
     const genreArray = displayPreviewGenre(genres);
+
+    const providerData = await getProviders(foundMovie);
+
+    const providerArray = await getUserProviders(providerData, location);
+
+    // console.log(providerArray);
 
     //"#modalhere" TESTA
     document.querySelector("#dialog-message").innerHTML = `
@@ -750,7 +734,21 @@ function displayMovie(foundMovie){
   
 }
 
+function displayPreviewTrailer(videoList){
+    let videoSrc = '""';
+    if (videoList.length > 0){
+        for(let i=videoList.length-1; i>=0; i--){
+            let currentVid = videoList[i];
+            if((currentVid.name.search("trailer") >= 0)||(currentVid.name.search("Trailer") >= 0)){
+                let videoKey = currentVid.key;
+                return videoSrc = `"https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1&rel=0"`
+            }
+        }
+    }
+    return videoSrc
 
+
+}
 
 function displayPreviewLogo(logoList){
     let dataDisplay = logoList.slice(0,logoList.length).map((object, index) => {
@@ -773,48 +771,107 @@ function displayPreviewGenre(genreList){
 }
 
 
-async function findMovie(movieTitle){
-    const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
-    const data = await response.json();
+// ********************************************** MODAL EXECUTE**********************************************
 
-    for(let page in data){
-        for(let j=0; j<20; j++){
-            if (data[page].results[j].title == movieTitle){
-                const foundMovie = data[page].results[j];
-                const movieId = foundMovie.id;
-                console.log(movieId);
+function displayMoviePreview(data, providers ){
+    displayMovie(data, providers);
 
-                return foundMovie;
-            }
-        } 
-    }
-    alert("NANI what movie?!?")
-    return false;
-}
-
-
-
-
-
-function addMovieRoutes(){
-    let selectedMovie = document.querySelectorAll(".movie");
-    for (let i=0; i<selectedMovie.length; i++){
-        if (selectedMovie[i].id){
-            const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
-            movieBtn.addEventListener("click", async function(e){
-                e.preventDefault();
-                const movieClass = this.querySelector(".title");
-                const movieId = movieClass.id;
-                const provider = await getProviders(movieId);
-                console.log(provider);
-                const data = await getMovie(movieId);
-                displayMoviePreview(data);
+    $j(function(){
+        // $j("#dialog-message" ).dialog("moveToTop");
+        $j('#dialog-message').dialog( "open" );
+        return
+    })
     
-            })
-        }
+}
+
+
+$j(function(){
+    $j('.buttons').click(function(){
+        $j(modal).dialog( "close" );
+    })
+})
+
+
+// ********************************************** JAVASCRIPT EXECUTE**********************************************
+
+window.addEventListener('load', async function(){
+    await mainCarousel("trendday","#trendTodayOwl");
+    await mainCarousel("trendweek","#trendWeekOwl");
+    
+})
+
+
+
+
+const searchBtn = document.querySelector("#searchBtn");
+searchBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    const searchMovie = document.querySelector("#search_input").value;
+    const movieList = await getMovieList(searchMovie);
+
+    //validate if movie title exists
+    if (movieList.results.length > 0){
+        // displaySimiliarMovies(movieList);
+        displayMovieContainer(movieList);
+        addMovieRoutes()
 
     }
-}
+    else{
+        alert("doesn't exist")
+        $("<div>Test message</div>").dialog();
+    }
+    document.querySelector("#search_input").value = '';
+    return
+})
+
+
+// ********************************************** GEOLOCATION EXECUTE**********************************************
+
+// // get geolocation of user
+// const data = null;
+
+// const xhr = new XMLHttpRequest();
+// //set to false because CORS blocks off all cookies
+// xhr.withCredentials = false;
+
+// xhr.addEventListener("readystatechange", async function () {
+//   if (this.readyState === this.DONE) {
+//     console.log(this.responseText);
+//     const response = this.response;
+//     localStorage.setItem('location', response);
+
+//      const myData = await JSON.parse(response);
+//     console.log(myData);
+    
+//   }
+// });
+
+// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+// xhr.send(data);
+
+
+
+// const stringdata = localStorage.getItem('location');
+
+// const wee = JSON.parse(stringdata);
+// console.log(wee)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // function addOwlRoutes(){
@@ -881,99 +938,31 @@ function addMovieRoutes(){
 // }
 
 
-window.addEventListener('load', async function(){
-    await mainCarousel("trendday","#trendTodayOwl");
-    await mainCarousel("thriller","#trendWeekOwl");
-
-    // addOwlRoutes();
-    
-})
 
 
-function displayMoviePreview(data){
-    displayMovie(data);
-
-    $j(function(){
-        // $j("#dialog-message" ).dialog("moveToTop");
-        $j('#dialog-message').dialog( "open" );
-        return
-    })
-    
-}
 
 
-$j(function(){
-    $j('.buttons').click(function(){
-        $j(modal).dialog( "close" );
-    })
-})
 
 
-// $j('.ui-button').click(function(){
-//     $j('#dialog-message').dialog( "close" );
-// })
-
-document.querySelector("#dropdownMenuButton").addEventListener('click', function(){
-    document.querySelector(".dropdown-menu").style.display = "block";
-})
 
 
-// $(function displayMoviePreview(e,data){
-//     e.preventDefault();
-//     $('#myModal').modal('hide');
-//     displayMovie(data);
-//     displayVideo(data.id);
-//     $('#myModal').modal('show');
-// })
 
-// $('.wap').click(function(){
-//     $('.modalContainer').show();
-// })
-
-// $('.wapa').click(function(){
-//     $('.modalContainer').hide();
-// })
-
-// document.querySelector("#modalthere").innerHTML=`WAPAAAAA`
 
 
 //turns off youtube when modal closed
 
-jQuery(document).ready(function($) {
-    let url = $("#movieTrailer").attr('src');
-    $('#myModal').on('hide.bs.modal', function() {
-        $("#movieTrailer").attr('src', '');
-    });
-    $('#myModal').on('show.bs.modal', function() {
-        $("#movieTrailer").attr('src', url);
-    });
-});
+// jQuery(document).ready(function($) {
+//     let url = $("#movieTrailer").attr('src');
+//     $('#myModal').on('hide.bs.modal', function() {
+//         $("#movieTrailer").attr('src', '');
+//     });
+//     $('#myModal').on('show.bs.modal', function() {
+//         $("#movieTrailer").attr('src', url);
+//     });
+// });
 
 // $('.dropdown-item').click(function(){
 //     $('.dropdown-menu').css("display", "none")
 // })
 
-// let mydata = ''
-// // get geolocation of user
-// const data = null;
-
-// const xhr = new XMLHttpRequest();
-// //set to false because CORS blocks off all cookies
-// xhr.withCredentials = false;
-
-// xhr.addEventListener("readystatechange", function () {
-//   if (this.readyState === this.DONE) {
-//     console.log(this.responseText);
-//     console.log(this.response);
-//     mydata = this.response;
-    
-//   }
-// });
-
-// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}`);
-// xhr.send(data);
-
-
-// console.log(xhr.country_code)
-
+// let response = ''

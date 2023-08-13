@@ -185,9 +185,9 @@ app.get('/moviedata/trendday', async (req, res, next) => {
     const data = await response.json();
     res.send(data);
 });
-
+const poop =""
 app.get('/moviedata/trendweek', async (req, res, next) => {
-    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`);
+    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}${poop}`);
     const data = await response.json();
     res.send(data);
 });

@@ -23,53 +23,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <section class="header">
-        <div class="navbar-container">
-            <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
-            <ul class="navbar">
-                <li>
-                    <div class="navbar-item btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Genre
-                    </div>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" id="action" href="#">Action</a>
-                      <a class="dropdown-item" id="adventure" href="#">Adventure</a>
-                      <a class="dropdown-item" id="animation" href="#">Animation</a>
-                      <a class="dropdown-item" id="comedy" href="#">Comedy</a>
-                      <a class="dropdown-item" id="documentary" href="#">Documentary</a>
-                      <a class="dropdown-item" id="drama" href="#">Drama</a>
-                      <a class="dropdown-item" id="family" href="#">Family</a>
-                      <a class="dropdown-item" id="fantasy" href="#">Fantasy</a>
-                      <a class="dropdown-item" id="history" href="#">History</a>
-                      <a class="dropdown-item" id="horror" href="#">Horror</a>
-                      <a class="dropdown-item" id="music" href="#">Music</a>
-                      <a class="dropdown-item" id="mystery" href="#">Mystery</a>
-                      <a class="dropdown-item" id="romance" href="#">Romance</a>
-                      <a class="dropdown-item" id="thriller" href="#">Thriller</a>
-                      <a class="dropdown-item" id="war" href="#">War</a>
-                    </div>
-                </li>
-                <li class="navbar-item">
-                    <a href="#">About</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#">Books</a>
-                </li>
-                <li class="navbar-item" >
-                    <a href="#">Scripts</a>
-                </li>
-                <li class="navbar-item">
-                    <form action="submit">
-                        <input id="search_input" type="text">
-                        <button id="searchBtn">go</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-
-    </section>
-
-
 
     <section class="header">
         <div class="navbar-container">
@@ -78,19 +31,28 @@
                 <li class="menu-item">
                     <a class="sub-btn" href="#">Genre <i class="fas fa-angle-down"></i></a>
                     <ul class="sub-menu">
-                        <li class="sub-item"><a href="#" id="thriller">Thriller</a></li>
-                        <li class="sub-item"><a href="#" id="trendweek">TrendWeek</a></li>
-                        <li class="sub-item"><a href="#" id="action">Action</a></li>
+                        <li class="sub-item"><a href="#" id="action">action</a></li>
+                        <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
+                        <li class="sub-item"><a href="#" id="animation">animation</a></li>
+                        <li class="sub-item"><a href="#" id="comedy">comedy</a></li>
+                        <li class="sub-item"><a href="#" id="documentary">documentary</a></li>
+                        <li class="sub-item"><a href="#" id="drama">drama</a></li>
+                        <li class="sub-item"><a href="#" id="family">family</a></li>
+                        <li class="sub-item"><a href="#" id="fantasy">fantasy</a></li>
+                        <li class="sub-item"><a href="#" id="history">history</a></li>
+                        <li class="sub-item"><a href="#" id="horror">horror</a></li>
+                        <li class="sub-item"><a href="#" id="music">music</a></li>
+                        <li class="sub-item"><a href="#" id="mystery">mystery</a></li>
+                        <li class="sub-item"><a href="#" id="romance">romance</a></li>
+                        <li class="sub-item"><a href="#" id="thriller">thriller</a></li>
+                        <li class="sub-item"><a href="#" id="war">War</a></li>
                     </ul>
                 </li>
                 <li class="menu-item">
                     <a href="#">About</a>
                 </li>
-                <li class="menu-item">
-                    <a href="#">Books</a>
-                </li>
                 <li class="menu-item" >
-                    <a href="#">Scripts</a>
+                    <a href="#">Profile</a>
                 </li>
                 <li class="menu-item">
                     <form action="submit">
@@ -105,46 +67,6 @@
 
     
 
-
-
-
-
-    <!-- <form autocomplete="off" action="#" id="search_bar">
-        <div class="autocomplete">
-            <input type="text" name="searchMovie" id="search_input"placeholder="search movies title...">
-            <button type="submit" id="searchBtn">Go</button>
-        </div>
-    </form> -->
-
- 
-    <!-- <div class="imgContainer">
-        <img id="main_img" src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" alt="">
-        <div>
-            <h2>Trending this week</h2>
-        </div>
-        <div class="owl-carousel owl-theme" id="toast">
-            <div class="item">
-                <img src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="https://image.tmdb.org/t/p/original/iJ0UZaC7XW7BUpRQ7OLPZSms8Ou.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="https://image.tmdb.org/t/p/original/iJ0UZaC7XW7BUpRQ7OLPZSms8Ou.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" alt="">
-            </div>
-            <div class="item">
-                <img src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" alt=""></div>
-            <div class="item"><h4>7</h4></div>
-            <div class="item"><h4>8</h4></div>
-            <div class="item"><h4>9</h4></div>
-            <div class="item"><h4>10</h4></div>
-            <div class="item"><h4>11</h4></div>
-            <div class="item"><h4>12</h4></div>
-        </div>
-    </div> -->
 
     <section id="main">
         <img id="main_img" src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" alt="">
@@ -156,69 +78,23 @@
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi, vel asperiores. Doloremque qui accusantium culpa ab et exercitationem laborum repellendus, error quam enim odio molestias nisi officia. Praesentium, culpa doloremque!
             </p>
         </div>
-
     </section>
 
-    <!-- <div>
-        <h2>Trending this week</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut quia cumque aperiam recusandae animi! Mollitia rerum facere corporis minus dolore architecto magni excepturi blanditiis neque, et nostrum sit inventore distinctio?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro adipisci vero magnam, nobis consequuntur quibusdam ullam assumenda consequatur dolores? Laudantium officiis omnis possimus tempore alias repellendus veritatis exercitationem, ut repellat?</p>
-    </div> -->
 
-    <div id="dialog-message"> </div>
-
-
-    <h2>Trending Today</h2>
-    <div class="owl-carousel owl-theme" id="trendTodayOwl"></div>
-
-    <h2>Trending This Week</h2>
-    <div class="owl-carousel owl-theme" id="trendWeekOwl"></div>
-
-
-
+    <section id="sub1">
+        <h2>Trending Today</h2>
+        <div class="owl-carousel owl-theme" id="trendTodayOwl"></div>
     
-    <!-- <div class="item" id="item1">
-        <img class="owlImg" id='569094' src="https://image.tmdb.org/t/p/w300//8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg">
-    </div>
-    <div class="item" id="item2">
-        <img class="owlImg" id='346698'src="https://image.tmdb.org/t/p/w300//iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg">
-    </div>
-    <div class="item" id="item3">
-        <img class="owlImg" id='872585'src="https://image.tmdb.org/t/p/w300//8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg">
-    </div>
-    <div class="item" id="item4">
-        <img class="owlImg"id='614479' src="https://image.tmdb.org/t/p/w300//uS1AIL7I1Ycgs8PTfqUeN6jYNsQ.jpg">
-    </div>
-    <div class="item" id="item5">
-        <img class="owlImg" id='298618'src="https://image.tmdb.org/t/p/w300//rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg">
-    </div>
-    <div class="item">
-        <img class="owlImg" id='615656'src="https://image.tmdb.org/t/p/w300//4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg">
-    </div> -->
-
-
-
-    <!-- <div class="main">
-        <h1>
-            Mr Toast is toasting
-        </h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi, vel asperiores. Doloremque qui accusantium culpa ab et exercitationem laborum repellendus, error quam enim odio molestias nisi officia. Praesentium, culpa doloremque!</p>
-    </div> -->
-
-
-
-    <!-- "https://image.tmdb.org/t/p/original/iJ0UZaC7XW7BUpRQ7OLPZSms8Ou.jpg" -->
+        <h2>Trending This Week</h2>
+        <div class="owl-carousel owl-theme" id="trendWeekOwl"></div>
     
+    </section>
 
-
-
-
-
-    <!-- <div class="displayVideo"></div> -->
 
 
 
     <div class="displayList" id="display1"> </div>
+    <div id="dialog-message"> </div>
     <div class="go-to-top">
         <button id="topBtn">top</button>
     </div>
@@ -229,29 +105,6 @@
 
 
        
-
-
-
-
-    <!-- <div id="myModal" class="modal fade bd-example-modal-lg"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <div class="container-fluid" id="modalhere">
-                        <div class="row" id="modalhere"></div>
-                    </div>
-                    <div class="modalBtnContainer">
-                        <button id="modalCloseBtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fa-solid fa-circle-xmark fa-xl"></i></span>
-                        </button>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
 
 
 
