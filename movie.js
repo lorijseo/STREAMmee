@@ -11,6 +11,7 @@ $j(".owl-carousel").each(function(){
         dots:true,
         stagePadding:50,
         pagination : false,
+        lazyLoad:true,
         responsive:{
             0:{
                 items:1
@@ -372,7 +373,7 @@ function displayMovieContainer(data){
         return createMovieContainer(object,index)
     }).join("");
     document.querySelector("#main").style.display = "none";
-    document.querySelector("#toast").style.display = "none";
+    document.querySelector("#trendWeekOwl").style.display = "none";
     document.querySelector(".displayList").innerHTML = dataDisplay;
 }
 //fetch movie object
@@ -602,7 +603,7 @@ function displaySimiliarMovies(data){
     }).join("");
 
     document.querySelector("#main").style.display = "none";
-    document.querySelector("#toast").style.display = "none";
+    document.querySelector("#trendWeekOwl").style.display = "none";
     document.querySelector(".displayList").innerHTML = dataDisplay;
 
 }
@@ -872,8 +873,9 @@ function addMovieRoutes(){
 
 
 window.addEventListener('load', async function(){
-    await mainCarousel("thriller","#toast");
     await mainCarousel("trendday","#trendTodayOwl");
+    await mainCarousel("thriller","#trendWeekOwl");
+
     // addOwlRoutes();
     
 })
@@ -941,3 +943,24 @@ jQuery(document).ready(function($) {
 // $('.dropdown-item').click(function(){
 //     $('.dropdown-menu').css("display", "none")
 // })
+
+
+// get geolocation of user
+const data = null;
+
+const xhr = new XMLHttpRequest();
+//set to false because CORS blocks off all cookies
+xhr.withCredentials = false;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}`);
+
+xhr.send(data);
+
+console.log(xhr)

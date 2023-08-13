@@ -268,25 +268,7 @@ app.get(`/get_book/`, async(req,res,next)=>{
 //gets all movies that are based on book or novel
 https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&language=en-US&sort_by=popularity.desc&page=1&with_keywords=818
 
-// function welcome(name){
-//     console.log("hi" + name);
-// }
 
-// module.exports.welcome = welcome
-// welcome("poot");
-// console.log(module); 
-
-
-// const os = require('node:os');
-
-// let totalMemory = os.totalmem();
-// let freeMemory = os.freemem();
-
-// console.log(`total memory: ${totalMemory}`);
-
-app.get('/', (req,res) => {
-    res.send("RIP katy")
-})
 
 // listen in which port
 app.listen(port, () => {
