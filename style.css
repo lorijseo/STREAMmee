@@ -320,3 +320,39 @@ button {
   padding: 2px 5px;
 }
 
+/* ***********************************PROFILE*********************************** */
+
+/* ***********************************SETTING*********************************** */
+
+#setting{
+  text-align: center;
+}
+
+#setting form{
+  display:flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+#setting form label{
+  font-weight: 650;
+}
+
+#setting form div{
+  margin: 1%;
+}
+
+#profile{
+  width:50%;
+  margin:auto;
+}
+
+#profile .profile-label{
+  font-weight: 650;
+}
+
+#profile li{
+  list-style:circle;
+}
