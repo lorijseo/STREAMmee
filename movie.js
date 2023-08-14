@@ -394,25 +394,28 @@ async function getMovie(movie_id){
     return data
 }
 
-async function getProviders(movie_id){
-    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
-    const data = await response.json();
-    return data
-}
+// async function getProviders(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
+//     const data = await response.json();
+//     console.log(data)
+//     return data
+// }
 
-async function getUserProviders(data, country){
-    if (data.results[country] != null){
-        const userProvidersList = data.results[country]
-        const movieSubscriptionList = data.results.country.flatrate;
-        console.log(userProvidersList);
-        console.log(movieSubscriptionList);
-        return 
-    }
-    else{
-        console.log("movie not available anywhere")
-    }
+// async function getUserProviders(data, country){
+//     if (data.results[country] != null){
+//         const userProvidersList = data.results[country]
+//         const movieSubscriptionList = data.results.country.flatrate;
+//         console.log(userProvidersList);
+//         console.log(movieSubscriptionList);
+//         return 
+//     }
+//     else{
+//         console.log("movie not available anywhere")
+//     }
 
-}
+// }
+
+
 // async function getVideo(movie_id){
 //     const response = await fetch(`http://localhost:4000/get_video/${movie_id}`);
 //     const data = await response.json();
@@ -683,11 +686,11 @@ function addMovieRoutes(){
                 e.preventDefault();
                 const movieClass = this.querySelector(".title");
                 const movieId = movieClass.id;
-                const provider = await getProviders(movieId);
-                console.log(provider);
+                // const provider = await getProviders(movieId);
+                // console.log(provider);
                 const data = await getMovie(movieId);
-                const providers = await getUserProviders(movieId, "KR")
-                displayMoviePreview(data, providers);
+                // const providers = await getUserProviders(movieId, "KR")
+                displayMoviePreview(data);
     
             })
         }
@@ -700,9 +703,9 @@ function addMovieRoutes(){
 
 // const userLocation = "KR"
 
-async function displayMovie(foundMovie, providers){
+async function displayMovie(foundMovie){
     console.log(foundMovie)
-    const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos} = foundMovie;
+    const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
     const videoWidth = 740;
     const videoHeight = videoWidth / (16/9);
 
@@ -712,11 +715,15 @@ async function displayMovie(foundMovie, providers){
 
     const genreArray = displayPreviewGenre(genres);
 
-    const providerData = await getProviders(foundMovie);
+    const providersData = getProviders(providers);
 
-    const providerArray = await getUserProviders(providerData, location);
+    let providersArray = '';
+    // let providersInfo = '';
+    if (providersData !== undefined){
+        providersArray = displayPreviewProviders(providersData);
+        // providersInfo = displayPreviewExtraProviders(providersData);
+    }
 
-    // console.log(providerArray);
 
     //"#modalhere" TESTA
     document.querySelector("#dialog-message").innerHTML = `
@@ -726,13 +733,18 @@ async function displayMovie(foundMovie, providers){
     </iframe></div>
     <h3 class="previewTitle">${title}</h3>
     ${genreArray} <p class="previewTime">${runtime} min</p>
+    <div class="logoDisplay">
+    <p class="previewLogo" id= "previewLogo">${logoArray}</p> </div>
     <p class="previewDescr" id= "overview">${overview}</p>
-    ${logoArray}
+    <div class="streamDisplay">
+    <p class="previewStream" id= "previewStream">${providersArray}</p></div>
 
-
+    
     `
-  
 }
+
+{/* <button>${providersInfo}</button> */}
+
 
 function displayPreviewTrailer(videoList){
     let videoSrc = '""';
@@ -757,7 +769,6 @@ function displayPreviewLogo(logoList){
         }
         return
     }).join("");
-    console.log(dataDisplay);
     return dataDisplay
 }
 
@@ -770,11 +781,43 @@ function displayPreviewGenre(genreList){
     return dataDisplay
 }
 
+function getProviders(data){
+    // get user location
+    const userInfo = localStorage.getItem("user");
+    const userObject = JSON.parse(userInfo);
+    const userLocation = userObject.location
+    if (`${userLocation}` in data.results){
+        const providerArray = data.results[`${userLocation}`]
+        console.log(providerArray)
+        return providerArray
 
+    }
+
+
+}
+
+function displayPreviewProviders(providersList){
+    if ("flatrate" in providersList){
+        let dataDisplay = providersList.flatrate.slice(0,providersList.length).map((object, index) => {
+            if (object.logo_path !== null){
+                return `<p class="previewProviderIcon" id="provider_${index}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""></p>`
+            }
+            return
+        }).join("");
+        return dataDisplay
+    }
+}
+
+function displayPreviewExtraProviders(providersList){
+    if ("link" in providersList){
+        const infoLink = providersList.link;
+        return `<a href='${infoLink}'>More Info</a>`
+}
+}
 // ********************************************** MODAL EXECUTE**********************************************
 
-function displayMoviePreview(data, providers ){
-    displayMovie(data, providers);
+function displayMoviePreview(data ){
+    displayMovie(data);
 
     $j(function(){
         // $j("#dialog-message" ).dialog("moveToTop");
@@ -795,8 +838,9 @@ $j(function(){
 // ********************************************** JAVASCRIPT EXECUTE**********************************************
 
 window.addEventListener('load', async function(){
-    await mainCarousel("trendday","#trendTodayOwl");
-    await mainCarousel("trendweek","#trendWeekOwl");
+    mainCarousel("trendday","#trendTodayOwl");
+    // addOwlRoutes()
+    mainCarousel("trendweek","#trendWeekOwl");
     
 })
 
@@ -827,28 +871,30 @@ searchBtn.addEventListener("click", async function(e){
 
 // ********************************************** GEOLOCATION EXECUTE**********************************************
 
-// // get geolocation of user
-// const data = null;
+// get geolocation of user
+const data = null;
 
-// const xhr = new XMLHttpRequest();
-// //set to false because CORS blocks off all cookies
-// xhr.withCredentials = false;
+const xhr = new XMLHttpRequest();
+//set to false because CORS blocks off all cookies
+xhr.withCredentials = false;
 
-// xhr.addEventListener("readystatechange", async function () {
-//   if (this.readyState === this.DONE) {
-//     console.log(this.responseText);
-//     const response = this.response;
-//     localStorage.setItem('location', response);
+xhr.addEventListener("readystatechange", async function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+    const response = this.response;
+    let user = {};
+    user["location"] = response;
+    localStorage.setItem('user', user);
 
-//      const myData = await JSON.parse(response);
-//     console.log(myData);
+    //  const myData = await JSON.parse(response);
+    // console.log(myData);
     
-//   }
-// });
+  }
+});
 
-// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-// xhr.send(data);
+const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+xhr.send(data);
 
 
 
@@ -882,12 +928,13 @@ searchBtn.addEventListener("click", async function(e){
 //         // const owlItemArr = owlContainer.querySelectorAll('.owl-item');
 
 //         for (owl in owlContainer){
-//             const imgContainer = owl.querySelector('.item');
+//             const imgContainer = $j(owl).find('item');
+//             console.log(imgContainer)
+            
 //             const imgContainerId = imgContainer.id;
 
 //             const movieBtn = document.querySelector(`#${imgContainerId}`);
 //             movieBtn.addEventListener("click", async function(e){
-//                 e.preventDefault();
 //                 alert("hey")
 //                 const movieClass = this.querySelector(".owlImg");
 //                 const movieId = movieClass.id;
@@ -965,46 +1012,5 @@ searchBtn.addEventListener("click", async function(e){
 //     $('.dropdown-menu').css("display", "none")
 // })
 
-// let response = ''
-
-document.querySelector("#profile-location").innerHTML= location;
-if (locationActive){
-    document.querySelector("#location-is-active").style.display = "block";
-}
-if (subscriptionActive){
-    document.querySelector("#subscription-is-active").style.display = "block";
-}
 
 
-const settingBtn = document.querySelector("#setting-btn");
-        settingBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            // get values
-            const userName = document.querySelector("#username").value;
-            const userLocation = document.querySelector("#location").value;
-
-            const isLocationActive = document.querySelector("#use-location").checked;
-            const isSubscriptionActive = document.querySelector("#use-subscription").checked;
-            updateProfile(userName, userLocation, isLocationActive, isSubscriptionActive );
-            clearForm();
-            
-        })
-
-        function clearForm(){
-            document.querySelector("#username").value='';
-            document.querySelector("#location").value='';
-            document.querySelector("#use-location").checked = false;
-            document.querySelector("#use-subscription").checked = false;
-        }
-
-        function updateProfile(name, location, locationActive, subscriptionActive){
-            let profile ={}
-            document.querySelector("#profile-username").innerHTML= name;
-            profile["username"] = name;
-            profile["location"] = location;
-            profile["locationActive"] = locationActive;
-            profile["subscriptionActive"] = subscriptionActive;
-            
-            localStorage.setItem("user", JSON.stringify(profile))
-
-        }

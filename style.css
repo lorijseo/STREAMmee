@@ -296,7 +296,7 @@ button {
 
 .previewDescr {
   width: 100%;
-  margin: 5% 2%;
+  margin: 1% 2% 5%;
 }
 
 .previewGenreIcon {
@@ -307,8 +307,15 @@ button {
   font-size: 12px;
 }
 
+.logoDisplay, .streamDisplay{
+  display:flex;
+  width:100%;
+  align-items: center;
+}
+
 .previewLogoIcon {
   margin: 10px;
+
 }
 
 .previewLogoIcon img {
@@ -320,6 +327,20 @@ button {
   padding: 2px 5px;
 }
 
+/* .streamDisplay{
+  display:flex;
+  width:100%;
+  align-items: center;
+} */
+
+.previewProviderIcon{
+  margin: 0 10px;
+}
+
+.previewProviderIcon img{
+  max-height:70px;
+  border-radius: 10px;
+}
 /* ***********************************PROFILE*********************************** */
 
 /* ***********************************SETTING*********************************** */
