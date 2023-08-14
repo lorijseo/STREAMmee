@@ -841,6 +841,8 @@ window.addEventListener('load', async function(){
     mainCarousel("trendday","#trendTodayOwl");
     // addOwlRoutes()
     mainCarousel("trendweek","#trendWeekOwl");
+
+
     
 })
 
@@ -882,13 +884,23 @@ xhr.addEventListener("readystatechange", async function () {
   if (this.readyState === this.DONE) {
     console.log(this.responseText);
     const response = this.response;
-    let user = {};
-    user["location"] = response;
-    localStorage.setItem('user', user);
+    // const myData = await JSON.parse(response);
+    let geolocation = {};
+    geolocation["location"] = response;
+    localStorage.setItem('geolocation', JSON.stringify(response));
 
-    //  const myData = await JSON.parse(response);
-    // console.log(myData);
-    
+
+    const data = localStorage.getItem('user')
+    //first time user
+    if (data == null){
+        const userLocation = JSON.parse(localStorage.getItem('geolocation'));
+        console.log(userLocation);
+        let user ={};
+        user["location"] = userLocation;
+        console.log(user)
+        localStorage.setItem('user',JSON.stringify(user));
+
+    }
   }
 });
 
@@ -898,14 +910,13 @@ xhr.send(data);
 
 
 
-// const stringdata = localStorage.getItem('location');
-
-// const wee = JSON.parse(stringdata);
-// console.log(wee)
 
 
 
+const datar = JSON.parse(localStorage.getItem('user'));
+console.log(datar)
 
+     
 
 
 
