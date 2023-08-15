@@ -110,11 +110,11 @@ app.get('/moviedata/crime', async (req, res, next) => {
     res.send(data);
 });
 
-app.get('/moviedata/documentary', async (req, res, next) => {
-    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=99`);
-    const data = await response.json();
-    res.send(data);
-});
+// app.get('/moviedata/documentary', async (req, res, next) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=99`);
+//     const data = await response.json();
+//     res.send(data);
+// });
 
 app.get('/moviedata/drama', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=18`);
@@ -187,9 +187,9 @@ app.get('/moviedata/trendday', async (req, res, next) => {
     const data = await response.json();
     res.send(data);
 });
-const poop =""
+
 app.get('/moviedata/trendweek', async (req, res, next) => {
-    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}${poop}`);
+    const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`);
     const data = await response.json();
     res.send(data);
 });
@@ -223,7 +223,12 @@ const options = {
     }
 };
 
-
+// app.get('/moviedata/documentary', async (req, res, next) => {
+//     const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=99&append_to_response=videos,watch/providers', options);
+//     const data = await response.json();
+//     res.send(data);
+// });
+  
 
 
 //returns keywords given movie id
