@@ -195,8 +195,9 @@ async function getAnimation(){
 const comedyBtn = document.getElementById("comedy");
 comedyBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
+    const genre = this.getAttribute("id");
+    const data = await getMovieApi(genre);
+    console.log(data);
     displayMovieContainer(data);
     addMovieRoutes();
 });
@@ -212,8 +213,9 @@ async function getComedy(){
 const documentaryBtn = document.getElementById("documentary");
 documentaryBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
+    const genre = this.getAttribute("id");
+    const data = await getMovieApi(genre);
+    console.log(data);
     displayMovieContainer(data);
     addMovieRoutes();
 });
