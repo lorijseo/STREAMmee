@@ -1,50 +1,3 @@
-// var el = document.getElementById("go")
-// if (el){
-//     el.addEventListener("click", getPokemon)
-// };
-
-// function getPokemon(event){
-//     console.log("yay!")
-//     const name = document.getElementById("pokemon").value
-//     fetch(`http://pokeapi.co/api/v2/pokemon/${name}`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//             document.querySelector(".display").innerHTML = `
-//             Name: ${data.name} Height: ${data.height} ID: ${data.id} Weight: ${data.weight} Element: ${data.types[0].type.name}`;
-//         })
-//         .catch((err) => {
-//             console.log("pokemon not found", err);
-//         });
-//     event.preventDefault();
-// }
-
-
-// // importing express with variable express
-// const express = require("express")
-// // store another variable to store
-// const app = express()
-// // specify port number
-// const port = 3000
-
-// // install cors to prevent any bugs with cross-platform 
-// const cors = require('cors');
-
-// // use cors package after requiring 
-// app.use(cors());
-
-// const key = "613a35f50aa647f0d9c8c32ff6377714"
-
-// app.get('/trending', async(req, res, next) => {
-//     const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`);
-//     const data = await response.json();
-//     res.send(data);
-// });
-
-
-// // listen in which port
-// app.listen(port, () => {
-//     console.log(`Application is listening on port ${port}!`)
-// })
 
 
 
@@ -65,7 +18,7 @@ const cors = require('cors');
 app.use(cors());
 
 // MAKE SURE TO REMOVE THIS LATER 
-var fetch = require("node-fetch");
+// var fetch = require("node-fetch");
 
 const key = "613a35f50aa647f0d9c8c32ff6377714"
 app.get('/moviedata/horror', async (req, res, next) => {
@@ -110,11 +63,11 @@ app.get('/moviedata/crime', async (req, res, next) => {
     res.send(data);
 });
 
-// app.get('/moviedata/documentary', async (req, res, next) => {
-//     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=99`);
-//     const data = await response.json();
-//     res.send(data);
-// });
+app.get('/moviedata/documentary', async (req, res, next) => {
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=99`);
+    const data = await response.json();
+    res.send(data);
+});
 
 app.get('/moviedata/drama', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=18`);
@@ -224,7 +177,7 @@ const options = {
 };
 
 // app.get('/moviedata/documentary', async (req, res, next) => {
-//     const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=99&append_to_response=videos,watch/providers', options);
+//     const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&append_to_response=videos,watch/providers&language=en-US&sort_by=popularity.desc&with_genres=99', options);
 //     const data = await response.json();
 //     res.send(data);
 // });
@@ -249,13 +202,13 @@ app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
 
 
 
-// app.get(`/get_providers/:movie_id`, async(req,res,next)=>{
-//     const movie_id = req.params.movie_id;
-//     const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/watch/providers`, options);
-//     const data = await response.json();
-//     console.log(data)
-//     res.send(data);
-// });
+app.get(`/get_providers/:movie_id`, async(req,res,next)=>{
+    const movie_id = req.params.movie_id;
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/watch/providers`, options);
+    const data = await response.json();
+    console.log(data)
+    res.send(data);
+});
 
 
 //returns movie given movie id
@@ -266,6 +219,15 @@ app.get(`/get_movie/:movie_id`, async(req,res,next)=>{
     res.send(data);
 })
 
+
+app.get(`/get_regions`, async(req,res,next)=>{
+
+    const response = await fetch('https://api.themoviedb.org/3/watch/providers/regions?language=en-US', options);
+    const data = await response.json();
+    res.send(data);
+})
+
+  
 
   
 

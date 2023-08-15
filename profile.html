@@ -79,6 +79,7 @@
             <div>
                 <label for="location">Location</label>
                 <input type="text" name="location" id="location">
+                <select name="region" id="region"></select>
                 <!-- <div>
                     <label for="useLocation">Use your location to narrow down on searches</label>
                     <input type="checkbox" name="useLocation" id="use-location">
@@ -149,6 +150,7 @@
 
         window.addEventListener('load', function(){
             userProfile = localStorage.getItem("user");
+            console.log(userProfile)
             userLocationData = localStorage.getItem("selectedLocation");
             // first time
             if ((userProfile == null) && (userLocationData != null)){
@@ -165,6 +167,7 @@
                 loadProfile(userData);
 
             }
+            createRegionDropdown()
             
             
             

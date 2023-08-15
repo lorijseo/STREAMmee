@@ -370,11 +370,11 @@ async function getMovieApi(genreName){
     return data
 }
 
-async function getWar(){
-    const response = await fetch(`http://localhost:4000/moviedata/war`);
-    const data = await response.json();
-    return data
-}
+// async function getWar(){
+//     const response = await fetch(`http://localhost:4000/moviedata/war`);
+//     const data = await response.json();
+//     return data
+// }
 
 
 async function getKeywords(movie_id){
@@ -396,19 +396,69 @@ async function getMovie(movie_id){
     return data
 }
 
-// async function getUserProviders(data, country){
-//     if (data.results[country] != null){
-//         const userProvidersList = data.results[country]
-//         const movieSubscriptionList = data.results.country.flatrate;
-//         console.log(userProvidersList);
-//         console.log(movieSubscriptionList);
-//         return 
-//     }
-//     else{
-//         console.log("movie not available anywhere")
-//     }
+async function getProviders(movie_id){
+    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
+    const data = await response.json();
+    return data
+}
 
-// }
+
+
+
+function getLocation(){
+    const userInfo = localStorage.getItem("user");
+
+    if (userInfo !== null){
+        const userObject = JSON.parse(userInfo);
+        const userLocation = userObject.location;
+        return userLocation
+    }
+    //new user
+    else{
+        const userLocationData = localStorage.getItem("selectedLocation");
+        const userLocation = JSON.parse(userLocationData);
+        const countryCode = userLocation.country_code;
+        // const countryName = userLocation.country;
+        // return [countryCode, countryName]
+        // return countryName
+        return countryCode
+    }
+
+}    
+
+// *************************COME BACKKKKKKK DON'T LEAVEEEEE*************************
+// const providerList = await getProviders()
+
+async function getFlatrate(providerData){
+    const location = await getLocation();
+    const providersInLocation = providerData.results[location];
+    const flatrate = providersInLocation.flatrate;
+
+    //get my list of subscritions?
+    const userSubscription = [55,358,257]
+    let flatrateAvailable = []
+    if(flatrate){
+        for (let i =0; i<flatrate.length; i++){
+            console.log(flatrate[i].provider_id)
+            if (userSubscription.includes(flatrate[i].provider_id)){
+                flatrateAvailable.push(flatrate[i].provider_id)
+            }
+        }
+    }
+    return flatrateAvailable
+}
+
+async function getSubscriptionProviders(movieId){
+    // gets all providers for the movie
+    const providerList = await getProviders(movieId);
+    // gets all flatrate 
+    const subscriptionList = await getFlatrate(providerList);
+    console.log(subscriptionList)
+}
+
+getSubscriptionProviders(1149947)
+
+
 
 
 // async function getVideo(movie_id){
@@ -710,7 +760,7 @@ async function displayMovie(foundMovie){
 
     const genreArray = displayPreviewGenre(genres);
 
-    const providersData = getProviders(providers);
+    const providersData = getPreviewProviders(providers);
     console.log(providersData)
     let providersArray = '';
     // let providersInfo = '';
@@ -784,10 +834,9 @@ function displayPreviewGenre(genreList){
     return dataDisplay
 }
 
-function getProviders(data){
+function getPreviewProviders(data){
     // get user location
     const userInfo = localStorage.getItem("user");
-    console.log(userInfo)
     //returning user
     if (userInfo !== null){
         const userObject = JSON.parse(userInfo);

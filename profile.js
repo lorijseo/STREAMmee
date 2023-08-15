@@ -3,11 +3,12 @@ settingBtn.addEventListener('click', function(e){
     e.preventDefault();
     // get values
     const userName = document.querySelector("#username").value;
-    const userLocation = document.querySelector("#location").value;
+    // const userLocation = document.querySelector("#location").value;
+    const userLocation = document.querySelector('#region').value;
 
-    const isLocationActive = document.querySelector("#use-location").checked;
+    // const isLocationActive = document.querySelector("#use-location").checked;
     const isSubscriptionActive = document.querySelector("#use-subscription").checked;
-    formUpdateProfile(userName, userLocation, isLocationActive, isSubscriptionActive );
+    formUpdateProfile(userName, userLocation, isSubscriptionActive );
     clearForm();
     
 })
@@ -24,7 +25,10 @@ editProfileBtn.addEventListener("click", function(e){
         const userLocation = JSON.parse(userLocationData);
         const countryCode = userLocation.country_code;
         const countryName = userLocation.country;
-        document.querySelector("#location").value = countryName;
+        // document.querySelector("#location").value = countryName;
+        const location = document.querySelector(`#${countryCode}`)
+        location.setAttribute("selected", 'selected');
+        console.log(location.value)
         return
     }
     userData = JSON.parse(userProfile);
@@ -52,7 +56,7 @@ editProfileBtn.addEventListener("click", function(e){
 function clearForm(){
     document.querySelector("#username").value='';
     document.querySelector("#location").value='';
-    document.querySelector("#use-location").checked = false;
+    // document.querySelector("#use-location").checked = false;
     document.querySelector("#use-subscription").checked = false;
 }
 
@@ -60,12 +64,12 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
     //show on profile
     document.querySelector(".profile-username").innerHTML= name;
     document.querySelector(".profile-location").innerHTML= location;
-    if (locationActive){
-        document.querySelector(".location-is-active").style.display = "block";
-    }
-    else{
-        document.querySelector(".location-is-active").style.display = "none";
-    }
+    // if (locationActive){
+    //     document.querySelector(".location-is-active").style.display = "block";
+    // }
+    // else{
+    //     document.querySelector(".location-is-active").style.display = "none";
+    // }
     if (subscriptionActive){    
         document.querySelector(".subscription-is-active").style.display = "block";
     }
@@ -76,7 +80,7 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
     let profile ={}
     profile["username"] = name;
     profile["location"] = location;
-    profile["locationActive"] = locationActive;
+    // profile["locationActive"] = locationActive;
     profile["subscriptionActive"] = subscriptionActive;
     
     localStorage.setItem("user", JSON.stringify(profile))
@@ -86,16 +90,55 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
 function loadProfile(userData){
     document.querySelector(".profile-username").innerHTML=userData["username"];
     document.querySelector(".profile-location").innerHTML=userData["location"];
-    if (userData["locationActive"]== true){
-        document.querySelector(".location-is-active").style.display = "block";
-    }
-    else{
-        document.querySelector(".location-is-active").style.display = "none";
-    }
+    // if (userData["locationActive"]== true){
+    //     document.querySelector(".location-is-active").style.display = "block";
+    // }
+    // else{
+    //     document.querySelector(".location-is-active").style.display = "none";
+    // }
     if (userData["subscriptionActive"] == true){    
         document.querySelector(".subscription-is-active").style.display = "block";
     }
     else{
         document.querySelector(".subscription-is-active").style.display = "none";
+    }
+}
+
+
+async function getRegions(){
+    const response = await fetch(`http://localhost:4000/get_regions`);
+    const data = await response.json();
+    return data
+}
+
+
+
+
+async function getRegionNames(){
+    const regionData = await getRegions();
+    const regionDataArr = regionData.results;
+    let regionNames = []
+    for (let i=0; i<regionDataArr.length; i++){
+        regionNames.push([regionDataArr[i].native_name, regionDataArr[i].iso_3166_1])
+    }
+    // console.log(regionNames)
+    return regionNames
+}
+
+
+
+
+async function createRegionDropdown(){
+    const countryNameList = await getRegionNames();
+
+    const dropdownContainer = document.querySelector('#region');
+    for (let i=0; i<countryNameList.length; i++){
+        const name = countryNameList[i][0];
+        const code = countryNameList[i][1];
+        const newOption = document.createElement('option');
+        newOption.textContent = name;
+        newOption.value = name;
+        newOption.id = code;
+        dropdownContainer.appendChild(newOption);
     }
 }
