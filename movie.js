@@ -712,7 +712,10 @@ async function displayMovie(foundMovie){
     console.log(providersData)
     let providersArray = '';
     // let providersInfo = '';
+    console.log(providersArray)
     if (providersData !== undefined){
+
+        //iterate logo for only flatrate
         providersArray = displayPreviewProviders(providersData);
         console.log(providersArray);
         // providersInfo = displayPreviewExtraProviders(providersData);
@@ -782,10 +785,11 @@ function displayPreviewGenre(genreList){
 function getProviders(data){
     // get user location
     const userInfo = localStorage.getItem("user");
+    console.log(userInfo)
     //returning user
-    if (userInfo != null){
+    if (userInfo !== null){
         const userObject = JSON.parse(userInfo);
-        const userLocation = userObject; //took out .location
+        const userLocation = userObject.location; //took out .location
         if (`${userLocation}` in data.results){
             const providerArray = data.results[`${userLocation}`]
             console.log(providerArray)
@@ -814,10 +818,12 @@ function displayPreviewProviders(providersList){
             if (object.logo_path !== null){
                 return `<p class="previewProviderIcon" id="provider_${index}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""></p>`
             }
-            return
         }).join("");
+
         return dataDisplay
     }
+    return 'Does not stream in your current location'
+
 }
 
 function displayPreviewExtraProviders(providersList){
