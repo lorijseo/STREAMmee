@@ -361,7 +361,7 @@ button {
   font-weight: 650;
 }
 
-#setting form div{
+#setting form div, #profile div{
   margin: 1%;
 }
 

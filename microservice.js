@@ -64,6 +64,8 @@ const cors = require('cors');
 // use cors package after requiring 
 app.use(cors());
 
+// MAKE SURE TO REMOVE THIS LATER 
+var fetch = require("node-fetch");
 
 const key = "613a35f50aa647f0d9c8c32ff6377714"
 app.get('/moviedata/horror', async (req, res, next) => {

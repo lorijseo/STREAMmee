@@ -111,16 +111,16 @@
         <h1>Profile</h1>
         <div>
             <span class="profile-label">Username</span>
-            <span id="profile-username">poot</span>
+            <span class="profile-username">poot</span>
         </div>
         <div>
             <span class="profile-label">Location</span>
-            <span id="profile-location">doob</span>
-            <span id="location-is-active" style="display:none">location active</span>
+            <span class="profile-location">doob</span>
+            <span class="location-is-active" style="display:none">location active</span>
         </div>
         <div>
             <span class="profile-label">Subscription</span>
-            <span id="subscription-is-active" style="display:none">subscription active</span>
+            <span class="subscription-is-active" style="display:none">subscription active</span>
             <ul>
                 <li>wah</li>
                 <li>woo</li>
@@ -149,8 +149,23 @@
 
         window.addEventListener('load', function(){
             userProfile = localStorage.getItem("user");
-            userData = JSON.parse(userProfile);
-            loadProfile(userData);
+            userLocationData = localStorage.getItem("selectedLocation");
+            // first time
+            if ((userProfile == null) && (userLocationData != null)){
+                // set location in profile
+                const userLocation = JSON.parse(userLocationData);
+                const countryCode = userLocation.country_code;
+                const countryName = userLocation.country;
+                document.querySelector(".profile-location").innerHTML=countryName;
+                document.querySelector(".profile-location").id = countryCode;
+                console.log(countryCode);
+            }
+            else{
+                userData = JSON.parse(userProfile);
+                loadProfile(userData);
+
+            }
+            
             
             
         })

@@ -394,13 +394,6 @@ async function getMovie(movie_id){
     return data
 }
 
-// async function getProviders(movie_id){
-//     const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
-//     const data = await response.json();
-//     console.log(data)
-//     return data
-// }
-
 // async function getUserProviders(data, country){
 //     if (data.results[country] != null){
 //         const userProvidersList = data.results[country]
@@ -716,12 +709,17 @@ async function displayMovie(foundMovie){
     const genreArray = displayPreviewGenre(genres);
 
     const providersData = getProviders(providers);
-
+    console.log(providersData)
     let providersArray = '';
     // let providersInfo = '';
     if (providersData !== undefined){
         providersArray = displayPreviewProviders(providersData);
+        console.log(providersArray);
         // providersInfo = displayPreviewExtraProviders(providersData);
+    }
+    else{
+        providersArray=`&nbsp;`;
+        providersArray='Does not stream in your current location';
     }
 
 
@@ -784,14 +782,28 @@ function displayPreviewGenre(genreList){
 function getProviders(data){
     // get user location
     const userInfo = localStorage.getItem("user");
-    const userObject = JSON.parse(userInfo);
-    const userLocation = userObject.location
-    if (`${userLocation}` in data.results){
-        const providerArray = data.results[`${userLocation}`]
-        console.log(providerArray)
-        return providerArray
-
+    //returning user
+    if (userInfo != null){
+        const userObject = JSON.parse(userInfo);
+        const userLocation = userObject; //took out .location
+        if (`${userLocation}` in data.results){
+            const providerArray = data.results[`${userLocation}`]
+            console.log(providerArray)
+            return providerArray
+        }
     }
+    //new user
+    else{
+        const userLocationData = localStorage.getItem("selectedLocation");
+        const userLocation = JSON.parse(userLocationData);
+        const countryCode = userLocation.country_code;
+        if (countryCode in data.results){
+            const providerArray = data.results[countryCode]
+            console.log(providerArray)
+            return providerArray
+        }
+    }
+
 
 
 }
@@ -884,21 +896,22 @@ xhr.addEventListener("readystatechange", async function () {
   if (this.readyState === this.DONE) {
     console.log(this.responseText);
     const response = this.response;
-    // const myData = await JSON.parse(response);
+    const myData = await JSON.parse(response);
+    console.log(myData)
     let geolocation = {};
-    geolocation["location"] = response;
-    localStorage.setItem('geolocation', JSON.stringify(response));
+    geolocation["location"] = myData;
+    localStorage.setItem('geoLocation', JSON.stringify(myData));
 
 
     const data = localStorage.getItem('user')
     //first time user
     if (data == null){
-        const userLocation = JSON.parse(localStorage.getItem('geolocation'));
-        console.log(userLocation);
-        let user ={};
-        user["location"] = userLocation;
-        console.log(user)
-        localStorage.setItem('user',JSON.stringify(user));
+        // const userLocation = JSON.parse(localStorage.getItem('geoLocation'));
+        // console.log(userLocation);
+        // let user ={};
+        // user["location"] = userLocation;
+        // console.log(user)
+        localStorage.setItem('selectedLocation',JSON.stringify(myData));
 
     }
   }
@@ -913,8 +926,6 @@ xhr.send(data);
 
 
 
-const datar = JSON.parse(localStorage.getItem('user'));
-console.log(datar)
 
      
 

@@ -17,6 +17,16 @@ editProfileBtn.addEventListener("click", function(e){
     e.preventDefault();
 
     userProfile = localStorage.getItem("user");
+
+    //first time user editing location
+    if (userProfile == null){
+        const userLocationData = localStorage.getItem("selectedLocation");
+        const userLocation = JSON.parse(userLocationData);
+        const countryCode = userLocation.country_code;
+        const countryName = userLocation.country;
+        document.querySelector("#location").value = countryName;
+        return
+    }
     userData = JSON.parse(userProfile);
 
     //place user info into form
@@ -48,19 +58,19 @@ function clearForm(){
 
 function formUpdateProfile(name, location, locationActive, subscriptionActive){
     //show on profile
-    document.querySelector("#profile-username").innerHTML= name;
-    document.querySelector("#profile-location").innerHTML= location;
+    document.querySelector(".profile-username").innerHTML= name;
+    document.querySelector(".profile-location").innerHTML= location;
     if (locationActive){
-        document.querySelector("#location-is-active").style.display = "block";
+        document.querySelector(".location-is-active").style.display = "block";
     }
     else{
-        document.querySelector("#location-is-active").style.display = "none";
+        document.querySelector(".location-is-active").style.display = "none";
     }
     if (subscriptionActive){    
-        document.querySelector("#subscription-is-active").style.display = "block";
+        document.querySelector(".subscription-is-active").style.display = "block";
     }
     else{
-        document.querySelector("#subscription-is-active").style.display = "none";
+        document.querySelector(".subscription-is-active").style.display = "none";
     }
     //update local storage
     let profile ={}
@@ -74,18 +84,18 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
 }
 
 function loadProfile(userData){
-    document.querySelector("#profile-username").innerHTML=userData["username"];
-    document.querySelector("#profile-location").innerHTML=userData["location"];
+    document.querySelector(".profile-username").innerHTML=userData["username"];
+    document.querySelector(".profile-location").innerHTML=userData["location"];
     if (userData["locationActive"]== true){
-        document.querySelector("#location-is-active").style.display = "block";
+        document.querySelector(".location-is-active").style.display = "block";
     }
     else{
-        document.querySelector("#location-is-active").style.display = "none";
+        document.querySelector(".location-is-active").style.display = "none";
     }
     if (userData["subscriptionActive"] == true){    
-        document.querySelector("#subscription-is-active").style.display = "block";
+        document.querySelector(".subscription-is-active").style.display = "block";
     }
     else{
-        document.querySelector("#subscription-is-active").style.display = "none";
+        document.querySelector(".subscription-is-active").style.display = "none";
     }
 }
