@@ -3,8 +3,12 @@ settingBtn.addEventListener('click', function(e){
     e.preventDefault();
     // get values
     const userName = document.querySelector("#username").value;
-    // const userLocation = document.querySelector("#location").value;
-    const userLocation = document.querySelector('#region').value;
+    
+    const location =  document.querySelector('#region')
+    const locationName = document.querySelector('#region').value;
+    const locationCode = location.options[location.selectedIndex].id
+    const userLocation = [locationName, locationCode]
+
 
     // const isLocationActive = document.querySelector("#use-location").checked;
     const isSubscriptionActive = document.querySelector("#use-subscription").checked;
@@ -36,12 +40,12 @@ editProfileBtn.addEventListener("click", function(e){
     //place user info into form
     document.querySelector("#username").value =userData["username"];
     document.querySelector("#location").value =userData["location"];
-    if (userData["locationActive"]== true){
-        document.querySelector("#use-location").checked = true;
-    }
-    else{
-        document.querySelector("#use-location").checked = false;
-    }
+    // if (userData["locationActive"]== true){
+    //     document.querySelector("#use-location").checked = true;
+    // }
+    // else{
+    //     document.querySelector("#use-location").checked = false;
+    // }
     if (userData["subscriptionActive"] == true){    
         document.querySelector("#use-subscription").checked = true;
     }
@@ -63,7 +67,7 @@ function clearForm(){
 function formUpdateProfile(name, location, locationActive, subscriptionActive){
     //show on profile
     document.querySelector(".profile-username").innerHTML= name;
-    document.querySelector(".profile-location").innerHTML= location;
+    document.querySelector(".profile-location").innerHTML= location[0];
     // if (locationActive){
     //     document.querySelector(".location-is-active").style.display = "block";
     // }
@@ -76,10 +80,15 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
     else{
         document.querySelector(".subscription-is-active").style.display = "none";
     }
-    //update local storage
+
+    let locationObject = {};
+    locationObject['country'] = location[0];
+    locationObject['country_code'] = location[1];
+
+    // update local storage
     let profile ={}
     profile["username"] = name;
-    profile["location"] = location;
+    profile["location"] = locationObject;
     // profile["locationActive"] = locationActive;
     profile["subscriptionActive"] = subscriptionActive;
     
@@ -89,7 +98,8 @@ function formUpdateProfile(name, location, locationActive, subscriptionActive){
 
 function loadProfile(userData){
     document.querySelector(".profile-username").innerHTML=userData["username"];
-    document.querySelector(".profile-location").innerHTML=userData["location"];
+    console.log(userData['location'])
+    document.querySelector(".profile-location").innerHTML=userData["location"].country;
     // if (userData["locationActive"]== true){
     //     document.querySelector(".location-is-active").style.display = "block";
     // }

@@ -840,9 +840,11 @@ function getPreviewProviders(data){
     //returning user
     if (userInfo !== null){
         const userObject = JSON.parse(userInfo);
-        const userLocation = userObject.location; //took out .location
+        const userLocation = userObject.location; 
+        
         if (`${userLocation}` in data.results){
             const providerArray = data.results[`${userLocation}`]
+            console.log(`finding list for ${userLocation}`)
             console.log(providerArray)
             return providerArray
         }
