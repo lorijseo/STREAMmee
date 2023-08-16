@@ -976,8 +976,13 @@ xhr.addEventListener("readystatechange", async function () {
         // user["location"] = userLocation;
         // console.log(user)
         localStorage.setItem('selectedLocation',JSON.stringify(myData));
+        displayFlag(myData.country_code)
 
     }
+    else{
+        displayFlag(getLocation().country_code)
+    }
+    
   }
 });
 
@@ -990,11 +995,15 @@ xhr.send(data);
 
 
 
+// document.querySelector('#flag-emoji').innerHTML=`<img src="https://flagsapi.com/KR/flat/24.png">`
 
      
 
 
-
+function displayFlag(countryCode){
+    document.querySelector('#flag-emoji').innerHTML= `<img src="https://flagsapi.com/${countryCode}/flat/24.png"></img>`
+    return 
+}
 
 
 

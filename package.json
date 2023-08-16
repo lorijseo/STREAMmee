@@ -3,6 +3,7 @@
     "amqplib": "^0.10.3",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "country-flag-emoji": "^1.0.3",
     "express": "^4.18.2",
     "joi": "^17.9.2",
     "node-fetch": "^2.6.12",

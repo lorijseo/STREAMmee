@@ -1,3 +1,13 @@
+function getFlagEmoji(countryCode) {
+    const codePoints = countryCode
+      .toUpperCase()
+      .split('')
+      .map(char =>  127397 + char.charCodeAt());
+    return String.fromCodePoint(...codePoints);
+}
+
+
+
 const settingBtn = document.querySelector("#save-profile-btn");
 settingBtn.addEventListener('click', function(e){
     e.preventDefault();
@@ -13,7 +23,8 @@ settingBtn.addEventListener('click', function(e){
     // const isLocationActive = document.querySelector("#use-location").checked;
     const isSubscriptionActive = document.querySelector("#use-subscription").checked;
     formUpdateProfile(userName, userLocation, isSubscriptionActive );
-    clearForm();
+    document.querySelector('#setting').style.display="none";
+    // clearForm();
     
 })
 
@@ -33,25 +44,35 @@ editProfileBtn.addEventListener("click", function(e){
         const location = document.querySelector(`#${countryCode}`)
         location.setAttribute("selected", 'selected');
         console.log(location.value)
-        return
-    }
-    userData = JSON.parse(userProfile);
-
-    //place user info into form
-    document.querySelector("#username").value =userData["username"];
-    document.querySelector("#location").value =userData["location"];
-    // if (userData["locationActive"]== true){
-    //     document.querySelector("#use-location").checked = true;
-    // }
-    // else{
-    //     document.querySelector("#use-location").checked = false;
-    // }
-    if (userData["subscriptionActive"] == true){    
-        document.querySelector("#use-subscription").checked = true;
+        
     }
     else{
-        document.querySelector("#use-subscription").checked = false;
+        userData = JSON.parse(userProfile);
+
+        //place user info into form
+        document.querySelector("#username").value =userData["username"];
+        // document.querySelector("#location").value =userData["location"];
+
+        const location = document.querySelector(`#${userData["location"].country_code}`)
+        location.setAttribute("selected", 'selected');
+
+
+        // if (userData["locationActive"]== true){
+        //     document.querySelector("#use-location").checked = true;
+        // }
+        // else{
+        //     document.querySelector("#use-location").checked = false;
+        // }
+        if (userData["subscriptionActive"] == true){    
+            document.querySelector("#use-subscription").checked = true;
+        }
+        else{
+            document.querySelector("#use-subscription").checked = false;
+        }
+
     }
+    document.querySelector('#setting').style.display="flex";
+
 
 })
 
