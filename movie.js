@@ -585,7 +585,7 @@ document.querySelector('#display-filter').addEventListener('click', async functi
         const countryCode = userLocation.country_code;
         const data = await getSubscriptions(countryCode);
 
-        //it doesn't show up after awhile (how to make dropdown more permanent?)
+        //it doesn't show up after i leave the page(how to make dropdown more permanent?)
         const userLogo = getSubscriptionLogo(data);
         displaySubscription(userLogo);
         addLogoRoutes()
