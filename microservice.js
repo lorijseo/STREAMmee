@@ -229,8 +229,26 @@ app.get(`/get_regions`, async(req,res,next)=>{
 
   
 
-  
 
+
+
+app.get(`/get_movies_by_filter/:providers/:code/:page`, async(req,res,next)=>{
+    const providers = req.params.providers;
+    const code = req.params.code;
+    const page = req.params.page;
+    let providersFormatted = formatProviderQuery(providers);
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&with_watch_providers=${providersFormatted}&watch_region=${code}&page=${page}`);
+    const data = await response.json();
+    res.send(data);
+})
+
+function formatProviderQuery(param){
+    const reformatted = param.replace('-', '|');
+    return reformatted
+}
+
+
+// woot(8,"US", 2)
   
 //returns video results given movie id
 // app.get(`/get_video/:movie_id`, async(req,res,next)=>{
