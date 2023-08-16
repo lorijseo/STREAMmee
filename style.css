@@ -386,13 +386,26 @@ button {
 }
 
 
-#dialog-subscription{
+/* #dialog-subscription{
   display:flex;
-  /* width:70%; */
   flex-wrap: wrap;
   background-color: black;
 }
 
 .subscription-logo{
   margin: 15px;
+} */
+
+#sub2{
+  display:flex;
+  flex-wrap: wrap;
+  background-color: black;
+}
+
+.subscription-logo{
+  margin: 15px;
+}
+
+.subscription-logo:hover{
+  cursor: pointer;
 }

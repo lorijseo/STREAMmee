@@ -97,39 +97,39 @@ $j(function(){
 })
 
 
-$j(function(){
+// $j(function(){
 
-    $j("#dialog-subscription" ).dialog({
-    modal: true,
-    autoOpen:false,
-    buttons: [
-        {
-            id: "cancel-button-sub",
-            // text: "byebye",
-            // showText: false,
-            // icons: {primary: "ui-icon-heart"},
-            click: function() {
-                $j( this ).dialog( "close" );}
-        }
+//     $j("#dialog-subscription" ).dialog({
+//     modal: true,
+//     autoOpen:false,
+//     buttons: [
+//         {
+//             id: "cancel-button-sub",
+//             // text: "byebye",
+//             // showText: false,
+//             // icons: {primary: "ui-icon-heart"},
+//             click: function() {
+//                 $j( this ).dialog( "close" );}
+//         }
 
-    ],
-    width: 740,
-    //prevents lag
-    // draggable:false,
-    show: {
-      effect: "fade",
-      duration: 1000
-    },
-    hide: {
-      effect: "fade",
-      duration: 1000
-    }
-});
+//     ],
+//     width: 740,
+//     //prevents lag
+//     // draggable:false,
+//     show: {
+//       effect: "fade",
+//       duration: 1000
+//     },
+//     hide: {
+//       effect: "fade",
+//       duration: 1000
+//     }
+// });
 
 
-$j( "#cancel-button-sub" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
+// $j( "#cancel-button-sub" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
 
-})
+// })
 
 
 // async function getTrendweek(){
@@ -583,23 +583,92 @@ document.querySelector('#display-filter').addEventListener('click', async functi
     const userLocation = getLocation();
     const countryCode = userLocation.country_code;
     const data = await getSubscriptions(countryCode);
+    // createSubscriptionDropdown(data);
     const userLogo = getSubscriptionLogo(data);
     displaySubscription(userLogo);
+    addLogoRoutes()
 })
 
 function getSubscriptionLogo(data){
     let dataDisplay = data.results.slice(0,20).map((object, index) => {
-        return `<div class="subscription-logo"id="${object.provider_id}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""> </div>`
+        const formatId = 'logo' + object.provider_id
+        return `<div class="subscription-logo" id=${formatId}><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""> </div>`
     }).join("");
     return dataDisplay
 }
 
+function displaySubscription(data){
+    document.querySelector('#main').style.display = 'none';
+    document.querySelector('#sub1').style.display = 'none';
+    document.querySelector('#sub2').innerHTML = data
+}
+
+
+function addLogoRoutes(){
+    let selectedLogo = document.querySelectorAll(".subscription-logo");
+    let subscriptionList = []
+    for (let i=0; i<selectedLogo.length; i++){
+        const logoBtn = document.querySelector(`#${selectedLogo[i].id}`);
+        logoBtn.addEventListener("click", function(e){
+            e.preventDefault();
+            let logoId = selectedLogo[i].id;
+            const stripId = logoId.slice(4);
+
+            if (subscriptionList.includes(stripId )){
+                //already clicked
+
+                //get index
+                const index = subscriptionList.indexOf(stripId );
+                subscriptionList.splice(index, 1);
+                selectedLogo[i].style.border = "none";
+                console.log("poppppp")
+            }
+            else{
+                subscriptionList.push(stripId );
+                console.log("pushhhhh")
+                selectedLogo[i].style.border = "2px yellow solid";
+            }
+            console.log(subscriptionList)
+
+        })
+    }
+
+    document.querySelector('#subscription-submit').addEventListener('click', function(e){
+        document.querySelector('#main').style.display = 'block';
+        document.querySelector('#sub1').style.display = 'block';
+
+        document.querySelector('#filter').style.display = 'none';
+        localStorage.setItem('subscription', subscriptionList.toString())
+    })
+}
+
+// function createSubscriptionDropdown(data){
+//     const dropdownContainer = document.querySelector('#display-filter');
+//     // dropdownContainer.multiple = true;
+//     let dataDisplay = data.results.slice(0,20).map((object, index) => {
+//         const newOption = document.createElement('option');
+//         newOption.innerHTML = `${object.provider_id}`
+//         newOption.value = "yay"
+//         dropdownContainer.appendChild(newOption)
+
+//         return 
+//     });
+    
+// }
+
+
+
+
+
+
 // function addLogoRoutes(){
-//     let selectedLogo = document.querySelectorAll(".subscription-logo");
+//     // let selectedLogo = document.querySelectorAll(".subscription-logo");
 //     let subscriptionList = []
-//     for (let i=0; i<selectedLogo.length; i++){
-//         const logoBtn = document.querySelector(`#${selectedLogo[i].id}`);
-//         logoBtn.addEventListener("click", function(e){
+//     for (let i=0; i<$j('.subscription-logo').length; i++){
+//         // const logoBtn = document.querySelector(`#${selectedLogo[i].id}`);
+//         let logoId= $j('.subscription-logo').attr('id');
+//         let logoBtn = '#' + logoId;
+//         (logoBtn).on("click", function(e){
 //             e.preventDefault();
 //             if (subscriptionList.includes(selectedLogo[i])){
 //                 //already clicked
@@ -617,8 +686,6 @@ function getSubscriptionLogo(data){
 //         })
 //     }
 // }
-
-
 
 
 function formatProviderParam(arr){
@@ -1154,16 +1221,16 @@ function displayMoviePreview(data ){
     
 }
 
-function displaySubscription(formattedLogos){
-    document.querySelector('#dialog-subscription').innerHTML=`${formattedLogos}`
+// function displaySubscription(formattedLogos){
+//     document.querySelector('#dialog-subscription').innerHTML=`${formattedLogos}`
 
-    $j(function(){
-        // $j("#dialog-message" ).dialog("moveToTop");
-        $j('#dialog-subscription').dialog( "open" );
-        return
-    })
-    addLogoRoutes();
-}
+//     $j(function(){
+//         // $j("#dialog-message" ).dialog("moveToTop");
+//         $j('#dialog-subscription').dialog( "open" );
+//         return
+//     })
+//     addLogoRoutes();
+// }
 
 $j(function(){
     $j('.buttons').click(function(){
