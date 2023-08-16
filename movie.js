@@ -97,7 +97,39 @@ $j(function(){
 })
 
 
+$j(function(){
 
+    $j("#dialog-subscription" ).dialog({
+    modal: true,
+    autoOpen:false,
+    buttons: [
+        {
+            id: "cancel-button-sub",
+            // text: "byebye",
+            // showText: false,
+            // icons: {primary: "ui-icon-heart"},
+            click: function() {
+                $j( this ).dialog( "close" );}
+        }
+
+    ],
+    width: 740,
+    //prevents lag
+    // draggable:false,
+    show: {
+      effect: "fade",
+      duration: 1000
+    },
+    hide: {
+      effect: "fade",
+      duration: 1000
+    }
+});
+
+
+$j( "#cancel-button-sub" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
+
+})
 
 
 // async function getTrendweek(){
@@ -150,56 +182,102 @@ async function getHorror(){
 
 // ====================================================================================================
 
-async function getMoviesByFilter(provider_list, country_code,page_num){
-    // const providers = formatProviderParam(provider_list)
-    const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
-    const data = await response.json();
-    return data
 
-}
+
+
+// const actionBtn = document.getElementById("action");
+// actionBtn.addEventListener("click", async function(e){
+//     e.preventDefault();
+//     //genre
+//     const genreCode = 28;
+
+//     //providerList
+//     let movieCount = 0;
+//     let page = 1;
+//     const providerArr = [8,337]
+//     const providerList = formatProviderParam(providerArr);
+
+//     //location code
+//     const location = getLocation();
+//     const code = location.country_code;
+
+
+//     let selectedMovies = []
+
+//     while (movieCount<=20){
+//         const data = await getMoviesByFilter(providerList, code, page);
+
+//         for(let i =0; i<data.results.length; i++){
+//             const genreArr = data.results[i].genre_ids;
+//             if (genreArr.includes(genreCode)){
+//                 movieCount +=1;
+//                 if (movieCount == 20){
+//                     return 
+//                 }
+//                 selectedMovies.push(data.results[i]);
+//                 console.log(`${data.results[i].id} and num ${i}`)
+                
+//             }
+
+            
+//         }
+//         page +=1
+//     }
+//     console.log(`page ${page}`)
+
+//     displayMovieContainer(selectedMovies);
+//     // displayMovieContainer(data);
+//     addMovieRoutes();
+// });
 
 
 const actionBtn = document.getElementById("action");
 actionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     //genre
-    const genre = this.getAttribute("id")
     const genreCode = 28;
-    //providerList
-    let movieCount = 0;
-    let page = 1;
-    const providerArr = [8,337]
-    const providerList = formatProviderParam(providerArr);
+    const pageNum = 1
+
     //location code
     const location = getLocation();
-    const code = location.country_code;
+    const locationCode = location.country_code;
 
-
-    let selectedMovies = []
-
-    while (movieCount<=20){
-        const data = await getMoviesByFilter(providerList, code, page);
-
-        for(let i =0; i<data.results.length; i++){
-            const genreArr = data.results[i].genre_ids;
-            if (genreArr.includes(genreCode)){
-                movieCount +=1;
-                selectedMovies.push(data.results[i])
-            }
-
-            
-        }
-        page +=1
-    }
+    const selectedMovies = await getMovieData(genreCode,locationCode,pageNum);
 
     displayMovieContainer(selectedMovies);
-    // displayMovieContainer(data);
     addMovieRoutes();
 });
 
 
 
+async function getMovieData(genreCode, locationCode, page){
+    //initialize
+    // let page = 1;
 
+    //providerList
+    //create a getproviderslist function which fetches user's subscription providers
+    const providerArr = [8,337]
+    const providerList = formatProviderParam(providerArr);
+
+    let selectedMovies = []
+
+    while (selectedMovies.length<=20){
+        const data = await getMoviesByFilter(providerList, locationCode, page);
+
+        for(let i =0; i<data.results.length; i++){
+            const genreArr = data.results[i].genre_ids;
+            if (selectedMovies.length == 20){
+                return selectedMovies
+            }
+            else if (genreArr.includes(genreCode)){
+                selectedMovies.push(data.results[i]); 
+            }
+        }
+        page +=1
+    }
+    return selectedMovies
+
+}
 
 // ====================================================================================================
 
@@ -458,6 +536,19 @@ async function getProviders(movie_id){
     return data
 }
 
+async function getMoviesByFilter(provider_list, country_code,page_num){
+    // const providers = formatProviderParam(provider_list)
+    const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
+    const data = await response.json();
+    return data
+
+}
+
+async function getSubscriptions(country_code){
+    const response = await fetch(`http://localhost:4000/get_subscriptions/${country_code}`);
+    const data = await response.json();
+    return data
+}
 
 // async function getMoviesByFilter(providers, country_code,page_num){
 //     const provider_list = formatProviderParam(providers)
@@ -468,7 +559,67 @@ async function getProviders(movie_id){
 
 // }
 
-const woot = [8]
+// document.querySelector('#display-filter').addEventListener('click', async function(e){
+//     e.preventDefault();
+//     const userLocation = getLocation();
+//     const countryCode = userLocation.country_code;
+//     const data = await getSubscriptions(countryCode);
+
+//     for (let i=0; i<30; i++){
+//         subscriptionData = data.results[i];
+//         const newSubscription = document.createElement('div');
+//         newSubscription.setAttribute("id", i);
+//         newSubscription.innerHTML = `
+//         <img src="https://image.tmdb.org/t/p/w92/${subscriptionData.logo_path}" alt="">
+//         `
+//         document.querySelector('#sub2').appendChild(newSubscription);
+
+//     }
+
+// })
+
+document.querySelector('#display-filter').addEventListener('click', async function(e){
+    e.preventDefault();
+    const userLocation = getLocation();
+    const countryCode = userLocation.country_code;
+    const data = await getSubscriptions(countryCode);
+    const userLogo = getSubscriptionLogo(data);
+    displaySubscription(userLogo);
+})
+
+function getSubscriptionLogo(data){
+    let dataDisplay = data.results.slice(0,20).map((object, index) => {
+        return `<div class="subscription-logo"id="${object.provider_id}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""> </div>`
+    }).join("");
+    return dataDisplay
+}
+
+// function addLogoRoutes(){
+//     let selectedLogo = document.querySelectorAll(".subscription-logo");
+//     let subscriptionList = []
+//     for (let i=0; i<selectedLogo.length; i++){
+//         const logoBtn = document.querySelector(`#${selectedLogo[i].id}`);
+//         logoBtn.addEventListener("click", function(e){
+//             e.preventDefault();
+//             if (subscriptionList.includes(selectedLogo[i])){
+//                 //already clicked
+
+//                 //get index
+//                 const index = subscriptionList.indexOf(selectedLogo[i]);
+//                 subscriptionList.splice(index, 1);
+//                 selectedLogo[i].style.border = "none";
+//             }
+//             else{
+//                 subscriptionList.push(selectedLogo[i]);
+//                 selectedLogo[i].style.border = "2px yellow solid";
+//             }
+
+//         })
+//     }
+// }
+
+
+
 
 function formatProviderParam(arr){
     let query = '';
@@ -608,11 +759,23 @@ function displayMovieContainer(data){
     let dataDisplay2 = data.slice(10,20).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
+    let dataDisplay3 = data.slice(20,30).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+    let dataDisplay4 = data.slice(30,40).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+    let dataDisplay5 = data.slice(40,50).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
 
     document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
     document.querySelector("#display1").innerHTML = dataDisplay;
     document.querySelector("#display2").innerHTML = dataDisplay2;
+    document.querySelector("#display3").innerHTML = dataDisplay3;
+    document.querySelector("#display4").innerHTML = dataDisplay4;
+    document.querySelector("#display5").innerHTML = dataDisplay5;
 }
 
 
@@ -991,6 +1154,16 @@ function displayMoviePreview(data ){
     
 }
 
+function displaySubscription(formattedLogos){
+    document.querySelector('#dialog-subscription').innerHTML=`${formattedLogos}`
+
+    $j(function(){
+        // $j("#dialog-message" ).dialog("moveToTop");
+        $j('#dialog-subscription').dialog( "open" );
+        return
+    })
+    addLogoRoutes();
+}
 
 $j(function(){
     $j('.buttons').click(function(){

@@ -243,7 +243,7 @@ button {
   visibility: hidden;
 }
 
-#cancel-button {
+.cancel-button {
   text-align: center;
   background-color: transparent;
   border: none;
@@ -385,3 +385,14 @@ button {
   font-weight: 650;
 }
 
+
+#dialog-subscription{
+  display:flex;
+  /* width:70%; */
+  flex-wrap: wrap;
+  background-color: black;
+}
+
+.subscription-logo{
+  margin: 15px;
+}

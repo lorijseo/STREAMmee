@@ -18,7 +18,7 @@ const cors = require('cors');
 app.use(cors());
 
 // MAKE SURE TO REMOVE THIS LATER 
-// var fetch = require("node-fetch");
+var fetch = require("node-fetch");
 
 const key = "613a35f50aa647f0d9c8c32ff6377714"
 app.get('/moviedata/horror', async (req, res, next) => {
@@ -228,7 +228,12 @@ app.get(`/get_regions`, async(req,res,next)=>{
 })
 
   
-
+app.get(`/get_subscriptions/:code`, async(req,res,next)=>{
+    const code= req.params.code;
+    const response = await fetch(`https://api.themoviedb.org/3/watch/providers/movie?language=en-US&watch_region=${code}`, options);
+    const data = await response.json();
+    res.send(data);
+})
 
 
 
@@ -248,7 +253,7 @@ function formatProviderQuery(param){
 }
 
 
-// woot(8,"US", 2)
+
   
 //returns video results given movie id
 // app.get(`/get_video/:movie_id`, async(req,res,next)=>{
