@@ -144,15 +144,77 @@ async function getHorror(){
     return data
 }
 
-// displays 12 action movies
+
+
+
+
+// ====================================================================================================
+
+async function getMoviesByFilter(provider_list, country_code,page_num){
+    // const providers = formatProviderParam(provider_list)
+    const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
+    const data = await response.json();
+    return data
+
+}
+
+
 const actionBtn = document.getElementById("action");
 actionBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    //genre
     const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
+    const genreCode = 28;
+    //providerList
+    let movieCount = 0;
+    let page = 1;
+    const providerArr = [8,337]
+    const providerList = formatProviderParam(providerArr);
+    //location code
+    const location = getLocation();
+    const code = location.country_code;
+
+
+    let selectedMovies = []
+
+    while (movieCount<=20){
+        const data = await getMoviesByFilter(providerList, code, page);
+
+        for(let i =0; i<data.results.length; i++){
+            const genreArr = data.results[i].genre_ids;
+            if (genreArr.includes(genreCode)){
+                movieCount +=1;
+                selectedMovies.push(data.results[i])
+            }
+
+            
+        }
+        page +=1
+    }
+
+    displayMovieContainer(selectedMovies);
+    // displayMovieContainer(data);
     addMovieRoutes();
 });
+
+
+
+
+
+// ====================================================================================================
+
+
+// displays 12 action movies
+// const actionBtn = document.getElementById("action");
+// actionBtn.addEventListener("click", async function(e){
+//     e.preventDefault();
+//     const genre = this.getAttribute("id")
+//     const data = await getMovieApi(genre)
+//     displayMovieContainer(data);
+//     addMovieRoutes();
+// });
+
+
 async function getAction(){
     const response = await fetch(`http://localhost:4000/moviedata/action`);
     const data = await response.json();
@@ -370,12 +432,6 @@ async function getMovieApi(genreName){
     return data
 }
 
-// async function getWar(){
-//     const response = await fetch(`http://localhost:4000/moviedata/war`);
-//     const data = await response.json();
-//     return data
-// }
-
 
 async function getKeywords(movie_id){
     const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
@@ -402,6 +458,33 @@ async function getProviders(movie_id){
     return data
 }
 
+
+// async function getMoviesByFilter(providers, country_code,page_num){
+//     const provider_list = formatProviderParam(providers)
+//     // console.log(provider_list)
+//     const response = await fetch(`http://localhost:4000/${providers}/${country_code}/${page_num}`);
+//     const data = await response.json();
+//     return data
+
+// }
+
+const woot = [8]
+
+function formatProviderParam(arr){
+    let query = '';
+    for (let i=0; i<arr.length; i++){
+        if(i == arr.length -1){
+            query = query + arr[i]
+            return query
+        }
+        query = query + arr[i] + "-";
+    }
+}
+
+function formatProviderParam2(param){
+    const reformatted = param.replace('-', '|');
+    return reformatted
+}
 
 
 
@@ -519,13 +602,17 @@ function createCarouselImg(data, index){
 //iterate through top 12
 
 function displayMovieContainer(data){
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
+    let dataDisplay = data.slice(0,10).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+    let dataDisplay2 = data.slice(10,20).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
 
     document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
-    document.querySelector(".displayList").innerHTML = dataDisplay;
+    document.querySelector("#display1").innerHTML = dataDisplay;
+    document.querySelector("#display2").innerHTML = dataDisplay2;
 }
 
 
@@ -543,6 +630,7 @@ function displayMovieContainer(data){
 
 // **********************************************MOVIE POSTER DISPLAY**********************************************
 function createMovieContainer(data,index){
+    console.log(data)
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const className = "movie_btn_" + index;
@@ -992,10 +1080,6 @@ xhr.send(data);
 
 
 
-
-
-
-// document.querySelector('#flag-emoji').innerHTML=`<img src="https://flagsapi.com/KR/flat/24.png">`
 
      
 
