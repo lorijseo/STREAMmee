@@ -417,11 +417,11 @@ function getLocation(){
     else{
         const userLocationData = localStorage.getItem("selectedLocation");
         const userLocation = JSON.parse(userLocationData);
-        const countryCode = userLocation.country_code;
+        // const countryCode = userLocation.country_code;
         // const countryName = userLocation.country;
         // return [countryCode, countryName]
         // return countryName
-        return countryCode
+        return userLocation
     }
 
 }    
@@ -429,34 +429,34 @@ function getLocation(){
 // *************************COME BACKKKKKKK DON'T LEAVEEEEE*************************
 // const providerList = await getProviders()
 
-async function getFlatrate(providerData){
-    const location = await getLocation();
-    const providersInLocation = providerData.results[location];
-    const flatrate = providersInLocation.flatrate;
+// async function getFlatrate(providerData){
+//     const location = await getLocation();
+//     const providersInLocation = providerData.results[location];
+//     const flatrate = providersInLocation.flatrate;
 
-    //get my list of subscritions?
-    const userSubscription = [55,358,257]
-    let flatrateAvailable = []
-    if(flatrate){
-        for (let i =0; i<flatrate.length; i++){
-            console.log(flatrate[i].provider_id)
-            if (userSubscription.includes(flatrate[i].provider_id)){
-                flatrateAvailable.push(flatrate[i].provider_id)
-            }
-        }
-    }
-    return flatrateAvailable
-}
+//     //get my list of subscritions?
+//     const userSubscription = [55,358,257]
+//     let flatrateAvailable = []
+//     if(flatrate){
+//         for (let i =0; i<flatrate.length; i++){
+//             console.log(flatrate[i].provider_id)
+//             if (userSubscription.includes(flatrate[i].provider_id)){
+//                 flatrateAvailable.push(flatrate[i].provider_id)
+//             }
+//         }
+//     }
+//     return flatrateAvailable
+// }
 
-async function getSubscriptionProviders(movieId){
-    // gets all providers for the movie
-    const providerList = await getProviders(movieId);
-    // gets all flatrate 
-    const subscriptionList = await getFlatrate(providerList);
-    console.log(subscriptionList)
-}
+// async function getSubscriptionProviders(movieId){
+//     // gets all providers for the movie
+//     const providerList = await getProviders(movieId);
+//     // gets all flatrate 
+//     const subscriptionList = await getFlatrate(providerList);
+//     console.log(subscriptionList)
+// }
 
-getSubscriptionProviders(1149947)
+// getSubscriptionProviders(1149947)
 
 
 
@@ -761,23 +761,12 @@ async function displayMovie(foundMovie){
     const genreArray = displayPreviewGenre(genres);
 
     const providersData = getPreviewProviders(providers);
-    console.log(providersData)
-    let providersArray = '';
-    // let providersInfo = '';
-    console.log(providersArray)
-    if (providersData !== undefined){
 
-        //iterate logo for only flatrate
-        providersArray = displayPreviewProviders(providersData);
-        console.log(providersArray);
-        // providersInfo = displayPreviewExtraProviders(providersData);
-    }
-    else{
-        providersArray=`&nbsp;`;
-        providersArray='Does not stream in your current location';
-    }
+    // // let providersInfo = '';
+    // // providersInfo = displayPreviewExtraProviders(providersData);
 
 
+    providersArray = displayPreviewProviders(providersData);
     //"#modalhere" TESTA
     document.querySelector("#dialog-message").innerHTML = `
     <div class="videoDisplay">
@@ -834,39 +823,55 @@ function displayPreviewGenre(genreList){
     return dataDisplay
 }
 
+// function getPreviewProviders(data){
+//     // get user location
+//     const userInfo = localStorage.getItem("user");
+//     //returning user
+//     if (userInfo !== null){
+//         const userObject = JSON.parse(userInfo);
+//         const userLocation = userObject.location; 
+
+//         if (`${userLocation}` in data.results){
+//             const providerArray = data.results[`${userLocation}`]
+//             console.log(`finding list for ${userLocation}`)
+//             console.log(providerArray)
+//             return providerArray
+//         }
+//     }
+//     //new user
+//     else{
+//         const userLocationData = localStorage.getItem("selectedLocation");
+//         const userLocation = JSON.parse(userLocationData);
+//         const countryCode = userLocation.country_code;
+//         if (countryCode in data.results){
+//             const providerArray = data.results[countryCode]
+//             console.log(providerArray)
+//             return providerArray
+//         }
+//     }
+// }
+
+
 function getPreviewProviders(data){
     // get user location
-    const userInfo = localStorage.getItem("user");
-    //returning user
-    if (userInfo !== null){
-        const userObject = JSON.parse(userInfo);
-        const userLocation = userObject.location; 
-        
-        if (`${userLocation}` in data.results){
-            const providerArray = data.results[`${userLocation}`]
-            console.log(`finding list for ${userLocation}`)
-            console.log(providerArray)
-            return providerArray
-        }
-    }
-    //new user
-    else{
-        const userLocationData = localStorage.getItem("selectedLocation");
-        const userLocation = JSON.parse(userLocationData);
-        const countryCode = userLocation.country_code;
-        if (countryCode in data.results){
-            const providerArray = data.results[countryCode]
-            console.log(providerArray)
-            return providerArray
-        }
-    }
+    const userLocationData= getLocation();
+    const name = userLocationData.country;
+    const code = userLocationData.country_code;
 
-
+    // console.log(name);
+    // console.log(code)
+    if (code in data.results){
+        const providerArray = data.results[code];
+        // console.log(`finding list for ${name}`)
+        // console.log(providerArray)
+        return providerArray
+    }
+    console.log("didn't work")
 
 }
 
 function displayPreviewProviders(providersList){
-    if ("flatrate" in providersList){
+    if ((providersList)&&("flatrate" in providersList)){
         let dataDisplay = providersList.flatrate.slice(0,providersList.length).map((object, index) => {
             if (object.logo_path !== null){
                 return `<p class="previewProviderIcon" id="provider_${index}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""></p>`
@@ -875,7 +880,7 @@ function displayPreviewProviders(providersList){
 
         return dataDisplay
     }
-    return 'Does not stream in your current location'
+    return  `<p class="previewProviderMessage" id="error_msg">Does not stream in your current location</p>`
 
 }
 
