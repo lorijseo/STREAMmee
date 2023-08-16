@@ -580,13 +580,19 @@ async function getSubscriptions(country_code){
 
 document.querySelector('#display-filter').addEventListener('click', async function(e){
     e.preventDefault();
-    const userLocation = getLocation();
-    const countryCode = userLocation.country_code;
-    const data = await getSubscriptions(countryCode);
-    // createSubscriptionDropdown(data);
-    const userLogo = getSubscriptionLogo(data);
-    displaySubscription(userLogo);
-    addLogoRoutes()
+    if (localStorage.getItem('subscription') == null){
+        const userLocation = getLocation();
+        const countryCode = userLocation.country_code;
+        const data = await getSubscriptions(countryCode);
+
+        //it doesn't show up after awhile (how to make dropdown more permanent?)
+        const userLogo = getSubscriptionLogo(data);
+        displaySubscription(userLogo);
+        addLogoRoutes()
+    }
+    document.querySelector('#main').style.display = 'none';
+    document.querySelector('#sub1').style.display = 'none';
+    document.querySelector('#filter').style.display = 'block';
 })
 
 function getSubscriptionLogo(data){
@@ -1286,10 +1292,8 @@ xhr.withCredentials = false;
 
 xhr.addEventListener("readystatechange", async function () {
   if (this.readyState === this.DONE) {
-    console.log(this.responseText);
     const response = this.response;
     const myData = await JSON.parse(response);
-    console.log(myData)
     let geolocation = {};
     geolocation["location"] = myData;
     localStorage.setItem('geoLocation', JSON.stringify(myData));
