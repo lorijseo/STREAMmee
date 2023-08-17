@@ -254,10 +254,12 @@ async function getMovieData(genreCode, locationCode, page){
     //initialize
     // let page = 1;
 
-    //providerList
-    //create a getproviderslist function which fetches user's subscription providers
-    const providerArr = [8,337]
-    const providerList = formatProviderParam(providerArr);
+    // verify if user has saved subscriptions to filter by
+    const providerArr = retrieveSubscriptionsStorage();
+    let providerList = [];
+    if (providerArr){
+        providerList = formatProviderParam(providerArr);
+    }
 
     let selectedMovies = []
 
@@ -559,24 +561,8 @@ async function getSubscriptions(country_code){
 
 // }
 
-// document.querySelector('#display-filter').addEventListener('click', async function(e){
-//     e.preventDefault();
-//     const userLocation = getLocation();
-//     const countryCode = userLocation.country_code;
-//     const data = await getSubscriptions(countryCode);
+// *************************SUBSCRIPTION FILTER*************************
 
-//     for (let i=0; i<30; i++){
-//         subscriptionData = data.results[i];
-//         const newSubscription = document.createElement('div');
-//         newSubscription.setAttribute("id", i);
-//         newSubscription.innerHTML = `
-//         <img src="https://image.tmdb.org/t/p/w92/${subscriptionData.logo_path}" alt="">
-//         `
-//         document.querySelector('#sub2').appendChild(newSubscription);
-
-//     }
-
-// })
 
 document.querySelector('#display-filter').addEventListener('click', async function(e){
     e.preventDefault();
@@ -618,7 +604,12 @@ function showSelectedSubscriptions(){
 }
 
 function retrieveSubscriptionsStorage(){
-
+    let userSubscriptions = localStorage.getItem('subscription');
+    if (userSubscriptions == null){
+       return false
+    }
+    let userSubscriptionsArr = userSubscriptions.split(',');
+    return userSubscriptionsArr
 }
 
 
@@ -752,36 +743,7 @@ function getLocation(){
 }    
 
 // *************************COME BACKKKKKKK DON'T LEAVEEEEE*************************
-// const providerList = await getProviders()
 
-// async function getFlatrate(providerData){
-//     const location = await getLocation();
-//     const providersInLocation = providerData.results[location];
-//     const flatrate = providersInLocation.flatrate;
-
-//     //get my list of subscritions?
-//     const userSubscription = [55,358,257]
-//     let flatrateAvailable = []
-//     if(flatrate){
-//         for (let i =0; i<flatrate.length; i++){
-//             console.log(flatrate[i].provider_id)
-//             if (userSubscription.includes(flatrate[i].provider_id)){
-//                 flatrateAvailable.push(flatrate[i].provider_id)
-//             }
-//         }
-//     }
-//     return flatrateAvailable
-// }
-
-// async function getSubscriptionProviders(movieId){
-//     // gets all providers for the movie
-//     const providerList = await getProviders(movieId);
-//     // gets all flatrate 
-//     const subscriptionList = await getFlatrate(providerList);
-//     console.log(subscriptionList)
-// }
-
-// getSubscriptionProviders(1149947)
 
 
 

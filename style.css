@@ -311,6 +311,7 @@ button {
   display:flex;
   width:100%;
   align-items: center;
+  margin: 2% 1%;
 }
 
 .previewLogoIcon {
@@ -408,4 +409,8 @@ button {
 
 .subscription-logo:hover{
   cursor: pointer;
+}
+
+#filter{
+  z-index: 1000;
 }
