@@ -256,10 +256,8 @@ async function getMovieData(genreCode, locationCode, page){
 
     // verify if user has saved subscriptions to filter by
     const providerArr = retrieveSubscriptionsStorage();
-    let providerList = [];
-    if (providerArr){
-        providerList = formatProviderParam(providerArr);
-    }
+    const providerList = formatProviderParam(providerArr);
+
 
     let selectedMovies = []
 
@@ -574,7 +572,8 @@ document.querySelector('#display-filter').addEventListener('click', async functi
 
     const userLogo = await getSubscriptionLogo(data);
     displaySubscription(userLogo);
-    const subscriptionList = showSelectedSubscriptions();
+    const subscriptionList = retrieveSubscriptionsStorage();
+    showSelectedSubscriptions(subscriptionList);
     addLogoRoutes(subscriptionList)
 
 })
@@ -588,25 +587,17 @@ function getSubscriptionLogo(data){
     return dataDisplay
 }
 
-function showSelectedSubscriptions(){
-    const userSubscriptions = localStorage.getItem('subscription');
-    let userSubscriptionsArr =[];
-    if (userSubscriptions == null){
-       return userSubscriptionsArr 
-    }
-    userSubscriptionsArr = userSubscriptions.split(',');
+function showSelectedSubscriptions(userSubscriptionsArr){
     for (let i=0; i<userSubscriptionsArr.length; i++){
-        console.log(userSubscriptionsArr[i])
         document.querySelector(`#logo${userSubscriptionsArr[i]}`).style.border = "2px yellow solid";
     }
-    console.log(userSubscriptionsArr)
     return userSubscriptionsArr
 }
 
 function retrieveSubscriptionsStorage(){
     let userSubscriptions = localStorage.getItem('subscription');
     if (userSubscriptions == null){
-       return false
+       return []
     }
     let userSubscriptionsArr = userSubscriptions.split(',');
     return userSubscriptionsArr
@@ -621,9 +612,10 @@ function displaySubscription(data){
 }
 
 
-function addLogoRoutes(list){
+function addLogoRoutes(userSubscriptionsArr){
     let selectedLogo = document.querySelectorAll(".subscription-logo");
-    let subscriptionList = list;
+    let subscriptionList = userSubscriptionsArr;
+
     for (let i=0; i<selectedLogo.length; i++){
 
 
@@ -643,7 +635,7 @@ function addLogoRoutes(list){
                 subscriptionList.push(stripId );
                 selectedLogo[i].style.border = "2px yellow solid";
             }
-            console.log(subscriptionList)
+            
 
         })
     }
@@ -846,7 +838,6 @@ function displayMovieContainer(data){
 
 // **********************************************MOVIE POSTER DISPLAY**********************************************
 function createMovieContainer(data,index){
-    console.log(data)
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const className = "movie_btn_" + index;
