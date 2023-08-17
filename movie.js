@@ -190,93 +190,123 @@ async function getHorror(){
 //     e.preventDefault();
 //     //genre
 //     const genreCode = 28;
-
-//     //providerList
-//     let movieCount = 0;
-//     let page = 1;
-//     const providerArr = [8,337]
-//     const providerList = formatProviderParam(providerArr);
+//     const pageNum = 1
 
 //     //location code
 //     const location = getLocation();
-//     const code = location.country_code;
+//     const locationCode = location.country_code;
 
-
-//     let selectedMovies = []
-
-//     while (movieCount<=20){
-//         const data = await getMoviesByFilter(providerList, code, page);
-
-//         for(let i =0; i<data.results.length; i++){
-//             const genreArr = data.results[i].genre_ids;
-//             if (genreArr.includes(genreCode)){
-//                 movieCount +=1;
-//                 if (movieCount == 20){
-//                     return 
-//                 }
-//                 selectedMovies.push(data.results[i]);
-//                 console.log(`${data.results[i].id} and num ${i}`)
-                
-//             }
-
-            
-//         }
-//         page +=1
-//     }
-//     console.log(`page ${page}`)
+//     const selectedMovies = await getMovieData(genreCode,locationCode,pageNum);
 
 //     displayMovieContainer(selectedMovies);
-//     // displayMovieContainer(data);
 //     addMovieRoutes();
 // });
 
+
+
+// async function getMovieData(genreCode, locationCode, pageNum){
+//     //initialize
+//     // let page = 1;
+
+//     // verify if user has saved subscriptions to filter by
+//     const providerArr = retrieveSubscriptionsStorage();
+//     const providerList = formatProviderParam(providerArr);
+
+
+//     let selectedMovies = []
+//     const numOfMovies = 20
+//     while (selectedMovies.length<=numOfMovies){
+//         const data = await getMoviesByFilter(providerList, locationCode, pageNum);
+//         for(let i =0; i<data.results.length; i++){
+//             const genreArr = data.results[i].genre_ids;
+//             if (selectedMovies.length == numOfMovies){
+//                 return selectedMovies
+//             }
+//             else if (genreArr.includes(genreCode)){
+//                 selectedMovies.push(data.results[i]); 
+//             }
+//         }
+//         pageNum +=1;
+//         console.log(selectedMovies.length);
+//         console.log(pageNum)
+//     }
+    
+//     return selectedMovies
+
+// }
+// ====================================================================================================
 
 const actionBtn = document.getElementById("action");
 actionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     //genre
     const genreCode = 28;
-    const pageNum = 1
+    let pageNum = 1;
+    let startEl = 0;
 
     //location code
     const location = getLocation();
     const locationCode = location.country_code;
-
-    const selectedMovies = await getMovieData(genreCode,locationCode,pageNum);
-
-    displayMovieContainer(selectedMovies);
-    addMovieRoutes();
-});
-
-
-
-async function getMovieData(genreCode, locationCode, page){
-    //initialize
-    // let page = 1;
 
     // verify if user has saved subscriptions to filter by
     const providerArr = retrieveSubscriptionsStorage();
     const providerList = formatProviderParam(providerArr);
 
 
+    let counter = 1;
+    while ((counter < 5)){
+        // [movielist, current page num, last el pushed]
+        const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
+
+        if (!selectedMovies){
+            alert("no more!")
+            return
+        }
+        //continue looping
+        else if (selectedMovies.length > 1){
+            displayMovieContainer(selectedMovies[0],counter);
+            counter += 1;
+            pageNum = selectedMovies[1];
+            startEl = selectedMovies[2]; // consider if it's the last element of the page
+        }
+        console.log(counter)
+        //display remaining movies that did not reach 10
+        // else if (selectedMovies[0].length > 0){
+        //     displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
+        //     alert("stop")
+        //     return
+        // }
+    
+        addMovieRoutes();
+    }
+
+});
+
+
+
+async function getMovieData(genreCode, providerList, locationCode, pageNum, startEl){
     let selectedMovies = []
 
-    while (selectedMovies.length<=20){
-        const data = await getMoviesByFilter(providerList, locationCode, page);
-
-        for(let i =0; i<data.results.length; i++){
+    while ((selectedMovies.length <= 10)){
+        const data = await getMoviesByFilter(providerList, locationCode, pageNum);
+        for(let i =startEl; i<data.results.length; i++){
             const genreArr = data.results[i].genre_ids;
-            if (selectedMovies.length == 20){
-                return selectedMovies
+            if (selectedMovies.length == 10){
+                // [movielist, current page num, last el pushed]
+                return [selectedMovies, pageNum, i]
             }
             else if (genreArr.includes(genreCode)){
                 selectedMovies.push(data.results[i]); 
             }
         }
-        page +=1
+        console.log(pageNum)
+        pageNum +=1;
+        // console.log(selectedMovies.length);
+        
     }
-    return selectedMovies
-
+    console.log(selectedMovies)
+    // return selectedMovies
+    return
 }
 
 // ====================================================================================================
@@ -797,30 +827,22 @@ function createCarouselImg(data, index){
 
 //iterate through top 12
 
-function displayMovieContainer(data){
+function displayMovieContainer(data, count){
     let dataDisplay = data.slice(0,10).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
-    let dataDisplay2 = data.slice(10,20).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
-    let dataDisplay3 = data.slice(20,30).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
-    let dataDisplay4 = data.slice(30,40).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
-    let dataDisplay5 = data.slice(40,50).map((object, index) => {
-        return createMovieContainer(object,index)
-    }).join("");
+
 
     document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
-    document.querySelector("#display1").innerHTML = dataDisplay;
-    document.querySelector("#display2").innerHTML = dataDisplay2;
-    document.querySelector("#display3").innerHTML = dataDisplay3;
-    document.querySelector("#display4").innerHTML = dataDisplay4;
-    document.querySelector("#display5").innerHTML = dataDisplay5;
+    const newContainer = document.createElement('div');
+    newContainer.setAttribute('class', 'displayList');
+    newContainer.setAttribute('id', `display${count}`);
+
+    document.querySelector("#displayMovies").appendChild(newContainer);
+    newContainer.innerHTML = dataDisplay;
+
+
 }
 
 
