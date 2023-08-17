@@ -580,20 +580,19 @@ async function getSubscriptions(country_code){
 
 document.querySelector('#display-filter').addEventListener('click', async function(e){
     e.preventDefault();
-    if (localStorage.getItem('subscription') == null){
-        const userLocation = getLocation();
-        const countryCode = userLocation.country_code;
-        const data = await getSubscriptions(countryCode);
 
-        //it doesn't show up after i leave the page(how to make dropdown more permanent?)
-        const userLogo = getSubscriptionLogo(data);
-        displaySubscription(userLogo);
-        addLogoRoutes()
-    }
-    document.querySelector('#main').style.display = 'none';
-    document.querySelector('#sub1').style.display = 'none';
-    document.querySelector('#filter').style.display = 'block';
+    const userLocation = getLocation();
+    const countryCode = userLocation.country_code;
+    const data = await getSubscriptions(countryCode);
+
+
+    const userLogo = await getSubscriptionLogo(data);
+    displaySubscription(userLogo);
+    const subscriptionList = showSelectedSubscriptions();
+    addLogoRoutes(subscriptionList)
+
 })
+
 
 function getSubscriptionLogo(data){
     let dataDisplay = data.results.slice(0,20).map((object, index) => {
@@ -603,35 +602,54 @@ function getSubscriptionLogo(data){
     return dataDisplay
 }
 
-function displaySubscription(data){
-    document.querySelector('#main').style.display = 'none';
-    document.querySelector('#sub1').style.display = 'none';
-    document.querySelector('#sub2').innerHTML = data
+function showSelectedSubscriptions(){
+    const userSubscriptions = localStorage.getItem('subscription');
+    let userSubscriptionsArr =[];
+    if (userSubscriptions == null){
+       return userSubscriptionsArr 
+    }
+    userSubscriptionsArr = userSubscriptions.split(',');
+    for (let i=0; i<userSubscriptionsArr.length; i++){
+        console.log(userSubscriptionsArr[i])
+        document.querySelector(`#logo${userSubscriptionsArr[i]}`).style.border = "2px yellow solid";
+    }
+    console.log(userSubscriptionsArr)
+    return userSubscriptionsArr
+}
+
+function retrieveSubscriptionsStorage(){
+
 }
 
 
-function addLogoRoutes(){
+function displaySubscription(data){
+    document.querySelector('#main').style.display = 'none';
+    document.querySelector('#sub1').style.display = 'none';
+    document.querySelector('#sub2').innerHTML = data;
+    document.querySelector('#filter').style.display = 'block';
+}
+
+
+function addLogoRoutes(list){
     let selectedLogo = document.querySelectorAll(".subscription-logo");
-    let subscriptionList = []
+    let subscriptionList = list;
     for (let i=0; i<selectedLogo.length; i++){
+
+
         const logoBtn = document.querySelector(`#${selectedLogo[i].id}`);
         logoBtn.addEventListener("click", function(e){
             e.preventDefault();
             let logoId = selectedLogo[i].id;
             const stripId = logoId.slice(4);
 
+            //logo already selected
             if (subscriptionList.includes(stripId )){
-                //already clicked
-
-                //get index
                 const index = subscriptionList.indexOf(stripId );
                 subscriptionList.splice(index, 1);
                 selectedLogo[i].style.border = "none";
-                console.log("poppppp")
             }
             else{
                 subscriptionList.push(stripId );
-                console.log("pushhhhh")
                 selectedLogo[i].style.border = "2px yellow solid";
             }
             console.log(subscriptionList)
