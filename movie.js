@@ -267,8 +267,23 @@ actionBtn.addEventListener("click", async function(e){
             break
         }
 
+        // //continue looping
+        // else if (selectedMovies.length == 3){
+        //     displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
+        //     counter += 1;
+        //     pageNum = selectedMovies[1];
+        //     startEl = selectedMovies[2]; // consider if it's the last element of the page
+        // }
+        
+        // //display remaining movies that did not reach 10
+        // else if (selectedMovies.length < 10){
+        //     displayMovieContainer(selectedMovies, selectedMovies.length, counter);
+        //     alert("stop")
+        //     break
+        // }
+
         //continue looping
-        else if (selectedMovies.length == 3){
+        else if (selectedMovies[0].length == 10){
             displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
             counter += 1;
             pageNum = selectedMovies[1];
@@ -276,8 +291,8 @@ actionBtn.addEventListener("click", async function(e){
         }
         
         //display remaining movies that did not reach 10
-        else if (selectedMovies.length < 10){
-            displayMovieContainer(selectedMovies, selectedMovies.length, counter);
+        else if (selectedMovies[1] == 0){
+            displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
             alert("stop")
             break
         }
@@ -309,8 +324,8 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         pageNum +=1;
         // console.log(selectedMovies.length);
         if (pageNum >50){
-            console.log(selectedMovies)
-            return selectedMovies
+            console.log(selectedMovies);
+            return [selectedMovies, 0, 0]
         }
         
     }
@@ -858,7 +873,7 @@ function displayMovieContainer(data, numOfMovies, count){
     
     const createButton = document.createElement('button')
     createButton.setAttribute('id', `nextBtn${count}`);
-    createButton.setAttribute('textContent', "yay")
+    createButton.innerHTML = 'NEXT';
     
     document.querySelector(`#display${count}`).appendChild(createButtonContainer);
     document.querySelector(`#btnContainer${count}`).appendChild(createButton);
