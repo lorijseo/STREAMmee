@@ -262,6 +262,11 @@ actionBtn.addEventListener("click", async function(e){
             alert("no more!");
             break
         }
+        if (selectedMovies.length == 0){
+            alert("nani!");
+            break
+        }
+
         //continue looping
         else if (selectedMovies.length == 3){
             displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
@@ -277,6 +282,7 @@ actionBtn.addEventListener("click", async function(e){
             break
         }
         console.log(counter);
+        console.log("yay")
         addMovieRoutes();
     }
 
@@ -844,7 +850,18 @@ function displayMovieContainer(data, numOfMovies, count){
     newContainer.setAttribute('id', `display${count}`);
 
     document.querySelector("#displayMovies").appendChild(newContainer);
-    newContainer.innerHTML = dataDisplay;
+    newContainer.innerHTML += dataDisplay;
+
+    const createButtonContainer = document.createElement('div');
+    createButtonContainer.setAttribute('class', 'nextBtn');
+    createButtonContainer.setAttribute('id', `btnContainer${count}`);
+    
+    const createButton = document.createElement('button')
+    createButton.setAttribute('id', `nextBtn${count}`);
+    createButton.setAttribute('textContent', "yay")
+    
+    document.querySelector(`#display${count}`).appendChild(createButtonContainer);
+    document.querySelector(`#btnContainer${count}`).appendChild(createButton);
 
 
 }

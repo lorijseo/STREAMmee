@@ -414,3 +414,9 @@ button {
 #filter{
   z-index: 1000;
 }
+
+.nextBtn{
+  width:100%;
+  text-align:center;
+  margin: auto;
+}
