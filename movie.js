@@ -254,29 +254,29 @@ actionBtn.addEventListener("click", async function(e){
 
 
     let counter = 1;
-    while ((counter < 5)){
+    while ((counter < 4)){
         // [movielist, current page num, last el pushed]
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
         if (!selectedMovies){
-            alert("no more!")
-            return
+            alert("no more!");
+            break
         }
         //continue looping
-        else if (selectedMovies.length > 1){
-            displayMovieContainer(selectedMovies[0],counter);
+        else if (selectedMovies.length == 3){
+            displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
             counter += 1;
             pageNum = selectedMovies[1];
             startEl = selectedMovies[2]; // consider if it's the last element of the page
         }
-        console.log(counter)
+        
         //display remaining movies that did not reach 10
-        // else if (selectedMovies[0].length > 0){
-        //     displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
-        //     alert("stop")
-        //     return
-        // }
-    
+        else if (selectedMovies.length < 10){
+            displayMovieContainer(selectedMovies, selectedMovies.length, counter);
+            alert("stop")
+            break
+        }
+        console.log(counter);
         addMovieRoutes();
     }
 
@@ -302,6 +302,10 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         console.log(pageNum)
         pageNum +=1;
         // console.log(selectedMovies.length);
+        if (pageNum >50){
+            console.log(selectedMovies)
+            return selectedMovies
+        }
         
     }
     console.log(selectedMovies)
@@ -827,8 +831,8 @@ function createCarouselImg(data, index){
 
 //iterate through top 12
 
-function displayMovieContainer(data, count){
-    let dataDisplay = data.slice(0,10).map((object, index) => {
+function displayMovieContainer(data, numOfMovies, count){
+    let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
         return createMovieContainer(object,index)
     }).join("");
 
@@ -1276,44 +1280,44 @@ searchBtn.addEventListener("click", async function(e){
 
 // ********************************************** GEOLOCATION EXECUTE**********************************************
 
-// get geolocation of user
-const data = null;
+// // get geolocation of user
+// const data = null;
 
-const xhr = new XMLHttpRequest();
-//set to false because CORS blocks off all cookies
-xhr.withCredentials = false;
+// const xhr = new XMLHttpRequest();
+// //set to false because CORS blocks off all cookies
+// xhr.withCredentials = false;
 
-xhr.addEventListener("readystatechange", async function () {
-  if (this.readyState === this.DONE) {
-    const response = this.response;
-    const myData = await JSON.parse(response);
-    let geolocation = {};
-    geolocation["location"] = myData;
-    localStorage.setItem('geoLocation', JSON.stringify(myData));
+// xhr.addEventListener("readystatechange", async function () {
+//   if (this.readyState === this.DONE) {
+//     const response = this.response;
+//     const myData = await JSON.parse(response);
+//     let geolocation = {};
+//     geolocation["location"] = myData;
+//     localStorage.setItem('geoLocation', JSON.stringify(myData));
 
 
-    const data = localStorage.getItem('user')
-    //first time user
-    if (data == null){
-        // const userLocation = JSON.parse(localStorage.getItem('geoLocation'));
-        // console.log(userLocation);
-        // let user ={};
-        // user["location"] = userLocation;
-        // console.log(user)
-        localStorage.setItem('selectedLocation',JSON.stringify(myData));
-        displayFlag(myData.country_code)
+//     const data = localStorage.getItem('user')
+//     //first time user
+//     if (data == null){
+//         // const userLocation = JSON.parse(localStorage.getItem('geoLocation'));
+//         // console.log(userLocation);
+//         // let user ={};
+//         // user["location"] = userLocation;
+//         // console.log(user)
+//         localStorage.setItem('selectedLocation',JSON.stringify(myData));
+//         displayFlag(myData.country_code)
 
-    }
-    else{
-        displayFlag(getLocation().country_code)
-    }
+//     }
+//     else{
+//         displayFlag(getLocation().country_code)
+//     }
     
-  }
-});
+//   }
+// });
 
-const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-xhr.send(data);
+// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+// xhr.send(data);
 
 
 
