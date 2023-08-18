@@ -236,13 +236,16 @@ async function getHorror(){
 // }
 // ====================================================================================================
 
+// const initialValues = [0,1];
 const actionBtn = document.getElementById("action");
-actionBtn.addEventListener("click", async function(e){
+actionBtn.addEventListener("click", async function(e,){
     e.preventDefault();
     //genre
     const genreCode = 28;
     let pageNum = 1;
     let startEl = 0;
+    // let pageNum = initialValues[1];
+    // let startEl = initialValues[0];
 
     //location code
     const location = getLocation();
@@ -252,48 +255,50 @@ actionBtn.addEventListener("click", async function(e){
     const providerArr = retrieveSubscriptionsStorage();
     const providerList = formatProviderParam(providerArr);
 
-
-    let counter = 1;
-    while ((counter < 4)){
+    const searchLimit = 10;
+    let counter = 0;
+    while ((counter < searchLimit)){
         // [movielist, current page num, last el pushed]
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
         if (!selectedMovies){
-            alert("no more!");
-            break
-        }
-        if (selectedMovies.length == 0){
-            alert("nani!");
+            alert("hmm check your code");
             break
         }
 
-        // //continue looping
-        // else if (selectedMovies.length == 3){
-        //     displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
-        //     counter += 1;
-        //     pageNum = selectedMovies[1];
-        //     startEl = selectedMovies[2]; // consider if it's the last element of the page
-        // }
-        
-        // //display remaining movies that did not reach 10
-        // else if (selectedMovies.length < 10){
-        //     displayMovieContainer(selectedMovies, selectedMovies.length, counter);
-        //     alert("stop")
-        //     break
-        // }
+        else if (selectedMovies[0].length == 0){
+            alert("EMPTY NO MORE");
+            break
+        }
 
         //continue looping
         else if (selectedMovies[0].length == 10){
-            displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);
             counter += 1;
-            pageNum = selectedMovies[1];
-            startEl = selectedMovies[2]; // consider if it's the last element of the page
+            displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);  
+            if (counter !== searchLimit){
+                pageNum = selectedMovies[1];
+                startEl = selectedMovies[2]; // consider if it's the last element of the page
+                createNextBtn(counter)
+                // const nextPageReady = document.querySelector(`display${counter+1}`);
+                // if (nextPageReady){
+                //     createNextBtn(counter);
+                // }
+                // else{
+                //     notReadyBtn(counter);
+                // }
+                
+            }
+
         }
         
         //display remaining movies that did not reach 10
-        else if (selectedMovies[1] == 0){
+        else if ((selectedMovies[0].length > 0)&&(selectedMovies[1] == 0)){
+
+            counter += 1;
+
             displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
-            alert("stop")
+            // document.querySelector('#notReady').style.display = "none";
+            // alert("stop")
             break
         }
         console.log(counter);
@@ -330,6 +335,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         
     }
     console.log(selectedMovies)
+    console.log("didn't think i can reach here. check your code")
     // return selectedMovies
     return
 }
@@ -857,42 +863,74 @@ function displayMovieContainer(data, numOfMovies, count){
         return createMovieContainer(object,index)
     }).join("");
 
-
+    
     document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
+
     const newContainer = document.createElement('div');
     newContainer.setAttribute('class', 'displayList');
     newContainer.setAttribute('id', `display${count}`);
-
-    document.querySelector("#displayMovies").appendChild(newContainer);
     newContainer.innerHTML += dataDisplay;
 
-    const createButtonContainer = document.createElement('div');
-    createButtonContainer.setAttribute('class', 'nextBtn');
-    createButtonContainer.setAttribute('id', `btnContainer${count}`);
+    if (count !== 1){
+        newContainer.style.display = 'none';
+    }
+
+    document.querySelector("#displayMovies").appendChild(newContainer);
     
-    const createButton = document.createElement('button')
+    
+    // createNextBtn(count)
+    
+
+
+    // do not create next button for last page
+
+}
+
+
+function createNextBtn(count){
+    const createButtonContainer = document.createElement('div');
+    createButtonContainer.setAttribute('id', `btnContainer${count}`);
+    createButtonContainer.setAttribute('class', 'btnContainer');
+    
+    
+    const createButton = document.createElement('button');
     createButton.setAttribute('id', `nextBtn${count}`);
+    createButton.setAttribute('class', 'nextBtn' )
     createButton.innerHTML = 'NEXT';
     
     document.querySelector(`#display${count}`).appendChild(createButtonContainer);
     document.querySelector(`#btnContainer${count}`).appendChild(createButton);
 
+    createButton.addEventListener('click', function(e){
+        e.preventDefault();
+        const currentDisplay = document.querySelector(`#display${count}`);
+        currentDisplay.style.display = "none";
+        const nextDisplay = document.querySelector(`#display${count + 1}`);
+        nextDisplay.style.display = "flex";
+    })
 
 }
 
+function notReadyBtn(count){
+    const createNotReady = document.createElement('button');
+    createNotReady.setAttribute('id', `notReady`);
+    createNotReady.innerHTML = 'Not ready yet....';
+    document.querySelector(`#display${count}`).appendChild(createNotReady);
 
-// function displayMovieContainer(data){
-//     let dataDisplay = data.results.slice(0,12).map((object, index) => {
-//         return createMovieContainer(object,index)
-//     }).join("");
-//     document.querySelector("#main").style.display = "none";
-//     document.querySelector("#trendWeekOwl").style.display = "none";
-//     document.querySelector(".displayList").innerHTML = dataDisplay;
+}
+
+// const nextBtnArr = document.querySelectorAll('.nextBtn');
+// console.log(nextBtnArr)
+// for(let i=0; i<nextBtnArr.length; i++){
+//     const nextBtn = nextBtnArr[i];
+//     nextBtn.addEventListener('click', function(e){
+//         e.preventDefault();
+//         console.log(nextBtn.id.slice(5));
+//     })
 // }
-//fetch movie object
-//display poster
-//on click, view modal
+
+
 
 // **********************************************MOVIE POSTER DISPLAY**********************************************
 function createMovieContainer(data,index){
@@ -1297,7 +1335,7 @@ searchBtn.addEventListener("click", async function(e){
     //validate if movie title exists
     if (movieList.results.length > 0){
         // displaySimiliarMovies(movieList);
-        displayMovieContainer(movieList);
+        displayMovieContainer(movieList.results,10);
         addMovieRoutes()
 
     }
