@@ -615,35 +615,53 @@ async function getSubscriptions(country_code){
 
 document.querySelector('#display-filter').addEventListener('click', async function(e){
     e.preventDefault();
+    if (document.querySelector('#filter').style.display === "none"){
+        const userLocation = getLocation();
+        const countryCode = userLocation.country_code;
+        const data = await getSubscriptions(countryCode);
+    
+    
+        const userLogo = await getSubscriptionLogo(data);
+        displaySubscription(userLogo);
+        let subscriptionList = retrieveSubscriptionsStorage();
+        
+        // consider if user does not choose a filter
+        if (subscriptionList[0] == ''){
+            subscriptionList = [];
+        }
+        else{
+            showSelectedSubscriptions(subscriptionList);
+        }
+        addLogoRoutes(subscriptionList)
+    }
+    else{
+        document.querySelector('#filter').style.display = "none";
+    }
 
-    const userLocation = getLocation();
-    const countryCode = userLocation.country_code;
-    const data = await getSubscriptions(countryCode);
 
-
-    const userLogo = await getSubscriptionLogo(data);
-    displaySubscription(userLogo);
-    const subscriptionList = retrieveSubscriptionsStorage();
-    showSelectedSubscriptions(subscriptionList);
-    addLogoRoutes(subscriptionList)
 
 })
 
 
 function getSubscriptionLogo(data){
     let dataDisplay = data.results.slice(0,20).map((object, index) => {
-        const formatId = 'logo' + object.provider_id
-        return `<div class="subscription-logo" id=${formatId}><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""> </div>`
+        const formatId = 'logo' + object.provider_id;
+        return `<div class="subscription-logo" id=${formatId}><img src="https://image.tmdb.org/t/p/w45/${object.logo_path}" alt=""> </div>`
     }).join("");
     return dataDisplay
 }
 
 function showSelectedSubscriptions(userSubscriptionsArr){
     for (let i=0; i<userSubscriptionsArr.length; i++){
-        document.querySelector(`#logo${userSubscriptionsArr[i]}`).style.border = "2px yellow solid";
+        //consider provider unavailable when country changes
+        if (document.querySelector(`#logo${userSubscriptionsArr[i]}`)){
+            document.querySelector(`#logo${userSubscriptionsArr[i]}`).style.opacity = 1;
+        }
+        
     }
     return userSubscriptionsArr
 }
+
 
 function retrieveSubscriptionsStorage(){
     let userSubscriptions = localStorage.getItem('subscription');
@@ -656,8 +674,8 @@ function retrieveSubscriptionsStorage(){
 
 
 function displaySubscription(data){
-    document.querySelector('#main').style.display = 'none';
-    document.querySelector('#sub1').style.display = 'none';
+    // document.querySelector('#main').style.display = 'none';
+    // document.querySelector('#sub1').style.display = 'none';
     document.querySelector('#sub2').innerHTML = data;
     document.querySelector('#filter').style.display = 'block';
 }
@@ -666,7 +684,7 @@ function displaySubscription(data){
 function addLogoRoutes(userSubscriptionsArr){
     let selectedLogo = document.querySelectorAll(".subscription-logo");
     let subscriptionList = userSubscriptionsArr;
-
+    console.log(subscriptionList)
     for (let i=0; i<selectedLogo.length; i++){
 
 
@@ -674,17 +692,21 @@ function addLogoRoutes(userSubscriptionsArr){
         logoBtn.addEventListener("click", function(e){
             e.preventDefault();
             let logoId = selectedLogo[i].id;
+            console.log(logoId);
             const stripId = logoId.slice(4);
 
             //logo already selected
             if (subscriptionList.includes(stripId )){
                 const index = subscriptionList.indexOf(stripId );
                 subscriptionList.splice(index, 1);
-                selectedLogo[i].style.border = "none";
+                // selectedLogo[i].style.border = "none";
+                selectedLogo[i].style.opacity= 0.3;
             }
             else{
                 subscriptionList.push(stripId );
-                selectedLogo[i].style.border = "2px yellow solid";
+                // selectedLogo[i].style.border = "2px yellow solid";
+                selectedLogo[i].style.opacity= 1;
+                
             }
             
 
@@ -774,7 +796,7 @@ function getLocation(){
     }
     //new user
     else{
-        const userLocationData = localStorage.getItem("selectedLocation");
+        const userLocationData = localStorage.getItem("geoLocation");
         const userLocation = JSON.parse(userLocationData);
         // const countryCode = userLocation.country_code;
         // const countryName = userLocation.country;
@@ -1444,25 +1466,154 @@ searchBtn.addEventListener("click", async function(e){
 
 
 
+// get geolocation of user
+const data = null;
 
+const xhr = new XMLHttpRequest();
+//set to false because CORS blocks off all cookies
+xhr.withCredentials = false;
+
+xhr.addEventListener("readystatechange", async function () {
+  if (this.readyState === this.DONE) {
+    const response = this.response;
+    const myData = await JSON.parse(response);
+
+    const newUser = localStorage.getItem('geoLocation');
+    if (newUser == null){
+        displayFlag(myData.country_code)
+        let geolocation = {};
+        geolocation["location"] = myData;
+        localStorage.setItem('geoLocation', JSON.stringify(myData));
+    }
+    else{
+        updateFlagDisplay();
+    }
+
+  }
+});
+
+const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+xhr.send(data);
      
 
 
+
+
+
+
+
+
+
+
+
+
 function displayFlag(countryCode){
-    document.querySelector('#flag-emoji').innerHTML= `<img src="https://flagsapi.com/${countryCode}/flat/24.png"></img>`
+    document.querySelector('#menu-title-region').innerHTML= `<img src="https://flagsapi.com/${countryCode}/flat/24.png">`
     return 
 }
 
 
 
+document.querySelector('#menu-genre').addEventListener('click', function(e){
+    e.preventDefault();
+    if (document.querySelector('#sub-menu-genre').style.display === "none"){
+        document.querySelector('#sub-menu-genre').style.display = "block";
+    }
+    else{
+        document.querySelector('#sub-menu-genre').style.display = "none";
+    }
+    
+})
+
+async function getRegions(){
+    const response = await fetch(`http://localhost:4000/get_regions`);
+    const data = await response.json();
+    return data
+}
 
 
 
+async function getRegionNames(){
+    const regionData = await getRegions();
+    const regionDataArr = regionData.results;
+    let regionNames = []
+    for (let i=0; i<regionDataArr.length; i++){
+        regionNames.push([regionDataArr[i].native_name, regionDataArr[i].iso_3166_1])
+    }
+    // console.log(regionNames)
+    return regionNames
+}
+
+
+async function createRegionDropdown(){
+    const countryNameList = await getRegionNames();
+
+    const dropdownContainer = document.querySelector('#region');
+    for (let i=0; i<countryNameList.length; i++){
+        const name = countryNameList[i][0];
+        const code = countryNameList[i][1];
+        const newOption = document.createElement('option');
+        newOption.textContent = name;
+        newOption.value = name;
+        newOption.id = code;
+        dropdownContainer.appendChild(newOption);
+    }
+
+    const data = getLocation();
+    const location = document.querySelector(`#${data.country_code}`)
+    location.setAttribute("selected", 'selected');
+}
 
 
 
+document.querySelector('#menu-title-region').addEventListener('click', function(e){
+    e.preventDefault();
+    if (document.querySelector('#display-region').style.display === 'none'){
+        createRegionDropdown()
+        document.querySelector('#display-region').style.display="block";
+    }
+    else{
+        document.querySelector('#display-region').style.display = 'none';
+    }
 
 
+})
+
+
+document.querySelector("#regionBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    const location =  document.querySelector('#region');
+    const locationName = document.querySelector('#region').value;
+    const locationCode = location.options[location.selectedIndex].id
+
+    let locationObject = {};
+    locationObject['country'] = locationName;
+    locationObject['country_code'] = locationCode;
+
+    let user = {};
+    user["location"] = locationObject;
+    // displayFlag(locationCode);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.removeItem("subscription");
+    document.querySelector('#display-region').style.display = 'none';
+    updateFlagDisplay();
+    //display flag
+
+})
+
+
+function updateFlagDisplay(){
+    const data = localStorage.getItem('user');
+    //first time user
+    if (data == null){
+        const userLocation = JSON.parse(localStorage.getItem('geoLocation'));
+        displayFlag(userLocation.country_code);
+        return
+    }
+    const userSelectedLocation = JSON.parse(data);
+    displayFlag(userSelectedLocation.location.country_code);
+}
 // function addOwlRoutes(){
 
 //     const owlContainer = $j('.owl-stage').find('.owl-item')

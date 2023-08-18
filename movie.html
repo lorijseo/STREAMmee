@@ -29,8 +29,11 @@
             <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
             <ul class="menu">
                 <li class="menu-item">
-                    <a class="sub-btn" href="#">Genre <i class="fas fa-angle-down"></i></a>
-                    <ul class="sub-menu">
+                    <a class="menu-title" href="#">About</a>
+                </li>
+                <li class="menu-item" id="menu-genre">
+                    <a class="menu-title" href="#">Genre&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <ul class="sub-menu" id="sub-menu-genre">
                         <li class="sub-item"><a href="#" id="action">action</a></li>
                         <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
                         <li class="sub-item"><a href="#" id="animation">animation</a></li>
@@ -45,25 +48,37 @@
                         <li class="sub-item"><a href="#" id="mystery">mystery</a></li>
                         <li class="sub-item"><a href="#" id="romance">romance</a></li>
                         <li class="sub-item"><a href="#" id="thriller">thriller</a></li>
-                        <li class="sub-item"><a href="#" id="war">War</a></li>
+                        <li class="sub-item"><a href="#" id="war">war</a></li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a href="#">About</a>
-                </li>
-                <li class="menu-item" >
+                <!-- <li class="menu-item" >
                     <a href="profile.html">Profile</a>
-                </li>
+                </li> -->
                 <li class="menu-item" >
-                    <a href="#" id="display-filter">Filter</a>
+                    <a href="#" id="display-filter" class="menu-title">Subscription&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <div id="filter">
+                        <div id="sub2"></div>
+                        <div id="subscription-container">
+                            <button id="subscription-submit">GO</button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item" id="menu-region">
+                    <a id="menu-title-region" class="menu-title" href="#">Region</a>
+                    <div id="display-region">
+                        <form action="#">
+                            <select id="region"><option value="">Select</option></select>
+                            <div ><button action="submit "id="regionBtn">GO</button></div>
+                        </form>
+
+
+                    </div>                  
                 </li>
                 <li class="menu-item">
-                    <a href="#" id="flag-emoji"></a>
-                </li>
-                <li class="menu-item">
-                    <form action="submit">
+                    <form action="submit" id="search-form">
                         <input id="search_input" type="text">
-                        <button id="searchBtn">go</button>
+                        <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </li>
             </ul>
@@ -96,15 +111,7 @@
     
     </section>
 
-    <section id="filter">
-        <div id="sub2">
-            <h2>subby sub</h2>
-    
-        </div>
-        <div>
-            <button id="subscription-submit">GO</button>
-        </div>
-    </section>
+
 
 <!-- 
     <div id="dialog-subscription"> </div> -->
