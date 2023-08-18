@@ -261,24 +261,31 @@ actionBtn.addEventListener("click", async function(e,){
         // [movielist, current page num, last el pushed]
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
-        if (!selectedMovies){
-            alert("hmm check your code");
-            break
-        }
-
-        else if (selectedMovies[0].length == 0){
+        // if (!selectedMovies){
+        //     alert("hmm check your code");
+        //     break
+        // }
+        
+        if (selectedMovies[0].length == 0){
             alert("EMPTY NO MORE");
             break
         }
 
+        
         //continue looping
         else if (selectedMovies[0].length == 10){
             counter += 1;
+            
             displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);  
+            isPageReady(searchLimit);
             if (counter !== searchLimit){
                 pageNum = selectedMovies[1];
                 startEl = selectedMovies[2]; // consider if it's the last element of the page
-                createNextBtn(counter)
+                notReadyBtn(counter);
+                createNextBtn(counter);
+
+                // createNextBtn(counter)
+
                 // const nextPageReady = document.querySelector(`display${counter+1}`);
                 // if (nextPageReady){
                 //     createNextBtn(counter);
@@ -297,10 +304,13 @@ actionBtn.addEventListener("click", async function(e,){
             counter += 1;
 
             displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
+            isPageReady(searchLimit);
+            addMovieRoutes();
             // document.querySelector('#notReady').style.display = "none";
             // alert("stop")
             break
         }
+        isPageReady(searchLimit);
         console.log(counter);
         console.log("yay")
         addMovieRoutes();
@@ -892,6 +902,9 @@ function createNextBtn(count){
     const createButtonContainer = document.createElement('div');
     createButtonContainer.setAttribute('id', `btnContainer${count}`);
     createButtonContainer.setAttribute('class', 'btnContainer');
+
+    //make it invisible until page~ is ready
+    createButtonContainer.style.display = "none";
     
     
     const createButton = document.createElement('button');
@@ -904,22 +917,49 @@ function createNextBtn(count){
 
     createButton.addEventListener('click', function(e){
         e.preventDefault();
-        const currentDisplay = document.querySelector(`#display${count}`);
-        currentDisplay.style.display = "none";
         const nextDisplay = document.querySelector(`#display${count + 1}`);
-        nextDisplay.style.display = "flex";
+        if (nextDisplay){
+            const currentDisplay = document.querySelector(`#display${count}`);
+            currentDisplay.style.display = "none";
+            // const nextDisplay = document.querySelector(`#display${count + 1}`);
+            nextDisplay.style.display = "flex";
+        }
+        else{
+            createButton.innerHTML = 'loading...'
+        }
+    
     })
 
 }
 
 function notReadyBtn(count){
     const createNotReady = document.createElement('button');
-    createNotReady.setAttribute('id', `notReady`);
-    createNotReady.innerHTML = 'Not ready yet....';
+    createNotReady.setAttribute('id', `notReady${count}`);
+    createNotReady.setAttribute('class', `notReady`);
+    createNotReady.innerHTML = 'loading..';
     document.querySelector(`#display${count}`).appendChild(createNotReady);
 
 }
 
+function isPageReady(searchLimit){
+    console.log("checking if ready")
+    for (let i=2; i<=searchLimit; i++){
+        let nextPageReady = document.querySelector(`#display${i}`);
+        console.log(nextPageReady)
+        if (nextPageReady){
+            console.log(`page ${i} is readyyy`)
+            const controlBtns = document.querySelector(`#notReady${i-1}`);
+            if (controlBtns){
+                document.querySelector(`#notReady${i-1}`).style.display = "none";
+                document.querySelector(`#btnContainer${i-1}`).style.display = "block";
+
+            }
+        }
+
+
+    }
+
+}
 // const nextBtnArr = document.querySelectorAll('.nextBtn');
 // console.log(nextBtnArr)
 // for(let i=0; i<nextBtnArr.length; i++){
