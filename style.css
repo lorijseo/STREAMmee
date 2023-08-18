@@ -307,11 +307,12 @@ button {
   font-size: 12px;
 }
 
-.logoDisplay, .streamDisplay{
+.logoDisplay, .streamDisplay, .buyDisplay{
   display:flex;
   width:100%;
   align-items: center;
   margin: 2% 1%;
+  flex-wrap: wrap;
 }
 
 .previewLogoIcon {
@@ -334,13 +335,13 @@ button {
   align-items: center;
 } */
 
-.previewProviderIcon{
+.previewProviderIcon, .previewBuyIcon{
   margin: 0 10px;
 }
 
-.previewProviderIcon img{
+.previewProviderIcon img, .previewBuyIcon img{
   max-height:70px;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 /* ***********************************PROFILE*********************************** */
 

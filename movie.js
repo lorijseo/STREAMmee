@@ -261,39 +261,23 @@ actionBtn.addEventListener("click", async function(e,){
         // [movielist, current page num, last el pushed]
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
-        // if (!selectedMovies){
-        //     alert("hmm check your code");
-        //     break
-        // }
-        
         if (selectedMovies[0].length == 0){
             alert("EMPTY NO MORE");
             break
         }
 
-        
-        //continue looping
         else if (selectedMovies[0].length == 10){
             counter += 1;
             
             displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);  
-            isPageReady(searchLimit);
+
             if (counter !== searchLimit){
                 pageNum = selectedMovies[1];
                 startEl = selectedMovies[2]; // consider if it's the last element of the page
-                notReadyBtn(counter);
-                createNextBtn(counter);
-
-                // createNextBtn(counter)
-
-                // const nextPageReady = document.querySelector(`display${counter+1}`);
-                // if (nextPageReady){
-                //     createNextBtn(counter);
-                // }
-                // else{
-                //     notReadyBtn(counter);
-                // }
                 
+                createNextBtn(counter);
+                createPrevBtn(counter);
+                notReadyBtn(counter);               
             }
 
         }
@@ -302,18 +286,16 @@ actionBtn.addEventListener("click", async function(e,){
         else if ((selectedMovies[0].length > 0)&&(selectedMovies[1] == 0)){
 
             counter += 1;
-
             displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
-            isPageReady(searchLimit);
             addMovieRoutes();
-            // document.querySelector('#notReady').style.display = "none";
-            // alert("stop")
             break
         }
-        isPageReady(searchLimit);
-        console.log(counter);
-        console.log("yay")
-        addMovieRoutes();
+
+        // if (counter == 1){
+        //     //initialize movie routes for first page only
+        //     addMovieRoutes();
+        // }
+        addMovieRoutes()
     }
 
 });
@@ -344,9 +326,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         }
         
     }
-    console.log(selectedMovies)
-    console.log("didn't think i can reach here. check your code")
-    // return selectedMovies
+    console.log("didn't think i can reach here. check your code");
     return
 }
 
@@ -866,7 +846,6 @@ function createCarouselImg(data, index){
 
 // **********************************************SEARCH DISPLAY**********************************************
 
-//iterate through top 12
 
 function displayMovieContainer(data, numOfMovies, count){
     let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
@@ -887,13 +866,10 @@ function displayMovieContainer(data, numOfMovies, count){
     }
 
     document.querySelector("#displayMovies").appendChild(newContainer);
-    
-    
-    // createNextBtn(count)
-    
 
+    // display next button when page is ready
+    isPageReady(10);
 
-    // do not create next button for last page
 
 }
 
@@ -903,14 +879,13 @@ function createNextBtn(count){
     createButtonContainer.setAttribute('id', `btnContainer${count}`);
     createButtonContainer.setAttribute('class', 'btnContainer');
 
-    //make it invisible until page~ is ready
-    createButtonContainer.style.display = "none";
-    
-    
     const createButton = document.createElement('button');
     createButton.setAttribute('id', `nextBtn${count}`);
     createButton.setAttribute('class', 'nextBtn' )
     createButton.innerHTML = 'NEXT';
+
+    //make it invisible until page~ is ready
+    createButton.style.display = "none";
     
     document.querySelector(`#display${count}`).appendChild(createButtonContainer);
     document.querySelector(`#btnContainer${count}`).appendChild(createButton);
@@ -921,23 +896,49 @@ function createNextBtn(count){
         if (nextDisplay){
             const currentDisplay = document.querySelector(`#display${count}`);
             currentDisplay.style.display = "none";
-            // const nextDisplay = document.querySelector(`#display${count + 1}`);
             nextDisplay.style.display = "flex";
+            addMovieRoutes();
         }
-        else{
-            createButton.innerHTML = 'loading...'
-        }
-    
     })
-
 }
+
+
+function createPrevBtn(count){
+    if (count == 1){
+        return
+    }
+    const createButton = document.createElement('button');
+    createButton.setAttribute('id', `prevBtn${count}`);
+    createButton.setAttribute('class', 'prevBtn' )
+    createButton.innerHTML = 'PREV';
+
+    //make it invisible until page~ is ready
+    // createButton.style.display = "none";
+    
+    document.querySelector(`#btnContainer${count}`).appendChild(createButton);
+
+    createButton.addEventListener('click', function(e){
+        e.preventDefault();
+        const prevDisplay = document.querySelector(`#display${count - 1}`);
+        if (prevDisplay){
+            const currentDisplay = document.querySelector(`#display${count}`);
+            currentDisplay.style.display = "none";
+            prevDisplay.style.display = "flex";
+            addMovieRoutes();
+        }
+
+    })
+}
+
+
 
 function notReadyBtn(count){
     const createNotReady = document.createElement('button');
     createNotReady.setAttribute('id', `notReady${count}`);
     createNotReady.setAttribute('class', `notReady`);
     createNotReady.innerHTML = 'loading..';
-    document.querySelector(`#display${count}`).appendChild(createNotReady);
+    // document.querySelector(`#display${count}`).appendChild(createNotReady);
+    document.querySelector(`#btnContainer${count}`).appendChild(createNotReady);
 
 }
 
@@ -945,13 +946,12 @@ function isPageReady(searchLimit){
     console.log("checking if ready")
     for (let i=2; i<=searchLimit; i++){
         let nextPageReady = document.querySelector(`#display${i}`);
-        console.log(nextPageReady)
         if (nextPageReady){
             console.log(`page ${i} is readyyy`)
             const controlBtns = document.querySelector(`#notReady${i-1}`);
             if (controlBtns){
                 document.querySelector(`#notReady${i-1}`).style.display = "none";
-                document.querySelector(`#btnContainer${i-1}`).style.display = "block";
+                document.querySelector(`#nextBtn${i-1}`).style.display = "block";
 
             }
         }
@@ -1177,10 +1177,8 @@ function addMovieRoutes(){
 
 // ********************************************** FORMAT MODAL DISPLAY**********************************************
 
-// const userLocation = "KR"
 
 async function displayMovie(foundMovie){
-    console.log(foundMovie)
     const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
     const videoWidth = 740;
     const videoHeight = videoWidth / (16/9);
@@ -1197,7 +1195,8 @@ async function displayMovie(foundMovie){
     // // providersInfo = displayPreviewExtraProviders(providersData);
 
 
-    providersArray = displayPreviewProviders(providersData);
+    const providersArray = displayPreviewProviders(providersData);
+    const buyArray = displayPreviewBuy(providersData);
     //"#modalhere" TESTA
     document.querySelector("#dialog-message").innerHTML = `
     <div class="videoDisplay">
@@ -1205,12 +1204,12 @@ async function displayMovie(foundMovie){
     src=${videoSrc} frameborder="0" allowfullscreen> 
     </iframe></div>
     <h3 class="previewTitle">${title}</h3>
-    ${genreArray} <p class="previewTime">${runtime} min</p>
-    <div class="logoDisplay">
-    <p class="previewLogo" id= "previewLogo">${logoArray}</p> </div>
+    ${genreArray} 
+    <p class="previewTime">${runtime} min</p>
+    <div class="logoDisplay"><p class="previewLogo" id= "previewLogo">${logoArray}</p> </div>
     <p class="previewDescr" id= "overview">${overview}</p>
-    <div class="streamDisplay">
-    <p class="previewStream" id= "previewStream">${providersArray}</p></div>
+    <div class="streamDisplay">Stream<p class="previewStream" id= "previewStream">${providersArray}</p></div>
+    <div class="buyDisplay">Buy<p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
 
     
     `
@@ -1311,7 +1310,21 @@ function displayPreviewProviders(providersList){
 
         return dataDisplay
     }
-    return  `<p class="previewProviderMessage" id="error_msg">Does not stream in your current location</p>`
+    return  `<p id="previewProviderMessage" class="error_msg">Not available in your current location</p>`
+
+}
+
+function displayPreviewBuy(providersList){
+    if ((providersList)&&("buy" in providersList)){
+        let dataDisplay = providersList.buy.slice(0,providersList.length).map((object, index) => {
+            if (object.logo_path !== null){
+                return `<p class="previewBuyIcon" id="buy_${index}"><img src="https://image.tmdb.org/t/p/w92/${object.logo_path}" alt=""></p>`
+            }
+        }).join("");
+
+        return dataDisplay
+    }
+    return  `<p id="previewBuyMessage" class="error_msg">Not available in your current location</p>`
 
 }
 
