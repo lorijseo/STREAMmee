@@ -4,6 +4,8 @@ body {
   color: #d5d5d5;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding-right: 0 !important;
+  margin:0;
+  font-size: 18px;
 }
 
 button {
@@ -14,13 +16,13 @@ button {
 
 /* ***********************************HEADER & LOGO*********************************** */
 .header {
-  margin: 2% 0;
+  margin: 10px;
 }
 
 .logo {
   font-size: 30px;
   color: black;
-  margin: 0 15px;
+  /* margin: 0 15px; */
   /* color: #d5d5d5; */
 }
 
@@ -46,28 +48,34 @@ button {
   display: flex;
   justify-content: center;
   list-style: none;
+  padding:0;
+  margin:0;
 }
 
 .menu-item {
-  margin: 20px;
+  margin: 10px;
 }
-.menu .menu-item a {
-  color: black;
-  /* color: #d5d5d5; */
-}
+/* .menu .menu-item a {
+  color: white;
+  color: #d5d5d5;
+} */
 
+.sub-item a{
+  color: #d5d5d5;
+}
 .menu .sub-menu {
   position: absolute;
   list-style: none;
   /* pointer-events: none; */
-  background: yellow;
+  background: black;
   border-radius: 0 0 8px 8px;
-  transform: translateY(20px);
+  transform: translateY(10px);
+  padding: 1%;
+  display:none;
 }
 
-.menu-item .sub-menu .sub-item {
-  position: relative;
-  /* padding: 15px 30px; */
+.menu-item .sub-menu a:hover {
+  color: orange;
 }
 
 .menu-item .sub-menu {
@@ -77,6 +85,8 @@ button {
 .navbar-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  /* margin: 0 10px; */
 }
 
 .navbar {
@@ -99,6 +109,11 @@ button {
   color: black;
 }
 
+.menu-title{
+  color:black;
+  font-size: 18px;
+}
+
 /* .navbar:hover .dropdown-menu {
   display: block;
 } */
@@ -112,16 +127,52 @@ button {
   column-count: 3;
 }
 
+
+/* ***********************************REGION DROPDOWN*********************************** */
+
+#region option{
+  border-radius: 10px;
+  background-color: black;
+  color:white;
+  width: 100px;
+
+  /* overflow-wrap: break-word !important;
+  white-space: pre-wrap;
+  
+  text-overflow: ellipsis;
+  word-wrap: break-word; */
+  
+}
+
+#region{
+  background-color: transparent;
+  /* border:none; */
+  /* width: 120px; */
+  font-family: unset;
+  font-size: 16px;
+  color:white;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  width: 200px;
+  /* overflow-wrap: break-word !important; */
+  
+}
+
+
 /* ***********************************SEARCH BAR*********************************** */
 #search_input {
   font-size: 16px;
   border-radius: 5px;
+  background-color: transparent;
+
 }
 
-/* #searchBtn{
-  border:#d5d5d5 1px solid;
-  padding: 5px 15px;
-} */
+#searchBtn{
+  /* border:#d5d5d5 1px solid; */
+  /* padding: 5px 15px; */
+  color:white;
+  background-color: black;
+}
 
 /* ***********************************MAIN IMG*********************************** */
 
@@ -398,26 +449,75 @@ button {
   margin: 15px;
 } */
 
-#sub2{
+#filter{
+  background-color: black;
+  width: 300px;
+  position:absolute;
+  /* right: 180px;
+  top:85px; */
+  border-radius: 15px;
+  padding: 1%;
+  display:none;
+  /* z-index: 100; */
+  transform: translate(0, 10px);
+}
+
+#filter #sub2{
   display:flex;
   flex-wrap: wrap;
-  background-color: black;
+  justify-content: space-between;
+
+
+}
+
+
+
+#filter #subscription-container{
+  text-align: center;
+  margin: 1%;
 }
 
 .subscription-logo{
-  margin: 15px;
+  opacity: 0.2;
+  margin: 3%;
+  
+}
+
+
+
+.subscription-logo img{
+  /* opacity: 0.1; */
+  border-radius:10px;
+  /* box-shadow: 5px 5px 8px white; */
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 4px 8px 0 yellow, 0 6px 20px 0 red;
+  
 }
 
 .subscription-logo:hover{
   cursor: pointer;
+  opacity: 1;
 }
 
 #filter{
   z-index: 1000;
 }
 
+
 .nextBtn{
   width:100%;
   text-align:center;
   margin: auto;
+}
+
+#display-region{
+  background-color: black;
+  color:white;
+  width: 250px;
+  position:absolute;
+  /* transform: translate(-75px, 10px); */
+  padding: 1%;
+  text-align:center;
+  display:none;
+  border-radius: 10px;
 }
