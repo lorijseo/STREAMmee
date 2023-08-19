@@ -896,6 +896,34 @@ function displayMovieContainer(data, numOfMovies, count){
 }
 
 
+function displaySearchMovieContainer(data, numOfMovies){
+    let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
+        return createMovieContainer(object,index)
+    }).join("");
+
+    
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#sub1").style.display = "none";
+
+    const newContainer = document.createElement('div');
+    newContainer.setAttribute('class', 'displayList');
+    // newContainer.setAttribute('id', `search${count}`);
+    newContainer.innerHTML += dataDisplay;
+
+    // if (count !== 1){
+    //     newContainer.style.display = 'none';
+    // }
+
+    document.querySelector("#displayMovies").appendChild(newContainer);
+
+    // display next button when page is ready
+    // isPageReady(10);
+
+
+}
+
+
+
 function createNextBtn(count){
     const createButtonContainer = document.createElement('div');
     createButtonContainer.setAttribute('id', `btnContainer${count}`);
@@ -1409,8 +1437,9 @@ searchBtn.addEventListener("click", async function(e){
 
     //validate if movie title exists
     if (movieList.results.length > 0){
+        console.log(movieList.results.length)
         // displaySimiliarMovies(movieList);
-        displayMovieContainer(movieList.results,10);
+        displaySearchMovieContainer(movieList.results,20);
         addMovieRoutes()
 
     }
@@ -1569,7 +1598,10 @@ async function createRegionDropdown(){
 
 document.querySelector('#menu-title-region').addEventListener('click', function(e){
     e.preventDefault();
-    if (document.querySelector('#display-region').style.display === 'none'){
+    const regionNav = document.querySelector('#display-region')
+    const currentState = regionNav.getPropertyValue('display')
+    console.log(currentState)
+    if (currentState === 'none'){
         createRegionDropdown()
         document.querySelector('#display-region').style.display="block";
     }
