@@ -16,8 +16,13 @@ button {
 
 /* ***********************************HEADER & LOGO*********************************** */
 .header {
-  margin: 10px;
+  /* margin: 10px; */
+  z-index: 200;
+  position: fixed;
+  display:flex;
+  top: 1%;
 }
+
 
 .logo {
   font-size: 30px;
@@ -83,12 +88,19 @@ button {
 }
 
 .navbar-container {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   /* margin: 0 10px; */
+  position:fixed;
+  top:1%;
+  right:0;
 }
 
+/* .navbar-container li{
+
+  right: 0;
+} */
 .navbar {
   display: flex;
   justify-content: center;
@@ -190,6 +202,9 @@ button {
 
 } */
 
+#main {
+  z-index: 0;
+}
 #main_img {
   width: 100%;
   position: absolute;
@@ -215,9 +230,31 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   margin: 10% 0 0 0;
+/* 
+  //blur out background */
+  z-index: 100;
+  position: absolute;
+  top:1%;
+  left:0;
 }
 
-.movie {
+.displayList div{
+  margin: 2%
+}
+
+#btnContainer1{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 5% 40%;
+}
+
+.nextBtn, .notReady, .prevBtn{
+  margin: 20%;
+}
+
+
+/* .movie {
   margin: 2%;
 }
 .movie:hover {
@@ -236,12 +273,34 @@ button {
   justify-content: space-evenly;
 }
 
-/* align title when image is different */
 .movie .poster {
   height: 450px;
   object-fit: contain;
+} */
+
+.movie {
+  margin: 2%;
+}
+.movie:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
+.title {
+  font-size: 25px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.descr {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.poster {
+  height: 450px;
+  object-fit: contain;
+}
 .overview {
   font-size: 15px;
 }
@@ -347,7 +406,7 @@ button {
 
 .previewDescr {
   width: 100%;
-  margin: 1% 2% 5%;
+  margin: 1% 2%;
 }
 
 .previewGenreIcon {
@@ -362,7 +421,7 @@ button {
   display:flex;
   width:100%;
   align-items: center;
-  margin: 2% 1%;
+  margin: 1% 2%;
   flex-wrap: wrap;
 }
 
@@ -387,12 +446,19 @@ button {
 } */
 
 .previewProviderIcon, .previewBuyIcon{
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .previewProviderIcon img, .previewBuyIcon img{
-  max-height:70px;
-  border-radius: 20px;
+  max-height:50px;
+  border-radius: 15px;
+}
+
+#dialog-message .providerLabel{
+  width: 100px;
+  /* text-align:center; */
+  font-size:18px;
+  margin: 5px;
 }
 /* ***********************************PROFILE*********************************** */
 
