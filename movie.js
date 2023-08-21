@@ -56,10 +56,10 @@ $j(".owl-carousel").each(function(){
 //     });
 // });
 
-document.querySelector('#topBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    window.scrollTo(0,0);
-})
+// document.querySelector('#topBtn').addEventListener('click', function(e){
+//     e.preventDefault();
+//     window.scrollTo(0,0);
+// })
 
 
 $j(function(){
@@ -145,133 +145,204 @@ $j(function(){
 
 // }
 
-// displays 12 romance movies
-const romanceBtn = document.getElementById("romance");
-romanceBtn.addEventListener("click", async function(e){
+
+// ====================================================================================================
+
+const actionBtn = document.getElementById("action");
+actionBtn.addEventListener("click", function(e){
     e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
+    switchDisplay();
+    searchByGenre(28);
 });
-async function getRomance(){
-    const response = await fetch(`http://localhost:4000/moviedata/romance`);
-    const data = await response.json();
-    return data
 
-}
+const adventureBtn = document.getElementById("adventure");
+adventureBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(12);
 
-// displays 12 horror movies
+});
+
+const animationBtn = document.getElementById("animation");
+animationBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(16);
+});
+
+
+const comedyBtn = document.getElementById("comedy");
+comedyBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(35);
+});
+
+const crimeBtn = document.getElementById("crime");
+crimeBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(80);
+});
+
+const documentaryBtn = document.getElementById("documentary");
+documentaryBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(99);
+});
+
+const dramaBtn = document.getElementById("drama");
+dramaBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(18);
+});
+
+const familyBtn = document.getElementById("family");
+familyBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(10751);
+});
+
+const fantasyBtn = document.getElementById("fantasy");
+fantasyBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(14);
+});
+
+const historyBtn = document.getElementById("history");
+historyBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(36);
+});
 const horrorBtn = document.getElementById("horror");
 horrorBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
+    switchDisplay();
+    searchByGenre(27);
+
 });
-async function getHorror(){
-    const response = await fetch(`http://localhost:4000/moviedata/horror`);
-    const data = await response.json();
-    return data
+const musicBtn = document.getElementById("music");
+musicBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(10402);
+})
+
+const mysteryBtn = document.getElementById("mystery");
+mysteryBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(9648);
+})
+const romanceBtn = document.getElementById("romance");
+romanceBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(10749);
+});
+
+const scienceFictionBtn = document.getElementById("scifi");
+scienceFictionBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(878);
+});
+
+const thrillerBtn = document.getElementById("thriller");
+thrillerBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(53);
+})
+
+const tvBtn = document.getElementById("tv");
+tvBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(10770);
+})
+
+
+const warBtn = document.getElementById("war");
+warBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    switchDisplay();
+    searchByGenre(10752);
+});
+
+const westernBtn = document.getElementById("western");
+westernBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    // consider if genre movies are already displayed
+    switchDisplay();
+    searchByGenre(37);
+    
+});
+// ====================================================================================================
+
+// const initialValues = [0,1];
+
+function switchDisplay(){
+    if (document.querySelector('#displayMovies').hasChildNodes()){
+        document.querySelector('#displayMovies').textContent = '';
+    }
 }
 
 
 
+async function searchByGenre(genreCode){
+    // const genreCode = 28;
+    localStorage.setItem('genre', genreCode.toString());
 
-
-// ====================================================================================================
-
-
-
-
-// const actionBtn = document.getElementById("action");
-// actionBtn.addEventListener("click", async function(e){
-//     e.preventDefault();
-//     //genre
-//     const genreCode = 28;
-//     const pageNum = 1
-
-//     //location code
-//     const location = getLocation();
-//     const locationCode = location.country_code;
-
-//     const selectedMovies = await getMovieData(genreCode,locationCode,pageNum);
-
-//     displayMovieContainer(selectedMovies);
-//     addMovieRoutes();
-// });
-
-
-
-// async function getMovieData(genreCode, locationCode, pageNum){
-//     //initialize
-//     // let page = 1;
-
-//     // verify if user has saved subscriptions to filter by
-//     const providerArr = retrieveSubscriptionsStorage();
-//     const providerList = formatProviderParam(providerArr);
-
-
-//     let selectedMovies = []
-//     const numOfMovies = 20
-//     while (selectedMovies.length<=numOfMovies){
-//         const data = await getMoviesByFilter(providerList, locationCode, pageNum);
-//         for(let i =0; i<data.results.length; i++){
-//             const genreArr = data.results[i].genre_ids;
-//             if (selectedMovies.length == numOfMovies){
-//                 return selectedMovies
-//             }
-//             else if (genreArr.includes(genreCode)){
-//                 selectedMovies.push(data.results[i]); 
-//             }
-//         }
-//         pageNum +=1;
-//         console.log(selectedMovies.length);
-//         console.log(pageNum)
-//     }
-    
-//     return selectedMovies
-
-// }
-// ====================================================================================================
-
-// const initialValues = [0,1];
-const actionBtn = document.getElementById("action");
-actionBtn.addEventListener("click", async function(e,){
-    e.preventDefault();
-    //genre
-    const genreCode = 28;
-    let pageNum = 1;
-    let startEl = 0;
-    // let pageNum = initialValues[1];
-    // let startEl = initialValues[0];
-
-    //location code
     const location = getLocation();
     const locationCode = location.country_code;
-
-    // verify if user has saved subscriptions to filter by
     const providerArr = retrieveSubscriptionsStorage();
     const providerList = formatProviderParam(providerArr);
 
+    let pageNum = 1;
+    let startEl = 0;
     const searchLimit = 10;
     let counter = 0;
+
     while ((counter < searchLimit)){
         // [movielist, current page num, last el pushed]
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
         if (selectedMovies[0].length == 0){
-            alert("EMPTY NO MORE");
+            document.querySelector(`#notReady${counter}`).style.display = 'none';
             break
         }
 
+        //display remaining movies that did not reach 10
+        else if ((selectedMovies[0].length > 0)&&(selectedMovies[1] == 0)){
+            counter += 1;
+            displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
+            if (counter == 1){
+                //initialize movie routes for first page only
+                addGenreMovieRoutes(1);
+            }
+            else {
+                //last page needs prev button
+                createNextBtn(counter);
+                createPrevBtn(counter);
+            }
+            break
+        }
         else if (selectedMovies[0].length == 10){
             counter += 1;
             
             displayMovieContainer(selectedMovies[0],selectedMovies[0].length,counter);  
 
             if (counter !== searchLimit){
+                if (counter == 1){
+                    //initialize movie routes for first page only
+                    addGenreMovieRoutes(1);
+                }
                 pageNum = selectedMovies[1];
                 startEl = selectedMovies[2]; // consider if it's the last element of the page
                 
@@ -279,28 +350,12 @@ actionBtn.addEventListener("click", async function(e,){
                 createPrevBtn(counter);
                 notReadyBtn(counter);               
             }
-
+            else if(counter == searchLimit){
+                createPrevBtn(counter);
+            }
         }
-        
-        //display remaining movies that did not reach 10
-        else if ((selectedMovies[0].length > 0)&&(selectedMovies[1] == 0)){
-
-            counter += 1;
-            displayMovieContainer(selectedMovies[0], selectedMovies[0].length, counter);
-            addMovieRoutes();
-            break
-        }
-
-        // if (counter == 1){
-        //     //initialize movie routes for first page only
-        //     addMovieRoutes();
-        // }
-        addMovieRoutes()
     }
-
-});
-
-
+}
 
 async function getMovieData(genreCode, providerList, locationCode, pageNum, startEl){
     let selectedMovies = []
@@ -316,6 +371,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
             else if (genreArr.includes(genreCode)){
                 selectedMovies.push(data.results[i]); 
             }
+
         }
         console.log(pageNum)
         pageNum +=1;
@@ -333,224 +389,8 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
 // ====================================================================================================
 
 
-// displays 12 action movies
-// const actionBtn = document.getElementById("action");
-// actionBtn.addEventListener("click", async function(e){
-//     e.preventDefault();
-//     const genre = this.getAttribute("id")
-//     const data = await getMovieApi(genre)
-//     displayMovieContainer(data);
-//     addMovieRoutes();
-// });
 
 
-async function getAction(){
-    const response = await fetch(`http://localhost:4000/moviedata/action`);
-    const data = await response.json();
-    return data
-
-}
-
-// displays 12 adventure movies
-const adventureBtn = document.getElementById("adventure");
-adventureBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-async function getAdventure(){
-    const response = await fetch(`http://localhost:4000/moviedata/adventure`);
-    const data = await response.json();
-    return data
-
-}
-
-// displays 12 animation movies
-const animationBtn = document.getElementById("animation");
-animationBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-async function getAnimation(){
-    const response = await fetch(`http://localhost:4000/moviedata/animation`);
-    const data = await response.json();
-    return data
-}
-
-// displays 12 comedy movies
-const comedyBtn = document.getElementById("comedy");
-comedyBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id");
-    const data = await getMovieApi(genre);
-    console.log(data);
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-async function getComedy(){
-    const response = await fetch(`http://localhost:4000/moviedata/comedy`);
-    const data = await response.json();
-    return data
-
-}
-
-//displays 12 documentary movies
-const documentaryBtn = document.getElementById("documentary");
-documentaryBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id");
-    const data = await getMovieApi(genre);
-    console.log(data);
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-async function getDocumentary(){
-    const response = await fetch(`http://localhost:4000/moviedata/documentary`);
-    const data = await response.json();
-    return data
-
-}
-
-//displays 12 drama movies
-const dramaBtn = document.getElementById("drama");
-dramaBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-async function getDrama(){
-    const response = await fetch(`http://localhost:4000/moviedata/drama`);
-    const data = await response.json();
-    return data
-
-}
-
-//displays 12 family movies
-const familyBtn = document.getElementById("family");
-familyBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-
-async function getFamily(){
-    const response = await fetch(`http://localhost:4000/moviedata/family`);
-    const data = await response.json();
-    return data
-
-}
-
-//displays 12 fantasy movies
-const fantasyBtn = document.getElementById("fantasy");
-fantasyBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-
-async function getFantasy(){
-    const response = await fetch(`http://localhost:4000/moviedata/fantasy`);
-    const data = await response.json();
-    return data
-}
-
-//displays 12 history movies
-const historyBtn = document.getElementById("history");
-historyBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
-
-async function getHistory(){
-    const response = await fetch(`http://localhost:4000/moviedata/history`);
-    const data = await response.json();
-    return data
-
-}
-
-//displays 12 music movies
-const musicBtn = document.getElementById("music");
-musicBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-})
-
-async function getMusic(){
-    const response = await fetch(`http://localhost:4000/moviedata/music`);
-    const data = await response.json();
-    return data
-}
-
-//displays 12 mystery movies
-const mysteryBtn = document.getElementById("mystery");
-mysteryBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-})
-
-// async function getMystery(){
-//     const response = await fetch(`http://localhost:4000/moviedata/mystery`);
-//     const data = await response.json();
-//     return data
-// }
-
-
-
-
-
-async function getThriller(){
-    const response = await fetch(`http://localhost:4000/moviedata/thriller`);
-    const data = await response.json();
-    return data
-
-}
-
-
-
-
-
-const thrillerBtn = document.getElementById("thriller");
-thrillerBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-})
-
-//displays 12 war movies
-const warBtn = document.getElementById("war");
-warBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genre = this.getAttribute("id")
-    const data = await getMovieApi(genre)
-    displayMovieContainer(data);
-    addMovieRoutes();
-});
 
 
 // **********************************************FETCH FUNCTIONS**********************************************
@@ -613,9 +453,11 @@ async function getSubscriptions(country_code){
 // *************************SUBSCRIPTION FILTER*************************
 
 
-document.querySelector('#display-filter').addEventListener('click', async function(e){
+document.querySelector('#menu-title-subscription').addEventListener('click', async function(e){
     e.preventDefault();
-    if (document.querySelector('#filter').style.display === "none"){
+    const subscriptionNav = document.querySelector('#filter');
+    const currentState = window.getComputedStyle(subscriptionNav);
+    if (currentState['display'] === 'none'){
         const userLocation = getLocation();
         const countryCode = userLocation.country_code;
         const data = await getSubscriptions(countryCode);
@@ -665,7 +507,8 @@ function showSelectedSubscriptions(userSubscriptionsArr){
 
 function retrieveSubscriptionsStorage(){
     let userSubscriptions = localStorage.getItem('subscription');
-    if (userSubscriptions == null){
+    // consider when user does not provide subscriptions or when they remove subscriptions
+    if ((userSubscriptions == null)|| (userSubscriptions.length == 0)){
        return []
     }
     let userSubscriptionsArr = userSubscriptions.split(',');
@@ -684,7 +527,6 @@ function displaySubscription(data){
 function addLogoRoutes(userSubscriptionsArr){
     let selectedLogo = document.querySelectorAll(".subscription-logo");
     let subscriptionList = userSubscriptionsArr;
-    console.log(subscriptionList)
     for (let i=0; i<selectedLogo.length; i++){
 
 
@@ -713,17 +555,25 @@ function addLogoRoutes(userSubscriptionsArr){
         })
     }
 
-    document.querySelector('#subscription-submit').addEventListener('click', function(e){
-        document.querySelector('#main').style.display = 'block';
-        document.querySelector('#sub1').style.display = 'block';
-
+    document.querySelector('#subscription-submit').addEventListener('click', async function(e){
+        e.preventDefault();
+        localStorage.setItem('subscription', subscriptionList.toString());
         document.querySelector('#filter').style.display = 'none';
-        localStorage.setItem('subscription', subscriptionList.toString())
+
+        if (document.querySelector('#displayMovies').hasChildNodes()){
+            
+            document.querySelector('#displayMovies').textContent = '';
+            const genreCode = JSON.parse(localStorage.getItem('genre'));
+            await searchByGenre(genreCode);
+        }
+        // document.querySelector('#main').style.display = 'block';
+        // document.querySelector('#sub1').style.display = 'block';
+        
     })
 }
 
 // function createSubscriptionDropdown(data){
-//     const dropdownContainer = document.querySelector('#display-filter');
+//     const dropdownContainer = document.querySelector('#menu-title-subscription');
 //     // dropdownContainer.multiple = true;
 //     let dataDisplay = data.results.slice(0,20).map((object, index) => {
 //         const newOption = document.createElement('option');
@@ -871,12 +721,15 @@ function createCarouselImg(data, index){
 
 function displayMovieContainer(data, numOfMovies, count){
     let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
-        return createMovieContainer(object,index)
+        return createMovieContainer(object,index,count)
     }).join("");
 
     
-    document.querySelector("#main").style.display = "none";
+    // document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
+
+    document.querySelector("#main").style.opacity = 0.2;
+    // document.querySelector("#sub1").style.opacity = 0.2;
 
     const newContainer = document.createElement('div');
     newContainer.setAttribute('class', 'displayList');
@@ -898,7 +751,7 @@ function displayMovieContainer(data, numOfMovies, count){
 
 function displaySearchMovieContainer(data, numOfMovies){
     let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
-        return createMovieContainer(object,index)
+        return createMovieContainer(object,index,1)
     }).join("");
 
     
@@ -925,7 +778,7 @@ function displaySearchMovieContainer(data, numOfMovies){
 
 
 function createNextBtn(count){
-    const createButtonContainer = document.createElement('div');
+    const createButtonContainer = document.createElement('span');
     createButtonContainer.setAttribute('id', `btnContainer${count}`);
     createButtonContainer.setAttribute('class', 'btnContainer');
 
@@ -947,7 +800,7 @@ function createNextBtn(count){
             const currentDisplay = document.querySelector(`#display${count}`);
             currentDisplay.style.display = "none";
             nextDisplay.style.display = "flex";
-            addMovieRoutes();
+            addGenreMovieRoutes(count+1);
         }
     })
 }
@@ -974,7 +827,6 @@ function createPrevBtn(count){
             const currentDisplay = document.querySelector(`#display${count}`);
             currentDisplay.style.display = "none";
             prevDisplay.style.display = "flex";
-            addMovieRoutes();
         }
 
     })
@@ -1023,10 +875,10 @@ function isPageReady(searchLimit){
 
 
 // **********************************************MOVIE POSTER DISPLAY**********************************************
-function createMovieContainer(data,index){
+function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
-    const className = "movie_btn_" + index;
+    const idName = "movie_btn_" + listNum +'_' +index;
     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
@@ -1034,7 +886,7 @@ function createMovieContainer(data,index){
     }
 
 
-    return `    <div class="movie" id=${className}>    <div class="poster">
+    return `    <div class="movie${listNum}" id=${idName}>    <div class="poster">
              <img src=${imgSrc} alt="movie poster"/> 
         </div>
 
@@ -1203,8 +1055,8 @@ function adaptedFromBook(keywordArr){
 // **********************************************MAKE BUTTONS FOR POSTERS**********************************************
 
 
-function addMovieRoutes(){
-    let selectedMovie = document.querySelectorAll(".movie");
+function addSearchMovieRoutes(){
+    let selectedMovie = document.querySelectorAll(".movie1");
     for (let i=0; i<selectedMovie.length; i++){
         if (selectedMovie[i].id){
             const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
@@ -1225,6 +1077,26 @@ function addMovieRoutes(){
 }
 
 
+function addGenreMovieRoutes(newCount){
+    const parentEl = document.querySelector(`#display${newCount}`);
+    const childElArr = parentEl.querySelectorAll(`.movie${newCount}`);
+
+    for (let i=0; i<childElArr.length; i++){
+
+        const movieBtn = document.querySelector(`#${childElArr[i].id}`);
+
+        movieBtn.addEventListener("click", async function(e){
+            e.preventDefault();
+            const movieClass = this.querySelector(".title");
+            const movieId = movieClass.id;
+            const data = await getMovie(movieId);
+            displayMoviePreview(data);
+
+        })
+        
+
+    }
+}
 // ********************************************** FORMAT MODAL DISPLAY**********************************************
 
 
@@ -1233,9 +1105,9 @@ async function displayMovie(foundMovie){
     const videoWidth = 740;
     const videoHeight = videoWidth / (16/9);
 
-    const videoSrc = displayPreviewTrailer(videos.results)
+    const videoSrc = displayPreviewTrailer(videos.results);
 
-    const logoArray = displayPreviewLogo(production_companies)
+    // const logoArray = displayPreviewLogo(production_companies);
 
     const genreArray = displayPreviewGenre(genres);
 
@@ -1256,17 +1128,16 @@ async function displayMovie(foundMovie){
     <h3 class="previewTitle">${title}</h3>
     ${genreArray} 
     <p class="previewTime">${runtime} min</p>
-    <div class="logoDisplay"><p class="previewLogo" id= "previewLogo">${logoArray}</p> </div>
+    
     <p class="previewDescr" id= "overview">${overview}</p>
-    <div class="streamDisplay">Stream<p class="previewStream" id= "previewStream">${providersArray}</p></div>
-    <div class="buyDisplay">Buy<p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
+    <div class="streamDisplay"><p class='providerLabel'>Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>
+    <div class="buyDisplay"><p class='providerLabel'>Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
 
     
     `
 }
 
-{/* <button>${providersInfo}</button> */}
-
+{/* <div class="logoDisplay"><p class="previewLogo" id= "previewLogo">${logoArray}</p> </div> */}
 
 function displayPreviewTrailer(videoList){
     let videoSrc = '""';
@@ -1440,7 +1311,7 @@ searchBtn.addEventListener("click", async function(e){
         console.log(movieList.results.length)
         // displaySimiliarMovies(movieList);
         displaySearchMovieContainer(movieList.results,20);
-        addMovieRoutes()
+        addSearchMovieRoutes()
 
     }
     else{
@@ -1494,36 +1365,37 @@ searchBtn.addEventListener("click", async function(e){
 // xhr.send(data);
 
 
+// ********************************************** GEOLOCATION EXECUTE**********************************************
 
-// get geolocation of user
-const data = null;
+// // get geolocation of user
+// const data = null;
 
-const xhr = new XMLHttpRequest();
-//set to false because CORS blocks off all cookies
-xhr.withCredentials = false;
+// const xhr = new XMLHttpRequest();
+// //set to false because CORS blocks off all cookies
+// xhr.withCredentials = false;
 
-xhr.addEventListener("readystatechange", async function () {
-  if (this.readyState === this.DONE) {
-    const response = this.response;
-    const myData = await JSON.parse(response);
+// xhr.addEventListener("readystatechange", async function () {
+//   if (this.readyState === this.DONE) {
+//     const response = this.response;
+//     const myData = await JSON.parse(response);
 
-    const newUser = localStorage.getItem('geoLocation');
-    if (newUser == null){
-        displayFlag(myData.country_code)
-        let geolocation = {};
-        geolocation["location"] = myData;
-        localStorage.setItem('geoLocation', JSON.stringify(myData));
-    }
-    else{
-        updateFlagDisplay();
-    }
+//     const newUser = localStorage.getItem('geoLocation');
+//     if (newUser == null){
+//         displayFlag(myData.country_code)
+//         let geolocation = {};
+//         geolocation["location"] = myData;
+//         localStorage.setItem('geoLocation', JSON.stringify(myData));
+//     }
+//     else{
+//         updateFlagDisplay();
+//     }
 
-  }
-});
+//   }
+// });
 
-const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-xhr.send(data);
+// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+// xhr.send(data);
      
 
 
@@ -1544,9 +1416,11 @@ function displayFlag(countryCode){
 
 
 
-document.querySelector('#menu-genre').addEventListener('click', function(e){
+document.querySelector('#menu-title-genre').addEventListener('click', function(e){
     e.preventDefault();
-    if (document.querySelector('#sub-menu-genre').style.display === "none"){
+    const genreNav = document.querySelector('#sub-menu-genre');
+    const currentState = window.getComputedStyle(genreNav);
+    if (currentState['display'] === 'none'){
         document.querySelector('#sub-menu-genre').style.display = "block";
     }
     else{
@@ -1598,10 +1472,9 @@ async function createRegionDropdown(){
 
 document.querySelector('#menu-title-region').addEventListener('click', function(e){
     e.preventDefault();
-    const regionNav = document.querySelector('#display-region')
-    const currentState = regionNav.getPropertyValue('display')
-    console.log(currentState)
-    if (currentState === 'none'){
+    const regionNav = document.querySelector('#display-region');
+    const currentState = window.getComputedStyle(regionNav);
+    if (currentState['display'] === 'none'){
         createRegionDropdown()
         document.querySelector('#display-region').style.display="block";
     }
@@ -1615,6 +1488,7 @@ document.querySelector('#menu-title-region').addEventListener('click', function(
 
 document.querySelector("#regionBtn").addEventListener("click", function(e){
     e.preventDefault();
+
     const location =  document.querySelector('#region');
     const locationName = document.querySelector('#region').value;
     const locationCode = location.options[location.selectedIndex].id
@@ -1631,6 +1505,7 @@ document.querySelector("#regionBtn").addEventListener("click", function(e){
     document.querySelector('#display-region').style.display = 'none';
     updateFlagDisplay();
     //display flag
+    document.location.reload();
 
 })
 
