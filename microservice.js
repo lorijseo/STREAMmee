@@ -242,13 +242,15 @@ app.get(`/get_movies_by_filter/:providers/:code/:page`, async(req,res,next)=>{
     const code = req.params.code;
     const page = req.params.page;
     let providersFormatted = formatProviderQuery(providers);
+
+    console.log(providersFormatted);
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&with_watch_providers=${providersFormatted}&watch_region=${code}&page=${page}`);
     const data = await response.json();
     res.send(data);
 })
 
 function formatProviderQuery(param){
-    const reformatted = param.replace('-', '|');
+    const reformatted = param.replaceAll('-', '|');
     return reformatted
 }
 

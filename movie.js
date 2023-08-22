@@ -376,7 +376,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         console.log(pageNum)
         pageNum +=1;
         // console.log(selectedMovies.length);
-        if (pageNum >50){
+        if (pageNum >80){
             console.log(selectedMovies);
             return [selectedMovies, 0, 0]
         }
@@ -559,13 +559,15 @@ function addLogoRoutes(userSubscriptionsArr){
         e.preventDefault();
         localStorage.setItem('subscription', subscriptionList.toString());
         document.querySelector('#filter').style.display = 'none';
-
+        
         if (document.querySelector('#displayMovies').hasChildNodes()){
-            
-            document.querySelector('#displayMovies').textContent = '';
-            const genreCode = JSON.parse(localStorage.getItem('genre'));
-            await searchByGenre(genreCode);
+            // document.querySelector('#displayMovies').textContent = '';
+            // const genreCode = JSON.parse(localStorage.getItem('genre'));
+            // const done = await searchByGenre(genreCode);
+
+            document.location.reload();
         }
+        
         // document.querySelector('#main').style.display = 'block';
         // document.querySelector('#sub1').style.display = 'block';
         
@@ -733,6 +735,7 @@ function displayMovieContainer(data, numOfMovies, count){
 
     const newContainer = document.createElement('div');
     newContainer.setAttribute('class', 'displayList');
+    
     newContainer.setAttribute('id', `display${count}`);
     newContainer.innerHTML += dataDisplay;
 
@@ -754,8 +757,8 @@ function displaySearchMovieContainer(data, numOfMovies){
         return createMovieContainer(object,index,1)
     }).join("");
 
-    
-    document.querySelector("#main").style.display = "none";
+    document.querySelector("#main").style.opacity = 0.2;
+    // document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
 
     const newContainer = document.createElement('div');
@@ -1303,6 +1306,7 @@ window.addEventListener('load', async function(){
 const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    switchDisplay();
     const searchMovie = document.querySelector("#search_input").value;
     const movieList = await getMovieList(searchMovie);
 
@@ -1323,7 +1327,7 @@ searchBtn.addEventListener("click", async function(e){
 })
 
 
-// ********************************************** GEOLOCATION EXECUTE**********************************************
+// ********************************************** G EXECUTE**********************************************
 
 // // get geolocation of user
 // const data = null;
