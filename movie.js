@@ -796,24 +796,14 @@ function addLogoRoutes(userSubscriptionsArr){
     document.querySelector('#subscription-submit').addEventListener('click', async function(e){
         e.preventDefault();
         localStorage.setItem('subscription', subscriptionList.toString());
-        const genreCode = JSON.parse(localStorage.getItem('genre'));
         document.querySelector('#filter').style.display = 'none';
+
         if (document.querySelector('.displayMovies').hasChildNodes()){
+            const genreCode = JSON.parse(localStorage.getItem('genre'));
+            localStorage.setItem('genreDisplay', genreCode);
             document.location.reload();
         }
-        
-        // if (!(document.querySelector('.displayMovies').hasChildNodes())){
-        //     alert('boo')
-        //     return
-        // }
-        // else if (document.querySelector('.displayMovies').hasChildNodes()){
-            
-        //     document.location.reload();
-        // }
-        // console.log('yay')
-        // searchByGenre(genreCode);
-        
-        
+        // if genre isn't selected, show top movies from providers
         
     })
 }
@@ -1575,10 +1565,7 @@ window.addEventListener('load', async function(){
 
         searchByGenre(isGenreDisplay)
         this.localStorage.removeItem('genreDisplay')
-    }
-
-
-    
+    }   
 })
 
 
