@@ -440,6 +440,18 @@ warBtn.addEventListener("click", async function(e){
 const westernBtn = document.getElementById("western");
 westernBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    //if no subscriptions, fetch directly
+
+    const subscriptionList = localStorage.getItem('subscription')
+    if ((subscriptionList == null)){
+        console.log("yay")
+        const genre = this.getAttribute("id")
+        const data = await getMovieApi(genre)
+        displayMovieContainer(data.results, 10, 1);
+        addMovieRoutes();
+    }
+
+    //subscriptions
     const genreCode = 37;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const genreDisplay = document.querySelector('.displayMovies')
@@ -1362,45 +1374,116 @@ function addGenreMovieRoutes(newCount){
 // ********************************************** FORMAT MODAL DISPLAY**********************************************
 
 
+// async function displayMovie(foundMovie){
+//     const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
+//     const videoWidth = 740;
+//     const videoHeight = videoWidth / (16/9);
+
+//     const videoSrc = displayPreviewTrailer(videos.results);
+
+//     // const logoArray = displayPreviewLogo(production_companies);
+
+//     const genreArray = displayPreviewGenre(genres);
+
+//     const providersData = getPreviewProviders(providers);
+//     console.log(providersData)
+
+//     // if (providersData){
+//     //     const providersArray = displayPreviewProviders(providersData);
+//     //     const buyArray = displayPreviewBuy(providersData);
+//     // }
+
+//     const providersArray = displayPreviewProviders(providersData);
+//     const buyArray = displayPreviewBuy(providersData);
+
+
+//     document.querySelector("#dialog-message").innerHTML = `
+//     <div class="videoDisplay">
+//     <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
+//     src=${videoSrc} frameborder="0" allowfullscreen> 
+//     </iframe></div>
+//     <h3 class="previewTitle">${title}</h3>
+//     ${genreArray} 
+//     <p class="previewTime">${runtime} min</p>
+    
+//     <p class="previewDescr" id= "overview">${overview}</p>
+//     <div class="streamDisplay"><p class='providerLabel'>Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>
+//     <div class="buyDisplay"><p class='providerLabel'>Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
+
+    
+//     `
+// }
+
 async function displayMovie(foundMovie){
-    const {id,title, poster_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
+    console.log(foundMovie)
+    let {id,title, backdrop_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
+
+    //initialize movie
     const videoWidth = 740;
     const videoHeight = videoWidth / (16/9);
+    if (videos.results.length > 0){
+        const videoSrc = displayPreviewTrailer(videos.results);
+        document.querySelector("#dialog-message").innerHTML = `
+        <div class="videoDisplay">
+        <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
+        src=${videoSrc} frameborder="0" allowfullscreen> 
+        </iframe></div>`
+    }
+    else if (backdrop_path !== null){
+        document.querySelector("#dialog-message").innerHTML = `
+        <div class="videoDisplay">
+        <img id="movieTrailer" src="https://image.tmdb.org/t/p/original/${backdrop_path}" 
+        height="${videoHeight}" width="${videoWidth}  alt=""></div>`
+    }
+    else{
+        document.querySelector("#dialog-message").innerHTML = `
+        <div class="videoDisplay">
+        <img id="movieTrailer" src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" 
+        height="${videoHeight}" width="${videoWidth}  alt=""></div>`
+    }
 
-    const videoSrc = displayPreviewTrailer(videos.results);
 
+    //verify overview exists
+    if (overview === ""){
+        overview = "Description not found"
+    }
     // const logoArray = displayPreviewLogo(production_companies);
 
     const genreArray = displayPreviewGenre(genres);
 
-    const providersData = getPreviewProviders(providers);
-    console.log(providersData)
-
-    // if (providersData){
-    //     const providersArray = displayPreviewProviders(providersData);
-    //     const buyArray = displayPreviewBuy(providersData);
-    // }
-
-    const providersArray = displayPreviewProviders(providersData);
-    const buyArray = displayPreviewBuy(providersData);
-
-
-    document.querySelector("#dialog-message").innerHTML = `
-    <div class="videoDisplay">
-    <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
-    src=${videoSrc} frameborder="0" allowfullscreen> 
-    </iframe></div>
+    document.querySelector("#dialog-message").innerHTML += `
     <h3 class="previewTitle">${title}</h3>
     ${genreArray} 
     <p class="previewTime">${runtime} min</p>
     
-    <p class="previewDescr" id= "overview">${overview}</p>
-    <div class="streamDisplay"><p class='providerLabel'>Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>
-    <div class="buyDisplay"><p class='providerLabel'>Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
-
-    
+    <p class="previewDescr" id= "overview">${overview}</p>    
     `
+
+    const providersData = getPreviewProviders(providers);
+    // can we stream from our country
+    if (providersData){
+        const providersArray = displayPreviewProviders(providersData);
+        const buyArray = displayPreviewBuy(providersData);
+        if ((!providersArray)&&(!buyArray)){
+            document.querySelector("#dialog-message").innerHTML += `
+            <p>We cannot find any streaming platforms for this movie</p>`
+        }
+        if (providersArray){
+            document.querySelector("#dialog-message").innerHTML += `
+            <div class="streamDisplay"><p class='providerLabel'>Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>`
+        }
+        if (buyArray){
+            document.querySelector("#dialog-message").innerHTML += `
+            <div class="buyDisplay"><p class='providerLabel'>Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
+            `
+        }
+    }
+    else{
+        document.querySelector("#dialog-message").innerHTML += `
+        <p>This movie is not available in your location</p>`
+    }
 }
+
 
 {/* <div class="logoDisplay"><p class="previewLogo" id= "previewLogo">${logoArray}</p> </div> */}
 
@@ -1414,6 +1497,7 @@ function displayPreviewTrailer(videoList){
                 return videoSrc = `"https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1&rel=0"`
             }
         }
+        return videoSrc = `"https://www.youtube.com/embed/${videoList[0].key}?autoplay=1&mute=1&rel=0"`
     }
     return videoSrc
 
@@ -1497,7 +1581,8 @@ function displayPreviewProviders(providersList){
 
         return dataDisplay
     }
-    return  `<p id="previewProviderMessage" class="error_msg">Not available in your current location</p>`
+    return
+    // return  `<p id="previewProviderMessage" class="error_msg">Not available in your current location</p>`
 
 }
 
@@ -1511,7 +1596,8 @@ function displayPreviewBuy(providersList){
 
         return dataDisplay
     }
-    return  `<p id="previewBuyMessage" class="error_msg">Not available in your current location</p>`
+    return
+    // return  `<p id="previewBuyMessage" class="error_msg">Not available in your current location</p>`
 
 }
 
@@ -1570,6 +1656,7 @@ window.addEventListener('load', async function(){
 
 
 const characterArr = {
+    " ": "%20",
     "<": "%3C", 
     ">": "%3E", 
     "#": "%23",
@@ -1599,6 +1686,10 @@ searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
     switchDisplay();
     let searchMovie = document.querySelector("#search_input").value;
+    document.querySelector("#search_input").value = '';
+    if (searchMovie === ''){
+        return
+    }
     for (let i=0; i<searchMovie.length; i++){
         if (searchMovie.charAt(i) in characterArr){
             const invalidChar = searchMovie.charAt(i);
@@ -1616,12 +1707,12 @@ searchBtn.addEventListener("click", async function(e){
         addSearchMovieRoutes()
 
     }
+
     else{
         alert("We cannot find anything in our database")
 
     }
-    document.querySelector("#search_input").value = '';
-    return
+    
 })
 
 
