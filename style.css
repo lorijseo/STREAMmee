@@ -249,9 +249,6 @@ button {
   margin: 5% 40%;
 }
 
-.nextBtn, .notReady, .prevBtn{
-  margin: 20%;
-}
 
 
 /* .movie {
@@ -570,10 +567,14 @@ button {
 }
 
 
-.nextBtn{
-  width:100%;
+.nextBtn, .prevBtn{
+  /* width:100%; */
   text-align:center;
   margin: auto;
+}
+.btnContainer{
+  width: 80%;
+  text-align: center;
 }
 
 #display-region{
