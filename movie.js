@@ -1384,14 +1384,17 @@ async function displayMovie(foundMovie){
     const genreArray = displayPreviewGenre(genres);
 
     const providersData = getPreviewProviders(providers);
+    console.log(providersData)
 
-    // // let providersInfo = '';
-    // // providersInfo = displayPreviewExtraProviders(providersData);
-
+    // if (providersData){
+    //     const providersArray = displayPreviewProviders(providersData);
+    //     const buyArray = displayPreviewBuy(providersData);
+    // }
 
     const providersArray = displayPreviewProviders(providersData);
     const buyArray = displayPreviewBuy(providersData);
-    //"#modalhere" TESTA
+
+
     document.querySelector("#dialog-message").innerHTML = `
     <div class="videoDisplay">
     <iframe id="movieTrailer"height="${videoHeight}" width="${videoWidth}" allow="autoplay" 
@@ -1489,7 +1492,8 @@ function getPreviewProviders(data){
         // console.log(providerArray)
         return providerArray
     }
-    console.log("didn't work")
+    console.log("Cannot stream from your current location")
+    return
 
 }
 
@@ -1578,15 +1582,45 @@ window.addEventListener('load', async function(){
 })
 
 
-
+const characterArr = {
+    "<": "%3C", 
+    ">": "%3E", 
+    "#": "%23",
+    "%": "%25",
+    "+": "%2B",
+    "{": "%7B",
+    "}": "%7D", 
+    "|": "%7C", 
+    "\\": "%5C", 
+    "^": "%5E", 
+    "~": "%7E", 
+    "[": "%5B", 
+    "]": "%5D", 
+    "'": "%60",
+    ";": "%3B", 
+    "/": "%2F", 
+    "?": "%3F", 
+    ":": "%3A", 
+    "@": "%40", 
+    "=": "%3D", 
+    "&": "%26", 
+    "$": "%24"
+}
 
 const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
     switchDisplay();
-    const searchMovie = document.querySelector("#search_input").value;
+    let searchMovie = document.querySelector("#search_input").value;
+    for (let i=0; i<searchMovie.length; i++){
+        if (searchMovie.charAt(i) in characterArr){
+            const invalidChar = searchMovie.charAt(i);
+            const newString = searchMovie.replace(invalidChar, characterArr[invalidChar]);
+            searchMovie = newString
+        }
+    }
     const movieList = await getMovieList(searchMovie);
-    const characterArr = ["<", ">", "#", "%", "+", "{", "}", "|", "\\", "^", "~", "[", "]", "'",";", "/", "?", ":", "@", "=", "&", "$"]
+
     //validate if movie title exists
     if (movieList.results.length > 0){
         console.log(movieList.results.length)
@@ -1596,8 +1630,8 @@ searchBtn.addEventListener("click", async function(e){
 
     }
     else{
-        alert("doesn't exist")
-        $("<div>Test message</div>").dialog();
+        alert("We cannot find anything in our database")
+
     }
     document.querySelector("#search_input").value = '';
     return
