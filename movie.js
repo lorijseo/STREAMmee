@@ -1586,7 +1586,7 @@ searchBtn.addEventListener("click", async function(e){
     switchDisplay();
     const searchMovie = document.querySelector("#search_input").value;
     const movieList = await getMovieList(searchMovie);
-
+    const characterArr = ["<", ">", "#", "%", "+", "{", "}", "|", "\\", "^", "~", "[", "]", "'",";", "/", "?", ":", "@", "=", "&", "$"]
     //validate if movie title exists
     if (movieList.results.length > 0){
         console.log(movieList.results.length)
