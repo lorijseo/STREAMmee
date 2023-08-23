@@ -798,10 +798,7 @@ function addLogoRoutes(userSubscriptionsArr){
                 subscriptionList.push(stripId );
                 // selectedLogo[i].style.border = "2px yellow solid";
                 selectedLogo[i].style.opacity= 1;
-                
             }
-            
-
         })
     }
 
@@ -816,6 +813,12 @@ function addLogoRoutes(userSubscriptionsArr){
             document.location.reload();
         }
         // if genre isn't selected, show top movies from providers
+        // else{
+        //     const location = getLocation();
+        //     const data = await getMoviesByFilter(subscriptionList, location.country_code, 1);
+        //     displaySearchMovieContainer(data.results, 10);
+        //     addSearchMovieRoutes();
+        // }
         
     })
 }
@@ -1001,10 +1004,10 @@ function displayMovieContainer(data, numOfMovies, count){
     }).join("");
 
     
-    // document.querySelector("#main").style.display = "none";
+    document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
 
-    document.querySelector("#main").style.opacity = 0.2;
+    // document.querySelector("#main").style.opacity = 0.2;
     // document.querySelector("#sub1").style.opacity = 0.2;
 
     const newContainer = document.createElement('div');
@@ -1028,8 +1031,8 @@ function displaySearchMovieContainer(data, numOfMovies){
         return createMovieContainer(object,index,1)
     }).join("");
 
-    document.querySelector("#main").style.opacity = 0.2;
-    // document.querySelector("#main").style.display = "none";
+    // document.querySelector("#main").style.opacity = 0.2;
+    document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
 
     const newContainer = document.createElement('div');
