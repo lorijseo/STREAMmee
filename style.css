@@ -29,10 +29,12 @@ a{
   /* position: fixed; */
   display:flex;
   /* top: 1%; */
-  padding: 10px;
+  padding: 0 10px;
+  padding-bottom: 0;
   justify-content: space-between;
   background-color: #121212;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 
@@ -41,11 +43,12 @@ a{
   color: #d5d5d5;
   margin: 0 160px 0 0 ;
   /* color: #d5d5d5; */
+  opacity: 1;
 }
 
 .logo:hover {
   /* color: #d5d5d5; */
-  opacity: 0.7;
+  opacity: 0.6;
   color: #d5d5d5;
 }
 
@@ -77,10 +80,16 @@ a{
   padding:0;
   margin:0;
   align-items: center;
+  flex-wrap: wrap;
 }
 .menu-title{
   color:#d5d5d5;
   font-size: 18px;
+  opacity: 1;
+}
+
+.menu-title:hover{
+  opacity:0.6;
 }
 
 .menu-item {

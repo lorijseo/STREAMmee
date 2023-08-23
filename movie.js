@@ -544,6 +544,7 @@ async function searchByGenre(genreCode){
                 loadingBtn(counter);               
             }
             else if(counter == searchLimit){
+                createNextBtn(counter);
                 createPrevBtn(counter);
                 createHomeBtn(counter);
             }
@@ -639,7 +640,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         console.log(pageNum)
         pageNum +=1;
         // console.log(selectedMovies.length);
-        if (pageNum >80){
+        if (pageNum >150){
             console.log(selectedMovies);
             return [selectedMovies, 0, 0]
         }
@@ -1180,7 +1181,7 @@ function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const idName = "movie_btn_" + listNum +'_' +index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
 
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
