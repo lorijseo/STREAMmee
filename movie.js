@@ -477,6 +477,10 @@ function switchDisplay(){
 
 
 async function searchByGenre(genreCode){
+
+    const page = document.getElementsByTagName('body')[0];
+    page.style.cursor = "progress";
+
     // const genreCode = 28;
     localStorage.setItem('genre', genreCode.toString());
 
@@ -506,6 +510,8 @@ async function searchByGenre(genreCode){
             if (counter == 1){
                 //initialize movie routes for first page only
                 addGenreMovieRoutes(1);
+                page.style.cursor = "default";
+
             }
             else {
                 //last page needs prev button
@@ -523,6 +529,7 @@ async function searchByGenre(genreCode){
                 if (counter == 1){
                     //initialize movie routes for first page only
                     addGenreMovieRoutes(1);
+                    page.style.cursor = "default";
                 }
                 pageNum = selectedMovies[1];
                 startEl = selectedMovies[2]; // consider if it's the last element of the page
@@ -952,7 +959,7 @@ function createCarouselImg(data, index){
     let imgSrc = `https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}` 
 
     if((poster_path == null)){
-        imgSrc=`images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px`
+        imgSrc=`images/no-poster.png" style = "width: ${imageWidth}px; height: 432px`
     }
 
     newOwlItem = `    <div class="item" id="item${index}">
@@ -1062,7 +1069,7 @@ function createNextBtn(count){
     const createButton = document.createElement('button');
     createButton.setAttribute('id', `nextBtn${count}`);
     createButton.setAttribute('class', 'nextBtn' )
-    createButton.innerHTML = 'NEXT';
+    createButton.innerHTML = `<i class="fa-solid fa-hand-point-right"></i>`;
 
     //make it invisible until page~ is ready
     createButton.style.display = "none";
@@ -1090,12 +1097,14 @@ function createPrevBtn(count){
     const createButton = document.createElement('button');
     createButton.setAttribute('id', `prevBtn${count}`);
     createButton.setAttribute('class', 'prevBtn' )
-    createButton.innerHTML = 'PREV';
+    createButton.innerHTML = `<i class="fa-solid fa-hand-point-left"></i>`;
 
     //make it invisible until page~ is ready
     // createButton.style.display = "none";
     
-    document.querySelector(`#btnContainer${count}`).appendChild(createButton);
+    const btnContainer = document.querySelector(`#btnContainer${count}`);
+    btnContainer.insertBefore(createButton, btnContainer.firstChild);
+
 
     createButton.addEventListener('click', function(e){
         e.preventDefault();
@@ -1115,7 +1124,7 @@ function notReadyBtn(count){
     const createNotReady = document.createElement('button');
     createNotReady.setAttribute('id', `notReady${count}`);
     createNotReady.setAttribute('class', `notReady`);
-    createNotReady.innerHTML = 'loading..';
+    createNotReady.innerHTML = `<i class="fa-solid fa-spinner"></i>`;
     // document.querySelector(`#display${count}`).appendChild(createNotReady);
     document.querySelector(`#btnContainer${count}`).appendChild(createNotReady);
 
@@ -1159,7 +1168,7 @@ function createMovieContainer(data,index,listNum){
     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
-        imgSrc=`"images/movieSlate.jpg" style = "width: ${imageWidth}px; height: 432px"`
+        imgSrc=`"images/video.png" style = "width: ${imageWidth}px; height: 432px"`
     }
 
 
@@ -1688,8 +1697,8 @@ const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
     switchDisplay();
-    let searchMovie = document.querySelector("#search_input").value;
-    document.querySelector("#search_input").value = '';
+    let searchMovie = document.querySelector("#search-input").value;
+    document.querySelector("#search-input").value = '';
     if (searchMovie === ''){
         return
     }

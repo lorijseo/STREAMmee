@@ -24,14 +24,12 @@
 </head>
 <body>
 
-    <section class="header">
+    <!-- <section class="header">
         <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
         <div class="navbar-container">
             
             <ul class="menu">
-                <li class="menu-item">
-                    <a class="menu-title" href="#">About</a>
-                </li>
+
                 <li class="menu-item" id="menu-title-genre">
                     <a class="menu-title" href="#">Genre&nbsp;<i class="fas fa-angle-down"></i></a>
                     <ul class="sub-menu" id="sub-menu-genre">
@@ -56,9 +54,15 @@
                         <li class="sub-item"><a href="#" id="western">western</a></li>
                     </ul>
                 </li>
-                <!-- <li class="menu-item" >
-                    <a href="profile.html">Profile</a>
-                </li> -->
+                <li class="menu-item">
+                    <form action="" id="search-form">
+                        <input id="search_input" type="text" required/>
+                        <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-title" href="#">About</a>
+                </li>
                 <li class="menu-item" >
                     <a href="#" id="menu-title-subscription" class="menu-title">My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
                     <div id="filter">
@@ -80,18 +84,85 @@
 
                     </div>                  
                 </li>
+
+            </ul>
+        </div>
+
+    </section> -->
+
+    
+    <section class="header">
+        <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
+        <div>
+
+            <ul class="menu">
                 <li class="menu-item">
-                    <form action="" id="search-form">
-                        <input id="search_input" type="text" required/>
-                        <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
+                    <a class="menu-title" href="#">About</a>
+                </li>
+                <li class="menu-item" >
+                    <a href="#" id="menu-title-subscription" class="menu-title">My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <div id="filter">
+                        <div id="sub2"></div>
+                        <div id="subscription-container">
+                            <button class= "saveBtn" id="subscription-submit"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item" id="menu-region">
+                    <a id="menu-title-region" class="menu-title" href="#">Region</a>
+                    <div id="display-region">
+                        <form action="#">
+                            <select id="region"><option value="">Select</option></select>
+                            <div ><button action="submit" class= "saveBtn" id="regionBtn"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button></div>
+                        </form>
+
+
+                    </div>                  
                 </li>
             </ul>
         </div>
 
-    </section>
+        <div class="navbar-container">
+            <ul class="menu">
 
-    
+                <li class="menu-item" id="menu-title-genre">
+                    <a class="menu-title" href="#">Genre&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <ul class="sub-menu" id="sub-menu-genre">
+                        <li class="sub-item"><a href="#" id="action">action</a></li>
+                        <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
+                        <li class="sub-item"><a href="#" id="animation">animation</a></li>
+                        <li class="sub-item"><a href="#" id="comedy">comedy</a></li>
+                        <li class="sub-item"><a href="#" id="crime">crime</a></li>
+                        <li class="sub-item"><a href="#" id="documentary">documentary</a></li>
+                        <li class="sub-item"><a href="#" id="drama">drama</a></li>
+                        <li class="sub-item"><a href="#" id="family">family</a></li>
+                        <li class="sub-item"><a href="#" id="fantasy">fantasy</a></li>
+                        <li class="sub-item"><a href="#" id="history">history</a></li>
+                        <li class="sub-item"><a href="#" id="horror">horror</a></li>
+                        <li class="sub-item"><a href="#" id="music">music</a></li>
+                        <li class="sub-item"><a href="#" id="mystery">mystery</a></li>
+                        <li class="sub-item"><a href="#" id="romance">romance</a></li>
+                        <li class="sub-item"><a href="#" id="scifi">sci-fi</a></li>
+                        <li class="sub-item"><a href="#" id="thriller">thriller</a></li>
+                        <li class="sub-item"><a href="#" id="tv">tv</a></li>
+                        <li class="sub-item"><a href="#" id="war">war</a></li>
+                        <li class="sub-item"><a href="#" id="western">western</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item" id="menu-title-search">
+                    <form action="" id="search-form">
+                        <input id="search-input" type="text" required/>
+                        <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+
+
+
+    </section>
 
 
     <section id="main">
