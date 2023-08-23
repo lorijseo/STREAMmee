@@ -96,6 +96,10 @@ $j(function(){
 
 })
 
+$j(window).resize(function() {
+    $j("#dialog-message").dialog("option", "position", {my: "center", at: "center", of: window});
+});
+
 
 // $j(function(){
 
@@ -499,7 +503,7 @@ async function searchByGenre(genreCode){
         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
         if (selectedMovies[0].length == 0){
-            document.querySelector(`#notReady${counter}`).style.display = 'none';
+            document.querySelector(`#loadingBtn${counter}`).style.display = 'none';
             break
         }
 
@@ -517,6 +521,7 @@ async function searchByGenre(genreCode){
                 //last page needs prev button
                 createNextBtn(counter);
                 createPrevBtn(counter);
+                createHomeBtn(counter);
             }
             break
         }
@@ -536,10 +541,11 @@ async function searchByGenre(genreCode){
                 
                 createNextBtn(counter);
                 createPrevBtn(counter);
-                notReadyBtn(counter);               
+                loadingBtn(counter);               
             }
             else if(counter == searchLimit){
                 createPrevBtn(counter);
+                createHomeBtn(counter);
             }
         }
     }
@@ -571,7 +577,7 @@ async function searchByGenre(genreCode){
 //         const selectedMovies = await getMovieData(genreCode, providerList, locationCode, pageNum, startEl);
 
 //         if (selectedMovies[0].length == 0){
-//             document.querySelector(`#notReady${counter}`).style.display = 'none';
+//             document.querySelector(`#loadingBtn${counter}`).style.display = 'none';
 //             break
 //         }
 
@@ -605,7 +611,7 @@ async function searchByGenre(genreCode){
                 
 //                 createNextBtn(counter);
 //                 createPrevBtn(counter);
-//                 notReadyBtn(counter);               
+//                  loadingBtn(counter);               
 //             }
 //             else if(counter == searchLimit){
 //                 createPrevBtn(counter);
@@ -1118,15 +1124,24 @@ function createPrevBtn(count){
     })
 }
 
+function createHomeBtn(count){
+    const createButton = document.createElement('a');
+    createButton.setAttribute('class', 'homeBtn' );
+    createButton.href = "movie.html";
+    createButton.innerHTML = `<i class="fa-solid fa-ticket">&nbsp;Home</i>`;
+    const btnContainer = document.querySelector(`#btnContainer${count}`);
+    btnContainer.appendChild(createButton);
+}
 
 
-function notReadyBtn(count){
-    const createNotReady = document.createElement('button');
-    createNotReady.setAttribute('id', `notReady${count}`);
-    createNotReady.setAttribute('class', `notReady`);
-    createNotReady.innerHTML = `<i class="fa-solid fa-spinner"></i>`;
-    // document.querySelector(`#display${count}`).appendChild(createNotReady);
-    document.querySelector(`#btnContainer${count}`).appendChild(createNotReady);
+
+function loadingBtn(count){
+    const createLoading = document.createElement('button');
+    createLoading.setAttribute('id', `loadingBtn${count}`);
+    createLoading.setAttribute('class', `loadingBtn`);
+    createLoading.innerHTML = `<i class="fa-solid fa-spinner"></i>`;
+    // document.querySelector(`#display${count}`).appendChild(createLoading);
+    document.querySelector(`#btnContainer${count}`).appendChild(createLoading);
 
 }
 
@@ -1136,9 +1151,9 @@ function isPageReady(searchLimit){
         let nextPageReady = document.querySelector(`#display${i}`);
         if (nextPageReady){
             console.log(`page ${i} is readyyy`)
-            const controlBtns = document.querySelector(`#notReady${i-1}`);
+            const controlBtns = document.querySelector(`#loadingBtn${i-1}`);
             if (controlBtns){
-                document.querySelector(`#notReady${i-1}`).style.display = "none";
+                document.querySelector(`#loadingBtn${i-1}`).style.display = "none";
                 document.querySelector(`#nextBtn${i-1}`).style.display = "block";
 
             }
@@ -1168,7 +1183,7 @@ function createMovieContainer(data,index,listNum){
     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
-        imgSrc=`"images/video.png" style = "width: ${imageWidth}px; height: 432px"`
+        imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
     }
 
 
@@ -1450,8 +1465,7 @@ async function displayMovie(foundMovie){
     else{
         document.querySelector("#dialog-message").innerHTML = `
         <div class="videoDisplay">
-        <img id="movieTrailer" src="https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg" 
-        height="${videoHeight}" width="${videoWidth}  alt=""></div>`
+        <img id="movieTrailer" src="images/no-video.png" alt=""></div>`
     }
 
 
@@ -1478,21 +1492,21 @@ async function displayMovie(foundMovie){
         const buyArray = displayPreviewBuy(providersData);
         if ((!providersArray)&&(!buyArray)){
             document.querySelector("#dialog-message").innerHTML += `
-            <p>We cannot find any streaming platforms for this movie</p>`
+            <p class="errorDisplay"><i class="fa-solid fa-triangle-exclamation"></i>We cannot find any streaming platforms for this movie</p>`
         }
         if (providersArray){
             document.querySelector("#dialog-message").innerHTML += `
-            <div class="streamDisplay"><p class='providerLabel'>Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>`
+            <div class="streamDisplay"><p class='providerLabel'><i class="fa-solid fa-tv"></i>&nbsp;Stream</p><p class="previewStream" id= "previewStream">${providersArray}</p></div>`
         }
         if (buyArray){
             document.querySelector("#dialog-message").innerHTML += `
-            <div class="buyDisplay"><p class='providerLabel'>Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
+            <div class="buyDisplay"><p class='providerLabel'><i class="fa-regular fa-credit-card"></i>&nbsp;Buy</p><p class="previewBuy" id= "previewBuy">${buyArray}</p></div>
             `
         }
     }
     else{
         document.querySelector("#dialog-message").innerHTML += `
-        <p>This movie is not available in your location</p>`
+        <p class="errorDisplay"><i class="fa-solid fa-location-pin-lock"></i> No streaming platforms in your region</p>`
     }
 }
 

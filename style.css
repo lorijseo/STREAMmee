@@ -317,7 +317,7 @@ a{
 }
 
 
-.nextBtn, .prevBtn{
+.nextBtn, .prevBtn, .loadingBtn, .homeBtn{
   text-align:center;
   margin: auto;
   background-color: transparent;
@@ -411,11 +411,11 @@ a{
   display: flex;
   justify-content: column;
   flex-wrap: wrap;
+  background-color: #302e2e;
+  padding-bottom: 3%;
 }
 
-#dialog-message {
-  background-color: #302e2e;
-}
+
 
 .ui-front {
   z-index: 1000 !important;
@@ -440,7 +440,7 @@ a{
   visibility: hidden;
 }
 
-.cancel-button {
+#cancel-button {
   text-align: center;
   background-color: transparent;
   border: none;
@@ -452,8 +452,8 @@ a{
 }
 
 #cancel-button i {
-  color: red;
-  font-size: 40px;
+  color: orange;
+  font-size: 50px;
   opacity: 0.4;
 }
 
@@ -508,7 +508,7 @@ a{
   display:flex;
   width:100%;
   align-items: center;
-  margin: 1% 2%;
+  margin: 1%;
   flex-wrap: wrap;
 }
 
@@ -544,8 +544,14 @@ a{
 #dialog-message .providerLabel{
   width: 100px;
   /* text-align:center; */
-  font-size:18px;
+  font-size:20px;
   margin: 5px;
+  color:orange;
+}
+
+#dialog-message .errorDisplay{
+  margin: 2%;
+  color:red;
 }
 /* ***********************************PROFILE*********************************** */
 
