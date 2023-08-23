@@ -21,14 +21,35 @@ app.use(cors());
 
 // MAKE SURE TO REMOVE THIS LATER 
 // var fetch = require("node-fetch");
+const key = "613a35f50aa647f0d9c8c32ff6377714";
+
+app.get(`/moviedata/horror/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=27&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
 
 
-
-const key = "613a35f50aa647f0d9c8c32ff6377714"
 app.get('/moviedata/horror', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie/?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=27`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/romance/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=10749&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/romance', async (req, res, next) => {
@@ -37,16 +58,39 @@ app.get('/moviedata/romance', async (req, res, next) => {
     res.send(data);
 });
 
+
+
 app.get('/moviedata/action', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=28`);
     const data = await response.json();
     res.send(data);
 });
-
+app.get(`/moviedata/adventure/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=12&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
 app.get('/moviedata/adventure', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=12`);
     const data = await response.json();
     res.send(data);
+});
+
+
+app.get(`/moviedata/animation/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=16&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/animation', async (req, res, next) => {
@@ -55,10 +99,32 @@ app.get('/moviedata/animation', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/comedy/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=35&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/comedy', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=35`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/crime/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=80&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/crime', async (req, res, next) => {
@@ -67,10 +133,32 @@ app.get('/moviedata/crime', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/documentary/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=99&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/documentary', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=99`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/drama/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=18&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/drama', async (req, res, next) => {
@@ -79,10 +167,32 @@ app.get('/moviedata/drama', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/family/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=10751&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/family', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=10751`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/fantasy/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=14&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/fantasy', async (req, res, next) => {
@@ -91,10 +201,32 @@ app.get('/moviedata/fantasy', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/history/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=36&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/history', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=36`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/music/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=10402&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/music', async (req, res, next) => {
@@ -103,10 +235,32 @@ app.get('/moviedata/music', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/mystery/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=9648&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/mystery', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=9648`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/thriller/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=53&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/thriller', async (req, res, next) => {
@@ -115,10 +269,32 @@ app.get('/moviedata/thriller', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/war/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=10752&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/war', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=10752`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/western/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=37&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/western', async (req, res, next) => {
@@ -127,10 +303,32 @@ app.get('/moviedata/western', async (req, res, next) => {
     res.send(data);
 });
 
+app.get(`/moviedata/sciencefiction/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=878&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
+});
+
 app.get('/moviedata/sciencefiction', async (req, res, next) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&with_genres=878`);
     const data = await response.json();
     res.send(data);
+});
+
+app.get(`/moviedata/tvmovie/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=10770&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+    res.send(mergedArr);
 });
 
 app.get('/moviedata/tvmovie', async (req, res, next) => {
@@ -172,6 +370,31 @@ app.get('/moviedata/trendweek', async (req, res, next) => {
 //     res.send(mergedArr)
 // });
 
+app.get(`/moviedata/action/:code`, async (req, res, next) => {
+    const code = req.params.code;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&watch_region=${code}&sort_by=popularity.desc&with_genres=28&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+
+    res.send(mergedArr);
+});
+
+app.get(`/get_movies/:movie_title`, async (req, res, next) => {
+    const movie_title = req.params.movie_title;
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie_title}&include_adult=false&language=en-US&page=${i}`, options);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+
+    res.send(mergedArr);
+});
+
+
 const options = {
     method: 'GET',
     headers: {
@@ -197,12 +420,12 @@ app.get(`/get_keys/:movie_id`, async(req,res,next)=>{
 })
 
 //returns list of similar movies given string
-app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
-    const movie_title = req.params.movie_title;
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie_title}&include_adult=false&language=en-US&page=1`, options)
-    const data = await response.json();
-    res.send(data);
-})
+// app.get(`/get_movies/:movie_title`,async(req,res,next)=>{
+//     const movie_title = req.params.movie_title;
+//     const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie_title}&include_adult=false&language=en-US&page=1`, options)
+//     const data = await response.json();
+//     res.send(data);
+// })
 
 
 
@@ -231,6 +454,17 @@ app.get(`/get_regions`, async(req,res,next)=>{
     res.send(data);
 })
 
+
+app.get(`/get_genre`, async(req,res,next)=>{
+
+    const response = await fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options);
+    const data = await response.json();
+    res.send(data);
+});
+  
+
+
+
   
 app.get(`/get_subscriptions/:code`, async(req,res,next)=>{
     const code= req.params.code;
@@ -252,6 +486,36 @@ app.get(`/get_movies_by_filter/:providers/:code/:page`, async(req,res,next)=>{
     const data = await response.json();
     res.send(data);
 })
+
+app.get(`/get_movies_by_filter/:providers/:code/:page`, async(req,res,next)=>{
+    const providers = req.params.providers;
+    const code = req.params.code;
+    const page = req.params.page;
+    let providersFormatted = formatProviderQuery(providers);
+
+    // console.log(providersFormatted);
+    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&with_watch_providers=${providersFormatted}&watch_region=${code}&page=${page}`);
+    const data = await response.json();
+    res.send(data);
+})
+
+
+
+
+app.get(`/get_movies_by_stream/:providers/:code/`, async (req, res, next) => {
+    const providers = req.params.providers;
+    const code = req.params.code;
+    let providersFormatted = formatProviderQuery(providers);
+    let mergedArr = [];
+    for(let i=1; i<=5; i++){
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=613a35f50aa647f0d9c8c32ff6377714&with_watch_providers=${providersFormatted}&watch_region=${code}&page=${i}`);
+        const data = await response.json();
+        mergedArr.push(data.results);
+    }
+
+    res.send(mergedArr);
+});
+
 
 function formatProviderQuery(param){
     const reformatted = param.replaceAll('-', '|');

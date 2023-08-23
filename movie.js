@@ -153,11 +153,13 @@ $j(window).resize(function() {
 // ====================================================================================================
 
 const actionBtn = document.getElementById("action");
-actionBtn.addEventListener("click", function(e){
+actionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 28;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -165,7 +167,16 @@ actionBtn.addEventListener("click", function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
+    
 });
 
 const adventureBtn = document.getElementById("adventure");
@@ -173,7 +184,9 @@ adventureBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 12;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -181,7 +194,15 @@ adventureBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 
 });
 
@@ -190,7 +211,9 @@ animationBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 16;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -198,7 +221,15 @@ animationBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 
@@ -207,7 +238,9 @@ comedyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 35;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -215,7 +248,15 @@ comedyBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const crimeBtn = document.getElementById("crime");
@@ -223,7 +264,9 @@ crimeBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 80;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -231,7 +274,15 @@ crimeBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const documentaryBtn = document.getElementById("documentary");
@@ -239,7 +290,9 @@ documentaryBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 99;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -247,7 +300,15 @@ documentaryBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const dramaBtn = document.getElementById("drama");
@@ -255,7 +316,9 @@ dramaBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 18;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -263,7 +326,15 @@ dramaBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const familyBtn = document.getElementById("family");
@@ -271,7 +342,9 @@ familyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10751;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -279,7 +352,15 @@ familyBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const fantasyBtn = document.getElementById("fantasy");
@@ -287,7 +368,9 @@ fantasyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 14;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -295,7 +378,15 @@ fantasyBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const historyBtn = document.getElementById("history");
@@ -303,7 +394,9 @@ historyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 36;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -311,14 +404,24 @@ historyBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 const horrorBtn = document.getElementById("horror");
 horrorBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 27;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -326,7 +429,15 @@ horrorBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 
 });
 const musicBtn = document.getElementById("music");
@@ -334,7 +445,9 @@ musicBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10402;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -342,7 +455,15 @@ musicBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 })
 
 const mysteryBtn = document.getElementById("mystery");
@@ -350,7 +471,9 @@ mysteryBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 9648;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -358,14 +481,24 @@ mysteryBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 })
 const romanceBtn = document.getElementById("romance");
 romanceBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10749;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -373,7 +506,15 @@ romanceBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const scienceFictionBtn = document.getElementById("scifi");
@@ -381,7 +522,9 @@ scienceFictionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 878;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -389,7 +532,15 @@ scienceFictionBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const thrillerBtn = document.getElementById("thriller");
@@ -397,7 +548,9 @@ thrillerBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 53;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -405,7 +558,15 @@ thrillerBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 })
 
 const tvBtn = document.getElementById("tv");
@@ -413,7 +574,9 @@ tvBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10770;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -421,7 +584,15 @@ tvBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 })
 
 
@@ -430,7 +601,9 @@ warBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10752;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -438,27 +611,25 @@ warBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
 });
 
 const westernBtn = document.getElementById("western");
 westernBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    //if no subscriptions, fetch directly
-
-    const subscriptionList = localStorage.getItem('subscription')
-    if ((subscriptionList == null)){
-        console.log("yay")
-        const genre = this.getAttribute("id")
-        const data = await getMovieApi(genre)
-        displayMovieContainer(data.results, 10, 1);
-        addMovieRoutes();
-    }
-
-    //subscriptions
     const genreCode = 37;
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const genreDisplay = document.querySelector('.displayMovies')
+    const checkStreams = retrieveSubscriptionsStorage()
+    const genreDisplay = document.querySelector('.displayMovies');
+
     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
         return
     }
@@ -466,7 +637,15 @@ westernBtn.addEventListener("click", async function(e){
         localStorage.setItem('genreDisplay', genreCode);
         document.location.reload();
     }
-    searchByGenre(genreCode);
+    else if (checkStreams.length == 0){
+        const genre = this.getAttribute("id");
+        const location = getLocation();
+        const data = await getFullMovieApi(genre,location.country_code);
+        displaySearchMovieContainer(data);
+    }
+    else{
+        searchByGenre(genreCode);
+    }
     
 });
 // ====================================================================================================
@@ -623,7 +802,7 @@ async function searchByGenre(genreCode){
 
 async function getMovieData(genreCode, providerList, locationCode, pageNum, startEl){
     let selectedMovies = []
-
+    
     while ((selectedMovies.length <= 10)){
         const data = await getMoviesByFilter(providerList, locationCode, pageNum);
         for(let i =startEl; i<data.results.length; i++){
@@ -640,7 +819,7 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
         console.log(pageNum)
         pageNum +=1;
         // console.log(selectedMovies.length);
-        if (pageNum >150){
+        if (pageNum >100){
             console.log(selectedMovies);
             return [selectedMovies, 0, 0]
         }
@@ -665,6 +844,12 @@ async function getMovieApi(genreName){
     return data
 }
 
+async function getFullMovieApi(genreName, country_code){
+    const response = await fetch(`http://localhost:4000/moviedata/${genreName}/${country_code}`);
+    const data = await response.json();
+    return data
+}
+
 
 async function getKeywords(movie_id){
     const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
@@ -685,6 +870,13 @@ async function getMovie(movie_id){
     return data
 }
 
+async function getGenre(){
+    const response = await fetch(`http://localhost:4000/get_genre`);
+    const data = await response.json();
+    return data
+}
+
+
 async function getProviders(movie_id){
     const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
     const data = await response.json();
@@ -694,6 +886,13 @@ async function getProviders(movie_id){
 async function getMoviesByFilter(provider_list, country_code,page_num){
     // const providers = formatProviderParam(provider_list)
     const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
+    const data = await response.json();
+    return data
+
+}
+
+async function getMoviesByStream(provider_list, country_code){
+    const response = await fetch(`http://localhost:4000/get_movies_by_stream/${provider_list}/${country_code}`);
     const data = await response.json();
     return data
 
@@ -827,12 +1026,12 @@ function addLogoRoutes(userSubscriptionsArr){
             document.location.reload();
         }
         // if genre isn't selected, show top movies from providers
-        // else{
-        //     const location = getLocation();
-        //     const data = await getMoviesByFilter(subscriptionList, location.country_code, 1);
-        //     displaySearchMovieContainer(data.results, 10);
-        //     addSearchMovieRoutes();
-        // }
+        else{
+            const location = getLocation();
+            const providerList = formatProviderParam(subscriptionList);
+            const data = await getMoviesByStream(providerList, location.country_code);
+            displaySearchMovieContainer(data);
+        }
         
     })
 }
@@ -1040,32 +1239,86 @@ function displayMovieContainer(data, numOfMovies, count){
     isPageReady(10);
 }
 
-function displaySearchMovieContainer(data, numOfMovies){
-    let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
-        return createMovieContainer(object,index,1)
-    }).join("");
+// function displaySearchMovieContainer(data, numOfMovies){
+//     document.querySelector("#main").style.display = "none";
+//     document.querySelector("#sub1").style.display = "none";
 
-    // document.querySelector("#main").style.opacity = 0.2;
+
+//     let dataDisplay = data.slice(0,numOfMovies).map((object, index) => {
+//         return createMovieContainer(object,index,1)
+//     }).join("");
+
+
+//     const newContainer = document.createElement('div');
+//     newContainer.setAttribute('class', 'displayList');
+//     // newContainer.setAttribute('id', `search${count}`);
+//     newContainer.innerHTML += dataDisplay;
+
+//     // if (count !== 1){
+//     //     newContainer.style.display = 'none';
+//     // }
+
+//     document.querySelector(".displayMovies").appendChild(newContainer);
+
+//     // display next button when page is ready
+//     // isPageReady(10);
+// }
+
+
+function displaySearchMovieContainer(data){
     document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
 
-    const newContainer = document.createElement('div');
-    newContainer.setAttribute('class', 'displayList');
-    // newContainer.setAttribute('id', `search${count}`);
-    newContainer.innerHTML += dataDisplay;
+    let counter = 1
+    for (let i=0; i<3; i++){
+        if (data[i].length > 0){
+            for(let j=0; j<=10; j+=10){
+                if ((data[i].length > 10) || (j==0)){
+                    const newContainer = document.createElement('div');
+                    newContainer.setAttribute('class', 'displayList');
+                    newContainer.setAttribute('id', `display${counter}`);
+                    if (counter !== 1){
+                        newContainer.style.display = 'none';
+                    }
+            
+                    let dataDisplay = data[i].slice(0+j,10+j).map((object,index)=>{
+                        return createMovieContainer(object,index,counter)
+                    }).join("");
+            
+                    newContainer.innerHTML += dataDisplay;
+                    document.querySelector(".displayMovies").appendChild(newContainer);
+                    counter +=1
+                }
 
-    // if (count !== 1){
-    //     newContainer.style.display = 'none';
-    // }
-
-    document.querySelector(".displayMovies").appendChild(newContainer);
-
-    // display next button when page is ready
-    // isPageReady(10);
-
+            }
+        }
+    }
+    displaySearchBtns(counter)
 
 }
 
+function displaySearchBtns(counter){
+    const lastPage = counter-1
+    for (let i=lastPage; i>0; i--){
+        if (i !== lastPage){
+            createNextBtn(i);
+            createPrevBtn(i);  
+            document.querySelector(`#nextBtn${i}`).style.display = "block";
+
+            if (i == 1){
+                //initialize movie routes for first page only
+                addGenreMovieRoutes(1);
+            }
+        }
+        else if(i == lastPage){
+            createNextBtn(i);
+            createPrevBtn(i);
+            createHomeBtn(i);
+            document.querySelector(`#prevBtn${i}`).style.display = "block";
+            document.querySelector(`.homeBtn`).style.display = "block";
+        }
+    }
+}
 
 
 function createNextBtn(count){
@@ -1181,7 +1434,7 @@ function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const idName = "movie_btn_" + listNum +'_' +index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
@@ -1673,14 +1926,45 @@ window.addEventListener('load', async function(){
     mainCarousel("trendweek","#trendWeekOwl");
 
     const isGenreDisplay = JSON.parse(this.localStorage.getItem('genreDisplay'));
-    if (isGenreDisplay){
+    const streamCheck = retrieveSubscriptionsStorage();
+
+    const returningUser = this.localStorage.getItem('user');
+
+    if (!returningUser){
+        const geoLocation = JSON.parse(this.localStorage.getItem('geoLocation'));
+        let user ={};
+        user["location"] = geoLocation;
+        this.localStorage.setItem('user',JSON.stringify(user));
+        // this.localStorage.setItem("user", geoLocation);
+    }
+    //movie displayed and no streaming service
+    if ((isGenreDisplay) && (streamCheck.length == 0)){
+        const genreName = await convertGenreToName(isGenreDisplay);
+        const location = getLocation();
+        const data = await getFullMovieApi(genreName,location.country_code);
+        displaySearchMovieContainer(data);
+        this.localStorage.removeItem('genreDisplay');
+    }
+
+    //movie displayed and streaming service
+    else if (isGenreDisplay){
         // retrieve genre i want and search
 
         searchByGenre(isGenreDisplay)
-        this.localStorage.removeItem('genreDisplay')
+        this.localStorage.removeItem('genreDisplay');
     }   
 })
 
+
+async function convertGenreToName(code){
+    const data = await getGenre();
+    for (let i=0; i< data.genres.length; i++){
+        if (data.genres[i]["id"] == code){
+            return data.genres[i]["name"]
+        }
+    }
+
+}
 
 const characterArr = {
     " ": "%20",
@@ -1708,6 +1992,40 @@ const characterArr = {
     "$": "%24"
 }
 
+// const searchBtn = document.querySelector("#searchBtn");
+// searchBtn.addEventListener("click", async function(e){
+//     e.preventDefault();
+//     switchDisplay();
+//     let searchMovie = document.querySelector("#search-input").value;
+//     document.querySelector("#search-input").value = '';
+//     if (searchMovie === ''){
+//         return
+//     }
+//     for (let i=0; i<searchMovie.length; i++){
+//         if (searchMovie.charAt(i) in characterArr){
+//             const invalidChar = searchMovie.charAt(i);
+//             const newString = searchMovie.replace(invalidChar, characterArr[invalidChar]);
+//             searchMovie = newString
+//         }
+//     }
+//     const movieList = await getMovieList(searchMovie);
+
+//     //validate if movie title exists
+//     if (movieList.results.length > 0){
+//         console.log(movieList.results.length)
+//         // displaySimiliarMovies(movieList);
+//         displaySearchMovieContainer(movieList.results,20);
+//         addSearchMovieRoutes()
+
+//     }
+
+//     else{
+//         alert("We cannot find anything in our database")
+
+//     }
+    
+// })
+
 const searchBtn = document.querySelector("#searchBtn");
 searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
@@ -1727,11 +2045,10 @@ searchBtn.addEventListener("click", async function(e){
     const movieList = await getMovieList(searchMovie);
 
     //validate if movie title exists
-    if (movieList.results.length > 0){
-        console.log(movieList.results.length)
+    if (movieList.length > 0){
         // displaySimiliarMovies(movieList);
-        displaySearchMovieContainer(movieList.results,20);
-        addSearchMovieRoutes()
+        displaySearchMovieContainer(movieList);
+        addSearchMovieRoutes();
 
     }
 
