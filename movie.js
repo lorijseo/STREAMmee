@@ -1053,6 +1053,19 @@ function addLogoRoutes(userSubscriptionsArr){
         if (document.querySelector('.displayMovies').hasChildNodes()){
             const genreCode = JSON.parse(localStorage.getItem('genre'));
             localStorage.setItem('genreDisplay', genreCode);
+            
+        }
+        document.location.reload();
+        
+    })
+
+    document.querySelector('#subscription-search').addEventListener('click', async function(e){
+        localStorage.setItem('subscription', subscriptionList.toString());
+        document.querySelector('#filter').style.display = 'none';
+
+        if (document.querySelector('.displayMovies').hasChildNodes()){
+            const genreCode = JSON.parse(localStorage.getItem('genre'));
+            localStorage.setItem('genreDisplay', genreCode);
             document.location.reload();
         }
         // if genre isn't selected, show top movies from providers
@@ -1064,8 +1077,8 @@ function addLogoRoutes(userSubscriptionsArr){
             
             displayMyServices(subscriptionList);
         }
-        
     })
+
 }
 
 
@@ -1347,7 +1360,8 @@ function displaySearchMovieContainer(data){
     // document.querySelector("#main").style.display = "none";
     // document.querySelector("#sub1").style.display = "none";
 
-    hideBackground()
+    hideBackground();
+    document.querySelector('#services').style.display="none";
 
     let counter = 1
     for (let i=0; i<3; i++){
@@ -2121,6 +2135,12 @@ searchBtn.addEventListener("click", async function(e){
     e.preventDefault();
     switchDisplay();
     let searchMovie = document.querySelector("#search-input").value;
+
+    const newEl = document.createElement('div');
+    newEl.setAttribute('id', 'searchMsg');
+    newEl.innerHTML = `<p> Search <i class="fa-solid fa-magnifying-glass"></i> results for "${searchMovie}" `;
+    document.querySelector('.displayMovies').appendChild(newEl);
+
     document.querySelector("#search-input").value = '';
     if (searchMovie === ''){
         return
@@ -2134,8 +2154,9 @@ searchBtn.addEventListener("click", async function(e){
     }
     const movieList = await getMovieList(searchMovie);
 
+    console.log(movieList)
     //validate if movie title exists
-    if (movieList.length > 0){
+    if (movieList[0].length > 0){
         // displaySimiliarMovies(movieList);
         displaySearchMovieContainer(movieList);
         addSearchMovieRoutes();
@@ -2143,7 +2164,11 @@ searchBtn.addEventListener("click", async function(e){
     }
 
     else{
-        alert("We cannot find anything in our database")
+        hideBackground();
+        document.querySelector('#services').style.display = "none";
+        newEl.innerHTML += `
+        <img src="images/no-results.png">
+        <p> No results found. </p>`;
 
     }
     
