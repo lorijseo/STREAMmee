@@ -915,6 +915,36 @@ async function getSubscriptions(country_code){
 
 // *************************SUBSCRIPTION FILTER*************************
 
+document.querySelector('#editServiceBtn').addEventListener('click', async function(e){
+    e.preventDefault();
+    window.scrollTo(0,0);
+    const subscriptionNav = document.querySelector('#filter');
+    const currentState = window.getComputedStyle(subscriptionNav);
+    if (currentState['display'] === 'none'){
+        const userLocation = getLocation();
+        const countryCode = userLocation.country_code;
+        const data = await getSubscriptions(countryCode);
+    
+    
+        const userLogo = await getSubscriptionLogo(data);
+        displaySubscription(userLogo);
+        let subscriptionList = retrieveSubscriptionsStorage();
+        
+        // consider if user does not choose a filter
+        if (subscriptionList[0] == ''){
+            subscriptionList = [];
+        }
+        else{
+            showSelectedSubscriptions(subscriptionList);
+        }
+        addLogoRoutes(subscriptionList)
+    }
+    else{
+        document.querySelector('#filter').style.display = "none";
+    }
+
+
+})
 
 document.querySelector('#menu-title-subscription').addEventListener('click', async function(e){
     e.preventDefault();
@@ -1031,15 +1061,29 @@ function addLogoRoutes(userSubscriptionsArr){
             const providerList = formatProviderParam(subscriptionList);
             const data = await getMoviesByStream(providerList, location.country_code);
             displaySearchMovieContainer(data);
-            displayMyServices.innerHTML = ``;
-            displayMyServices();
+            
+            displayMyServices(subscriptionList);
         }
         
     })
 }
 
+
+document.querySelector('#trendingServiceBtn').addEventListener('click', async function(e){
+    e.preventDefault();
+
+    const subscriptionList = JSON.parse(localStorage.getItem('subscription'))
+
+    const location = getLocation();
+    const providerList = formatProviderParam(subscriptionList);
+    const data = await getMoviesByStream(providerList, location.country_code);
+    displaySearchMovieContainer(data);
+ 
+})
+
 async function displayMyServices(myStream){
     const displayMyServices = document.querySelector('#myServices');
+    displayMyServices.innerHTML = ``;
     // const myStream = retrieveSubscriptionsStorage();
     if (myStream.length == 0){
         displayMyServices.innerHTML = `<p id="emptyServicesMsg">Empty</p>`;
@@ -1060,6 +1104,13 @@ async function displayMyServices(myStream){
             num +=1;
         }
     }
+
+}
+
+function hideBackground(){
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#sub1").style.display = "none";
+    document.querySelector("#displayServices").style.display = "none";
 }
 
 // displayMyServices();
@@ -1244,11 +1295,11 @@ function displayMovieContainer(data, numOfMovies, count){
     }).join("");
 
     
-    document.querySelector("#main").style.display = "none";
-    document.querySelector("#sub1").style.display = "none";
+    // document.querySelector("#main").style.display = "none";
+    // document.querySelector("#sub1").style.display = "none";
+    // document.querySelector("#displayServices").style.display = "none";
 
-    // document.querySelector("#main").style.opacity = 0.2;
-    // document.querySelector("#sub1").style.opacity = 0.2;
+    hideBackground();
 
     const newContainer = document.createElement('div');
     newContainer.setAttribute('class', 'displayList');
@@ -1293,8 +1344,10 @@ function displayMovieContainer(data, numOfMovies, count){
 
 
 function displaySearchMovieContainer(data){
-    document.querySelector("#main").style.display = "none";
-    document.querySelector("#sub1").style.display = "none";
+    // document.querySelector("#main").style.display = "none";
+    // document.querySelector("#sub1").style.display = "none";
+
+    hideBackground()
 
     let counter = 1
     for (let i=0; i<3; i++){
