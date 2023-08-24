@@ -1070,12 +1070,14 @@ function addLogoRoutes(userSubscriptionsArr){
         }
         // if genre isn't selected, show top movies from providers
         else{
+
             const location = getLocation();
             const providerList = formatProviderParam(subscriptionList);
             const data = await getMoviesByStream(providerList, location.country_code);
             displaySearchMovieContainer(data);
-            
             displayMyServices(subscriptionList);
+            document.querySelector('#services').style.display = 'block';
+            
         }
     })
 
