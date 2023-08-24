@@ -1084,17 +1084,17 @@ function addLogoRoutes(userSubscriptionsArr){
 }
 
 
-document.querySelector('#trendingServiceBtn').addEventListener('click', async function(e){
-    e.preventDefault();
+// document.querySelector('#trendingServiceBtn').addEventListener('click', async function(e){
+//     e.preventDefault();
 
-    const subscriptionList = JSON.parse(localStorage.getItem('subscription'))
+//     const subscriptionList = JSON.parse(localStorage.getItem('subscription'))
 
-    const location = getLocation();
-    const providerList = formatProviderParam(subscriptionList);
-    const data = await getMoviesByStream(providerList, location.country_code);
-    displaySearchMovieContainer(data);
+//     const location = getLocation();
+//     const providerList = formatProviderParam(subscriptionList);
+//     const data = await getMoviesByStream(providerList, location.country_code);
+//     displaySearchMovieContainer(data);
  
-})
+// })
 
 async function displayMyServices(myStream){
     const displayMyServices = document.querySelector('#myServices');
