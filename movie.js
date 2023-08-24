@@ -1,7 +1,7 @@
 var $j = jQuery.noConflict();
 
-$j(".owl-carousel").each(function(){
-    $j(this).owlCarousel({
+$j(function(){
+    $j('#mainOwl').owlCarousel({
         loop:true,
         margin:10,
         // nav:true,
@@ -9,31 +9,23 @@ $j(".owl-carousel").each(function(){
         // autoplay:true,
         // autoplayTimeout: 3000,
         dots:true,
-        stagePadding:50,
-        pagination : false,
-        lazyLoad:true,
+        stagePadding:0,
         responsive:{
             0:{
                 items:1
             },
             600:{
-                items:3
+                items:1
             },
             1000:{
-                items:4
-            },
-            1200:{
-                items:6
+                items:1
             }
         }
     });
-  });
+});
 
-//jquery runs after document is loaded
-
-
-// $j(function($){
-//     $('#trendTodayOwl').owlCarousel({
+// $j(".owl-carousel").each(function(){
+//     $j(this).owlCarousel({
 //         loop:true,
 //         margin:10,
 //         // nav:true,
@@ -42,6 +34,8 @@ $j(".owl-carousel").each(function(){
 //         // autoplayTimeout: 3000,
 //         dots:true,
 //         stagePadding:50,
+//         pagination : false,
+//         lazyLoad:true,
 //         responsive:{
 //             0:{
 //                 items:1
@@ -50,11 +44,102 @@ $j(".owl-carousel").each(function(){
 //                 items:3
 //             },
 //             1000:{
-//                 items:8
+//                 items:4
+//             },
+//             1200:{
+//                 items:6
 //             }
 //         }
 //     });
 // });
+
+$j('#trendTodayOwl').on('click', '.owl-item', function(e){
+    // $j(this).trigger('stop.owl.autoplay');
+    var carousel = $j('.owl-carousel').data('owl.carousel');
+    e.preventDefault();
+    carousel.to(carousel.relative($j(this).index()));
+    addOwlMovieRoutes(carousel, '#trendTodayOwl');
+    
+})
+
+$j('#trendWeekOwl').on('click', '.owl-item', function(e){
+    // $j(this).trigger('stop.owl.autoplay');
+    // $j('#trendWeekOwl').trigger('stop.owl.autoplay');
+
+    var carousel = $j('.owl-carousel').data('owl.carousel');
+    e.preventDefault();
+    carousel.to(carousel.relative($j(this).index()));
+    addOwlMovieRoutes(carousel, '#trendWeekOwl');
+    
+})
+
+async function addOwlMovieRoutes(carousel, carouselId){
+    // const movieClass = this.querySelector(".title");
+    // const movieId = movieClass.id;
+    console.log(carousel);
+    console.log(carousel._current);
+    const carouselIndex = carousel._current;
+
+    const findCarousel = document.querySelector(carouselId);
+    const allCarouselItems = findCarousel.querySelectorAll('.owl-item');
+    const currentItem = allCarouselItems[carouselIndex];
+    const itemId = currentItem.querySelector('.owlImg').getAttribute("id");
+    const data = await getMovie(itemId);
+    displayMoviePreview(data);
+}
+
+//jquery runs after document is loaded
+
+
+
+$j(function($){
+    $('#trendTodayOwl').owlCarousel({
+        loop:true,
+        margin:10,
+        // nav:true,
+        mouseDrag:true,
+        // autoplay:true,
+        // autoplayTimeout: 3000,
+        dots:true,
+        stagePadding:50,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:8
+            }
+        }
+    });
+});
+
+$j(function($){
+    $('#trendWeekOwl').owlCarousel({
+        loop:true,
+        margin:10,
+        // nav:true,
+        mouseDrag:true,
+        // autoplay:true,
+        // autoplayTimeout: 3000,
+        dots:true,
+        stagePadding:50,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:8
+            }
+        }
+    });
+});
+
 
 // document.querySelector('#topBtn').addEventListener('click', function(e){
 //     e.preventDefault();
@@ -1123,9 +1208,10 @@ async function displayMyServices(myStream){
 }
 
 function hideBackground(){
-    document.querySelector("#main").style.display = "none";
+    // document.querySelector("#main").style.display = "none";
     document.querySelector("#sub1").style.display = "none";
-    document.querySelector("#displayServices").style.display = "none";
+    // document.querySelector("#displayServices").style.display = "none";
+    document.querySelector('#mainOwl').style.display = "none";
 }
 
 // displayMyServices();
