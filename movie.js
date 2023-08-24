@@ -1031,11 +1031,38 @@ function addLogoRoutes(userSubscriptionsArr){
             const providerList = formatProviderParam(subscriptionList);
             const data = await getMoviesByStream(providerList, location.country_code);
             displaySearchMovieContainer(data);
+            displayMyServices.innerHTML = ``;
+            displayMyServices();
         }
         
     })
 }
 
+async function displayMyServices(myStream){
+    const displayMyServices = document.querySelector('#myServices');
+    // const myStream = retrieveSubscriptionsStorage();
+    if (myStream.length == 0){
+        displayMyServices.innerHTML = `<p id="emptyServicesMsg">Empty</p>`;
+    }
+    else{
+        const location = getLocation();
+        const data = await getSubscriptions(location.country_code);
+        counter = myStream.length;
+        num = 0;
+        while (counter > 0){
+            current = data.results[num].provider_id;
+            if (myStream.includes(current.toString())){
+                displayMyServices.innerHTML += `
+                <div class="my-services-logo"><img src="https://image.tmdb.org/t/p/w92/${data.results[num].logo_path}" alt=""> </div>
+                `;
+                counter -=1; 
+            }
+            num +=1;
+        }
+    }
+}
+
+// displayMyServices();
 // function createSubscriptionDropdown(data){
 //     const dropdownContainer = document.querySelector('#menu-title-subscription');
 //     // dropdownContainer.multiple = true;
@@ -1933,6 +1960,8 @@ window.addEventListener('load', async function(){
 
     const returningUser = this.localStorage.getItem('user');
 
+    displayMyServices(streamCheck);
+
     if (!returningUser){
         //tutorial
         const geoLocation = JSON.parse(this.localStorage.getItem('geoLocation'));
@@ -2112,35 +2141,35 @@ searchBtn.addEventListener("click", async function(e){
 
 // ********************************************** GEOLOCATION EXECUTE**********************************************
 
-// get geolocation of user
-const data = null;
+// // get geolocation of user
+// const data = null;
 
-const xhr = new XMLHttpRequest();
-//set to false because CORS blocks off all cookies
-xhr.withCredentials = false;
+// const xhr = new XMLHttpRequest();
+// //set to false because CORS blocks off all cookies
+// xhr.withCredentials = false;
 
-xhr.addEventListener("readystatechange", async function () {
-  if (this.readyState === this.DONE) {
-    const response = this.response;
-    const myData = await JSON.parse(response);
+// xhr.addEventListener("readystatechange", async function () {
+//   if (this.readyState === this.DONE) {
+//     const response = this.response;
+//     const myData = await JSON.parse(response);
 
-    const newUser = localStorage.getItem('geoLocation');
-    if (newUser == null){
-        displayFlag(myData.country_code)
-        let geolocation = {};
-        geolocation["location"] = myData;
-        localStorage.setItem('geoLocation', JSON.stringify(myData));
-    }
-    else{
-        updateFlagDisplay();
-    }
+//     const newUser = localStorage.getItem('geoLocation');
+//     if (newUser == null){
+//         displayFlag(myData.country_code)
+//         let geolocation = {};
+//         geolocation["location"] = myData;
+//         localStorage.setItem('geoLocation', JSON.stringify(myData));
+//     }
+//     else{
+//         updateFlagDisplay();
+//     }
 
-  }
-});
+//   }
+// });
 
-const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-xhr.send(data);
+// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+// xhr.send(data);
      
 
 

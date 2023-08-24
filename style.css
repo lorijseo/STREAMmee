@@ -281,7 +281,7 @@ a{
 
 #main_descr {
   width: 60%;
-  margin: 300px 0 300px 50px;
+  margin: 350px 0 350px 50px;
   color: black;
   font-size: 35px;
 }
@@ -305,6 +305,29 @@ a{
   border-radius: 15px;
   margin:10px;
 }
+/* ***********************************MY SERVICES*********************************** */
+
+#services{
+  text-align: center;
+}
+
+#services #displayServices{
+  
+  width: 80%;
+  margin:auto;
+}
+
+#services #myServices{
+  border: 3px solid #d5d5d5;
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#services #myServices img{
+  margin: 20px;
+}
+
 /* ***********************************SUB1*********************************** */
 
 #sub1 h2{
