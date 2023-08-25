@@ -1619,7 +1619,7 @@ function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const idName = "movie_btn_" + listNum +'_' +index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
 
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
@@ -2362,6 +2362,7 @@ document.querySelector('#menu-title-genre').addEventListener('click', function(e
     const currentState = window.getComputedStyle(genreNav);
     if (currentState['display'] === 'none'){
         document.querySelector('#sub-menu-genre').style.display = "block";
+        console.log("yay")
     }
     else{
         document.querySelector('#sub-menu-genre').style.display = "none";

@@ -117,6 +117,7 @@ a{
   padding: 20px;
   padding-top:30px;
   display:none;
+  z-index:100;
 }
 
 .menu-item .sub-menu a:hover {
@@ -471,6 +472,7 @@ a{
   /* border-radius: 10px; */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  z-index: 100;
 }
 /* .movie {
   margin: 2%;
