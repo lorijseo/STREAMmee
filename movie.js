@@ -2305,7 +2305,7 @@ searchBtn.addEventListener("click", async function(e){
 // xhr.send(data);
 
 
-// ********************************************** GEOLOCATION EXECUTE**********************************************
+// ********************************************** GEOLOCATION BENGIE EXECUTE**********************************************
 
 // get geolocation of user
 const data = null;
@@ -2338,7 +2338,7 @@ xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&
 xhr.send(data);
      
 
-
+// ********************************************** GEOLOCATION EXECUTE**********************************************
 
 
 
