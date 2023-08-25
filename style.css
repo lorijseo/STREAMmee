@@ -336,6 +336,7 @@ a{
 #services{
   text-align: center;
   margin: 100px 0;
+  color:#121212;
 }
 
 #services h1{
@@ -357,19 +358,23 @@ a{
 } */
 
 #services #myServices img{
-  margin: 20px;
+  border-radius: 15px;
 }
 
+.my-services-logo{
+  margin: 15px;
+}
 #servicesMsg{
   margin: 20px 0;
 }
 
 #editServiceBtn, #trendingServiceBtn{
   background-color: transparent;
-  color:#d5d5d5;
-  border:1px solid #d5d5d5;
+  color:#121212;
+  border:1px solid #121212;
   padding: 5px 15px;
   margin: 10px 20px;
+  font-size: 20px;
 }
 
 #editServiceBtn:hover, #trendingServiceBtn:hover{
@@ -382,14 +387,15 @@ a{
 
 #services #myServices{
   display:flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
   margin-bottom:10px;
+  border-top:#121212 3px solid;
 }
 
 #serviceContainer{
-  border: 3px solid #d5d5d5;
+  /* border: #121212 3px solid; */
   padding: 10px;
   width: 750px;
   margin: 50px auto;
