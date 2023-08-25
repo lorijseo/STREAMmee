@@ -2221,35 +2221,35 @@ searchBtn.addEventListener("click", async function(e){
 
 // ********************************************** GEOLOCATION EXECUTE**********************************************
 
-// // get geolocation of user
-// const data = null;
+// get geolocation of user
+const data = null;
 
-// const xhr = new XMLHttpRequest();
-// //set to false because CORS blocks off all cookies
-// xhr.withCredentials = false;
+const xhr = new XMLHttpRequest();
+//set to false because CORS blocks off all cookies
+xhr.withCredentials = false;
 
-// xhr.addEventListener("readystatechange", async function () {
-//   if (this.readyState === this.DONE) {
-//     const response = this.response;
-//     const myData = await JSON.parse(response);
+xhr.addEventListener("readystatechange", async function () {
+  if (this.readyState === this.DONE) {
+    const response = this.response;
+    const myData = await JSON.parse(response);
 
-//     const newUser = localStorage.getItem('geoLocation');
-//     if (newUser == null){
-//         displayFlag(myData.country_code)
-//         let geolocation = {};
-//         geolocation["location"] = myData;
-//         localStorage.setItem('geoLocation', JSON.stringify(myData));
-//     }
-//     else{
-//         updateFlagDisplay();
-//     }
+    const newUser = localStorage.getItem('geoLocation');
+    if (newUser == null){
+        displayFlag(myData.country_code)
+        let geolocation = {};
+        geolocation["location"] = myData;
+        localStorage.setItem('geoLocation', JSON.stringify(myData));
+    }
+    else{
+        updateFlagDisplay();
+    }
 
-//   }
-// });
+  }
+});
 
-// const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-// xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-// xhr.send(data);
+const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+xhr.send(data);
      
 
 
