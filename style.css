@@ -273,8 +273,13 @@ a{
 
 } */
 
+#mainOwl .owl-item{
+  margin: 0;
+  z-index:-100;
+}
+
 #main {
-  z-index: 0;
+  z-index: -100;
 }
 
 /* #mainImg {
@@ -286,7 +291,7 @@ a{
   object-fit: cover;
 } */
 
-#mainImg {
+.mainImg {
   position: absolute;
   top: 0;
   z-index: -50;
@@ -296,18 +301,18 @@ a{
   height: 900px;
 }
 
-#mainDescr {
+.mainDescr {
   width: 60%;
   margin: 400px 0 400px 50px;
   color: black;
   
 }
 
-#mainDescr h1{
+.mainDescr h1{
   margin: 0;
   font-size: 50px;
 }
-#mainDescr p{
+.mainDescr p{
   margin: 0;
   font-size: 25px;
 }
@@ -346,6 +351,10 @@ a{
   margin: 20px auto;
 }
 
+#services #displayServices h1{
+  margin: 5px auto;
+}
+
 /* #services #myServices{
   border: 3px solid #d5d5d5;
   display:flex;
@@ -364,14 +373,24 @@ a{
 .my-services-logo{
   margin: 15px;
 }
+
+
 #servicesMsg{
   margin: 20px 0;
 }
 
-#editServiceBtn, #trendingServiceBtn{
+/* #editServiceBtn, #trendingServiceBtn{
   background-color: transparent;
   color:#121212;
   border:1px solid #121212;
+  padding: 5px 15px;
+  margin: 10px 20px;
+  font-size: 20px;
+} */
+
+#editServiceBtn, #trendingServiceBtn{
+  background-color: #121212;
+  color:#d5d5d5;
   padding: 5px 15px;
   margin: 10px 20px;
   font-size: 20px;
@@ -390,7 +409,7 @@ a{
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
-  margin-bottom:10px;
+  /* margin-bottom:10px; */
   border-top:#121212 3px solid;
 }
 
@@ -398,10 +417,69 @@ a{
   /* border: #121212 3px solid; */
   padding: 10px;
   width: 750px;
-  margin: 50px auto;
+  margin: 20px auto;
 }
 
+#serviceMsg{
+  margin: 15px 0;
+}
 
+/* ***********************************TUTORIAL*********************************** */
+
+/* .tutorial{
+  display:flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  width:700px;
+  margin:auto;
+}
+
+#tutorialDisplaySub div{
+  width: 300px;
+  margin: 1%;
+  background-color: #222121;
+  color:#d5d5d5;
+  padding: 10px;
+  display:none;
+}
+
+#tutorialDisplaySub h4{
+  margin: 5px;
+  font-size: 22px;
+} */
+#tutorial{
+  background-color: black;
+  border-radius: 15px;
+  text-align: center;
+  padding: 10px;
+}
+
+#tutorial a{
+  margin: 10px;
+  border: 1px solid #d5d5d5;
+  padding: 5px 15px;
+  
+}
+
+#tutorialDisplaySub{
+  background-color: #d5d5d5;
+  width: 700px;
+  margin:auto;
+  display:none;
+}
+
+#tutorialDisplayRegion{
+  position:relative;
+  z-index:300px;
+  background-color: white;
+  transform: translate(150px, -300px);
+  width:700px;
+  display:none;
+}
+
+#tutorialDisplayGenre{
+  color:black;
+}
 /* ***********************************SUB1*********************************** */
 
 #sub1 h1{

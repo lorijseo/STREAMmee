@@ -185,101 +185,121 @@
     <section>
         <div class="owl-carousel owl-theme" id="mainOwl">
             <div class="item">
-                <img id="mainImg" src="https://image.tmdb.org/t/p/original/shqLeIkqPAAXM8iT6wVDiXUYz1p.jpg" alt="">
-                <div id="mainDescr">
+                <img class="mainImg" src="https://image.tmdb.org/t/p/original/shqLeIkqPAAXM8iT6wVDiXUYz1p.jpg" alt="">
+                <div class="mainDescr">
                     <h1>
                         Watch the best with ease
                     </h1>
                     <p>Search trending movies within your services</p>
                 </div>
             </div>
-            <div class="item">
-                <section id="services">
+            <div class="item" data-hash="tutorialSub">
+                <div id="services">
                     <div id="displayServices">
                         <!-- <img id="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt=""> -->
                         <!-- <img id="mainImg" src="https://image.tmdb.org/t/p/original/hGGC9gKo7CFE3fW07RA587e5kol.jpg" alt=""> -->
-                        <img id="mainImg" src="https://image.tmdb.org/t/p/original/xgDj56UWyeWQcxQ44f5A3RTWuSs.jpg" alt="">
-                        <h1>Find movies within your streaming services</h1>
-                        <!-- <div id="servicesMsg">
-                            <button id="editServiceBtn">
-                                <i class="fa-solid fa-pen-to-square"></i>&nbsp;
-                                Edit Services
-                            </button>
-                            <button id="trendingServiceBtn">
-                                <i class="fa-solid fa-hand-point-up"></i>&nbsp;
-                                Find Trending
-                            </button>
-                        </div> -->
+                        <img class="mainImg" src="https://image.tmdb.org/t/p/original/xgDj56UWyeWQcxQ44f5A3RTWuSs.jpg" alt="">
+                        <!-- <h1>Find movies within your streaming services</h1> -->
+                        <h1>Save your streaming services.</h1>
+                        <h1>Find movies you can watch at home.</h1>
                     </div>
+
                     <div id="serviceContainer">
-                        <p><i class="fa-solid fa-hands-clapping"></i>
+                        <!-- <p id="myServicesTitle"><i class="fa-solid fa-hands-clapping"></i>
                             &nbsp;My Streaming Services &nbsp;
-                            <i class="fa-solid fa-hands-clapping"></i></p>
+                            <i class="fa-solid fa-hands-clapping"></i>
+                        </p> -->
+
                         <div id="myServices"></div>
                     </div>
+
                     <div id="servicesMsg">
                         <button id="editServiceBtn">
                             <i class="fa-solid fa-pen-to-square"></i>&nbsp;
                             Edit Services
                         </button>
-                        <button id="trendingServiceBtn">
-                            <i class="fa-solid fa-hand-point-up"></i>&nbsp;
-                            Find Trending
-                        </button>
+                    </div>
+                    <!-- <div class="tutorial" id="tutorialDisplaySub">
+                        <div id="tutorialSub1">
+                            <h4>Edit Anytime</h4>
+                            <p>You can edit your streaming services anytime via NAVBAR or on this page.</p>
+                        </div>
+                        <div id="tutorialSub2">
+                            <h4>Find within Services</h4>
+                            <p>Your genre filtered results will all be within your streaming services.</p>
+                        </div>
+                        <div id="tutorialSub3">
+                            <h4>Services from your region</h4>
+                            <p>The top 20 streaming services from your region are displayed.  </p>
+                        </div>
+                        <div id="tutorialSub3">
+                            <h4>Services from your region</h4>
+                            <p>The top 20 streaming services from your region are displayed.  </p>
+                        </div>
+                    </div> -->
+
+                    <div id="tutorialDisplaySub">
+                        <!-- <div>
+                            <p>Save your streaming subscriptions from the TOP 20 services in your region. </p>
+                            <p>Edit your services anytime</p>
+                            <p>All genre filtered results will only show movies available according to your services.</p>
+                        </div> -->
+                        <h4>New User?</h4>
+                        <p>Select your streaming services to find movies available within your subscriptions. </p>
+                        <p>All genre filtered results will only show movies available within your subscriptions.</p>
+                        <p>You can edit this anytime under "My Streaming Services" at the top.</p>
+                        <p>Under "My Streaming Services", click "Search" to find the top trending movies within your subscriptions</p>
                     </div>
             
-                </section>
+                </div>
             </div>
-            <div class="item">                
-                <!-- <img id="mainImg" src="https://image.tmdb.org/t/p/original/xgDj56UWyeWQcxQ44f5A3RTWuSs.jpg" alt=""> -->
-                <img id="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
-                <div id="mainDescr">
+            <div class="item" data-hash="tutorialRegion">                
+                <img class="mainImg" src="https://image.tmdb.org/t/p/original/gZ78dyRH9hXeH94ASjuvD9Vw4b5.jpg" alt="">
+                <!-- <img id="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt=""> -->
+                <div class="mainDescr" >
                     <h1>
-                        Watch the best with ease
+                        VPN? Traveling overseas?
                     </h1>
-                    <p>Search trending movies within your services</p>
-                </div></div>
-            <div class="item"><h4>4</h4></div>
-            <div class="item"><h4>5</h4></div>
+                    <p>Find movies to watch from different countries.</p>
+                </div>
+                <!-- <div id="tutorialDisplayRegion">
+                    <h4>New User?</h4>
+                    <p>You can change your region anytime </p>
+                    <p>All results are based on your region</p>
+                    <p>The streaming services change based on your region</p>
+                </div> -->
+            </div>
+            <div class="item" data-hash="tutorialGenre">
+                <img class="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
+                <div class="mainDescr">
+                    <h1>19 different genres</h1>
+                    <p>Your location and subscription services affect your genre filtered results</p>
+                </div>
+                <!-- <div id="tutorialDisplayGenre">
+                    <h4>New User?</h4>
+                    <p>You can change your region anytime </p>
+                    <p>All results are based on your region</p>
+                    <p>The streaming services change based on your region</p>
+                </div> -->
+            </div>
+            <!-- <div class="item"><h4>5</h4></div>
             <div class="item"><h4>6</h4></div>
             <div class="item"><h4>7</h4></div>
             <div class="item"><h4>8</h4></div>
             <div class="item"><h4>9</h4></div>
             <div class="item"><h4>10</h4></div>
             <div class="item"><h4>11</h4></div>
-            <div class="item"><h4>12</h4></div>
+            <div class="item"><h4>12</h4></div> -->
         </div>
     </section>
 
-    <!-- <section id="services">
-        <div id="displayServices">
-            <h1>My Streaming Services</h1>
-            <div id="servicesMsg">
-                <p>Find trending movies within your streaming services.</p>
-                <button id="editServiceBtn">Edit Services</button>
-                <button id="trendingServiceBtn">Find Trending</button>
-            </div>
-        </div>
-        <div id="myServices"></div>
-    </section> -->
 
-    <!-- <section id="services">
-        <div id="displayServices">
-            <h1>Find movies within your streaming services</h1>
-            <div id="servicesMsg">
-                <button id="editServiceBtn">
-                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;
-                    Edit Services
-                </button>
-            </div>
-        </div>
-        <div id="serviceContainer">
-            <p><i class="fa-solid fa-hands-clapping"></i>
-                &nbsp;My Streaming Services &nbsp;
-                <i class="fa-solid fa-hands-clapping"></i></p>
-            <div id="myServices"></div>
-        </div>
-    </section> -->
+    <section id="tutorial">
+        <p>First time user?</p>
+        <a href="#tutorialRegion" >Region</a>
+        <a href="#tutorialSub" >Subscription</a>
+        <a href="#tutorialGenre">Genre</a>
+    </section>
 
 
     <section id="sub1">
@@ -295,10 +315,6 @@
 
 
     <section class="displayMovies"></section>
-
-    <!-- <section class="displayMovies" id="genre28"></section>
-    <section class="displayMovies" id="genre12"></section>
-    <section class="displayMovies" id="genre16"></section> -->
 
 
     <div id="dialog-message"> </div>

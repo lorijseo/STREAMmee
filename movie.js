@@ -2,6 +2,7 @@ var $j = jQuery.noConflict();
 
 $j(function(){
     $j('#mainOwl').owlCarousel({
+        items:4,
         loop:true,
         margin:10,
         // nav:true,
@@ -10,6 +11,8 @@ $j(function(){
         // autoplayTimeout: 3000,
         dots:true,
         stagePadding:0,
+        URLhashListener: true,
+        startPosition:'URLHash',
         responsive:{
             0:{
                 items:1
@@ -94,7 +97,7 @@ async function addOwlMovieRoutes(carousel, carouselId){
 
 $j(function($){
     $('#trendTodayOwl').owlCarousel({
-        loop:true,
+        loop:false,
         margin:10,
         // nav:true,
         mouseDrag:true,
@@ -110,7 +113,10 @@ $j(function($){
                 items:3
             },
             1000:{
-                items:8
+                items:4
+            },
+            1200:{
+                items:6
             }
         }
     });
@@ -134,7 +140,10 @@ $j(function($){
                 items:3
             },
             1000:{
-                items:8
+                items:4
+            },
+            1200:{
+                items:6
             }
         }
     });
@@ -181,10 +190,37 @@ $j(function(){
 
 })
 
+$j(function(){
+
+    $j("#tutorial" ).dialog({
+    modal: true,
+    autoOpen:false,
+    buttons: [
+        {
+            id: "cancel-button",
+            text: "byebye",
+            click: function() {
+                $j( this ).dialog( "close" );}
+        }
+
+    ],
+    width: 500
+    //prevents lag
+    // draggable:false,
+
+});
+
+
+
+})
+
 $j(window).resize(function() {
     $j("#dialog-message").dialog("option", "position", {my: "center", at: "center", of: window});
 });
 
+$j(window).resize(function() {
+    $j("#tutorial").dialog("option", "position", {my: "top", at: "top", of: window});
+});
 
 // $j(function(){
 
@@ -1184,9 +1220,10 @@ function addLogoRoutes(userSubscriptionsArr){
 async function displayMyServices(myStream){
     const displayMyServices = document.querySelector('#myServices');
     displayMyServices.innerHTML = ``;
-    // const myStream = retrieveSubscriptionsStorage();
     if (myStream.length == 0){
-        displayMyServices.innerHTML = `<p id="emptyServicesMsg">Empty</p>`;
+        // document.querySelector('#myServicesTitle').style.display = "none";
+        displayMyServices.innerHTML = `<p class="emptyServicesMsg">You do not have any saved streaming services.</p>`;
+        document.querySelector('#editServiceBtn').innerHTML = `<i class="fa-solid fa-plus"></i> &nbsp;Add Services`;
     }
     else{
         const location = getLocation();
@@ -1199,6 +1236,7 @@ async function displayMyServices(myStream){
                 displayMyServices.innerHTML += `
                 <div class="my-services-logo"><img src="https://image.tmdb.org/t/p/w92/${data.results[num].logo_path}" alt=""> </div>
                 `;
+                console.log(displayMyServices)
                 counter -=1; 
             }
             num +=1;
@@ -1619,7 +1657,7 @@ function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const idName = "movie_btn_" + listNum +'_' +index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
 
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
@@ -2085,6 +2123,14 @@ function displayMoviePreview(data ){
     
 }
 
+
+function tutorialStart(){
+    $j(function(){
+        // $j("#dialog-message" ).dialog("moveToTop");
+        $j('#tutorial').dialog( "open" );
+        return
+    })
+}
 // function displaySubscription(formattedLogos){
 //     document.querySelector('#dialog-subscription').innerHTML=`${formattedLogos}`
 
@@ -2109,6 +2155,8 @@ window.addEventListener('load', async function(){
     mainCarousel("trendday","#trendTodayOwl");
     // addOwlRoutes()
     mainCarousel("trendweek","#trendWeekOwl");
+
+    // tutorialStart();
 
     const isGenreDisplay = JSON.parse(this.localStorage.getItem('genreDisplay'));
     const streamCheck = retrieveSubscriptionsStorage();
@@ -2325,6 +2373,7 @@ xhr.addEventListener("readystatechange", async function () {
         let geolocation = {};
         geolocation["location"] = myData;
         localStorage.setItem('geoLocation', JSON.stringify(myData));
+        // tutorialStart();
     }
     else{
         updateFlagDisplay();
@@ -2556,3 +2605,9 @@ function updateFlagDisplay(){
 
 
 
+// ********************************************** TUTORIAL**********************************************
+
+// document.querySelector('#tutorialSub').addEventListener('click', function(e){
+//     e.preventDefault();
+//     document.querySelector('#tutorialDisplaySub').style.display="block";
+// })
