@@ -56,40 +56,6 @@ $j(function(){
 //     });
 // });
 
-$j('#trendTodayOwl').on('click', '.owl-item', function(e){
-    // $j(this).trigger('stop.owl.autoplay');
-    var carousel = $j('.owl-carousel').data('owl.carousel');
-    e.preventDefault();
-    carousel.to(carousel.relative($j(this).index()));
-    addOwlMovieRoutes(carousel, '#trendTodayOwl');
-    
-})
-
-$j('#trendWeekOwl').on('click', '.owl-item', function(e){
-    // $j(this).trigger('stop.owl.autoplay');
-    // $j('#trendWeekOwl').trigger('stop.owl.autoplay');
-
-    var carousel = $j('.owl-carousel').data('owl.carousel');
-    e.preventDefault();
-    carousel.to(carousel.relative($j(this).index()));
-    addOwlMovieRoutes(carousel, '#trendWeekOwl');
-    
-})
-
-async function addOwlMovieRoutes(carousel, carouselId){
-    // const movieClass = this.querySelector(".title");
-    // const movieId = movieClass.id;
-    console.log(carousel);
-    console.log(carousel._current);
-    const carouselIndex = carousel._current;
-
-    const findCarousel = document.querySelector(carouselId);
-    const allCarouselItems = findCarousel.querySelectorAll('.owl-item');
-    const currentItem = allCarouselItems[carouselIndex];
-    const itemId = currentItem.querySelector('.owlImg').getAttribute("id");
-    const data = await getMovie(itemId);
-    displayMoviePreview(data);
-}
 
 //jquery runs after document is loaded
 
@@ -97,7 +63,8 @@ async function addOwlMovieRoutes(carousel, carouselId){
 
 $j(function($){
     $('#trendTodayOwl').owlCarousel({
-        loop:false,
+        loop:true,
+        items:10,
         margin:10,
         // nav:true,
         mouseDrag:true,
@@ -125,6 +92,7 @@ $j(function($){
 $j(function($){
     $('#trendWeekOwl').owlCarousel({
         loop:true,
+        items:10,
         margin:10,
         // nav:true,
         mouseDrag:true,
@@ -155,6 +123,47 @@ $j(function($){
 //     window.scrollTo(0,0);
 // })
 
+$j('#trendTodayOwl').on('click', '.owl-item', function(e){
+    // $j(this).trigger('stop.owl.autoplay');
+    var carousel = $j('#trendTodayOwl').data('owl.carousel');
+    e.preventDefault();
+    carousel.to(carousel.relative($j(this).index()));
+    addOwlMovieRoutes(carousel, '#trendTodayOwl');
+    
+})
+
+
+    // $j(this).trigger('stop.owl.autoplay');
+    // $j('#trendWeekOwl').trigger('stop.owl.autoplay');
+
+
+$j('#trendWeekOwl').on('click', '.owl-item', function(e){
+
+
+    // var carousel = $j('.owl-carousel').data('owl.carousel');
+    var carousel = $j('#trendWeekOwl').data('owl.carousel');
+    e.preventDefault();
+    carousel.to(carousel.relative($j(this).index()));
+    addOwlMovieRoutes(carousel, '#trendWeekOwl');
+    
+})
+
+async function addOwlMovieRoutes(carousel, carouselId){
+    // const movieClass = this.querySelector(".title");
+    // const movieId = movieClass.id;
+    console.log(carousel);
+    const carouselIndex = carousel._current;
+    console.log(carouselIndex);
+
+    const findCarousel = document.querySelector(carouselId);
+
+    const allCarouselItems = findCarousel.querySelectorAll('.owl-item');
+    console.log(allCarouselItems)
+    const currentItem = allCarouselItems[carouselIndex];
+    const itemId = currentItem.querySelector('.owlImg').getAttribute("id");
+    const data = await getMovie(itemId);
+    displayMoviePreview(data);
+}
 
 $j(function(){
 
@@ -190,37 +199,32 @@ $j(function(){
 
 })
 
-$j(function(){
+// $j(function(){
 
-    $j("#tutorial" ).dialog({
-    modal: true,
-    autoOpen:false,
-    buttons: [
-        {
-            id: "cancel-button",
-            text: "byebye",
-            click: function() {
-                $j( this ).dialog( "close" );}
-        }
+//     $j("#tutorial" ).dialog({
+//     modal: true,
+//     autoOpen:false,
+//     buttons: [
+//         {
+//             id: "cancel-button",
+//             text: "byebye",
+//             click: function() {
+//                 $j( this ).dialog( "close" );}
+//         }
 
-    ],
-    width: 500
-    //prevents lag
-    // draggable:false,
+//     ],
+//     width: 500
 
-});
-
-
-
-})
+// });
+// })
 
 $j(window).resize(function() {
     $j("#dialog-message").dialog("option", "position", {my: "center", at: "center", of: window});
 });
 
-$j(window).resize(function() {
-    $j("#tutorial").dialog("option", "position", {my: "top", at: "top", of: window});
-});
+// $j(window).resize(function() {
+//     $j("#tutorial").dialog("option", "position", {my: "top", at: "top", of: window});
+// });
 
 // $j(function(){
 
@@ -1236,7 +1240,6 @@ async function displayMyServices(myStream){
                 displayMyServices.innerHTML += `
                 <div class="my-services-logo"><img src="https://image.tmdb.org/t/p/w92/${data.results[num].logo_path}" alt=""> </div>
                 `;
-                console.log(displayMyServices)
                 counter -=1; 
             }
             num +=1;
@@ -1360,7 +1363,7 @@ function getLocation(){
 // **********************************************CAROUSEL**********************************************
 async function mainCarousel(genre,positionId){
     const data = await getMovieApi(genre);
-    let dataDisplay = data.results.slice(0,12).map((object, index) => {
+    let dataDisplay = data.results.slice(0,10).map((object, index) => {
 
         const newItem = createCarouselImg(object,index);
 
@@ -1375,6 +1378,23 @@ async function mainCarousel(genre,positionId){
 }
 
 
+// function createCarouselImg(data, index){
+//     const {id,title, poster_path, backdrop_path} = data;
+//     const imageWidth = 300;
+
+//     let imgSrc = `https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}` 
+
+//     if((poster_path == null)){
+//         imgSrc=`images/no-poster.png" style = "width: ${imageWidth}px; height: 432px`
+//     }
+
+//     newOwlItem = `    <div class="item" id="item${index}">
+//     <img class="owlImg" id='${data.id}'src="${imgSrc}">
+// </div>`
+//     return newOwlItem
+// }
+
+
 function createCarouselImg(data, index){
     const {id,title, poster_path, backdrop_path} = data;
     const imageWidth = 300;
@@ -1385,17 +1405,10 @@ function createCarouselImg(data, index){
         imgSrc=`images/no-poster.png" style = "width: ${imageWidth}px; height: 432px`
     }
 
-    newOwlItem = `    <div class="item" id="item${index}">
-    <img class="owlImg" id='${data.id}'src="${imgSrc}">
-</div>`
-    // const newItem = document.createElement('img');
-    // newItem.src = imgSrc
-    // console.log(newItem)
-
-
+    newOwlItem = ` 
+    <img class="owlImg" id='${data.id}'src="${imgSrc}">`
     return newOwlItem
 }
-
 
 // **********************************************SEARCH DISPLAY**********************************************
 
@@ -2168,10 +2181,11 @@ window.addEventListener('load', async function(){
     if (!returningUser){
         //tutorial
         const geoLocation = JSON.parse(this.localStorage.getItem('geoLocation'));
-        let user ={};
-        user["location"] = geoLocation;
-        this.localStorage.setItem('user',JSON.stringify(user));
+        // let user ={};
+        // user["location"] = geoLocation;
+        // this.localStorage.setItem('user',JSON.stringify(user));
         // this.localStorage.setItem("user", geoLocation);
+
     }
     //movie displayed and no streaming service
     if ((isGenreDisplay) && (streamCheck.length == 0)){
@@ -2367,24 +2381,26 @@ xhr.addEventListener("readystatechange", async function () {
     const response = this.response;
     const myData = await JSON.parse(response);
 
-    const newUser = localStorage.getItem('geoLocation');
-    if (newUser == null){
-        displayFlag(myData.country_code)
-        let geolocation = {};
-        geolocation["location"] = myData;
-        localStorage.setItem('geoLocation', JSON.stringify(myData));
-        // tutorialStart();
-    }
-    else{
-        updateFlagDisplay();
-    }
+    displayFlag(myData.country_code)
+    let geolocation = {};
+    geolocation["location"] = myData;
+    localStorage.setItem('geoLocation', JSON.stringify(myData));
+    console.log("geolocation")
 
   }
 });
 
-const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-xhr.send(data);
+const newUser = localStorage.getItem('geoLocation');
+if (newUser == null){
+    localStorage.setItem("newUser", "true");
+    const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+    xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+    xhr.send(data);
+}
+else{
+    updateFlagDisplay();
+}
+
      
 
 // ********************************************** GEOLOCATION EXECUTE**********************************************
@@ -2399,7 +2415,7 @@ xhr.send(data);
 
 
 function displayFlag(countryCode){
-    document.querySelector('#menu-title-region').innerHTML= `<img src="https://flagsapi.com/${countryCode}/flat/24.png">`
+    document.querySelector('#menu-title-region').innerHTML= `<img src="https://flagsapi.com/${countryCode}/flat/24.png"><span>&nbsp;${countryCode}</span>`
     return 
 }
 

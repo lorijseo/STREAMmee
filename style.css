@@ -89,7 +89,7 @@ a{
 }
 
 #menu-region{
-  margin: 10px 15px 5px;
+  margin: 10px 15px;
 }
 
 .menu-title:hover{
@@ -170,7 +170,9 @@ a{
 
 
 /* ***********************************REGION DROPDOWN*********************************** */
-
+#menu-title-region{
+  display:flex;
+}
 #region option{
   border-radius: 10px;
   background-color: #121212;
