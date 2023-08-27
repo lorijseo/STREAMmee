@@ -642,7 +642,7 @@ romanceBtn.addEventListener("click", async function(e){
     }
 });
 
-const scienceFictionBtn = document.getElementById("scifi");
+const scienceFictionBtn = document.getElementById("sciencefiction");
 scienceFictionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 878;
@@ -694,31 +694,31 @@ thrillerBtn.addEventListener("click", async function(e){
     }
 })
 
-const tvBtn = document.getElementById("tv");
-tvBtn.addEventListener("click", async function(e){
-    e.preventDefault();
-    const genreCode = 10770;
-    const prevGenre = JSON.parse(localStorage.getItem('genre'));
-    const checkStreams = retrieveSubscriptionsStorage()
-    const genreDisplay = document.querySelector('.displayMovies');
+// const tvBtn = document.getElementById("tvmovie");
+// tvBtn.addEventListener("click", async function(e){
+//     e.preventDefault();
+//     const genreCode = 10770;
+//     const prevGenre = JSON.parse(localStorage.getItem('genre'));
+//     const checkStreams = retrieveSubscriptionsStorage()
+//     const genreDisplay = document.querySelector('.displayMovies');
 
-    if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
-        return
-    }
-    else if ((genreDisplay.hasChildNodes())&&(genreCode !== prevGenre)){
-        localStorage.setItem('genreDisplay', genreCode);
-        document.location.reload();
-    }
-    else if (checkStreams.length == 0){
-        const genre = this.getAttribute("id");
-        const location = getLocation();
-        const data = await getFullMovieApi(genre,location.country_code);
-        displaySearchMovieContainer(data);
-    }
-    else{
-        searchByGenre(genreCode);
-    }
-})
+//     if ((genreDisplay.hasChildNodes())&&(genreCode == prevGenre)){
+//         return
+//     }
+//     else if ((genreDisplay.hasChildNodes())&&(genreCode !== prevGenre)){
+//         localStorage.setItem('genreDisplay', genreCode);
+//         document.location.reload();
+//     }
+//     else if (checkStreams.length == 0){
+//         const genre = this.getAttribute("id");
+//         const location = getLocation();
+//         const data = await getFullMovieApi(genre,location.country_code);
+//         displaySearchMovieContainer(data);
+//     }
+//     else{
+//         searchByGenre(genreCode);
+//     }
+// })
 
 
 const warBtn = document.getElementById("war");
@@ -808,6 +808,7 @@ async function searchByGenre(genreCode){
 
         if (selectedMovies[0].length == 0){
             document.querySelector(`#loadingBtn${counter}`).style.display = 'none';
+            createHomeBtn(counter);
             break
         }
 
@@ -845,13 +846,24 @@ async function searchByGenre(genreCode){
                 
                 createNextBtn(counter);
                 createPrevBtn(counter);
-                loadingBtn(counter);               
+                loadingBtn(counter);            
             }
             else if(counter == searchLimit){
                 createNextBtn(counter);
                 createPrevBtn(counter);
                 createHomeBtn(counter);
             }
+            // else{
+            //     console.log("hey")
+            //     createNextBtn(counter);
+            //     createPrevBtn(counter);
+            //     createHomeBtn(counter);
+            // }
+        }
+        else{
+            console.log("hey");
+            createPrevBtn(counter);
+            createHomeBtn(counter);
         }
     }
 }
@@ -1114,8 +1126,13 @@ function getSubscriptionLogo(data){
 function showSelectedSubscriptions(userSubscriptionsArr){
     for (let i=0; i<userSubscriptionsArr.length; i++){
         //consider provider unavailable when country changes
-        if (document.querySelector(`#logo${userSubscriptionsArr[i]}`)){
-            document.querySelector(`#logo${userSubscriptionsArr[i]}`).style.opacity = 1;
+        const currentLogo = document.querySelector(`#logo${userSubscriptionsArr[i]}`)
+        if (currentLogo){
+            currentLogo.style.opacity = 1;
+            currentLogo.style.pointerEvents = "none";
+            const currentImage = currentLogo.childNodes[0];
+            // currentImage.style.boxShadow = '0px 0px 5px 5px orange'
+            // currentImage.style.border = "2px solid orange";
         }
         
     }
@@ -1580,6 +1597,7 @@ function createNextBtn(count){
             const currentDisplay = document.querySelector(`#display${count}`);
             currentDisplay.style.display = "none";
             nextDisplay.style.display = "flex";
+            window.scrollTo(0,0);
             addGenreMovieRoutes(count+1);
         }
     })
@@ -1609,6 +1627,7 @@ function createPrevBtn(count){
             const currentDisplay = document.querySelector(`#display${count}`);
             currentDisplay.style.display = "none";
             prevDisplay.style.display = "flex";
+            window.scrollTo(0,0);
         }
 
     })
@@ -1670,7 +1689,7 @@ function createMovieContainer(data,index,listNum){
     const {id,title, poster_path, backdrop_path, overview, release_date, vote_average} = data;
     const imageWidth = 300;
     const idName = "movie_btn_" + listNum +'_' +index;
-    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${backdrop_path}"` 
+    let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
