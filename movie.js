@@ -2442,15 +2442,15 @@ function displayFlag(countryCode){
 
 document.querySelector('#menu-title-genre').addEventListener('click', function(e){
     e.preventDefault();
-    const genreNav = document.querySelector('#sub-menu-genre');
-    const currentState = window.getComputedStyle(genreNav);
-    if (currentState['display'] === 'none'){
-        document.querySelector('#sub-menu-genre').style.display = "block";
-        console.log("yay")
-    }
-    else{
-        document.querySelector('#sub-menu-genre').style.display = "none";
-    }
+    // const genreNav = document.querySelector('#sub-menu-genre');
+    // const currentState = window.getComputedStyle(genreNav);
+    // if (currentState['display'] === 'none'){
+    //     document.querySelector('#sub-menu-genre').style.display = "block";
+    //     console.log("yay")
+    // }
+    // else{
+    //     document.querySelector('#sub-menu-genre').style.display = "none";
+    // }
     
 })
 
