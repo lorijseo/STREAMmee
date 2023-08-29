@@ -7,10 +7,19 @@ document.addEventListener('click', function(e){
 
     let currentDropdown 
     const isEditSubBtn = e.target.matches("#editServiceBtn");
+    const isEditRegionBtn = e.target.matches("#editRegionBtn");
+    const isEditGenreBtn = e.target.matches("#editGenreBtn");
     //edit subscription from carousel
     if (isDropdownBtn && isEditSubBtn){
         currentDropdown = document.querySelector('#menu-title-subscription')
-        // console.log(myStreamService)
+        currentDropdown.classList.toggle('active')
+    }
+    else if (isDropdownBtn && isEditRegionBtn){
+        currentDropdown = document.querySelector('#menu-region')
+        currentDropdown.classList.toggle('active')
+    }
+    else if (isDropdownBtn && isEditGenreBtn){
+        currentDropdown = document.querySelector('#menu-title-genre')
         currentDropdown.classList.toggle('active')
     }
     //navbar dropdown
@@ -19,11 +28,8 @@ document.addEventListener('click', function(e){
         currentDropdown.classList.toggle('active');
         console.log("this is dropdown")
     }
-    else{
-        console.log('nope')
-    }
 
-    console.log("yay")
+
     //close all active dropdowns
     document.querySelectorAll('[data-dropdown].active').forEach(dropdown => {
         if (dropdown === currentDropdown){
@@ -203,7 +209,7 @@ async function addOwlMovieRoutes(carousel, carouselId){
 
 $j(function(){
 
-        $j("#dialog-message" ).dialog({
+        $j("#dialog" ).dialog({
         modal: true,
         autoOpen:false,
         buttons: [
@@ -231,32 +237,38 @@ $j(function(){
     });
 
 
-    $j( "#cancel-button" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
+    $j( "#cancel-button" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>');
 
 })
 
-// $j(function(){
-
-//     $j("#tutorial" ).dialog({
-//     modal: true,
-//     autoOpen:false,
-//     buttons: [
-//         {
-//             id: "cancel-button",
-//             text: "byebye",
-//             click: function() {
-//                 $j( this ).dialog( "close" );}
-//         }
-
-//     ],
-//     width: 500
-
-// });
-// })
-
 $j(window).resize(function() {
-    $j("#dialog-message").dialog("option", "position", {my: "center", at: "center", of: window});
+    $j("#dialog").dialog("option", "position", {my: "center", at: "center", of: window});
 });
+
+$j(function(){
+
+    $j("#tutorial" ).dialog({
+    modal: true,
+    autoOpen:false,
+    position: { my: "top", at: "bottom", of: $j('#search-form')},
+    buttons: [
+        {
+            id: "close-button",
+            click: function() {
+                $j( this ).dialog( "close" );}
+        }
+
+    ],
+    width: '200px',
+    // height: '500px',
+
+    });
+
+    $j( "#close-button" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>');
+
+})
+
+
 
 // $j(window).resize(function() {
 //     $j("#tutorial").dialog("option", "position", {my: "top", at: "top", of: window});
@@ -955,6 +967,8 @@ async function searchByGenre(genreName, genreCode){
             if (counter == 1){
                 //initialize movie routes for first page only
                 addGenreMovieRoutes(1);
+                createNextBtn(counter);
+                createHomeBtn(counter);
                 page.style.cursor = "default";
 
             }
@@ -1247,9 +1261,8 @@ async function getSubscriptions(country_code){
 // })
 
 async function updateStreamDropdown(){
-    const userLocation = getLocation();
+    const userLocation = await getLocation();
     const countryCode = userLocation.country_code;
-    console.log(countryCode)
     const data = await getSubscriptions(countryCode);
 
 
@@ -1487,7 +1500,6 @@ function formatProviderParam2(param){
 
 function getLocation(){
     const userInfo = localStorage.getItem("user");
-
     if (userInfo !== null){
         const userObject = JSON.parse(userInfo);
         const userLocation = userObject.location;
@@ -1526,6 +1538,22 @@ function getLocation(){
 
 
 // **********************************************CAROUSEL**********************************************
+// async function mainCarousel(genre,positionId){
+//     const data = await getMovieApi(genre);
+//     let dataDisplay = data.results.slice(0,10).map((object, index) => {
+
+//         const newItem = createCarouselImg(object,index);
+
+//         $j(function(){
+//             $j(positionId).owlCarousel('add', newItem);
+//             $j(positionId).owlCarousel('update')
+//         })
+
+
+//         return 
+//     });
+// }
+
 async function mainCarousel(genre,positionId){
     const data = await getMovieApi(genre);
     let dataDisplay = data.results.slice(0,10).map((object, index) => {
@@ -1541,7 +1569,6 @@ async function mainCarousel(genre,positionId){
         return 
     });
 }
-
 
 // function createCarouselImg(data, index){
 //     const {id,title, poster_path, backdrop_path} = data;
@@ -2301,7 +2328,7 @@ function displayMoviePreview(data ){
 
     $j(function(){
         // $j("#dialog-message" ).dialog("moveToTop");
-        $j('#dialog-message').dialog( "open" );
+        $j('#dialog').dialog( "open" );
         return
     })
     
@@ -2337,7 +2364,6 @@ $j(function(){
 
 window.addEventListener('load', async function(){
     mainCarousel("trendday","#trendTodayOwl");
-    // addOwlRoutes()
     mainCarousel("trendweek","#trendWeekOwl");
 
     // tutorialStart();
@@ -2348,7 +2374,7 @@ window.addEventListener('load', async function(){
     const returningUser = this.localStorage.getItem('user');
 
     displayMyServices(streamCheck);
-    await updateStreamDropdown();
+    updateStreamDropdown();
 
     if (!returningUser){
         //tutorial
@@ -2388,8 +2414,8 @@ window.addEventListener('load', async function(){
     if (isGenreDisplay){
         this.localStorage.removeItem('genreDisplay');
     }
-    //update stream dropdown
-    
+
+    // tutorialStart();
     
 })
 
@@ -2567,11 +2593,13 @@ xhr.addEventListener("readystatechange", async function () {
     const response = this.response;
     const myData = await JSON.parse(response);
 
+    tutorialStart();
     displayFlag(myData.country_code)
     let geolocation = {};
     geolocation["location"] = myData;
     localStorage.setItem('geoLocation', JSON.stringify(myData));
-    console.log("geolocation")
+    console.log("geolocation");
+    updateStreamDropdown();
 
   }
 });

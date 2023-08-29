@@ -25,73 +25,6 @@
 </head>
 <body>
 
-    <!-- <section class="header">
-        <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;Home</i></a>
-        <div class="navbar-container">
-            
-            <ul class="menu">
-
-                <li class="menu-item" id="menu-title-genre">
-                    <a class="menu-title" href="#">Genre&nbsp;<i class="fas fa-angle-down"></i></a>
-                    <ul class="sub-menu" id="sub-menu-genre">
-                        <li class="sub-item"><a href="#" id="action">action</a></li>
-                        <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
-                        <li class="sub-item"><a href="#" id="animation">animation</a></li>
-                        <li class="sub-item"><a href="#" id="comedy">comedy</a></li>
-                        <li class="sub-item"><a href="#" id="crime">crime</a></li>
-                        <li class="sub-item"><a href="#" id="documentary">documentary</a></li>
-                        <li class="sub-item"><a href="#" id="drama">drama</a></li>
-                        <li class="sub-item"><a href="#" id="family">family</a></li>
-                        <li class="sub-item"><a href="#" id="fantasy">fantasy</a></li>
-                        <li class="sub-item"><a href="#" id="history">history</a></li>
-                        <li class="sub-item"><a href="#" id="horror">horror</a></li>
-                        <li class="sub-item"><a href="#" id="music">music</a></li>
-                        <li class="sub-item"><a href="#" id="mystery">mystery</a></li>
-                        <li class="sub-item"><a href="#" id="romance">romance</a></li>
-                        <li class="sub-item"><a href="#" id="scifi">sci-fi</a></li>
-                        <li class="sub-item"><a href="#" id="thriller">thriller</a></li>
-                        <li class="sub-item"><a href="#" id="tv">tv</a></li>
-                        <li class="sub-item"><a href="#" id="war">war</a></li>
-                        <li class="sub-item"><a href="#" id="western">western</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <form action="" id="search-form">
-                        <input id="search_input" type="text" required/>
-                        <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-title" href="#">About</a>
-                </li>
-                <li class="menu-item" >
-                    <a href="#" id="menu-title-subscription" class="menu-title">My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
-                    <div id="filter">
-                        <div id="sub2"></div>
-                        <div id="subscription-container">
-                            <button class= "saveBtn" id="subscription-submit"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="menu-item" id="menu-region">
-                    <a id="menu-title-region" class="menu-title" href="#">Region</a>
-                    <div id="display-region">
-                        <form action="#">
-                            <select id="region"><option value="">Select</option></select>
-                            <div ><button action="submit" class= "saveBtn" id="regionBtn"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button></div>
-                        </form>
-
-
-                    </div>                  
-                </li>
-
-            </ul>
-        </div>
-
-    </section> -->
-
-    
     <section class="header">
         <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;</i>STREAMme</a>
 
@@ -185,13 +118,17 @@
             <p>Search trending movies within your services</p>
         </div>
     </section> -->
+    <section id="tutoral-container">
+        <div id="tutorial">
+            <p>Hi <i class="fa-regular fa-hand-peace"></i>New here?</p>
+            <p> Let's get you started!</p>
+            <a href="#tutorialRegion"> Change Region</a>
+            <a href="#tutorialSub" > Save Subscriptions</a>
+            <a href="#tutorialGenre">Filter by Genre</a>
+        </div>
 
-    <section id="tutorial">
-        <p>First time user?</p>
-        <a href="#tutorialRegion" >Region</a>
-        <a href="#tutorialSub" >Subscription</a>
-        <a href="#tutorialGenre">Genre</a>
     </section>
+
 
 
     <section>
@@ -226,7 +163,7 @@
                     </div>
 
                     <div id="servicesMsg">
-                        <button id="editServiceBtn" data-dropdown-btn>
+                        <button class= "carousel-btn" id="editServiceBtn" data-dropdown-btn>
                             <i class="fa-solid fa-pen-to-square"></i>&nbsp;
                             Edit Services
                         </button>
@@ -273,7 +210,11 @@
                         VPN? Traveling overseas?
                     </h1>
                     <p>Find movies to watch from different countries.</p>
+                    <button class= "carousel-btn" id="editRegionBtn" data-dropdown-btn>
+                        Let's go&nbsp;<i class="fa-solid fa-plane"></i>
+                    </button>
                 </div>
+
                 <!-- <div id="tutorialDisplayRegion">
                     <h4>New User?</h4>
                     <p>You can change your region anytime </p>
@@ -286,6 +227,13 @@
                 <div class="mainDescr" id="mainGenreDescr">
                     <h1>19 different genres to choose from</h1>
                     <p>Movie genre results that considers your location and subscription plans</p>
+                    <div id="edit-genre-container">
+                        <button class= "carousel-btn" id="editGenreBtn" data-dropdown-btn>
+                            Let's go&nbsp;<i class="fa-solid fa-plane"></i>
+                        </button>
+
+                    </div>
+
                 </div>
                 <!-- <div id="tutorialDisplayGenre">
                     <h4>New User?</h4>
@@ -326,8 +274,10 @@
     </section>
     
 
-
-    <div id="dialog-message"> </div>
+    <section id="dialog">
+        <div id="dialog-message"> </div>
+    </section>
+    
 
     <!-- <div class="go-to-top">
         <button id="topBtn">top</button>
