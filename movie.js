@@ -1,3 +1,25 @@
+document.addEventListener('click', function(e){
+    const isDropdownBtn = e.target.matches("[data-dropdown-btn]");
+
+    if ((!isDropdownBtn) && (e.target.closest('[data-dropdown]')!== null)){
+        return
+    }
+
+    let currentDropdown 
+    if (isDropdownBtn){
+        currentDropdown = e.target.closest('[data-dropdown]');
+        currentDropdown.classList.toggle('active')
+    }
+
+    document.querySelectorAll('[data-dropdown].active').forEach(dropdown => {
+        if (dropdown === currentDropdown){
+            return
+        }
+        dropdown.classList.remove('active')
+    })
+})
+
+
 var $j = jQuery.noConflict();
 
 $j(function(){
@@ -301,6 +323,10 @@ actionBtn.addEventListener("click", async function(e){
     else{
         searchByGenre(genreCode);
     }
+
+    // const currentDropdown = document.querySelector('[data-dropdown]');
+    const currentDropdown = e.target.closest('[data-dropdown]');
+    currentDropdown.classList.toggle('active');
     
 });
 
@@ -1083,37 +1109,60 @@ document.querySelector('#editServiceBtn').addEventListener('click', async functi
 
 })
 
+// document.querySelector('#menu-title-subscription').addEventListener('click', async function(e){
+//     e.preventDefault();
+//     const subscriptionNav = document.querySelector('#filter');
+//     const currentState = window.getComputedStyle(subscriptionNav);
+//     if (currentState['display'] === 'none'){
+//         const userLocation = getLocation();
+//         const countryCode = userLocation.country_code;
+//         const data = await getSubscriptions(countryCode);
+    
+    
+//         const userLogo = await getSubscriptionLogo(data);
+//         displaySubscription(userLogo);
+//         let subscriptionList = retrieveSubscriptionsStorage();
+        
+//         // consider if user does not choose a filter
+//         if (subscriptionList[0] == ''){
+//             subscriptionList = [];
+//         }
+//         else{
+//             showSelectedSubscriptions(subscriptionList);
+//         }
+//         addLogoRoutes(subscriptionList)
+//     }
+//     else{
+//         document.querySelector('#filter').style.display = "none";
+//     }
+
+
+
+// })
+
+
 document.querySelector('#menu-title-subscription').addEventListener('click', async function(e){
     e.preventDefault();
-    const subscriptionNav = document.querySelector('#filter');
-    const currentState = window.getComputedStyle(subscriptionNav);
-    if (currentState['display'] === 'none'){
-        const userLocation = getLocation();
-        const countryCode = userLocation.country_code;
-        const data = await getSubscriptions(countryCode);
+
+    const userLocation = getLocation();
+    const countryCode = userLocation.country_code;
+    const data = await getSubscriptions(countryCode);
+
+
+    const userLogo = await getSubscriptionLogo(data);
+    displaySubscription(userLogo);
+    let subscriptionList = retrieveSubscriptionsStorage();
     
-    
-        const userLogo = await getSubscriptionLogo(data);
-        displaySubscription(userLogo);
-        let subscriptionList = retrieveSubscriptionsStorage();
-        
-        // consider if user does not choose a filter
-        if (subscriptionList[0] == ''){
-            subscriptionList = [];
-        }
-        else{
-            showSelectedSubscriptions(subscriptionList);
-        }
-        addLogoRoutes(subscriptionList)
+    // consider if user does not choose a filter
+    if (subscriptionList[0] == ''){
+        subscriptionList = [];
     }
     else{
-        document.querySelector('#filter').style.display = "none";
+        showSelectedSubscriptions(subscriptionList);
     }
-
-
+    addLogoRoutes(subscriptionList)
 
 })
-
 
 function getSubscriptionLogo(data){
     let dataDisplay = data.results.slice(0,20).map((object, index) => {
