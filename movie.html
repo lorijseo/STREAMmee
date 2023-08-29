@@ -127,11 +127,11 @@
                     </ul>
                 </li>
 
-                <li class="menu-item" id="menu-title-subscription">
-                    <a href="#" class="menu-title">My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
-                    <div class="sub-menu" id="filter">
-                        <div id="sub2"></div>
-                        <div id="subscription-container">
+                <li class="menu-item" id="menu-title-subscription" data-dropdown>
+                    <a href="#" class="menu-title" data-dropdown-btn>My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <div class="sub-menu" id="sub-menu-subscription">
+                        <div id="subscription-container"></div>
+                        <div id="subscription-btn-container">
                             <button class= "saveBtn" id="subscription-submit"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button>
                             <button class= "saveBtn" id="subscription-search"><i class="fa-solid fa-video"></i>&nbsp;search</button>
                         </div>
@@ -143,23 +143,26 @@
         </div>
 
         <div class="navbar-container">
-
             <ul class="menu">
-
                 <li class="menu-item" id="menu-title-search">
                     <form action="" id="search-form">
                         <input id="search-input" type="text" required/>
                         <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </li>
-                <li class="menu-item" id="menu-region">
-                    <a id="menu-title-region" class="menu-title" href="#">Region</a>
-                    <div id="display-region">
+                <li class="menu-item" id="menu-region" data-dropdown>
+
+                    <a href="#" class="menu-title"  data-dropdown-btn >Region</a>
+
+                    <div class="sub-menu" id="display-region" >
                         <form action="#">
                             <select id="region"><option value="">Select</option></select>
                             <div ><button action="submit" class= "saveBtn" id="regionBtn"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button></div>
                         </form>
-                    </div>                  
+                    </div>    
+                    <div id="menu-title-region">
+                        
+                    </div>              
                 </li>
             </ul>
         </div>
@@ -219,7 +222,7 @@
                     </div>
 
                     <div id="servicesMsg">
-                        <button id="editServiceBtn">
+                        <button id="editServiceBtn" data-dropdown-btn>
                             <i class="fa-solid fa-pen-to-square"></i>&nbsp;
                             Edit Services
                         </button>
