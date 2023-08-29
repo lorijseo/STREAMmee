@@ -103,7 +103,7 @@
                     <a class="menu-title" href="about.html">About</a>
                 </li>
                 <li class="menu-item" id="menu-title-genre" data-dropdown>
-                    <a class="menu-title" data-dropdown-btn href="#">Genre&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <a class="menu-title" data-dropdown-btn href="#">Genre&nbsp;<i class="fas fa-angle-down" data-dropdown-btn></i></a>
                     <ul class="sub-menu" id="sub-menu-genre">
                         <li class="sub-item"><a href="#" id="action">action</a></li>
                         <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
@@ -128,12 +128,14 @@
                 </li>
 
                 <li class="menu-item" id="menu-title-subscription" data-dropdown>
-                    <a href="#" class="menu-title" data-dropdown-btn>My Streaming Services&nbsp;<i class="fas fa-angle-down"></i></a>
+                    <a href="#" class="menu-title" data-dropdown-btn>My Streaming Services&nbsp;<i class="fas fa-angle-down" data-dropdown-btn></i></a>
                     <div class="sub-menu" id="sub-menu-subscription">
+                        <!-- <div id="subscription-descr"> <span style="color: orange">Save</span> streaming services or <span style="color: orange">search</span> for trending movies within your services
+                        </div> -->
                         <div id="subscription-container"></div>
                         <div id="subscription-btn-container">
                             <button class= "saveBtn" id="subscription-submit"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button>
-                            <button class= "saveBtn" id="subscription-search"><i class="fa-solid fa-video"></i>&nbsp;search</button>
+                            <!-- <button class= "saveBtn" id="subscription-search"><i class="fa-solid fa-video"></i>&nbsp;search</button> -->
                         </div>
                     </div>
                 </li>
@@ -152,15 +154,17 @@
                 </li>
                 <li class="menu-item" id="menu-region" data-dropdown>
 
-                    <a href="#" class="menu-title"  data-dropdown-btn >Region</a>
+                    <!-- <a href="#" class="menu-title"  data-dropdown-btn ><i class="fa-solid fa-globe" data-dropdown-btn></i></a> -->
+                    <a href="#" class="menu-title" id="menu-title-region"></a>
 
                     <div class="sub-menu" id="display-region" >
                         <form action="#">
+                            <!-- <label name="region">Choose your location:</label> -->
                             <select id="region"><option value="">Select</option></select>
                             <div ><button action="submit" class= "saveBtn" id="regionBtn"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button></div>
                         </form>
                     </div>    
-                    <div id="menu-title-region">
+                    <div >
                         
                     </div>              
                 </li>
@@ -196,7 +200,7 @@
                 <img class="mainImg" src="https://image.tmdb.org/t/p/original/shqLeIkqPAAXM8iT6wVDiXUYz1p.jpg" alt="">
                 <div class="mainDescr">
                     <h1>
-                        Watch the best with ease
+                        Watch the best movies with ease
                     </h1>
                     <p>Search trending movies within your services</p>
                 </div>
@@ -316,8 +320,11 @@
     </section>
 
     <!-- <section id="displayFilters"></section> -->
-
-    <section class="displayMovies"></section>
+    <section id="displayMoviesContainer">
+        <div id="searchMsg"></div>
+        <div class="displayMovies"></div>
+    </section>
+    
 
 
     <div id="dialog-message"> </div>
