@@ -129,9 +129,7 @@ $j(function($){
             }
         }
     });
-});
 
-$j(function($){
     $('#trendWeekOwl').owlCarousel({
         loop:true,
         items:10,
@@ -157,7 +155,37 @@ $j(function($){
             }
         }
     });
+
+
 });
+
+// $j(function($){
+//     $('#trendWeekOwl').owlCarousel({
+//         loop:true,
+//         items:10,
+//         margin:10,
+//         // nav:true,
+//         mouseDrag:true,
+//         // autoplay:true,
+//         // autoplayTimeout: 3000,
+//         dots:true,
+//         stagePadding:50,
+//         responsive:{
+//             0:{
+//                 items:1
+//             },
+//             600:{
+//                 items:3
+//             },
+//             1000:{
+//                 items:4
+//             },
+//             1200:{
+//                 items:6
+//             }
+//         }
+//     });
+// });
 
 
 // document.querySelector('#topBtn').addEventListener('click', function(e){
@@ -326,8 +354,18 @@ $j(function(){
 // ====================================================================================================
 
 function displayGenreMsg(genreName){
-    const searchMsg = document.querySelector('#searchMsg')
-    searchMsg.innerHTML = `<p> Search results for "${genreName}" `;
+
+    let genreMsg = document.querySelector('#searchMsg');
+    const firstLetter = genreName.charAt(0).toUpperCase();
+    genreName = firstLetter + genreName.slice(1,genreName.length);
+
+    // const services = document.querySelector('#myServices');
+    // genreMsg.appendChild(services);
+
+    // genreMsg.innerHTML += `<span style="font-size: 35px">&nbsp; > &nbsp;</span>`
+    genreMsg.innerHTML += `<p id="displayGenreName"> ${genreName} Movies</p> `;
+
+
 }
 
 function closeDropdown(e){
@@ -340,6 +378,7 @@ const actionBtn = document.getElementById("action");
 actionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 28;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -371,6 +410,7 @@ const adventureBtn = document.getElementById("adventure");
 adventureBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 12;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -401,6 +441,8 @@ adventureBtn.addEventListener("click", async function(e){
 const animationBtn = document.getElementById("animation");
 animationBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    const genreCode = 16;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -432,6 +474,8 @@ animationBtn.addEventListener("click", async function(e){
 const comedyBtn = document.getElementById("comedy");
 comedyBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    const genreCode = 35;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -463,6 +507,7 @@ const crimeBtn = document.getElementById("crime");
 crimeBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 80;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -494,6 +539,7 @@ const documentaryBtn = document.getElementById("documentary");
 documentaryBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 99;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -525,6 +571,7 @@ const dramaBtn = document.getElementById("drama");
 dramaBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 18;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -556,6 +603,7 @@ const familyBtn = document.getElementById("family");
 familyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10751;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -587,6 +635,7 @@ const fantasyBtn = document.getElementById("fantasy");
 fantasyBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 14;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -617,6 +666,8 @@ fantasyBtn.addEventListener("click", async function(e){
 const historyBtn = document.getElementById("history");
 historyBtn.addEventListener("click", async function(e){
     e.preventDefault();
+    const genreCode = 36;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -649,6 +700,7 @@ const horrorBtn = document.getElementById("horror");
 horrorBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 27;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -680,6 +732,7 @@ const musicBtn = document.getElementById("music");
 musicBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10402;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -711,6 +764,7 @@ const mysteryBtn = document.getElementById("mystery");
 mysteryBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 9648;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -741,6 +795,7 @@ const romanceBtn = document.getElementById("romance");
 romanceBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10749;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -772,6 +827,7 @@ const scienceFictionBtn = document.getElementById("sciencefiction");
 scienceFictionBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 878;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -803,6 +859,7 @@ const thrillerBtn = document.getElementById("thriller");
 thrillerBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 53;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -861,6 +918,7 @@ const warBtn = document.getElementById("war");
 warBtn.addEventListener("click", async function(e){
     e.preventDefault();
     const genreCode = 10752;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -891,8 +949,8 @@ warBtn.addEventListener("click", async function(e){
 const westernBtn = document.getElementById("western");
 westernBtn.addEventListener("click", async function(e){
     e.preventDefault();
-    hideBackground();
     const genreCode = 37;
+    hideBackground();
     const genre = this.getAttribute("id");
     const prevGenre = JSON.parse(localStorage.getItem('genre'));
     const checkStreams = retrieveSubscriptionsStorage()
@@ -1816,7 +1874,7 @@ function createHomeBtn(count){
     const createButton = document.createElement('a');
     createButton.setAttribute('class', 'homeBtn' );
     createButton.href = "movie.html";
-    createButton.innerHTML = `<i class="fa-solid fa-ticket">&nbsp;Home</i>`;
+    createButton.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;STREAMme`;
     const btnContainer = document.querySelector(`#btnContainer${count}`);
     btnContainer.appendChild(createButton);
 }
@@ -2359,8 +2417,18 @@ $j(function(){
     })
 })
 
-
+// $j(function(){
+//     $j('#trendTodayOwl').owlCarousel('destroy'); 
+//     $j('#trendWeekOwl').owlCarousel('destroy'); 
+// });
 // ********************************************** JAVASCRIPT EXECUTE**********************************************
+
+document.querySelector('#test').addEventListener('click', function(e){
+    e.preventDefault();
+    mainCarousel("trendday","#trendTodayOwl");
+    mainCarousel("trendweek","#trendWeekOwl");
+})
+
 
 window.addEventListener('load', async function(){
     mainCarousel("trendday","#trendTodayOwl");
@@ -2387,6 +2455,7 @@ window.addEventListener('load', async function(){
     }
     //movie displayed and no streaming service
     if ((isGenreDisplay) && (streamCheck.length == 0)){
+        hideBackground();
         const genreName = await convertGenreToName(isGenreDisplay);
         const location = getLocation();
         const data = await getFullMovieApi(genreName,location.country_code);
@@ -2399,6 +2468,7 @@ window.addEventListener('load', async function(){
 
     //movie displayed and streaming service
     else if ((isGenreDisplay) && (isGenreDisplay !== undefined)){
+        hideBackground();
         // retrieve genre i want and search
         const genreName = await convertGenreToName(isGenreDisplay);
         searchByGenre(genreName,isGenreDisplay);
@@ -2415,7 +2485,7 @@ window.addEventListener('load', async function(){
         this.localStorage.removeItem('genreDisplay');
     }
 
-    // tutorialStart();
+    
     
 })
 
@@ -2424,6 +2494,7 @@ function tutorial(){
     document.querySelector('#display-region').style.display = "block";
 
 }
+
 async function convertGenreToName(code){
     const data = await getGenre();
     for (let i=0; i< data.genres.length; i++){
@@ -2501,7 +2572,7 @@ searchBtn.addEventListener("click", async function(e){
     let searchMovie = document.querySelector("#search-input").value;
 
     const searchMsg = document.querySelector('#searchMsg')
-    searchMsg.innerHTML = `<p> Search results for "${searchMovie}" `;
+    searchMsg.innerHTML = `<p> Search results for <span style='color:orange'>"${searchMovie}"</span></p> `;
 
     document.querySelector("#search-input").value = '';
     if (searchMovie === ''){
