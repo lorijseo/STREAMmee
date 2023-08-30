@@ -103,7 +103,7 @@ $j(function(){
 
 
 
-$j(function($){
+$j(function createOwl($){
     $('#trendTodayOwl').owlCarousel({
         loop:true,
         items:10,
@@ -1928,6 +1928,17 @@ function createMovieContainer(data,index,listNum){
     const idName = "movie_btn_" + listNum +'_' +index;
     let imgSrc = `"https://image.tmdb.org/t/p/w${imageWidth}/${poster_path}"` 
 
+    let releaseYear = "N/A"
+    if (release_date){
+        releaseYear = release_date.slice(0,4);
+    }
+    let voteAvgRound = "N/A"
+    if (vote_average){
+        voteAvgRound = Math.round(vote_average * 10)/10
+    }
+    
+
+
     if((poster_path == null)){
         imgSrc=`"images/no-poster.png" style = "width: ${imageWidth}px; height: 432px"`
     }
@@ -1943,8 +1954,8 @@ function createMovieContainer(data,index,listNum){
         </div>
 
         <div class="descr">
-            <div class="date">${release_date}</div>
-            <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${vote_average}</div>
+            <div class="date">${releaseYear}</div>
+            <div class="vote"><i class="fa-solid fa-star" style="color:orange">&nbsp;</i>${voteAvgRound}</div>
         </div>
         </div>
         `
@@ -2417,17 +2428,86 @@ $j(function(){
     })
 })
 
-// $j(function(){
-//     $j('#trendTodayOwl').owlCarousel('destroy'); 
-//     $j('#trendWeekOwl').owlCarousel('destroy'); 
-// });
+
+
 // ********************************************** JAVASCRIPT EXECUTE**********************************************
 
-document.querySelector('#test').addEventListener('click', function(e){
-    e.preventDefault();
-    mainCarousel("trendday","#trendTodayOwl");
-    mainCarousel("trendweek","#trendWeekOwl");
-})
+// document.querySelector('#test').addEventListener('click', function(e){
+//     e.preventDefault();
+//     $j(function(){
+        
+//         // $j('#trendWeekOwl').owlCarousel('destroy'); 
+//         $j('#trendTodayOwl').trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
+//         $j('#trendTodayOwl').find('.owl-stage-outer').children().unwrap();
+//         $j('#trendWeekOwl').trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
+//         $j('#trendWeekOwl').find('.owl-stage-outer').children().unwrap();
+
+//     });
+//     document.querySelector('#trendTodayOwl').innerHTML = '';
+//     document.querySelector('#trendWeekOwl').innerHTML = '';
+//     document.querySelector('#trendTodayOwl').className = '';
+//     document.querySelector('#trendWeekOwl').className = '';
+
+//     console.log("yay")
+//     $j(function createOwl($){
+//         $('#trendTodayOwl').owlCarousel({
+//             loop:true,
+//             items:10,
+//             margin:10,
+//             // nav:true,
+//             mouseDrag:true,
+//             autoplay:true,
+//             autoplayTimeout: 3000,
+//             dots:true,
+//             stagePadding:50,
+//             responsive:{
+//                 0:{
+//                     items:1
+//                 },
+//                 600:{
+//                     items:3
+//                 },
+//                 1000:{
+//                     items:4
+//                 },
+//                 1200:{
+//                     items:6
+//                 }
+//             }
+//         });
+    
+//         $('#trendWeekOwl').owlCarousel({
+//             loop:true,
+//             items:10,
+//             margin:10,
+//             // nav:true,
+//             mouseDrag:true,
+//             autoplay:true,
+//             autoplayTimeout: 3000,
+//             dots:true,
+//             stagePadding:50,
+//             responsive:{
+//                 0:{
+//                     items:1
+//                 },
+//                 600:{
+//                     items:3
+//                 },
+//                 1000:{
+//                     items:4
+//                 },
+//                 1200:{
+//                     items:6
+//                 }
+//             }
+//         });
+    
+    
+//     });
+
+//     mainCarousel("trendday","#trendTodayOwl");
+//     mainCarousel("trendweek","#trendWeekOwl");
+// })
 
 
 window.addEventListener('load', async function(){
