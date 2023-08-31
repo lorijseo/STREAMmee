@@ -69,6 +69,31 @@ $j(function(){
     });
 });
 
+$j(function(){
+    $j('#about-main-owl').owlCarousel({
+        items:3,
+        loop:true,
+        margin:15,
+        // nav:true,
+        mouseDrag:true,
+        // autoplay:true,
+        // autoplayTimeout: 3000,
+        dots:true,
+        stagePadding:0,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:1
+            },
+            1000:{
+                items:1
+            }
+        }
+    });
+});
+
 // $j(".owl-carousel").each(function(){
 //     $j(this).owlCarousel({
 //         loop:true,
@@ -108,6 +133,7 @@ $j(function createOwl($){
         loop:true,
         items:10,
         margin:10,
+        center:true,
         // nav:true,
         mouseDrag:true,
         // autoplay:true,
@@ -134,6 +160,7 @@ $j(function createOwl($){
         loop:true,
         items:10,
         margin:10,
+        center:true,
         // nav:true,
         mouseDrag:true,
         // autoplay:true,

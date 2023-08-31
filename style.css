@@ -45,7 +45,8 @@ a{
 .logo {
   font-size: 30px;
   color: #d5d5d5;
-  margin: 0 160px 0 0 ;
+  /* margin: 0 160px 0 0 ; */
+  margin: 10px 160px 10px 0 ;
   /* color: #d5d5d5; */
   opacity: 1;
 }
@@ -1066,4 +1067,65 @@ input:-webkit-autofill{
 
 
 
+/* ***********************************ABOUT*********************************** */
 
+.main{
+  margin: 5% 10%;
+}
+
+.main img{
+  position: absolute;
+  top: 0;
+  z-index: -50;
+  object-fit: cover;
+  margin: 5% auto;
+  width: 80%;
+  height: 650px;
+}
+
+.main h1{
+
+  font-size: 50px;
+  margin: 0;
+  margin-top:700px;
+  margin-left: 30px;
+  text-align:center;
+
+}
+
+.main-descr{
+  margin: 25% 15%;
+  text-align:center;
+}
+
+.main-descr h2{
+  font-size: 40px;
+}
+
+.main-descr-text{
+  border-top: orange 1px solid;
+  border-bottom: orange 1px solid;
+  font-size:20px;
+}
+
+
+.about-main{
+  margin: 10%;
+  height: 650px;
+}
+
+.about-main .item{
+  height: 300px;
+}
+
+#contact-display{
+  display:flex;
+}
+
+.contact-cards a{
+  color:#d5d5d5;
+}
+.contact-cards:hover i{
+  color:orange;
+  cursor: pointer;
+}

@@ -26,101 +26,91 @@
 <body>
     <section class="header">
         <a class="logo" href="movie.html"><i class="fa-solid fa-ticket">&nbsp;</i>STREAMme</a>
-        <div class="navbar-container">
-
-            <ul class="menu">
-                <li class="menu-item">
-                    <a class="menu-title" href="about.html">About</a>
-                </li>
-                <li class="menu-item" id="menu-title-genre" data-dropdown>
-                    <a class="menu-title" data-dropdown-btn href="#">Genre&nbsp;<i class="fas fa-angle-down" data-dropdown-btn></i></a>
-                    <ul class="sub-menu" id="sub-menu-genre">
-                        <li class="sub-item"><a href="#" id="action">action</a></li>
-                        <li class="sub-item"><a href="#" id="adventure">adventure</a></li>
-                        <li class="sub-item"><a href="#" id="animation">animation</a></li>
-                        <li class="sub-item"><a href="#" id="comedy">comedy</a></li>
-                        <li class="sub-item"><a href="#" id="crime">crime</a></li>
-                        <li class="sub-item"><a href="#" id="documentary">documentary</a></li>
-                        <li class="sub-item"><a href="#" id="drama">drama</a></li>
-                        <li class="sub-item"><a href="#" id="family">family</a></li>
-                        <li class="sub-item"><a href="#" id="fantasy">fantasy</a></li>
-                        <li class="sub-item"><a href="#" id="history">history</a></li>
-                        <li class="sub-item"><a href="#" id="horror">horror</a></li>
-                        <li class="sub-item"><a href="#" id="music">music</a></li>
-                        <li class="sub-item"><a href="#" id="mystery">mystery</a></li>
-                        <li class="sub-item"><a href="#" id="romance">romance</a></li>
-                        <li class="sub-item"><a href="#" id="sciencefiction">sci-fi</a></li>
-                        <li class="sub-item"><a href="#" id="thriller">thriller</a></li>
-                        <!-- <li class="sub-item"><a href="#" id="tvmovie">tv</a></li> -->
-                        <li class="sub-item"><a href="#" id="war">war</a></li>
-                        <li class="sub-item"><a href="#" id="western">western</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item" id="menu-title-subscription" data-dropdown>
-                    <a href="#" class="menu-title" data-dropdown-btn>My Streaming Services&nbsp;<i class="fas fa-angle-down" data-dropdown-btn></i></a>
-                    <div class="sub-menu" id="sub-menu-subscription">
-                        <!-- <div id="subscription-descr"> <span style="color: orange">Save</span> streaming services or <span style="color: orange">search</span> for trending movies within your services
-                        </div> -->
-                        <div id="subscription-container"></div>
-                        <div id="subscription-btn-container">
-                            <button class= "saveBtn" id="subscription-submit"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button>
-                            <!-- <button class= "saveBtn" id="subscription-search"><i class="fa-solid fa-video"></i>&nbsp;search</button> -->
-                        </div>
-                    </div>
-                </li>
-
-
-            </ul>
-        </div>
-
-        <div class="navbar-container">
-            <ul class="menu">
-                <li class="menu-item" id="menu-title-search">
-                    <form action="" id="search-form">
-                        <input id="search-input" type="text" required/>
-                        <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </li>
-                <li class="menu-item" id="menu-region" data-dropdown>
-
-                    <!-- <a href="#" class="menu-title"  data-dropdown-btn ><i class="fa-solid fa-globe" data-dropdown-btn></i></a> -->
-                    <a href="#" class="menu-title" id="menu-title-region"></a>
-
-                    <div class="sub-menu" id="display-region" >
-                        <form action="#">
-                            <!-- <label name="region">Choose your location:</label> -->
-                            <select id="region"><option value="">Select</option></select>
-                            <div ><button action="submit" class= "saveBtn" id="regionBtn"><i class="fa-regular fa-bookmark"></i>&nbsp;save</button></div>
-                        </form>
-                    </div>    
-                    <div >
-                        
-                    </div>              
-                </li>
-            </ul>
-        </div>
-
-
-
     </section>
-    <h1>About Page</h1>
-    <img class="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
+
+    <section class="main">
+        <img  src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
+        <h1>STREAMme?</h1>
+    </section>
+    <section class="main-descr">
+        <h2>Why STREAMme?</h2>
+        <div class="main-descr-text">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem minus placeat, adipisci et saepe, consectetur doloremque error repellendus, perspiciatis earum necessitatibus. Consectetur ducimus odit repudiandae possimus architecto, ullam rerum consequuntur.
+            </p>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem maxime vel itaque exercitationem sunt odit et fuga libero cum sed facere laborum nulla aut velit, optio perspiciatis doloribus esse cumque?
+            </p>
+
+        </div>
+    </section>
+    <section class="main-descr">
+        <h2>Contact</h2>
+        <div id="contact-display">
+            <div class="contact-cards">
+                <a href="https://github.com/lorijseo"><i class="fa-brands fa-github"></i></a>
+                <p>Github</p>
+            </div>
+            <div class="contact-cards">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <p>LinkedIn</p>
+            </div>
+            <div class="contact-cards">
+                <i class="fa-regular fa-envelope"></i>
+                <p>Email</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="about-main">
+        <div class="owl-carousel owl-theme" id="about-main-owl">
+            <div class="item">
+                <h2>Why STREAMme?</h2>
+                <div class="main-descr-text">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem minus placeat, adipisci et saepe, consectetur doloremque error repellendus, perspiciatis earum necessitatibus. Consectetur ducimus odit repudiandae possimus architecto, ullam rerum consequuntur.
+                    </p>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem maxime vel itaque exercitationem sunt odit et fuga libero cum sed facere laborum nulla aut velit, optio perspiciatis doloribus esse cumque?
+                    </p>
+                </div>
+
+            </div>
+            <div class="item" id="about-item-owl">                
+                <img src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
+                <div class="mainDescr" >
+                    <h1>
+                        VPN? Traveling overseas?
+                    </h1>
+                    <p>Find movies to watch from different countries.</p>
+                    <button class= "carousel-btn" id="editRegionBtn" data-dropdown-btn>
+                        Let's go&nbsp;<i class="fa-solid fa-plane"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="item" data-hash="tutorialGenre">
+                <img class="mainImg" src="https://image.tmdb.org/t/p/original/8GHxjXlI5rqyTBuVNekGTPjG5T6.jpg" alt="">
+                <div class="mainDescr" id="mainGenreDescr">
+                    <h1>19 different genres to choose from</h1>
+                    <p>Movie genre results that considers your location and subscription plans</p>
+                    <div id="edit-genre-container">
+                        <button class= "carousel-btn" id="editGenreBtn" data-dropdown-btn>
+                            Let's go&nbsp;<i class="fa-solid fa-plane"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section> -->
 
 
 
-    
-    <!-- jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <!-- jquery ui -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- OwlCarousel2 default -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="movie.js"></script>
-    <script src="microservice.js"></script>
+    <!-- <script src="movie.js"></script>
+    <script src="microservice.js"></script> -->
 </body>
 
 </html>
