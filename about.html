@@ -44,73 +44,42 @@
 
         </div>
     </section>
-    <section class="main-descr">
+    <section class="main-descr" id="contact">
         <h2>Contact</h2>
         <div id="contact-display">
             <div class="contact-cards">
-                <a href="https://github.com/lorijseo"><i class="fa-brands fa-github"></i></a>
-                <p>Github</p>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/lorijseo"><i class="fa-brands fa-github"></i></a>
             </div>
             <div class="contact-cards">
-                <i class="fa-brands fa-linkedin-in"></i>
-                <p>LinkedIn</p>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/lorijseo/"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <div class="contact-cards">
-                <i class="fa-regular fa-envelope"></i>
-                <p>Email</p>
+                <i class="fa-regular fa-envelope" id="email-icon"></i>
             </div>
         </div>
     </section>
 
-    <!-- <section class="about-main">
-        <div class="owl-carousel owl-theme" id="about-main-owl">
-            <div class="item">
-                <h2>Why STREAMme?</h2>
-                <div class="main-descr-text">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem minus placeat, adipisci et saepe, consectetur doloremque error repellendus, perspiciatis earum necessitatibus. Consectetur ducimus odit repudiandae possimus architecto, ullam rerum consequuntur.
-                    </p>
-                    <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem maxime vel itaque exercitationem sunt odit et fuga libero cum sed facere laborum nulla aut velit, optio perspiciatis doloribus esse cumque?
-                    </p>
-                </div>
-
+    <section id="email-display">
+        <form id="emailForm"action="https://formspree.io/f/mknlgyka" method="POST">
+            <div class="promptUser" id="promptName">
+              <label for="sender">Name</label>
+              <input type="text" id="sender" name="name" required>
             </div>
-            <div class="item" id="about-item-owl">                
-                <img src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
-                <div class="mainDescr" >
-                    <h1>
-                        VPN? Traveling overseas?
-                    </h1>
-                    <p>Find movies to watch from different countries.</p>
-                    <button class= "carousel-btn" id="editRegionBtn" data-dropdown-btn>
-                        Let's go&nbsp;<i class="fa-solid fa-plane"></i>
-                    </button>
-                </div>
+            <div class="promptUser" id="promptEmail">
+              <label for="email">Email&nbsp;</label>
+              <input type="email" id="email" name="email"  required>
             </div>
-            <div class="item" data-hash="tutorialGenre">
-                <img class="mainImg" src="https://image.tmdb.org/t/p/original/8GHxjXlI5rqyTBuVNekGTPjG5T6.jpg" alt="">
-                <div class="mainDescr" id="mainGenreDescr">
-                    <h1>19 different genres to choose from</h1>
-                    <p>Movie genre results that considers your location and subscription plans</p>
-                    <div id="edit-genre-container">
-                        <button class= "carousel-btn" id="editGenreBtn" data-dropdown-btn>
-                            Let's go&nbsp;<i class="fa-solid fa-plane"></i>
-                        </button>
-
-                    </div>
-
-                </div>
+            <div class="promptUser" id="promptMessage">
+              <label for="message"></label>
+              <textarea name="message" id="message" cols="50" rows="15" required></textarea>
             </div>
-        </div>
-    </section> -->
+            <button id="sendEmailBtn">Send</button>
+          </form>
+
+    </section>
 
 
-
-
-
-    <!-- <script src="movie.js"></script>
-    <script src="microservice.js"></script> -->
+    <script src="about.js"></script>
 </body>
 
 </html>
