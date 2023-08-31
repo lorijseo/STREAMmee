@@ -13,9 +13,9 @@ body {
   /* border: #d5d5d5 1px solid; */
   /* padding: 2px 10px; */
 
-button{
+/* button{
   color: orange;
-}
+} */
 
 button:hover{
   cursor: pointer;
@@ -25,6 +25,9 @@ a{
   text-decoration: none;
 }
 
+i{
+  color:orange;
+}
 
 /* ***********************************HEADER & LOGO*********************************** */
 .header {
@@ -46,15 +49,23 @@ a{
   font-size: 30px;
   color: #d5d5d5;
   /* margin: 0 160px 0 0 ; */
-  margin: 10px 160px 10px 0 ;
+  margin: 8px 160px 10px 8px ;
   /* color: #d5d5d5; */
   opacity: 1;
+}
+
+.logo i{
+  color: #d5d5d5;
 }
 
 .logo:hover {
   /* color: #d5d5d5; */
   color: orange;
-  transform: translateY(-3px);
+  transform: scale(1.1)
+}
+
+.logo:hover i{
+  color: orange;
 }
 
 /* ***********************************FOOTER*********************************** */
@@ -315,6 +326,9 @@ a{
   
 }
 
+/* #search-input:focus i{
+  color:orange;
+} */
 
 /* //chrome auto-fill */
 input:-webkit-autofill{
@@ -329,12 +343,12 @@ input:-webkit-autofill{
   background-color: transparent;
   /* padding: 2px; */
   border: none;
-  color:orange;
+  color:white;
   z-index: 10000;
 }
 
 #search-form{
-  border: 1px solid orange;
+  border: 1px solid white;
   padding: 5px 15px;
   border-radius: 15px;
   z-index: 10000;
@@ -623,11 +637,11 @@ input:-webkit-autofill{
 #sub1 h1{
   font-size: 40px;
   text-align: center;
-  color:orange;
+  /* color:orange; */
 }
 #sub1 h2{
   margin: 3% 1% 1%;
-  color:orange;
+  /* color:orange; */
 }
 
 #sub1{
@@ -951,7 +965,7 @@ input:-webkit-autofill{
 
 #dialog-message .errorDisplay{
   margin: 2%;
-  color:red;
+  /* color:red; */
 }
 /* ***********************************PROFILE*********************************** */
 
@@ -1069,6 +1083,27 @@ input:-webkit-autofill{
 
 /* ***********************************ABOUT*********************************** */
 
+#back-button{
+  background-color: transparent;
+  border: none;
+  font-size: 50px;
+  position: absolute;
+  top: 0;
+  left: 3%;
+  margin: 5% auto;
+  color:orange;
+  opacity: 0.7;
+}
+
+#back-button:visited{
+  color: orange;
+}
+
+#back-button:hover{
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 .main{
   margin: 5% 10%;
 }
@@ -1078,9 +1113,11 @@ input:-webkit-autofill{
   top: 0;
   z-index: -50;
   object-fit: cover;
+  object-position: 50% 90%;
   margin: 5% auto;
   width: 80%;
   height: 650px;
+  box-shadow: 0 30px 40px rgba(233, 223, 223, 0.3);
 }
 
 .main h1{
@@ -1090,12 +1127,15 @@ input:-webkit-autofill{
   margin-top:700px;
   margin-left: 30px;
   text-align:center;
+  color:orange;
 
 }
 
 .main-descr{
-  margin: 25% 15%;
+  /* margin: 30% 15%; */
   text-align:center;
+  width:50%;
+  margin: 25% auto;
 }
 
 .main-descr h2{
@@ -1131,17 +1171,19 @@ input:-webkit-autofill{
 }
 
 
-.contact-cards a:visited a,i{
+.contact-cards a:visited i{
   color:#d5d5d5;
 }
 
 .contact-cards i{
   font-size: 30px;
+  color:#d5d5d5;
 }
-.contact-cards:hover i{
+
+.contact-cards:hover i, .contact-cards a:hover i{
   color:orange;
   cursor: pointer;
-  transform: translateY(-10px)
+  transform: scale(1.2);
 }
 
 #email-display{
