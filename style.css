@@ -19,8 +19,9 @@ body {
 
 button:hover{
   cursor: pointer;
-  
+  transform: translateY(-10px);
 }
+
 a{
   text-decoration: none;
 }
@@ -61,7 +62,7 @@ i{
 .logo:hover {
   /* color: #d5d5d5; */
   color: orange;
-  transform: scale(1.1)
+  transform: translateY(-5px);
 }
 
 .logo:hover i{
@@ -171,14 +172,19 @@ i{
   pointer-events: auto;
 }
 
-/* #menu-title-genre > .menu-title:focus, .menu-title:hover{
+#menu-title-genre.active > .menu-title:focus, .menu-title:hover{
  color:orange;
-} */
+} 
 
 
-#menu-title-genre.active > .menu-title, .menu-title:hover{
+ #menu-region.active > .menu-title, .menu-title:hover{
   color:orange;
  }
+
+ #menu-title-subscription.active > .menu-title, .menu-title:hover{
+  color:orange;
+ }
+
 
 
 
@@ -301,9 +307,9 @@ i{
 
 .saveBtn:hover{
   cursor: pointer;
-  border: 1px solid orange;
-  color:orange;
-  transform: translateY(-5px)
+  /* border: 1px solid orange;
+  color:orange; */
+  /* transform: translateY(-5px) */
 }
 
 /* ***********************************SEARCH BAR*********************************** */
@@ -523,11 +529,11 @@ input:-webkit-autofill{
   font-size: 30px;
 }
 
-#editServiceBtn:hover, #trendingServiceBtn:hover{
-  /* background-color: #d5d5d5; */
+
+/* #editServiceBtn:hover, #trendingServiceBtn:hover{
   color:orange;
 
-}
+} */
 
 
 
@@ -599,18 +605,35 @@ input:-webkit-autofill{
   margin-top: 0px;
 }
 
-#tutorial a{
-  margin: 5px;
-  border: 1px solid black;
-  padding: 5px 12px;
+#tutorial i{
   color:black;
 }
 
+#tutorial a{
+  margin: 10px 5px;
+  border: 1px solid black;
+  padding: 5px 12px;
+  color:#d5d5d5;
+  background-color: black;
+}
+
+#tutorial a:hover{
+  transform: translateY(-10px);
+}
 #close-button{
   background-color: transparent;
   color: black;
   border: none;
-  font-size: 20px;
+  font-size: 15px;
+  transform: translate(-9px, -4px);
+}
+
+#close-button i{
+  color:black;
+}
+
+#close-button:hover{
+  transform: translate(-9px, -14px);
 }
 
 #tutorialDisplaySub{
@@ -720,9 +743,10 @@ input:-webkit-autofill{
 }
 
 .displayList .movie1:hover, .movie2:hover, .movie3:hover, .movie4:hover, .movie5:hover, .movie6:hover,  .movie7:hover  .movie8:hover .movie9:hover{
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
+  transform: translateY(-20px);
   cursor: pointer;
-  color:orange;
+  /* color:orange; */
 }
 
 .btnContainer{
@@ -747,7 +771,7 @@ input:-webkit-autofill{
 
 .nextBtn:hover, .prevBtn:hover, .homeBtn:hover{
   /* color:orange; */
-  transform: scale(1.2);
+  transform: translateY(-10px);
   /* transform: translateY(-5px) */
 }
 
@@ -804,7 +828,7 @@ input:-webkit-autofill{
 }
 .date,
 .vote {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 /* ***********************************MODAL*********************************** */
@@ -1173,24 +1197,36 @@ input:-webkit-autofill{
 
 .contact-cards a:visited i{
   color:#d5d5d5;
+  color:orange;
 }
 
 .contact-cards i{
   font-size: 30px;
   color:#d5d5d5;
+  color:orange;
 }
 
 .contact-cards:hover i, .contact-cards a:hover i{
   color:orange;
   cursor: pointer;
-  transform: scale(1.2);
+  transform: translateY(-10px);
 }
 
 #email-display{
   display:none;
-  text-align: center;
-  margin: 5% auto;
+  margin: 5% 30%;
+
 }
+
+
+#emailForm{
+  width:400px;
+  margin:auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between
+}
+
 
 #emailForm input, textarea{
   border: 1px solid #d5d5d5;
@@ -1198,13 +1234,33 @@ input:-webkit-autofill{
   color: #d5d5d5;
 }
 
-#emailForm .promptUser{
-  margin: 2% auto;
+#emailForm p{
+  margin:3px 0 15px 0;
 }
+
+#emailForm .promptUser{
+  margin: 5px;
+
+}
+
+/* #promptName, #promptEmail{
+  width: 20%;
+} */
+
+/* #emailForm label{
+  margin-left: 0;
+} */
 
 #emailForm button{
   border: 1px solid #d5d5d5;
   background-color: transparent;
   color: #d5d5d5;
   padding: 5px 15px;
+  margin:auto;
 }
+
+#emailForm button:hover{
+  /* color:orange; */
+  border: 1px solid orange;
+}
+

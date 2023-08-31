@@ -29,7 +29,6 @@ document.addEventListener('click', function(e){
         console.log("this is dropdown")
     }
 
-
     //close all active dropdowns
     document.querySelectorAll('[data-dropdown].active').forEach(dropdown => {
         if (dropdown === currentDropdown){

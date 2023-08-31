@@ -29,7 +29,7 @@
     </section>
 
     <section class="main">
-        <a href='movie.html' id="back-button"><i class="fa-solid fa-hand-point-left"></i> </a>
+        <a href='movie.html' id="back-button"><i class="fa-solid fa-arrow-left-long"></i> </a>
         <img  src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt="">
         <h1>STREAMme?</h1>
     </section>
@@ -63,18 +63,29 @@
     <section id="email-display">
         <form id="emailForm" action="https://formspree.io/f/xwkdbkyr" method="POST">
             <div class="promptUser" id="promptName">
-              <label for="sender">Name</label>
-              <input type="text" id="sender" name="name" required>
-            </div>
+                <label for="sender">Name</label>
+                <p>
+                  <input type="text" id="sender" name="name" required>
+                </p>
+              </div>
+
             <div class="promptUser" id="promptEmail">
-              <label for="email">Email&nbsp;</label>
-              <input type="email" id="email" name="email"  required>
-            </div>
+                <label for="email">Email&nbsp;</label>
+                <p>
+                  <input type="email" id="email" name="email"  required>
+                </p>
+              </div>
+
+
+
             <div class="promptUser" id="promptMessage">
-              <label for="message"></label>
-              <textarea name="message" id="message" cols="50" rows="15" required></textarea>
+              <label for="message">Message</label>
+              <p>
+                <textarea name="message" id="message" cols="50" rows="15" required></textarea>
+              </p>
+              
             </div>
-            <button id="sendEmailBtn">Send</button>
+            <button id="sendEmailBtn"><i class="fa-solid fa-paper-plane"></i>&nbsp;Send</button>
           </form>
 
     </section>
