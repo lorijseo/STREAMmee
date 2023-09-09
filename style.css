@@ -164,6 +164,11 @@ i{
   pointer-events: auto;
 }
 
+#navbar-container.active > .menu{
+  display:block;
+  pointer-events: auto;
+}
+
 #menu-title-subscription.active > .menu-title + .sub-menu{
   opacity: 1;
   transform: translateY(10px);
@@ -1272,7 +1277,7 @@ input:-webkit-autofill{
 
 
 .navbar-collapse{
-  display:none;
+  opacity: 0;
 }
 
 @media  screen and (max-width:1060px) {
@@ -1280,12 +1285,16 @@ input:-webkit-autofill{
   .navbar-container{
     width:100%;
     padding-right: 8px;
-    display:none;
   }
 
   .menu{
     display:block;
     text-align: right;
+    /* opacity:0; */
+    display:none;
+    pointer-events: none;
+    /* transform: translateY(-50px);
+    transition: opacity 100ms ease-in-out, transform 300ms ease-in-out; */
   }
   
   #search-form{
@@ -1306,7 +1315,7 @@ input:-webkit-autofill{
   
 
   .navbar-collapse{
-    display:block;
+    opacity: 1;
     font-size: 35px;
     margin-right: 8px;
   }

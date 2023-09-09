@@ -1,5 +1,6 @@
 document.addEventListener('click', function(e){
     const isDropdownBtn = e.target.matches("[data-dropdown-btn]");
+    console.log(isDropdownBtn)
 
     if ((!isDropdownBtn) && (e.target.closest('[data-dropdown]')!== null)){
         return
@@ -9,6 +10,8 @@ document.addEventListener('click', function(e){
     const isEditSubBtn = e.target.matches("#editServiceBtn");
     const isEditRegionBtn = e.target.matches("#editRegionBtn");
     const isEditGenreBtn = e.target.matches("#editGenreBtn");
+    const isCollapseBtn = e.target.matches("#navbar-collapse")
+
     //edit subscription from carousel
     if (isDropdownBtn && isEditSubBtn){
         currentDropdown = document.querySelector('#menu-title-subscription')
@@ -22,6 +25,12 @@ document.addEventListener('click', function(e){
         currentDropdown = document.querySelector('#menu-title-genre')
         currentDropdown.classList.toggle('active')
     }
+    else if (isDropdownBtn && isCollapseBtn){
+        currentDropdown = document.querySelector('.navbar-container')
+        currentDropdown.classList.toggle('active')
+        console.log("yay")
+    }
+
     //navbar dropdown
     else if (isDropdownBtn){
         currentDropdown = e.target.closest('[data-dropdown]');
