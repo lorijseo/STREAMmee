@@ -6,6 +6,8 @@ body {
   padding-right: 0 !important;
   margin:0;
   font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 
@@ -53,6 +55,7 @@ i{
   margin: 8px 160px 10px 8px ;
   /* color: #d5d5d5; */
   opacity: 1;
+  font-family: 'Anton', sans-serif;
 }
 
 .logo i{
@@ -423,13 +426,17 @@ input:-webkit-autofill{
   
 }
 
-/* #main-img-home{
-  object-position: 50% 50%;
-} */
+#main-img-home{
+  object-position: 40% 50%;
+}
+
+#mainRegionImg{
+  object-position: 10% 10%;
+}
 
 .mainDescr {
   width: 60%;
-  margin: 400px 0 400px 50px;
+  margin: 370px 0 400px 50px;
   color: black;
   
 }
@@ -452,6 +459,9 @@ input:-webkit-autofill{
   font-size: 25px;
 }
 
+#mainRegionDescr{
+  color:#d5d5d5;
+}
 .mainMsg{
   text-align:center;
   width:80%;
@@ -651,7 +661,7 @@ input:-webkit-autofill{
 }
 
 #close-button:hover{
-  transform: translate(-9px, -14px);
+  transform: translate(-9px, -6px);
 }
 
 #tutorialDisplaySub{
@@ -693,6 +703,14 @@ input:-webkit-autofill{
   /* transform: scale(1.2); */
   transform: translateY(-20px);
   cursor: pointer;
+}
+
+#sub1 .owl-carousel{
+  margin: 2% 0;
+}
+
+#sub1 .carousel-container{
+  margin: 5% 0;
 }
 /* ***********************************OWL CAROUSEL*********************************** */
 
@@ -1339,3 +1357,13 @@ input:-webkit-autofill{
     width:200px
   }
 }
+
+@media screen and (max-width:1080px) {
+  .header{
+    justify-content: center;
+  }
+  .logo{
+    margin: 10px 
+  }
+}
+

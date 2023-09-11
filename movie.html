@@ -22,6 +22,9 @@
     <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
     <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@500&family=Nunito&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -121,7 +124,7 @@
                 <img class="mainImg" id="main-img-home"src="https://image.tmdb.org/t/p/original/shqLeIkqPAAXM8iT6wVDiXUYz1p.jpg" alt="">
                 <div class="mainDescr">
                     <h1>
-                        Find top trending movies
+                        Find Top Trending Movies
                     </h1>
                     <p>Filter by location, genre, and streaming services</p>
                 </div>
@@ -181,9 +184,9 @@
                 </div>
             </div>
             <div class="item" data-hash="tutorialRegion">                
-                <img class="mainImg" src="https://image.tmdb.org/t/p/original/gZ78dyRH9hXeH94ASjuvD9Vw4b5.jpg" alt="">
-                <!-- <img id="mainImg" src="https://image.tmdb.org/t/p/original/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg" alt=""> -->
-                <div class="mainDescr" >
+                <!-- <img class="mainImg" src="https://image.tmdb.org/t/p/original/gZ78dyRH9hXeH94ASjuvD9Vw4b5.jpg" alt=""> -->
+                <img class="mainImg" id="mainRegionImg" src="https://image.tmdb.org/t/p/original/fMdtO9Vk5VG42xi6QUMlaobR44W.jpg" alt="">
+                <div class="mainDescr" id="mainRegionDescr">
                     <h1>
                         VPN? Traveling overseas?
                     </h1>
@@ -203,7 +206,7 @@
             <div class="item" data-hash="tutorialGenre">
                 <img class="mainImg" src="https://image.tmdb.org/t/p/original/8GHxjXlI5rqyTBuVNekGTPjG5T6.jpg" alt="">
                 <div class="mainDescr" id="mainGenreDescr">
-                    <h1>19 different genres to choose from</h1>
+                    <h1>Choose from 18 different genres</h1>
                     <p>Movie genre results that considers your location and subscription plans</p>
                     <div id="edit-genre-container">
                         <button class= "carousel-btn" id="editGenreBtn" data-dropdown-btn>
@@ -237,11 +240,17 @@
 
     <section id="sub1">
         <!-- <h1>At a glance</h1> -->
-        <h2>Trending Today</h2>
-        <div class="owl-carousel owl-theme" id="trendTodayOwl"></div>
-    
-        <h2>Trending This Week</h2>
-        <div class="owl-carousel owl-theme" id="trendWeekOwl"></div>
+        <div class="carousel-container">
+            <h2>Trending Today</h2>
+            <div class="owl-carousel owl-theme" id="trendTodayOwl"></div>
+
+        </div>
+
+        <div class="carousel-container">
+            <h2>Trending This Week</h2>
+            <div class="owl-carousel owl-theme" id="trendWeekOwl"></div>
+        </div>
+
     
     </section>
 

@@ -151,7 +151,7 @@ $j(function createOwl($){
         stagePadding:50,
         responsive:{
             0:{
-                items:1
+                items:2
             },
             600:{
                 items:3
@@ -178,7 +178,7 @@ $j(function createOwl($){
         stagePadding:50,
         responsive:{
             0:{
-                items:1
+                items:2
             },
             600:{
                 items:3
@@ -314,7 +314,13 @@ $j(function(){
     $j("#tutorial" ).dialog({
     modal: true,
     autoOpen:false,
-    position: { my: "top", at: "bottom", of: $j('#search-form')},
+    // position: { my: "center", at: "bottom", of: $j('#search-form')},
+    position: {
+        my: "top",
+        at: "bottom",
+        of: $j('#search-form'),
+        collision: "none"
+    },
     buttons: [
         {
             id: "close-button",
@@ -324,6 +330,10 @@ $j(function(){
 
     ],
     width: '200px',
+    closeOnEscape: true, 
+    create: function (event, ui) {
+        $j(event.target).parent().css('position', 'fixed');
+        }
     // height: '500px',
 
     });
@@ -1910,7 +1920,7 @@ function createHomeBtn(count){
     const createButton = document.createElement('a');
     createButton.setAttribute('class', 'homeBtn' );
     createButton.href = "movie.html";
-    createButton.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;STREAMme`;
+    createButton.innerHTML = `<img src="images/movie-logo.png" alt="">&nbsp;STREAMmee`;
     const btnContainer = document.querySelector(`#btnContainer${count}`);
     btnContainer.appendChild(createButton);
 }
@@ -2299,7 +2309,7 @@ async function displayMovie(foundMovie){
     }
     else{
         document.querySelector("#dialog-message").innerHTML += `
-        <p class="errorDisplay"><i class="fa-solid fa-location-pin-lock"></i> No streaming platforms in your region</p>`
+        <p class="errorDisplay"><i class="fa-solid fa-location-pin-lock"></i> Not available to stream in your region</p>`
     }
 }
 
