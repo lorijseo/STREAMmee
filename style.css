@@ -49,13 +49,13 @@ i{
 
 
 .logo {
-  font-size: 30px;
+  font-size: 40px;
   color: #d5d5d5;
   /* margin: 0 160px 0 0 ; */
-  margin: 8px 160px 10px 8px ;
+  margin: 10px 160px 8px 8px ;
   /* color: #d5d5d5; */
   opacity: 1;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 .logo i{
@@ -446,16 +446,16 @@ input:-webkit-autofill{
   /* margin: 100px 0 600px 400px; */
   margin: auto;
   text-align:center;
-  margin-top: 100px;
-  /* text-align:right; */
+  margin-top: 70px;
+  /* color:#d5d5d5; */
 }
 
 .mainDescr h1{
-  margin: 0;
+  margin: 10px 0;
   font-size: 50px;
 }
 .mainDescr p{
-  margin: 0;
+  margin: 10px 0;
   font-size: 25px;
 }
 

@@ -1,6 +1,5 @@
 
 
-
 // importing express with variable express
 const express = require("express");
 const compression = require('compression');
