@@ -11,3 +11,6 @@ MIT license
 
 ### Filter by region to choose from the region's top streaming services
 ![Main](/gifs/region.gif)
+
+### View movie trailer and details with jquery dialog
+![Main](/gifs/movieDialog.gif)
