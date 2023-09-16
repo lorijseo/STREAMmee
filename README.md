@@ -13,4 +13,10 @@ MIT license
 ![Main](/gifs/region.gif)
 
 ### View movie trailer and details with jquery dialog
-![Main](/gifs/movieDialog.gif)
+![Main](/gifs/dialog.gif)
+
+### Filter by genre within selected streaming services 
+![Main](/gifs/subscription.gif)
+
+### Navigate through web using jquery dialog
+![Main](/gifs/tutorial.gif)
