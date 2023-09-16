@@ -5,6 +5,7 @@ const express = require("express");
 const compression = require('compression');
 
 
+
 const app = express();
 app.use(compression()); 
 
@@ -17,6 +18,12 @@ const cors = require('cors');
 
 // use cors package after requiring 
 app.use(cors());
+
+app.use('/', (req,res) => {
+    res.send("toot tot")
+})
+
+
 
 // MAKE SURE TO REMOVE THIS LATER 
 // var fetch = require("node-fetch");
