@@ -20,3 +20,8 @@ MIT license
 
 ### Navigate through web using jquery dialog
 ![Main](/gifs/tutorial.gif)
+
+
+Images and Icons from freepik.
+flag icon from https://flagsapi.com/#body
+movie data from tmdb API
