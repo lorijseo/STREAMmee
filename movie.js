@@ -1,6 +1,5 @@
 document.addEventListener('click', function(e){
     const isDropdownBtn = e.target.matches("[data-dropdown-btn]");
-    console.log(isDropdownBtn)
 
     if ((!isDropdownBtn) && (e.target.closest('[data-dropdown]')!== null)){
         return
@@ -28,14 +27,12 @@ document.addEventListener('click', function(e){
     else if (isDropdownBtn && isCollapseBtn){
         currentDropdown = document.querySelector('.navbar-container')
         currentDropdown.classList.toggle('active')
-        console.log("yay")
     }
 
     //navbar dropdown
     else if (isDropdownBtn){
         currentDropdown = e.target.closest('[data-dropdown]');
         currentDropdown.classList.toggle('active');
-        console.log("this is dropdown")
     }
 
     // close all active dropdowns
@@ -257,14 +254,11 @@ $j('#trendWeekOwl').on('click', '.owl-item', function(e){
 async function addOwlMovieRoutes(carousel, carouselId){
     // const movieClass = this.querySelector(".title");
     // const movieId = movieClass.id;
-    console.log(carousel);
-    const carouselIndex = carousel._current;
-    console.log(carouselIndex);
 
+    const carouselIndex = carousel._current;
     const findCarousel = document.querySelector(carouselId);
 
     const allCarouselItems = findCarousel.querySelectorAll('.owl-item');
-    console.log(allCarouselItems)
     const currentItem = allCarouselItems[carouselIndex];
     const itemId = currentItem.querySelector('.owlImg').getAttribute("id");
     const data = await getMovie(itemId);
@@ -1040,8 +1034,6 @@ async function searchByGenre(genreName, genreCode){
 
     const page = document.getElementsByTagName('body')[0];
     page.style.cursor = "progress";
-    console.log(genreCode)
-    // const genreCode = 28;
     localStorage.setItem('genre', genreCode.toString());
 
     const location = getLocation();
@@ -1107,15 +1099,9 @@ async function searchByGenre(genreName, genreCode){
                 createPrevBtn(counter);
                 createHomeBtn(counter);
             }
-            // else{
-            //     console.log("hey")
-            //     createNextBtn(counter);
-            //     createPrevBtn(counter);
-            //     createHomeBtn(counter);
-            // }
+
         }
         else{
-            console.log("hey");
             createPrevBtn(counter);
             createHomeBtn(counter);
         }
@@ -1207,16 +1193,13 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
             }
 
         }
-        console.log(pageNum)
         pageNum +=1;
-        // console.log(selectedMovies.length);
+
         if (pageNum >100){
-            console.log(selectedMovies);
             return [selectedMovies, 0, 0]
         }
         
     }
-    console.log("didn't think i can reach here. check your code");
     return
 }
 
@@ -1436,7 +1419,6 @@ function addLogoRoutes(userSubscriptionsArr){
         logoBtn.addEventListener("click", function(e){
             e.preventDefault();
             let logoId = selectedLogo[i].id;
-            console.log(logoId);
             const stripId = logoId.slice(4);
 
             //logo already selected
@@ -1461,7 +1443,6 @@ function addLogoRoutes(userSubscriptionsArr){
         if (document.querySelector('.displayMovies').hasChildNodes()){
             const genreCode = JSON.parse(localStorage.getItem('genre'));
             localStorage.setItem('genreDisplay', genreCode);
-            console.log(genreCode)
             
         }
         document.location.reload();
@@ -1807,9 +1788,7 @@ function displaySearchMovieContainer(data){
                     const newContainer = document.createElement('div');
                     newContainer.setAttribute('class', 'displayList');
                     newContainer.setAttribute('id', `display${counter}`);
-                    // console.log(`counter is ${counter}`);
-                    // console.log(`i is ${i}`);
-                    // console.log(`j is ${j}`);
+
                     if (counter !== 1){
                         newContainer.style.display = 'none';
                     }
@@ -1938,11 +1917,10 @@ function loadingBtn(count){
 }
 
 function isPageReady(searchLimit){
-    console.log("checking if ready")
     for (let i=2; i<=searchLimit; i++){
         let nextPageReady = document.querySelector(`#display${i}`);
         if (nextPageReady){
-            console.log(`page ${i} is readyyy`)
+            // console.log(`page ${i} is readyyy`)
             const controlBtns = document.querySelector(`#loadingBtn${i-1}`);
             if (controlBtns){
                 document.querySelector(`#loadingBtn${i-1}`).style.display = "none";
@@ -2245,7 +2223,7 @@ function addGenreMovieRoutes(newCount){
 // }
 
 async function displayMovie(foundMovie){
-    console.log(foundMovie)
+    // console.log(foundMovie)
     let {id,title, backdrop_path, runtime, genres, production_companies, overview, release_date, vote_average, videos, "watch/providers":providers} = foundMovie;
 
     //initialize movie
@@ -2395,7 +2373,7 @@ function getPreviewProviders(data){
         // console.log(providerArray)
         return providerArray
     }
-    console.log("Cannot stream from your current location")
+    // console.log("Cannot stream from your current location")
     return
 
 }
@@ -2713,7 +2691,7 @@ searchBtn.addEventListener("click", async function(e){
     }
     const movieList = await getMovieList(searchMovie);
 
-    console.log(movieList)
+    // console.log(movieList)
     //validate if movie title exists
     if (movieList[0].length > 0){
         // displaySimiliarMovies(movieList);
@@ -2790,15 +2768,15 @@ xhr.addEventListener("readystatechange", async function () {
     const response = this.response;
     const myData = await JSON.parse(response);
 
-    tutorialStart();
     displayFlag(myData.country_code)
     let geolocation = {};
     geolocation["location"] = myData;
     localStorage.setItem('geoLocation', JSON.stringify(myData));
-    console.log("geolocation");
+    // console.log("geolocation");
     updateStreamDropdown();
 
   }
+  tutorialStart();
 });
 
 const newUser = localStorage.getItem('geoLocation');

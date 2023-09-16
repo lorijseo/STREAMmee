@@ -49,13 +49,14 @@ i{
 
 
 .logo {
-  font-size: 40px;
+  font-size: 35px;
   color: #d5d5d5;
   /* margin: 0 160px 0 0 ; */
-  margin: 10px 160px 8px 8px ;
+  margin: 0 160px 0 5px ;
   /* color: #d5d5d5; */
   opacity: 1;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  /* font-family: 'Yanone Kaffeesatz', sans-serif; */
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 .logo i{
@@ -1352,18 +1353,34 @@ input:-webkit-autofill{
   
 } */
 
-@media screen and (max-width:615px) {
-  #sub-menu-subscription{
-    width:200px
-  }
-}
 
 @media screen and (max-width:1080px) {
   .header{
     justify-content: center;
   }
   .logo{
-    margin: 10px 
+    margin: 0 10px 
   }
 }
 
+@media screen and (max-width:615px) {
+  #sub-menu-subscription{
+    width:200px;
+    padding:10px;
+    
+  }
+
+  #sub-menu-subscription #subscription-container{
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .menu-title{
+    font-size:15px
+  }
+  #sub-menu-subscription{
+    width:150px;
+
+  }
+}
