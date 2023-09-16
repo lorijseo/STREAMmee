@@ -4,8 +4,19 @@
 ### Filter by region to choose from the region's top streaming services
 ![Main](/gifs/region.gif)
 
+<br>
+<br>
+<br>
+
 ### View movie trailer and details with jquery dialog
 ![Main](/gifs/dialog.gif)
+
+
+
+
+
+
+
 
 ### Filter by genre within selected streaming services 
 ![Main](/gifs/subscription.gif)
