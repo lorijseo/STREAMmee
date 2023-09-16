@@ -10,4 +10,4 @@ MIT license
 <a href="https://www.freepik.com/icon/clapperboard_4240234#fromView=resource_detail&position=20">Icon by SumberRejeki</a>
 
 ### Filter by region to choose from the region's top streaming services
-![Main](/gif/region.gif)
+![Main](/gifs/region.gif)
