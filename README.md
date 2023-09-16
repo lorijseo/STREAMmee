@@ -29,6 +29,6 @@
 <br>
 <br>
 
-Images and Icons from freepik.
-flag icon from [Flags API](https://flagsapi.com/#body)
-movie data from tmdb API
+Images and Icons from freepik. <br>
+flag icon from [Flags API](https://flagsapi.com/#body) <br>
+movie data from tmdb API <br>
