@@ -19,9 +19,9 @@ const cors = require('cors');
 // use cors package after requiring 
 app.use(cors());
 
-app.use('/', (req,res) => {
-    res.send("toot tot")
-})
+// app.use('/', (req,res) => {
+//     console.log("toot")
+// })
 
 
 
