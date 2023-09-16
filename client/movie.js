@@ -1212,80 +1212,150 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
 
 // **********************************************FETCH FUNCTIONS**********************************************
 
+// const URL = 'localhost:4000';
+
+const URL = 'vercel.com/lorijseo/stream-me-server'
+
 async function getMovieApi(genreName){
-    const response = await fetch(`http://localhost:4000/moviedata/${genreName}`);
+    const response = await fetch(`http://${URL}/moviedata/${genreName}`);
     const data = await response.json();
     return data
 }
 
 async function getFullMovieApi(genreName, country_code){
-    const response = await fetch(`http://localhost:4000/moviedata/${genreName}/${country_code}`);
+    const response = await fetch(`http://${URL}/moviedata/${genreName}/${country_code}`);
     const data = await response.json();
     return data
 }
 
 
 async function getKeywords(movie_id){
-    const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
+    const response = await fetch(`http://${URL}/get_keys/${movie_id}`);
     const data = await response.json();
     return data.keywords
 
 }
 
 async function getMovieList(movie_title){
-    const response = await fetch(`http://localhost:4000/get_movies/${movie_title}`);
+    const response = await fetch(`http://${URL}/get_movies/${movie_title}`);
     const data = await response.json();
     return data
 }
 
 async function getMovie(movie_id){
-    const response = await fetch(`http://localhost:4000/get_movie/${movie_id}`);
+    const response = await fetch(`http://${URL}/get_movie/${movie_id}`);
     const data = await response.json();
     return data
 }
 
 async function getGenre(){
-    const response = await fetch(`http://localhost:4000/get_genre`);
+    const response = await fetch(`http://${URL}/get_genre`);
     const data = await response.json();
     return data
 }
 
 
 async function getProviders(movie_id){
-    const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
+    const response = await fetch(`http://${URL}/get_providers/${movie_id}`);
     const data = await response.json();
     return data
 }
 
 async function getMoviesByFilter(provider_list, country_code,page_num){
-    // const providers = formatProviderParam(provider_list)
-    const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
+    const response = await fetch(`http://${URL}/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
     const data = await response.json();
     return data
 
 }
 
 async function getMoviesByStream(provider_list, country_code){
-    const response = await fetch(`http://localhost:4000/get_movies_by_stream/${provider_list}/${country_code}`);
+    const response = await fetch(`http://${URL}/get_movies_by_stream/${provider_list}/${country_code}`);
     const data = await response.json();
     return data
 
 }
 
 async function getSubscriptions(country_code){
-    const response = await fetch(`http://localhost:4000/get_subscriptions/${country_code}`);
+    const response = await fetch(`http://${URL}/get_subscriptions/${country_code}`);
     const data = await response.json();
     return data
 }
 
-// async function getMoviesByFilter(providers, country_code,page_num){
-//     const provider_list = formatProviderParam(providers)
-//     // console.log(provider_list)
-//     const response = await fetch(`http://localhost:4000/${providers}/${country_code}/${page_num}`);
+async function getRegions(){
+    const response = await fetch(`http://${URL}/get_regions`);
+    const data = await response.json();
+    return data
+}
+
+
+
+// async function getMovieApi(genreName){
+//     const response = await fetch(`http://localhost:4000/moviedata/${genreName}`);
+//     const data = await response.json();
+//     return data
+// }
+
+// async function getFullMovieApi(genreName, country_code){
+//     const response = await fetch(`http://localhost:4000/moviedata/${genreName}/${country_code}`);
+//     const data = await response.json();
+//     return data
+// }
+
+
+// async function getKeywords(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_keys/${movie_id}`);
+//     const data = await response.json();
+//     return data.keywords
+
+// }
+
+// async function getMovieList(movie_title){
+//     const response = await fetch(`http://localhost:4000/get_movies/${movie_title}`);
+//     const data = await response.json();
+//     return data
+// }
+
+// async function getMovie(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_movie/${movie_id}`);
+//     const data = await response.json();
+//     return data
+// }
+
+// async function getGenre(){
+//     const response = await fetch(`http://localhost:4000/get_genre`);
+//     const data = await response.json();
+//     return data
+// }
+
+
+// async function getProviders(movie_id){
+//     const response = await fetch(`http://localhost:4000/get_providers/${movie_id}`);
+//     const data = await response.json();
+//     return data
+// }
+
+// async function getMoviesByFilter(provider_list, country_code,page_num){
+//     // const providers = formatProviderParam(provider_list)
+//     const response = await fetch(`http://localhost:4000/get_movies_by_filter/${provider_list}/${country_code}/${page_num}`);
 //     const data = await response.json();
 //     return data
 
 // }
+
+// async function getMoviesByStream(provider_list, country_code){
+//     const response = await fetch(`http://localhost:4000/get_movies_by_stream/${provider_list}/${country_code}`);
+//     const data = await response.json();
+//     return data
+
+// }
+
+// async function getSubscriptions(country_code){
+//     const response = await fetch(`http://localhost:4000/get_subscriptions/${country_code}`);
+//     const data = await response.json();
+//     return data
+// }
+
+
 
 // *************************SUBSCRIPTION FILTER*************************
 
