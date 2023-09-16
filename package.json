@@ -10,9 +10,12 @@
     "node-fetch": "^2.6.12",
     "nodemon": "^3.0.1"
   },
-  "name": "topmovies",
+  "name": "streammee",
   "version": "1.0.0",
-  "main": "genre.js",
+  "main": "movie.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "nodemon microservice.js"
   },
