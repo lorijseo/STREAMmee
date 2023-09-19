@@ -1,3 +1,41 @@
+// ********************************************** GEOLOCATION BENGIE EXECUTE**********************************************
+
+// get geolocation of user
+const data = null;
+
+const xhr = new XMLHttpRequest();
+//set to false because CORS blocks off all cookies
+xhr.withCredentials = false;
+
+xhr.addEventListener("readystatechange", async function () {
+  if (this.readyState === this.DONE) {
+    const response = this.response;
+    const myData = await JSON.parse(response);
+
+    displayFlag(myData.country_code)
+    let geolocation = {};
+    geolocation["location"] = myData;
+    localStorage.setItem('geoLocation', JSON.stringify(myData));
+    // console.log("geolocation");
+    updateStreamDropdown();
+
+  }
+  tutorialStart();
+});
+
+const newUser = localStorage.getItem('geoLocation');
+if (newUser == null){
+    localStorage.setItem("newUser", "true");
+    const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
+    xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
+    xhr.send(data);
+}
+else{
+    updateFlagDisplay();
+}
+
+
+// ********************************************** RESPONSIVE NAV**********************************************
 document.addEventListener('click', function(e){
     const isDropdownBtn = e.target.matches("[data-dropdown-btn]");
 
@@ -46,6 +84,7 @@ document.addEventListener('click', function(e){
 })
 
 
+// ********************************************** JQUERY OWL & MODAL**********************************************
 var $j = jQuery.noConflict();
 
 $j(function(){
@@ -336,62 +375,70 @@ $j(function(){
 
 })
 
+// ********************************************** ON WINDOW LOAD**********************************************
 
+window.addEventListener('load', async function(){
+    mainCarousel("trendday","#trendTodayOwl");
+    mainCarousel("trendweek","#trendWeekOwl");
 
-// $j(window).resize(function() {
-//     $j("#tutorial").dialog("option", "position", {my: "top", at: "top", of: window});
-// });
+    // tutorialStart();
 
-// $j(function(){
+    const isGenreDisplay = JSON.parse(this.localStorage.getItem('genreDisplay'));
+    const streamCheck = retrieveSubscriptionsStorage();
 
-//     $j("#dialog-subscription" ).dialog({
-//     modal: true,
-//     autoOpen:false,
-//     buttons: [
-//         {
-//             id: "cancel-button-sub",
-//             // text: "byebye",
-//             // showText: false,
-//             // icons: {primary: "ui-icon-heart"},
-//             click: function() {
-//                 $j( this ).dialog( "close" );}
-//         }
+    const returningUser = this.localStorage.getItem('user');
 
-//     ],
-//     width: 740,
-//     //prevents lag
-//     // draggable:false,
-//     show: {
-//       effect: "fade",
-//       duration: 1000
-//     },
-//     hide: {
-//       effect: "fade",
-//       duration: 1000
-//     }
-// });
+    displayMyServices(streamCheck);
+    updateStreamDropdown();
 
+    if (!returningUser){
+        //tutorial
+        const geoLocation = JSON.parse(this.localStorage.getItem('geoLocation'));
+        // let user ={};
+        // user["location"] = geoLocation;
+        // this.localStorage.setItem('user',JSON.stringify(user));
+        // this.localStorage.setItem("user", geoLocation);
 
-// $j( "#cancel-button-sub" ).html('<i class="fa-solid fa-circle-xmark fa-xl"></i>')
+    }
+    //movie displayed and no streaming service
+    if ((isGenreDisplay) && (streamCheck.length == 0)){
+        hideBackground();
+        const genreName = await convertGenreToName(isGenreDisplay);
+        const location = getLocation();
+        const data = await getFullMovieApi(genreName,location.country_code);
+        displayGenreMsg(genreName)
+        displaySearchMovieContainer(data);
+        this.localStorage.removeItem('genreDisplay');
+        createRegionDropdown();
+        
+    }
 
-// })
+    //movie displayed and streaming service
+    else if ((isGenreDisplay) && (isGenreDisplay !== undefined)){
+        hideBackground();
+        // retrieve genre i want and search
+        const genreName = await convertGenreToName(isGenreDisplay);
+        searchByGenre(genreName,isGenreDisplay);
+        
+        
+    }  
+    else{
+        createRegionDropdown();
+        
+    }
+    
+    await updateStreamDropdown();
+    if (isGenreDisplay){
+        this.localStorage.removeItem('genreDisplay');
+    }
 
-
-// async function getTrendweek(){
-//     const response = await fetch(`http://localhost:4000/moviedata/trendweek`);
-//     const data = await response.json();
-//     return data
-// }
-
-// async function getTrendday(){
-//     const response = await fetch(`http://localhost:4000/moviedata/trendday`);
-//     const data = await response.json();
-//     return data
-
-// }
+    
+    
+})
 
 
 // ====================================================================================================
+// ********************************************** GENRE BUTTONS**********************************************
 
 function displayGenreMsg(genreName){
 
@@ -2604,64 +2651,6 @@ $j(function(){
 // })
 
 
-window.addEventListener('load', async function(){
-    mainCarousel("trendday","#trendTodayOwl");
-    mainCarousel("trendweek","#trendWeekOwl");
-
-    // tutorialStart();
-
-    const isGenreDisplay = JSON.parse(this.localStorage.getItem('genreDisplay'));
-    const streamCheck = retrieveSubscriptionsStorage();
-
-    const returningUser = this.localStorage.getItem('user');
-
-    displayMyServices(streamCheck);
-    updateStreamDropdown();
-
-    if (!returningUser){
-        //tutorial
-        const geoLocation = JSON.parse(this.localStorage.getItem('geoLocation'));
-        // let user ={};
-        // user["location"] = geoLocation;
-        // this.localStorage.setItem('user',JSON.stringify(user));
-        // this.localStorage.setItem("user", geoLocation);
-
-    }
-    //movie displayed and no streaming service
-    if ((isGenreDisplay) && (streamCheck.length == 0)){
-        hideBackground();
-        const genreName = await convertGenreToName(isGenreDisplay);
-        const location = getLocation();
-        const data = await getFullMovieApi(genreName,location.country_code);
-        displayGenreMsg(genreName)
-        displaySearchMovieContainer(data);
-        this.localStorage.removeItem('genreDisplay');
-        createRegionDropdown();
-        
-    }
-
-    //movie displayed and streaming service
-    else if ((isGenreDisplay) && (isGenreDisplay !== undefined)){
-        hideBackground();
-        // retrieve genre i want and search
-        const genreName = await convertGenreToName(isGenreDisplay);
-        searchByGenre(genreName,isGenreDisplay);
-        
-        
-    }  
-    else{
-        createRegionDropdown();
-        
-    }
-    
-    await updateStreamDropdown();
-    if (isGenreDisplay){
-        this.localStorage.removeItem('genreDisplay');
-    }
-
-    
-    
-})
 
 
 function tutorial(){
@@ -2824,41 +2813,7 @@ searchBtn.addEventListener("click", async function(e){
 // xhr.send(data);
 
 
-// ********************************************** GEOLOCATION BENGIE EXECUTE**********************************************
 
-// get geolocation of user
-const data = null;
-
-const xhr = new XMLHttpRequest();
-//set to false because CORS blocks off all cookies
-xhr.withCredentials = false;
-
-xhr.addEventListener("readystatechange", async function () {
-  if (this.readyState === this.DONE) {
-    const response = this.response;
-    const myData = await JSON.parse(response);
-
-    displayFlag(myData.country_code)
-    let geolocation = {};
-    geolocation["location"] = myData;
-    localStorage.setItem('geoLocation', JSON.stringify(myData));
-    // console.log("geolocation");
-    updateStreamDropdown();
-
-  }
-  tutorialStart();
-});
-
-const newUser = localStorage.getItem('geoLocation');
-if (newUser == null){
-    localStorage.setItem("newUser", "true");
-    const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd'
-    xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
-    xhr.send(data);
-}
-else{
-    updateFlagDisplay();
-}
 
      
 
@@ -2979,103 +2934,4 @@ function updateFlagDisplay(){
     const userSelectedLocation = JSON.parse(data);
     displayFlag(userSelectedLocation.location.country_code);
 }
-// function addOwlRoutes(){
 
-//     const owlContainer = $j('.owl-stage').find('.owl-item')
-//     console.log(owlContainer)
-//     for (let i=0; i<24; i++){
-//         // const owlItemArr = owlContainer.querySelectorAll('.owl-item');
-
-//         for (owl in owlContainer){
-//             const imgContainer = $j(owl).find('item');
-//             console.log(imgContainer)
-            
-//             const imgContainerId = imgContainer.id;
-
-//             const movieBtn = document.querySelector(`#${imgContainerId}`);
-//             movieBtn.addEventListener("click", async function(e){
-//                 alert("hey")
-//                 const movieClass = this.querySelector(".owlImg");
-//                 const movieId = movieClass.id;
-//                 console.log(movieId);
-//                 data = await getMovie(movieId);
-//                 displayMoviePreview(data);})
-           
-//         }
-        
-//     }
-// }
-
-
-
-// function addOwlRoutes(){
-//     let selectedMovie = document.querySelectorAll(".item");
-//     for (let i=0; i<selectedMovie.length; i++){
-//         if (selectedMovie[i].id){
-//             const movieBtn = document.querySelector(`#${selectedMovie[i].id}`);
-//             movieBtn.addEventListener("click", async function(e){
-//                 e.preventDefault();
-//                 const movieClass = this.querySelector(".owlImg");
-//                 const movieId = movieClass.id;
-//                 console.log(movieId);
-//                 data = await getMovie(movieId);
-//                 displayMoviePreview(data);
-    
-//             })
-//         }
-
-//     }
-// }
-
-
-// $j(function(){
-//     $j('#item2').click(function(){
-//         const imgTag = $j(this).find('img');
-//         const movieId = $j(imgTag).attr('id');
-//         owlPreview(movieId);
-//     })
-// })
-
-// $j( "#item2" ).trigger( "click" );
-
-// async function owlPreview(movieId){
-//     data = await getMovie(movieId);
-//     displayMoviePreview(data);
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//turns off youtube when modal closed
-
-// jQuery(document).ready(function($) {
-//     let url = $("#movieTrailer").attr('src');
-//     $('#myModal').on('hide.bs.modal', function() {
-//         $("#movieTrailer").attr('src', '');
-//     });
-//     $('#myModal').on('show.bs.modal', function() {
-//         $("#movieTrailer").attr('src', url);
-//     });
-// });
-
-// $('.dropdown-item').click(function(){
-//     $('.dropdown-menu').css("display", "none")
-// })
-
-
-
-// ********************************************** TUTORIAL**********************************************
-
-// document.querySelector('#tutorialSub').addEventListener('click', function(e){
-//     e.preventDefault();
-//     document.querySelector('#tutorialDisplaySub').style.display="block";
-// })
