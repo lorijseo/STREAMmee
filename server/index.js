@@ -1,9 +1,8 @@
-
-
+require('dotenv').config()
+const key = process.env.MOVIE_API_KEY;
 // importing express with variable express
 const express = require("express");
 const compression = require('compression');
-
 
 
 const app = express();
@@ -25,10 +24,11 @@ app.use(cors());
 
 
 
-// MAKE SURE TO REMOVE THIS LATER 
-// var fetch = require("node-fetch");
-// const key = "613a35f50aa647f0d9c8c32ff6377714";
-const key = process.env.MOVIE_API_KEY
+
+
+
+
+
 
 app.get(`/moviedata/horror/:code`, async (req, res, next) => {
     const code = req.params.code;
