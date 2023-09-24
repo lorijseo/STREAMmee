@@ -26,7 +26,8 @@ xhr.addEventListener("readystatechange", async function () {
 const newUser = localStorage.getItem('geoLocation');
 if (newUser == null){
     localStorage.setItem("newUser", "true");
-    const MY_API_KEY = process.env.GEOLOCATION_API_KEY;
+    const MY_API_KEY = '417bf8a674b64865a20346832a91e6bd';
+    // const MY_API_KEY = process.env.GEOLOCATION_API_KEY;
     xhr.open("GET", `https://ipgeolocation.abstractapi.com/v1?api_key=${MY_API_KEY}&fields=country_code,country,flag`);
     xhr.send(data);
 }
