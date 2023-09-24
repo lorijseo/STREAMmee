@@ -1260,9 +1260,9 @@ async function getMovieData(genreCode, providerList, locationCode, pageNum, star
 
 // **********************************************FETCH FUNCTIONS**********************************************
 
-const URL = 'http://localhost:4000';
+// const URL = 'http://localhost:4000';
 
-// const URL = 'https://streammee-server.vercel.app'
+const URL = 'https://streammee-server.vercel.app'
 
 async function getMovieApi(genreName){
     const response = await fetch(`${URL}/moviedata/${genreName}`);
