@@ -911,6 +911,7 @@ input:-webkit-autofill{
 .ui-dialog .ui-dialog-buttonpane{
   text-align: center;
   position:relative;
+  z-index: 1000;
   /* position: absolute; top: 20px; left:94%; */
 }
 /* .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
@@ -1571,6 +1572,7 @@ input:-webkit-autofill{
 
   .previewProviderIcon img, .previewBuyIcon img{
     max-height: 40px;
+    border-radius: 10px;
   }
 
   .main img{
@@ -1621,7 +1623,7 @@ input:-webkit-autofill{
 
   #dialog-message .providerLabel{
     font-size: 14px;
-    width:60px;
+    width:70px;
   }
 
   #dialog-message{
@@ -1654,4 +1656,10 @@ input:-webkit-autofill{
   #emailForm{
     justify-content: space-around;
   }
+
+  .previewGenreIcon{
+    margin: 3px 5px;
+  }
+
+
 }
