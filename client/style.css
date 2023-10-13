@@ -885,6 +885,8 @@ input:-webkit-autofill{
   flex-wrap: wrap;
   background-color: #302e2e;
   padding-bottom: 3%;
+  width:740px;
+  margin: auto;
 }
 
 
@@ -903,7 +905,8 @@ input:-webkit-autofill{
 
 .ui-dialog .ui-dialog-buttonpane{
   text-align: center;
-  position: absolute; top: 20px; left:94%;
+  position:relative;
+  /* position: absolute; top: 20px; left:94%; */
 }
 /* .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
   float: none;
@@ -1458,7 +1461,20 @@ input:-webkit-autofill{
   }
 }
 
+@media screen and (max-width: 750px){
+    #dialog-message{
+    width: 650px;
+  }
+
+  #movieTrailer{
+    height: 365px;
+    width: 650px
+  }
+}
+
 @media screen and (max-width:615px) {
+
+
   .mainImg{
     object-fit: cover;
     object-position: 20% 10%;
@@ -1517,10 +1533,43 @@ input:-webkit-autofill{
     font-size: 16px;
   }
 
+  #dialog-message{
+    width: 450px;
+  }
+
+  #movieTrailer{
+    height: 253px;
+    width: 450px
+  }
+
+  .previewTitle{
+    font-size:30px;
+  }
+
+  body{
+    font-size: 16px;
+  }
+
+  .previewDescr{
+    font-size: 16px;
+  }
+
+  #dialog-message .providerLabel{
+    font-size: 16px;
+    width:80px;
+  }
+
+  .previewProviderIcon img, .previewBuyIcon img{
+    max-height: 40px;
+  }
 
 }
 
 @media screen and (max-width:450px) {
+  .menu{
+    justify-content:space-evenly
+  }
+
   .menu-title{
     font-size:15px
   }
@@ -1537,5 +1586,35 @@ input:-webkit-autofill{
     width: 50px;
   }
 
+  .previewTitle{
+    font-size:25px;
+  }
+
+  .previewDescr{
+    font-size: 14px;
+  }
+
+  #dialog-message .providerLabel{
+    font-size: 14px;
+    width:60px;
+  }
+
+  #dialog-message{
+    width: 380px;
+  }
+
+  #movieTrailer{
+    height: 213px;
+    width: 380px
+  }
+
+  #searchMsg{
+    font-size:30px;
+    margin:10px;
+  }
+
+  #displayGenreName{
+    margin:10px;
+  }
 
 }

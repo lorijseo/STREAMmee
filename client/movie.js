@@ -313,15 +313,13 @@ $j(function(){
         buttons: [
             {
                 id: "cancel-button",
-                // text: "byebye",
-                // showText: false,
-                // icons: {primary: "ui-icon-heart"},
                 click: function() {
                     $j( this ).dialog( "close" );}
             }
 
         ],
         width: 740,
+        width: "auto",
         //prevents lag
         // draggable:false,
         show: {
@@ -332,6 +330,7 @@ $j(function(){
           effect: "fade",
           duration: 1000
         }
+        
     });
 
 
