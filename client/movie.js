@@ -95,7 +95,7 @@ $j(function(){
         // nav:true,
         mouseDrag:true,
         // autoplay:true,
-        // autoplayTimeout: 3000,
+        // autoplayTimeout: 5000,
         dots:false,
         stagePadding:0,
         URLhashListener: true,
@@ -324,11 +324,11 @@ $j(function(){
         // draggable:false,
         show: {
           effect: "fade",
-          duration: 1000
+          duration: 800
         },
         hide: {
           effect: "fade",
-          duration: 1000
+          duration: 800
         }
         
     });
