@@ -624,10 +624,15 @@ input:-webkit-autofill{
   padding: 10px 5px;
   color: black;
   border-radius: 15px;
-  border-top-right-radius: 0;
+  /* border-top-right-radius: 0; */
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+#tutorial p,a{
+  font-size: 14px;
+  margin: 5px;
 }
 
 #tutorial p{
@@ -641,14 +646,14 @@ input:-webkit-autofill{
 #tutorial a{
   margin: 10px 5px;
   border: 1px solid black;
-  padding: 5px 12px;
+  padding: 2px 8px;
   color:#d5d5d5;
   background-color: black;
 }
 
-#tutorial a:hover{
+/* #tutorial a:hover{
   transform: translateY(-10px);
-}
+} */
 #close-button{
   background-color: transparent;
   color: black;
@@ -1617,4 +1622,8 @@ input:-webkit-autofill{
     margin:10px;
   }
 
+  #tutorial p,a{
+    font-size: 12px;
+    margin: 5px;
+  }
 }

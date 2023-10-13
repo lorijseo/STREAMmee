@@ -351,7 +351,7 @@ $j(function(){
     position: {
         my: "top",
         at: "bottom",
-        of: $j('#search-form'),
+        of: $j('.logo'),
         collision: "none"
     },
     buttons: [
@@ -362,7 +362,7 @@ $j(function(){
         }
 
     ],
-    width: '200px',
+    width: '160px',
     closeOnEscape: true, 
     create: function (event, ui) {
         $j(event.target).parent().css('position', 'fixed');
