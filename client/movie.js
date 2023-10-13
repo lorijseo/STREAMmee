@@ -1330,11 +1330,16 @@ async function getSubscriptions(country_code){
 
 async function getRegions(){
     const response = await fetch(`${URL}/get_regions`);
+    console.log(response)
     const data = await response.json();
     return data
 }
 
-
+async function getRegions(){
+    const response = await fetch(`${URL}/get_regions`);
+    const data = await response.json();
+    return data
+}
 
 // async function getMovieApi(genreName){
 //     const response = await fetch(`http://localhost:4000/moviedata/${genreName}`);
@@ -2849,11 +2854,7 @@ function displayFlag(countryCode){
     
 // })
 
-async function getRegions(){
-    const response = await fetch(`http://localhost:4000/get_regions`);
-    const data = await response.json();
-    return data
-}
+
 
 
 

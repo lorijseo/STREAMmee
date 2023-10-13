@@ -1203,7 +1203,6 @@ input:-webkit-autofill{
 }
 
 .main-descr{
-  /* margin: 30% 15%; */
   text-align:center;
   width:50%;
   margin: 25% auto;
@@ -1262,7 +1261,7 @@ input:-webkit-autofill{
 
 #email-display{
   display:none;
-  margin: 5% 30%;
+  margin: 5% auto;
 
 }
 
@@ -1475,6 +1474,12 @@ input:-webkit-autofill{
     height: 365px;
     width: 650px
   }
+
+  .main-descr{
+    text-align:center;
+    width:70%;
+    margin: 25% auto;
+  }
 }
 
 @media screen and (max-width:615px) {
@@ -1568,6 +1573,21 @@ input:-webkit-autofill{
     max-height: 40px;
   }
 
+  .main img{
+    height: 400px;
+  }
+  .main h1{
+    font-size: 30px;
+    margin-top:420px;
+  }
+
+  .main-descr h2{
+    font-size: 25px;
+  }
+
+  .main-descr-text{
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width:450px) {
@@ -1625,5 +1645,13 @@ input:-webkit-autofill{
   #tutorial p,a{
     font-size: 12px;
     margin: 5px;
+  }
+
+  .main-descr{
+    width:80%;
+  }
+
+  #emailForm{
+    justify-content: space-around;
   }
 }
