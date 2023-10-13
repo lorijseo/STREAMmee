@@ -1353,27 +1353,171 @@ input:-webkit-autofill{
   }
   
 } */
+@media screen and (max-width:1050px){
+  .logo{
+    font-size:25px;
+  }
+
+  .menu-title{
+    font-size:16px;
+  }
+}
 
 
 @media screen and (max-width:1080px) {
+  .logo{
+    font-size:20px;
+  }
+
+  .menu-title{
+    font-size:14px;
+  }
   .header{
     justify-content: center;
   }
   .logo{
     margin: 0 10px 
   }
+
+  .mainImg{
+    height: 700px;
+  }
+
+  .mainDescr{
+    margin: 200px 50px;
+  }
+
+  #services{
+    margin: 50px 0;
+  }
+
+  #services #myServices img{
+    width: 70px;
+  }
+
+  #serviceContainer{
+    width: 900px;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  .mainImg{
+    object-fit: cover;
+    object-position: 50% 10%;
+  }
+}
+
+@media screen and (max-width: 880px){
+  .menu-item{
+    margin: 10px;
+  }
+
+  #services{
+    margin: 10px 0;
+  }
+
+  .my-services-logo{
+    margin:10px;
+  }
+
+  #services h1{
+    font-size: 32px;
+  }
+
+  #serviceContainer{
+    width: 95%;
+    margin: auto;
+  }
+
+  #editServiceBtn, #editRegionBtn, #editGenreBtn{
+    font-size: 20px;
+  }
+
+  #services #myServices{
+    border: none;
+  }
+
+  #servicesMsg{
+    margin: 0;
+  }
+
+  .mainDescr{
+    margin: 100px 50px;
+  }
+
+  .mainDescr h1{
+    font-size: 32px;
+  }
+
+  .mainDescr p{
+    font-size: 20px;
+  }
+
+  #mainGenreDescr{
+    width: 80%;
+  }
 }
 
 @media screen and (max-width:615px) {
-  #sub-menu-subscription{
+  .mainImg{
+    object-fit: cover;
+    object-position: 20% 10%;
+  }
+
+  #services #myServices img{
+    width: 60px;
+  }
+
+  #services #myServices{
+    padding: 10px;
+  }
+
+  #services h1{
+    font-size: 20px;
+  }
+
+  #services #displayServices{
+    margin: 10px auto;
+  }
+
+  .my-services-logo{
+    margin:5px;
+  }
+
+  .subscription-logo{
+    margin: 5px;
+  }
+
+  .menu .sub-menu{
+    padding: 10px;
+  }
+  /* #sub-menu-subscription{
     width:200px;
     padding:10px;
-    
   }
 
   #sub-menu-subscription #subscription-container{
     justify-content: space-around;
+  } */
+
+  .mainDescr{
+    width: 80%;
+    /* margin: 80px 20px; */
   }
+
+  #editServiceBtn, #editRegionBtn, #editGenreBtn{
+    font-size: 16px;
+  }
+
+  .mainDescr h1{
+    font-size: 25px;
+  }
+
+  .mainDescr p{
+    font-size: 16px;
+  }
+
+
 }
 
 @media screen and (max-width:450px) {
@@ -1381,7 +1525,17 @@ input:-webkit-autofill{
     font-size:15px
   }
   #sub-menu-subscription{
-    width:150px;
-
+    width:200px;
+    padding: 5px;
   }
+
+  .subscription-logo{
+    width: 40px;
+  }
+
+  #services #myServices img{
+    width: 50px;
+  }
+
+
 }

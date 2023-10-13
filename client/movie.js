@@ -89,17 +89,18 @@ var $j = jQuery.noConflict();
 
 $j(function(){
     $j('#mainOwl').owlCarousel({
-        items:4,
+        items:3,
         loop:true,
         margin:10,
         // nav:true,
         mouseDrag:true,
         // autoplay:true,
         // autoplayTimeout: 3000,
-        dots:true,
+        dots:false,
         stagePadding:0,
         URLhashListener: true,
         startPosition:'URLHash',
+        // autoHeight:true,
         responsive:{
             0:{
                 items:1
